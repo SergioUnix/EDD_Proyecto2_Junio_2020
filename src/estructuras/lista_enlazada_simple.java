@@ -41,10 +41,20 @@ public class lista_enlazada_simple<T> {
     }
     //************************************************************************************
 
+        /*
+        *
+        * CLASE PARA FUNCIONES DE LA LISTA ENLAZADA SIMPLE
+        */
+    
     private nodo_simple<T> inicio;
     private nodo_simple<T> aux;
     private int tamanio;
 
+    public lista_enlazada_simple(){
+        this.inicio = null;
+        this.aux = null;
+        this.tamanio = 0;
+    }
     public boolean estaVacia() {
         return this.inicio == null;
     }
