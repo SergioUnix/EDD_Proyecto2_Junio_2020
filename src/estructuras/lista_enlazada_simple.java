@@ -41,20 +41,20 @@ public class lista_enlazada_simple<T> {
     }
     //************************************************************************************
 
-        /*
+    /*
         *
         * CLASE PARA FUNCIONES DE LA LISTA ENLAZADA SIMPLE
-        */
-    
+     */
     private nodo_simple<T> inicio;
     private nodo_simple<T> aux;
     private int tamanio;
 
-    public lista_enlazada_simple(){
+    public lista_enlazada_simple() {
         this.inicio = null;
         this.aux = null;
         this.tamanio = 0;
     }
+
     public boolean estaVacia() {
         return this.inicio == null;
     }
@@ -128,7 +128,7 @@ public class lista_enlazada_simple<T> {
                 return inicio.getDato();
             } else {
                 aux = inicio;
-                for (int i = 0; i < indice; i++) {
+                for (int i = 0; i < indice - 1; i++) {
                     aux = aux.getSiguiente();
                 }
                 return aux.getDato();
