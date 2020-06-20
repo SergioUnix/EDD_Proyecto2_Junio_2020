@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package llegarapidito;
-import estructuras.lista_enlazada_simple;
+
+//import estructuras.lista_enlazada_simple;
+//import clases.Carga;
+
 import ventanas.carga_Masiva;
+
 /**
  *
  * @author ADMIN
@@ -17,7 +20,7 @@ public class LlegaRapidito {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    
+
         
         
         
@@ -34,10 +37,7 @@ public class LlegaRapidito {
         
         
         
-            
-        
-    //****************************************************************************************************    
-        
+        //****************************************************************************************************    
         /*
          PRUEBA LISTA ENLAZADA SIMPLE
          
@@ -49,28 +49,15 @@ public class LlegaRapidito {
             System.out.println(miLista.retornarValor(i+1));
         }
         
-        */
-        
-        
+         */
+         /*
+        METODO PARA GRAPHVIZ
+        Carga.dibujar(png, dot);
+         */
+        //Carga.lista_doble_ciruclar_GRAPHVIZ();
         carga_Masiva ventana = new carga_Masiva();
         ventana.setVisible(true);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
     }
-    
+
 }

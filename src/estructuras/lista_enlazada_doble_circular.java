@@ -136,7 +136,7 @@ public class lista_enlazada_doble_circular<T, V> {
         } else {
             aux = inicio;
             do {
-                
+
                 if (aux.getEtiqueta().toString().compareTo(index.toString()) > 0 && aux == inicio) {
                     nuevoNodo.setSiguiente(aux);
                     nuevoNodo.setAnterior(aux.getAnterior());
@@ -189,6 +189,27 @@ public class lista_enlazada_doble_circular<T, V> {
         }
         return null;
     }
+
+    //ESTA FUNCIÓN DEVUELVE EL NODO CON TODA SU INFORMACIÓN
+    public T retornarNodobyIndex(int indice) {
+        if (indice > tamanio) {
+            indice = tamanio - 1;
+        }
+
+        if (indice >= 0 && tamanio >= indice) {
+            if (indice == 0) {
+                return inicio.getDato();
+            } else {
+                aux = inicio;
+                for (int i = 0; i < indice - 1; i++) {
+                    aux = aux.getSiguiente();
+                }
+                return aux.getDato();
+            }
+        }
+        return null;
+    }
+
     //FUNCIÓN PARA RETORNAR DATO EN EL NODO DE LA LISTA
     public T retornarDato(V index) {
         aux = inicio;
@@ -200,8 +221,9 @@ public class lista_enlazada_doble_circular<T, V> {
         } while (aux != inicio);
         return null;
     }
+
     //FUNCIÓN PARA EDITAR EL DATO DE NUESTRO NODO
-    public void editarDato(T dato, V index){
+    public void editarDato(T dato, V index) {
         aux = inicio;
         do {
             if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0) {
@@ -211,6 +233,7 @@ public class lista_enlazada_doble_circular<T, V> {
             aux = aux.getSiguiente();
         } while (aux != inicio);
     }
+
     //MÉTODO PARA ELIMINAR EL NODO DE LA LISTA
     public void eliminarNodo(V index) {
         aux = inicio;
