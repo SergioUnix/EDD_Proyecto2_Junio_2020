@@ -9,6 +9,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import estructuras.lista_enlazada_doble_circular;
 
 /*
      *
