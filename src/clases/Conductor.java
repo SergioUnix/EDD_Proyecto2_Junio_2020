@@ -11,6 +11,7 @@ public class Conductor {
     private String apellidos;
     private char licencia;
     private String genero;
+    private String fecha_nac;
     private int telefono;
     private String direccion;
 
@@ -22,9 +23,10 @@ public class Conductor {
         this.genero = null;
         this.telefono = 0;
         this.direccion = null;
+        this.fecha_nac = null;
     }
 
-    public Conductor(long DPI, String nombres, String apellidos, char licencia, String genero, int telefono, String direccion) {
+    public Conductor(long DPI, String nombres, String apellidos, char licencia, String genero, String fecha_nac, int telefono, String direccion) {
         this.DPI = DPI;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -32,6 +34,7 @@ public class Conductor {
         this.genero = genero;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.fecha_nac = fecha_nac;
     }
 
     public long getDPI() {
@@ -88,6 +91,14 @@ public class Conductor {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
     }
 
     @Override

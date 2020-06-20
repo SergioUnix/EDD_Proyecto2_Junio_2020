@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package llegarapidito;
 
+package llegarapidito;
+import estructuras.lista_enlazada_simple;
+import ventanas.carga_Masiva;
 /**
  *
  * @author ADMIN
@@ -32,15 +34,26 @@ public class LlegaRapidito {
         
         
         
-        
+            
         
     //****************************************************************************************************    
         
+        /*
+         PRUEBA LISTA ENLAZADA SIMPLE
+         
+        lista_enlazada_simple<Integer> miLista = new lista_enlazada_simple();
+        miLista.agregarNodo(1);
+        miLista.agregarNodo(2);
+        
+        for (int i = 0; i < miLista.tamanioLista(); i++) {
+            System.out.println(miLista.retornarValor(i+1));
+        }
+        
+        */
         
         
-        
-        
-        
+        carga_Masiva ventana = new carga_Masiva();
+        ventana.setVisible(true);
         
         
         
