@@ -10,6 +10,7 @@ package llegarapidito;
 
 import estructuras.arbol_por_paginas;
 import ventanas.carga_Masiva;
+import clases.Vehiculo;
 
 /**
  *
@@ -22,27 +23,9 @@ public class LlegaRapidito {
      */
     public static void main(String[] args) {
 
-        
-    arbol_por_paginas pag =new arbol_por_paginas(2);
-    
-        pag.agregar_datos(14);
-    pag.agregar_datos(79);
-    pag.agregar_datos(85);
-        pag.agregar_datos(2);
-    pag.agregar_datos(1);
-    pag.agregar_datos(4);
-    pag.agregar_datos(3);
-    pag.agregar_datos(5);
-    
-        
-        
-     
-        
-        
-        
-        
-        
-        
+
+
+
         
         
         
@@ -66,8 +49,10 @@ public class LlegaRapidito {
         Carga.dibujar(png, dot);
          */
         //Carga.lista_doble_ciruclar_GRAPHVIZ();
-        carga_Masiva ventana = new carga_Masiva();
-        ventana.setVisible(true);
+        
+
+carga_Masiva ventana = new carga_Masiva();
+ ventana.setVisible(true);
 
     }
 

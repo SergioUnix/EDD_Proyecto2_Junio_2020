@@ -3,7 +3,6 @@
  * @author ADMIN
  */
 
-
 package estructuras;
 
 import java.awt.Desktop;
@@ -14,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import clases.Vehiculo;
 
 
 class arbolPagina {   
@@ -51,6 +51,7 @@ public class arbol_por_paginas {
     public static int pag_primera_particion;   
     public static boolean verifico_pag_primero;
     public static int altura_N = 1;
+    ArrayList <Vehiculo> v=new ArrayList<>();
     public static int imprimir = 1;
     public static String cadena_dot_ghrapviz = ""; 
     public cabeceras cabeza_nodo;
@@ -63,7 +64,13 @@ public class arbol_por_paginas {
         arbolPagina llevarIngresos = new arbolPagina();
         verifico_pag_primero = true;
     }
-    public void agregar_datos(int placa) {
+    public void agregar_datos(Vehiculo vehi) {
+        String subCadena=null;
+        int placa=0;
+        if(vehi.getPlaca()!=null){
+            subCadena=vehi.getPlaca();
+            placa=Integer.parseInt(subCadena.substring(0,3));
+        v.add(vehi);}
         if (cabeza_nodo.existen_hijos==true) {
          Ingreso_cambio_hijos(cabeza_nodo);
          Ingreso_en_hijos(cabeza_nodo, placa);
@@ -86,6 +93,21 @@ public class arbol_por_paginas {
             }            
         }
     }
+    
+    public String obtenerPlaca(int subCadena){//solo para grafic
+    String placa_entera="";     
+        
+      for(int i=0;i<=this.v.size()-1;i++){
+          String sub=this.v.get(i).getPlaca().substring(0,3);
+          String subCa=String.valueOf(subCadena);
+              if(sub.equals(subCa)){                  
+               placa_entera = this.v.get(i).getPlaca();
+               }
+    
+    }
+      return placa_entera;
+    }
+    
     public void OrganizarNodos(int arreglo[], int tamanio_orga){
      
         int i=0;
@@ -243,47 +265,173 @@ public class arbol_por_paginas {
         }
     }
     }   
+    
+    public String obtenerMarca(int subCadena){//solo para grafic
+    String marca="";     
+        
+      for(int i=0;i<=this.v.size()-1;i++){
+          String sub=this.v.get(i).getPlaca().substring(0,3);
+          String subCa=String.valueOf(subCadena);
+              if(sub.equals(subCa)){                  
+               marca = this.v.get(i).getMarca();
+               }
+    
+    }
+      return marca;
+    }
+    
+    public String obtenerModelo(int subCadena){//solo para grafic
+    String modelo="";     
+        
+      for(int i=0;i<=this.v.size()-1;i++){
+          String sub=this.v.get(i).getPlaca().substring(0,3);
+          String subCa=String.valueOf(subCadena);
+              if(sub.equals(subCa)){                  
+               modelo = this.v.get(i).getModelo();
+               }
+    
+    }
+      return modelo;
+    }
+    public void eliminar_dato(int placa) { 
+    boolean existe_placa = false;
+        int indes1= 0;
+        int indes2=0;
+        while(indes2<arbolPagina.datos_existentes.size() && !existe_placa){
+        if (arbolPagina.datos_existentes.get(indes2) == placa) {
+                existe_placa = true;
+                indes1 = indes2;
+            }
+          indes2=indes2+1;  
+        }
+        if (existe_placa==true) { arbolPagina.datos_existentes.remove(indes1); } else {
+         System.out.println("No existe dato");
+        }
+        ArrayList<Integer> arreglo_comodin = arbolPagina.datos_existentes;
+        arbolPagina.datos_existentes = new ArrayList<Integer>();
+        cabeza_nodo = new cabeceras();
+        cabeza_nodo.existen_hijos = false;
+        int kindex=0;
+        while (kindex< arreglo_comodin.size()){
+        Integer y = arreglo_comodin.get(kindex);
+            int o = y.intValue();
+            Vehiculo nada=new Vehiculo();
+            agregar_datos(nada);
+            kindex=kindex+1; 
+        }
+    }      
+    public boolean buscar_valor(int placa){
+        int desk=0;
+        boolean existe_placa_aca = false;
+        while(desk<arbolPagina.datos_existentes.size() && !existe_placa_aca){
+        if(arbolPagina.datos_existentes.get(desk) == placa){
+                existe_placa_aca = true;
+                System.out.println("Si existe");
+                return existe_placa_aca;
+            }
+            desk=desk+1;
+        }
+        System.out.println("No existe");
+        return false;
+    }
+    
+    
+    public String generar_recursivo(cabeceras nodo) {
+        cadena_dot_ghrapviz += "\n";
+        int iterBusca=0;
+        while(iterBusca<2*pag_primera_particion+1){   
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        if (nodo.nodo[iterBusca] != null) {
+            if (iterBusca != 0) { imprimir ++;
+        } else {     altura_N++;  imprimir = 1;}
+        generar_recursivo(nodo.nodo[iterBusca]);    }     
+        if (nodo.nodo[iterBusca] != null) { cadena_dot_ghrapviz += "[ "; }
+        int hijo=0;  int father=0;
+        int j=0;
+        while(nodo.nodo[iterBusca]!=null && j<nodo.nodo[iterBusca].valores.length){
+            if (nodo.nodo[iterBusca].valores[j] != 0) {
+            father=nodo.nodo[iterBusca].father.valores[0];
+            hijo= nodo.nodo[iterBusca].valores[0];                      
+            aux+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+                    obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
+                    "}"+"|";                                              
+            cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
+            }
+        j=j+1;
+        }
+        if (nodo.nodo[iterBusca] != null) {         
+        this.cadena_nodos +="nodo"+hijo+"[ label =\""+aux+"\"]  \n";
+        this.cadena_direccion += "nodo"+father+"->"+"nodo"+hijo+"\n";
+        aux="";
+        cadena_dot_ghrapviz += " ]";
+        } 
+        iterBusca=iterBusca+1;
+        }
+        if (cadena_dot_ghrapviz.length() > (2*pag_primera_particion+3)*4) {return cadena_dot_ghrapviz;}
+        return cadena_dot_ghrapviz;
+    }
+
+String aux="";
+String cadena_nodos="";
+String cadena_direccion="";
+public String getTxt() {
+this.cadena_dot_ghrapviz="";
+this.aux="";
+this.cadena_nodos="";
+this.cadena_direccion="";
+String cadena_dot = generar_recursivo(cabeza_nodo);
+int hijo=0;  int father=0;
+String aux="";
+for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
+    hijo =cabeza_nodo.valores[0];
+    aux += "{"+cabeza_nodo.valores[i] +"|"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+         obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
+            +"}"+ "|";
+ }
+cadena +="nodo"+hijo+"[ label =\""+aux+"\"]  \n";
+cadena+=this.cadena_nodos;
+cadena+=this.cadena_direccion;
+cadena+="label=\"{Arbol B | placas}\";\n}";       
+        return cadena;
+    }    
+    Random r = new Random();
+    int valorDado =0; 
+
+ public void crearTxT(String cadena) {
+    File f;
+    FileWriter wr;
+    try {
+        f = new File("Arbol_B.txt");
+        wr = new FileWriter(f);
+        BufferedWriter bw = new BufferedWriter(wr);
+        PrintWriter salida = new PrintWriter(bw);
+        salida.write(cadena + "\n");
+        salida.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, " NO ESCRIBE ");
+        }
+    }
+    public void obtener_generar_grafico() {
+        
+           try {
+       
+        String archivoDot=getTxt();
+        this.crearTxT(archivoDot);     
+            ProcessBuilder pbuilder;
+            pbuilder = new ProcessBuilder("dot", "-Tpng","-Gdpi=300", "-o", "Arbol_B.png", "Arbol_B.txt");
+            pbuilder.redirectErrorStream(true);
+            pbuilder.start();                    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se creo la imagen ");
+        }
+        File miArchivo = new File("Arbol_B.png");
+        try {
+            Desktop.getDesktop().open(miArchivo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No esta la Ruta");
+        }
+    } 
 }
-
-
-
 
 
 

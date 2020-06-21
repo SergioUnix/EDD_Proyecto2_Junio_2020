@@ -1,0 +1,26 @@
+digraph arbol_por_paginas{
+rankdir=TB;
+node[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];   
+nodo590[ label ="{590|590PXZ|Suzuki|Deportivo}|"]  
+nodo196[ label ="{196|196JDD|Vauxhall|Racing}|{207|207OOW|Renault|Standard}|"]  
+nodo218[ label ="{218|218MOS|Mazda|Standard}|{249|249TVZ|Hyundai Motors|Standard}|{282|282LUO|Buick|Racing}|"]  
+nodo344[ label ="{344|344SEQ|Honda|Coupe}|{477|477TTC|Chrysler|Camioneta}|{484|484JTO|Buick|Standard}|{515|515LQN|Skoda|Camioneta}|"]  
+nodo546[ label ="{546|546SKJ|Mitsubishi Motors|Deportivo}|{571|571ZHR|Ford|Deportivo}|"]  
+nodo210[ label ="{210|210GPE|Suzuki|Racing}|{290|290BID|Tata Motors|Standard}|{535|535BUB|Kia Motors|Camioneta}|"]  
+nodo647[ label ="{647|647MGJ|Audi|Pick Up}|{660|660HKC|MINI|Camioneta}|"]  
+nodo725[ label ="{725|725CQU|MINI|Pick Up}|{824|824HFI|Suzuki|Racing}|{836|836WTS|Dacia|Pick Up}|"]  
+nodo860[ label ="{860|860RMD|Buick|Pick Up}|{868|868SAS|Audi|Standard}|"]  
+nodo913[ label ="{913|913FOH|Citroën|Coupe}|{920|920XCG|Mercedes-Benz|Deportivo}|{958|958WOF|RAM Trucks|Standard}|{970|970AZE|Lexus|Deportivo}|"]  
+nodo688[ label ="{688|688XIZ|Mazda|Coupe}|{859|859QZN|Infiniti|Pick Up}|{885|885BVH|Buick|Coupe}|"]  
+nodo210->nodo196
+nodo210->nodo218
+nodo210->nodo344
+nodo210->nodo546
+nodo590->nodo210
+nodo688->nodo647
+nodo688->nodo725
+nodo688->nodo860
+nodo688->nodo913
+nodo590->nodo688
+label="{Arbol B | placas}";
+}

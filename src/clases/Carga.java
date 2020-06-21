@@ -4,6 +4,7 @@
  */
 package clases;
 
+import estructuras.arbol_por_paginas;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -24,6 +25,7 @@ import estructuras.lista_enlazada_doble_circular;
 public class Carga {
 
     static lista_enlazada_doble_circular<Conductor, Long> conductores = new lista_enlazada_doble_circular();
+    public static arbol_por_paginas vehiculos=new arbol_por_paginas(2);      
 
     public static void cargaCliente(String ruta) throws FileNotFoundException {
         File archivoLeer = new File(ruta);
@@ -74,6 +76,12 @@ public class Carga {
                     nuevoVehiculo.setColor(atributos[4].trim());
                     nuevoVehiculo.setPrecio(Double.parseDouble(atributos[5].trim()));
                     nuevoVehiculo.setTransmision(atributos[6].trim());
+                    vehiculos.agregar_datos(nuevoVehiculo);
+
+                    
+
+
+
 
                     System.out.println(nuevoVehiculo.toString());
                 }
