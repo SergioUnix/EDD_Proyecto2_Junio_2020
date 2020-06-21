@@ -33,6 +33,19 @@ public class menu_Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        Salir = new javax.swing.JLabel();
+        direccion = new javax.swing.JTextField();
+        telefono = new javax.swing.JTextField();
+        anio = new javax.swing.JComboBox<>();
+        mes = new javax.swing.JComboBox<>();
+        dia = new javax.swing.JComboBox<>();
+        genero = new javax.swing.JComboBox<>();
+        apellido = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
+        DPI = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -46,15 +59,46 @@ public class menu_Cliente extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 500, 240));
+
+        Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/logout72.png"))); // NOI18N
+        Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SalirMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 280, -1, -1));
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 150, -1));
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 150, -1));
+
+        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003" }));
+        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+
+        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+
+        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jPanel1.add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+
+        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Fenemino" }));
+        jPanel1.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 150, -1));
+        jPanel1.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 150, -1));
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 150, -1));
+        jPanel1.add(DPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 150, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -69,6 +113,10 @@ public class menu_Cliente extends javax.swing.JFrame {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
+
+    private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_SalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -106,5 +154,17 @@ public class menu_Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField DPI;
+    private javax.swing.JLabel Salir;
+    private javax.swing.JComboBox<String> anio;
+    private javax.swing.JTextField apellido;
+    private javax.swing.JComboBox<String> dia;
+    private javax.swing.JTextField direccion;
+    private javax.swing.JComboBox<String> genero;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> mes;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
