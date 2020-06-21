@@ -174,7 +174,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("node[shape=record];\n");
-            //BW.write("rankdir=LR;\n");
+            BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
                 conductor = conductores.retornarNodobyIndex(i);
                 BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");
@@ -203,7 +203,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("node[shape=record];\n");
-            //BW.write("rankdir=LR;\n");
+            BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
                 conductor = conductores.retornarNodobyIndex(i);
                 BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");

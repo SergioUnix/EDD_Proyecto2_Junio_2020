@@ -117,13 +117,13 @@ public class lista_enlazada_simple<T> {
     }
 
     //ESTA FUNCIÓN RETORNA EL VALOR O DATO QUE CONTENGA NUESTRO NODO
-    public T retornarValor(int indice) {
+    public T retornarValor(int indice) throws Exception {
         //FACTOR PARA DEVOLVER EL ÚLTIMO VALOR DE LA LISTA
-        if (indice > tamanio) {
+        if (indice >= tamanio) {
             indice = tamanio - 1;
         }
 
-        if (indice >= 0 && tamanio >= indice) {
+        if (indice >= 0 && tamanio > indice) {
             if (indice == 0) {
                 return inicio.getDato();
             } else {
@@ -133,13 +133,14 @@ public class lista_enlazada_simple<T> {
                 }
                 return aux.getDato();
             }
+        } else{
+            throw new Exception("Posición No encontrada");
         }
-        return null;
     }
 
     //ELIMINAR UN NODO POR SU POSICIÓN 
     public void eliminarNodo(int indice) {
-        if (indice >= 0 && tamanio >= indice) {
+        if (indice >= 0 && tamanio > indice) {
             if (indice == 0) {
                 inicio = inicio.getSiguiente();
             } else {
