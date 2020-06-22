@@ -17,14 +17,14 @@ import clases.Vehiculo;
 
 
 class arbolPagina {   
-    public ArrayList<Integer> datos_existentes;
-    public arbolPagina(){datos_existentes = new ArrayList<Integer>(); }        
-    public boolean buscar_valor(int placa){
+    public lista_enlazada_simple<Integer> datos_existentes;
+    public arbolPagina(){datos_existentes = new lista_enlazada_simple<Integer>(); }        
+    public boolean buscar_valor(int placa) throws Exception{
         boolean esta = false;
         int index=0;
-        int tamano=datos_existentes.size();        
+        int tamano=datos_existentes.tamanioLista();        
         while(index<tamano && !esta){
-        if (datos_existentes.get(index) == placa){esta = true;}        
+        if (datos_existentes.retornarValor(index) == placa){esta = true;}        
         index++;
         }
         
@@ -81,7 +81,7 @@ public class arbol_por_paginas {
          while(index_insert<tamano_cabeceras){
                if (cabeza_nodo.valores[index_insert] == 0) {
                     cabeza_nodo.valores[index_insert] = placa;
-                    arbolPagina.datos_existentes.add(placa);
+                    arbolPagina.datos_existentes.agregarNodo(placa);
                     auxiliar = index_insert;
                     OrganizarNodos(cabeza_nodo.valores,6);
                     break;
@@ -174,7 +174,7 @@ public class arbol_por_paginas {
     public void Obtener_dato_arreglo(cabeceras nodo_lado, int placa){
           for(int cont=0;cont <= 2*pag_primera_particion;cont++){
           if (nodo_lado.valores[cont]==0) {
-           nodo_lado.valores[cont]=placa;   OrganizarNodos(nodo_lado.valores, 5);    arbolPagina.datos_existentes.add(placa);
+           nodo_lado.valores[cont]=placa;   OrganizarNodos(nodo_lado.valores, 5);    arbolPagina.datos_existentes.agregarNodo(placa);
                 if (cont == 2*pag_primera_particion) {Ingresar_en(nodo_lado);}
                 break;
             } }
@@ -306,27 +306,27 @@ public class arbol_por_paginas {
     }
       return modelo;
     }
-    public void eliminar_dato(int placa) { 
+    public void eliminar_dato(int placa) throws Exception { 
     boolean existe_placa = false;
         int indes1= 0;
-        int indes2=0;
-        while(indes2<arbolPagina.datos_existentes.size() && !existe_placa){
-        if (arbolPagina.datos_existentes.get(indes2) == placa) {
+        int indes2=1;
+        while(indes2<arbolPagina.datos_existentes.tamanioLista()+1&& !existe_placa){
+        if (arbolPagina.datos_existentes.retornarValor(indes2) == placa) {
                 existe_placa = true;
                 indes1 = indes2;
             }
           indes2=indes2+1;  
         }
-        if (existe_placa==true) { arbolPagina.datos_existentes.remove(indes1); } else {
+        if (existe_placa==true) { arbolPagina.datos_existentes.eliminarNodo(indes1); } else {
          System.out.println("No existe dato");
         }
-        ArrayList<Integer> arreglo_comodin = arbolPagina.datos_existentes;
-        arbolPagina.datos_existentes = new ArrayList<Integer>();
+        lista_enlazada_simple<Integer> arreglo_comodin = arbolPagina.datos_existentes;
+        arbolPagina.datos_existentes = new lista_enlazada_simple<Integer>();
         cabeza_nodo = new cabeceras();
         cabeza_nodo.existen_hijos = false;
         int kindex=0;
-        while (kindex< arreglo_comodin.size()){
-        Integer y = arreglo_comodin.get(kindex);
+        while (kindex< arreglo_comodin.tamanioLista()){
+        Integer y = arreglo_comodin.retornarValor(kindex);
             int o = y.intValue();
             Vehiculo nada=new Vehiculo();
             agregar_datos(nada);
@@ -334,11 +334,11 @@ public class arbol_por_paginas {
             kindex=kindex+1; 
         }
     }      
-    public boolean buscar_valor(int placa){
+    public boolean buscar_valor(int placa) throws Exception{
         int desk=0;
         boolean existe_placa_aca = false;
-        while(desk<arbolPagina.datos_existentes.size() && !existe_placa_aca){
-        if(arbolPagina.datos_existentes.get(desk) == placa){
+        while(desk<arbolPagina.datos_existentes.tamanioLista()&& !existe_placa_aca){
+        if(arbolPagina.datos_existentes.retornarValor(desk) == placa){
                 existe_placa_aca = true;
                 System.out.println("Si existe");
                 return existe_placa_aca;

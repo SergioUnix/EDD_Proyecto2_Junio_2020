@@ -5,8 +5,13 @@
  */
 package ventanas;
 
+import clases.Cliente;
+import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,16 +39,28 @@ public class menu_Cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        BuscarBoton1 = new javax.swing.JButton();
+        BuscarBoton = new javax.swing.JButton();
+        DPIbuscar = new javax.swing.JTextField();
+        CrearBoton = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
+        imagen = new javax.swing.JLabel();
         Salir = new javax.swing.JLabel();
+        direccionLabel = new javax.swing.JLabel();
         direccion = new javax.swing.JTextField();
+        telefonoLabel = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
+        fechaLabel = new javax.swing.JLabel();
         anio = new javax.swing.JComboBox<>();
         mes = new javax.swing.JComboBox<>();
         dia = new javax.swing.JComboBox<>();
+        generoLabel = new javax.swing.JLabel();
         genero = new javax.swing.JComboBox<>();
+        apellidoLabel = new javax.swing.JLabel();
         apellido = new javax.swing.JTextField();
+        nombreLabel = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
+        dpiLabel = new javax.swing.JLabel();
         DPI = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,8 +79,33 @@ public class menu_Cliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 500, 240));
+        BuscarBoton1.setText("EDITAR");
+        jPanel1.add(BuscarBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, -1));
+
+        BuscarBoton.setText("BUSCAR");
+        jPanel1.add(BuscarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+
+        DPIbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DPIbuscarKeyTyped(evt);
+            }
+        });
+        jPanel1.add(DPIbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 150, -1));
+
+        CrearBoton.setText("CREAR");
+        CrearBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
+
+        errorLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 370, 20));
+
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
+        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 500, 240));
 
         Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/logout72.png"))); // NOI18N
         Salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,22 +114,81 @@ public class menu_Cliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 280, -1, -1));
-        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 150, -1));
-        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 150, -1));
 
-        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003" }));
-        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+        direccionLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        direccionLabel.setForeground(new java.awt.Color(255, 255, 255));
+        direccionLabel.setText("DIRECCION:");
+        jPanel1.add(direccionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 150, -1));
 
-        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+        telefonoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        telefonoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        telefonoLabel.setText("TELEFONO:");
+        jPanel1.add(telefonoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
-        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jPanel1.add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                telefonoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, -1));
 
-        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Fenemino" }));
-        jPanel1.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 150, -1));
+        fechaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        fechaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        fechaLabel.setText("NACIMIENTO:");
+        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0000", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003" }));
+        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+
+        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jPanel1.add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
+
+        generoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        generoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        generoLabel.setText("GENERO:");
+        jPanel1.add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Fenemino", "No deseo especificar", "Helicoptero Apache de Guerra" }));
+        jPanel1.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, -1));
+
+        apellidoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        apellidoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        apellidoLabel.setText("APELLIDOS:");
+        jPanel1.add(apellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellidoKeyTyped(evt);
+            }
+        });
         jPanel1.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 150, -1));
+
+        nombreLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
+        nombreLabel.setText("NOMBRES:");
+        jPanel1.add(nombreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 150, -1));
+
+        dpiLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        dpiLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dpiLabel.setText("DPI:");
+        jPanel1.add(dpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        DPI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DPIKeyTyped(evt);
+            }
+        });
         jPanel1.add(DPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,6 +203,7 @@ public class menu_Cliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -117,6 +219,118 @@ public class menu_Cliente extends javax.swing.JFrame {
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
         System.exit(0);
     }//GEN-LAST:event_SalirMouseClicked
+
+    private void DPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DPIKeyTyped
+        char c = evt.getKeyChar();
+        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            errorLabel.setText("SOLO NUMEROS PARA EL DPI");
+        }
+        //LIMITAR NUMERO PARA DPI {XXXX XXXXX XXXX}
+        if (DPI.getText().length() == 13 && Character.isDigit(c)) {
+            evt.consume();
+            errorLabel.setText("");
+        } else if (DPI.getText().length() < 13 && Character.isDigit(c)) {
+            errorLabel.setText("EL DPI DEBE RESPETAR SU TAMAÑO {XXXX XXXXX XXXX}");
+        }
+    }//GEN-LAST:event_DPIKeyTyped
+
+    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            errorLabel.setText("SOLO NUMEROS PARA EL TELEFONO");
+        }
+        //LIMITAR NUMERO PARA TELEFONO {XXXX XXXX}
+        if (telefono.getText().length() == 8 && Character.isDigit(c)) {
+            evt.consume();
+            errorLabel.setText("");
+        } else if (telefono.getText().length() < 8 && Character.isDigit(c)) {
+            errorLabel.setText("EL TELEFONO DEBE RESPETAR SU TAMAÑO {XXXX XXXX}");
+        }
+    }//GEN-LAST:event_telefonoKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        char c = evt.getKeyChar();
+        //SOLO SE ADMITIRÁN LETRAS EN ESTE TEXTBOX
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            errorLabel.setText("SOLO LETRAS PARA SU NOMBRE");
+        }
+    }//GEN-LAST:event_nombreKeyTyped
+
+    private void apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyTyped
+        char c = evt.getKeyChar();
+        //SOLO SE ADMITIRÁN LETRAS EN ESTE TEXTBOX
+        if (Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+            errorLabel.setText("SOLO LETRAS PARA SU APELLIDO");
+        }
+    }//GEN-LAST:event_apellidoKeyTyped
+
+    private void DPIbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DPIbuscarKeyTyped
+        char c = evt.getKeyChar();
+        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+            errorLabel.setText("SOLO NUMEROS PARA EL DPI");
+        }
+        //LIMITAR NUMERO PARA DPI {XXXX XXXXX XXXX}
+        if (DPIbuscar.getText().length() == 13 && Character.isDigit(c)) {
+            evt.consume();
+            errorLabel.setText("");
+        } else if (DPIbuscar.getText().length() < 13 && Character.isDigit(c)) {
+            errorLabel.setText("EL DPI DEBE RESPETAR SU TAMAÑO {XXXX XXXXX XXXX}");
+        }
+    }//GEN-LAST:event_DPIbuscarKeyTyped
+
+    private void CrearBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBotonActionPerformed
+
+        if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
+                && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
+                && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
+                && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
+                && !direccion.getText().isEmpty()) {
+            if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
+                errorLabel.setText("ANTES DE CREAR DEBE RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
+            } else {
+                System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
+                Cliente nuevoCliente = new Cliente();
+                nuevoCliente.setDPI(Long.parseLong(DPI.getText().trim()));
+                nuevoCliente.setNombres(nombre.getText().trim());
+                nuevoCliente.setApellidos(apellido.getText().trim());
+                nuevoCliente.setGenero(genero.getSelectedItem().toString().trim());
+                nuevoCliente.setFecha_nac(dia.getSelectedItem().toString()+"/"+mes.getSelectedItem().toString()+"/"+
+                anio.getSelectedItem().toString());
+                nuevoCliente.setTelefono(Integer.parseInt(telefono.getText().trim()));
+                nuevoCliente.setDireccion(direccion.getText().trim());
+                System.out.println(nuevoCliente.toString());
+                
+                for (Component component : jPanel1.getComponents()) {
+                    if (component instanceof JTextField) {
+                        ((JTextField) component).setText("");
+                    }
+                }
+                for (Component component : jPanel1.getComponents()) {
+                    if (component instanceof JComboBox) {
+                        ((JComboBox) component).setSelectedIndex(0);
+                    }
+                }
+            }
+
+        } else {
+            errorLabel.setText("ANTES DE CREAR DEBE RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
+        }
+
+
+    }//GEN-LAST:event_CrearBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,17 +368,29 @@ public class menu_Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BuscarBoton;
+    private javax.swing.JButton BuscarBoton1;
+    private javax.swing.JButton CrearBoton;
     private javax.swing.JTextField DPI;
+    private javax.swing.JTextField DPIbuscar;
     private javax.swing.JLabel Salir;
     private javax.swing.JComboBox<String> anio;
     private javax.swing.JTextField apellido;
+    private javax.swing.JLabel apellidoLabel;
     private javax.swing.JComboBox<String> dia;
     private javax.swing.JTextField direccion;
+    private javax.swing.JLabel direccionLabel;
+    private javax.swing.JLabel dpiLabel;
+    private javax.swing.JLabel errorLabel;
+    private javax.swing.JLabel fechaLabel;
     private javax.swing.JComboBox<String> genero;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel generoLabel;
+    private javax.swing.JLabel imagen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> mes;
     private javax.swing.JTextField nombre;
+    private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField telefono;
+    private javax.swing.JLabel telefonoLabel;
     // End of variables declaration//GEN-END:variables
 }

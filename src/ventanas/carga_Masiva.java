@@ -154,7 +154,9 @@ public class carga_Masiva extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        System.exit(0);
+        //System.exit(0);
+        menu_Conductor co1 = new menu_Conductor();
+        co1.setVisible(true);
     }//GEN-LAST:event_SalirMouseClicked
 
     private void CclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CclientesActionPerformed
@@ -210,13 +212,6 @@ public class carga_Masiva extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
-        }
-       //MÉTODO PARA CREAR EL ARCHIVO.DOT Y LA IMAGEN.PNG
-        try {
-           Path CMD= Carga.lista_doble_ciruclar_GRAPHVIZ();
-           Carga.dibujarGRAPHVIZ(CMD,"Conductores.png");
-        } catch (IOException ex) {
-            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
         }
         //*/ 
     }//GEN-LAST:event_CconductoresActionPerformed

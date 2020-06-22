@@ -24,8 +24,8 @@ import estructuras.lista_enlazada_doble_circular;
  */
 public class Carga {
 
-    static lista_enlazada_doble_circular<Conductor, Long> conductores = new lista_enlazada_doble_circular();
-    public static arbol_por_paginas vehiculos=new arbol_por_paginas(2);      
+    public static lista_enlazada_doble_circular<Conductor, Long> conductores = new lista_enlazada_doble_circular();
+    public static arbol_por_paginas vehiculos = new arbol_por_paginas(2);
 
     public static void cargaCliente(String ruta) throws FileNotFoundException {
         File archivoLeer = new File(ruta);
@@ -76,12 +76,8 @@ public class Carga {
                     nuevoVehiculo.setColor(atributos[4].trim());
                     nuevoVehiculo.setPrecio(Double.parseDouble(atributos[5].trim()));
                     nuevoVehiculo.setTransmision(atributos[6].trim());
+
                     vehiculos.agregar_datos(nuevoVehiculo);
-
-                    
-
-
-
 
                     System.out.println(nuevoVehiculo.toString());
                 }
@@ -157,6 +153,7 @@ public class Carga {
         }
     }
 //************************************************************************************************
+
     public static Path lista_doble_ciruclar_GRAPHVIZ() throws IOException {
         //VARIABLES PARA OBTENER LOS DATOS DE LOS CONDUTORES EN LA LISTA
         Conductor conductor;
@@ -176,18 +173,21 @@ public class Carga {
         //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
         File archivo = new File(rutaAbsoluta.toString());
         BufferedWriter BW;
-        
+
         //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
         if (archivo.exists()) {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=black;");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
                 conductor = conductores.retornarNodobyIndex(i);
                 BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");
             }
-            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\"];\n");
+            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\" color=\"red\"];\n");
             BW.write("{node[shape=point height=0] p0 p4}" + "\n");
             BW.write("p0:n -> \"" + String.valueOf(inicial.getDPI()) + "\"[arrowtail=none];\n");
             BW.write("p0:s -> p4:s[arrowtail=none];\n");
@@ -204,19 +204,22 @@ public class Carga {
             //BW.write(String.valueOf(inicial.getDPI())+":before:c ->"+String.valueOf(ultimo.getDPI())+":next;\n");
             //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
             BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
-            BW.write("}");
-
-        //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+            //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
         } else {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
+            BW.write("subgraph Conductores{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=black;");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
                 conductor = conductores.retornarNodobyIndex(i);
                 BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");
             }
-            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\"];\n");
+            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\" color=\"red\"];\n");
             BW.write("{node[shape=point height=0] p0 p4}" + "\n");
             BW.write("p0:n -> \"" + String.valueOf(inicial.getDPI()) + "\"[arrowtail=none];\n");
             BW.write("p0:s -> p4:s[arrowtail=none];\n");
@@ -233,7 +236,8 @@ public class Carga {
             //BW.write(String.valueOf(inicial.getDPI())+":before:c ->"+String.valueOf(ultimo.getDPI())+":next;\n");
             //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
             BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
-            BW.write("}");
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
 
         }
         BW.close();
@@ -246,7 +250,7 @@ public class Carga {
             //CREAMOS UN PROCESO PARA LLAMAR LA FUNCIÓN DOT
             ProcessBuilder graficarDot;
             //CREAMOS EL CONSTRUCTOR CON LOS PARAMETROS DE LA FUNCIÓN
-            graficarDot = new ProcessBuilder("dot", "-Tpng","-Gdpi=300" ,"-o", png, dot.toString());
+            graficarDot = new ProcessBuilder("dot", "-Tpng", "-Gdpi=300", "-o", png, dot.toString());
             //VERIFICA O REDIRIGE SI HAY UN ERROR
             graficarDot.redirectErrorStream(true);
             //EJECUTA LA FUCNIÓN

@@ -238,7 +238,14 @@ public class lista_enlazada_doble_circular<T, V> {
     public void eliminarNodo(V index) {
         aux = inicio;
         do {
-            if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0) {
+            if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0 && aux == inicio) {
+                aux.getAnterior().setSiguiente(aux.getSiguiente());
+                aux.getSiguiente().setAnterior(aux.getAnterior());
+                inicio = inicio.getSiguiente();
+                aux = null;
+                aux = inicio.getAnterior();
+            }
+            else if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0) {
                 aux.getAnterior().setSiguiente(aux.getSiguiente());
                 aux.getSiguiente().setAnterior(aux.getAnterior());
                 aux = null;
@@ -246,5 +253,6 @@ public class lista_enlazada_doble_circular<T, V> {
             }
             aux = aux.getSiguiente();
         } while (aux != inicio);
+        tamanio--;
     }
 }

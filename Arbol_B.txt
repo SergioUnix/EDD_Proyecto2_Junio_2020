@@ -1,24 +1,26 @@
 digraph arbol_por_paginas{
 rankdir=TB;
 node[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];   
-nodo535[ label ="{535BUB|Kia Motors|Camioneta}|"]  
-nodo20[ label ="{020XCG|Mercedes-Benz|Deportivo}|{058WOF|RAM Trucks|Standard}|{060HKC|MINI|Camioneta}|"]  
-nodo196[ label ="{196JDD|Vauxhall|Racing}|{207OOW|Renault|Standard}|"]  
-nodo218[ label ="{218WTF|Prueba|pick up P}|{218WTF|Prueba|pick up P}|{249TVZ|Hyundai Motors|Standard}|{282LUO|Buick|Racing}|"]  
-nodo344[ label ="{344SEQ|Honda|Coupe}|{477TTC|Chrysler|Camioneta}|{484JTO|Buick|Standard}|{515LQN|Skoda|Camioneta}|"]  
-nodo85[ label ="{085BVH|Buick|Coupe}|{210GPE|Suzuki|Racing}|{290BID|Tata Motors|Standard}|"]  
-nodo546[ label ="{546SKJ|Mitsubishi Motors|Deportivo}|{571ZHR|Ford|Deportivo}|{590PXZ|Suzuki|Deportivo}|{647MGJ|Audi|Pick Up}|"]  
+nodo590[ label ="{590PXZ|Suzuki|Deportivo}|"]  
+nodo10[ label ="{010GPE|Suzuki|Racing}|{035BUB|Kia Motors|Camioneta}|{044SEQ|Honda|Coupe}|{084JTO|Buick|Standard}|"]  
+nodo207[ label ="{207OOW|Renault|Standard}|{218MOS|Mazda|Standard}|{249TVZ|Hyundai Motors|Standard}|"]  
+nodo290[ label ="{290BID|Tata Motors|Standard}|{477TTC|Chrysler|Camioneta}|"]  
+nodo546[ label ="{546SKJ|Mitsubishi Motors|Deportivo}|{571ZHR|Ford|Deportivo}|"]  
+nodo196[ label ="{196JDD|Vauxhall|Racing}|{282LUO|Buick|Racing}|{515LQN|Skoda|Camioneta}|"]  
+nodo647[ label ="{647MGJ|Audi|Pick Up}|{660HKC|MINI|Camioneta}|"]  
 nodo725[ label ="{725CQU|MINI|Pick Up}|{824HFI|Suzuki|Racing}|{836WTS|Dacia|Pick Up}|"]  
-nodo860[ label ="{860RMD|Buick|Pick Up}|{868SAS|Audi|Standard}|{913FOH|Citroën|Coupe}|{970AZE|Lexus|Deportivo}|"]  
-nodo688[ label ="{688XIZ|Mazda|Coupe}|{859QZN|Infiniti|Pick Up}|"]  
-nodo85->nodo20
-nodo85->nodo196
-nodo85->nodo218
-nodo85->nodo344
-nodo535->nodo85
-nodo688->nodo546
+nodo860[ label ="{860RMD|Buick|Pick Up}|{868SAS|Audi|Standard}|"]  
+nodo913[ label ="{913FOH|Citroën|Coupe}|{920XCG|Mercedes-Benz|Deportivo}|{958WOF|RAM Trucks|Standard}|{970AZE|Lexus|Deportivo}|"]  
+nodo688[ label ="{688XIZ|Mazda|Coupe}|{859QZN|Infiniti|Pick Up}|{885BVH|Buick|Coupe}|"]  
+nodo196->nodo10
+nodo196->nodo207
+nodo196->nodo290
+nodo196->nodo546
+nodo590->nodo196
+nodo688->nodo647
 nodo688->nodo725
 nodo688->nodo860
-nodo535->nodo688
+nodo688->nodo913
+nodo590->nodo688
 label="{Arbol B | placas}";
 }
