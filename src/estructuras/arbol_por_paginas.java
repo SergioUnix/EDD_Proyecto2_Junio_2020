@@ -17,8 +17,8 @@ import clases.Vehiculo;
 
 
 class arbolPagina {   
-    public lista_enlazada_simple<Integer> datos_existentes;
-    public arbolPagina(){datos_existentes = new lista_enlazada_simple<Integer>(); }        
+    public lista_enlazada_simple<Long> datos_existentes;
+    public arbolPagina(){datos_existentes = new lista_enlazada_simple<Long>(); }        
     public boolean buscar_valor(int placa) throws Exception{
         boolean esta = false;
         int index=0;
@@ -36,14 +36,14 @@ class arbolPagina {
 class cabeceras{    
     public int ocupados = 0;
     public cabeceras father;
-    public int []valores;
+    public long []valores;
     public cabeceras []nodo;
     public static int numValores;
     public static int count;
     public boolean existen_hijos = false;
     public cabeceras(){count++;
        nodo = new cabeceras [arbol_por_paginas.pag_primera_particion * 2 + 3];
-       valores = new int [arbol_por_paginas.pag_primera_particion * 2 + 1];
+       valores = new long [arbol_por_paginas.pag_primera_particion * 2 + 1];
   }
 }
     
@@ -64,13 +64,20 @@ public class arbol_por_paginas {
         arbolPagina llevarIngresos = new arbolPagina();
         verifico_pag_primero = true;
     }
+    
+    
     public void agregar_datos(Vehiculo vehi) {
         String subCadena=null;
-        int placa=0;
-        if(vehi.getPlaca()!=null){
-        subCadena=vehi.getPlaca();
-        placa=Integer.parseInt(subCadena.substring(0,3));
-        v.add(vehi);}
+        String str = null;  
+        long placa=0;       
+        if(vehi.getPlaca()!=null){            
+        str=vehi.getPlaca();
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray())
+        sb.append((int)c);
+        placa=Long.parseLong(sb.toString());        
+        v.add(vehi);
+        }
         if (cabeza_nodo.existen_hijos==true) {
          Ingreso_cambio_hijos(cabeza_nodo);
          Ingreso_en_hijos(cabeza_nodo, placa);
@@ -94,28 +101,8 @@ public class arbol_por_paginas {
         }
     }
     
-    public String obtenerPlaca(int subCadena){//solo para grafic
-    String placa_entera="";     
-        
-      for(int i=0;i<=this.v.size()-1;i++){
-          String sub=this.v.get(i).getPlaca().substring(0,3);
-         
-          String subCa=String.valueOf(subCadena);
-          if(subCa.length()==2){
-          if(sub.equals("0"+subCa)){                  
-               placa_entera = this.v.get(i).getPlaca();
-               }
-          
-          }else{ if(sub.equals(subCa)){                  
-               placa_entera = this.v.get(i).getPlaca();
-               } }
-          
-    
-    }
-      return placa_entera;
-    }
-    
-    public void OrganizarNodos(int arreglo[], int tamanio_orga){
+ 
+    public void OrganizarNodos(long arreglo[], int tamanio_orga){
      
         int i=0;
         int ordenar1=0;
@@ -130,7 +117,7 @@ public class arbol_por_paginas {
            
           for(int ordenar2 = 0; ordenar2 < tamanio_orga - 1 ; ordenar2++){
              if(arreglo[ordenar2] > arreglo[ordenar2 + 1]){
-                int tmp = arreglo[ordenar2];
+                long tmp = arreglo[ordenar2];
                 arreglo[ordenar2] = arreglo[ordenar2+1];
                 arreglo[ordenar2+1] = tmp;      
               }
@@ -157,7 +144,7 @@ public class arbol_por_paginas {
             index=index +1;
         }
     } 
-    public void Ingreso_en_hijos(cabeceras viene_padre, int placa) {
+    public void Ingreso_en_hijos(cabeceras viene_padre, Long placa) {
         int indexar=0;
         boolean entro = false;
         if(!viene_padre.existen_hijos && viene_padre != null){
@@ -171,10 +158,12 @@ public class arbol_por_paginas {
             }
             indexar=indexar+1;     }
     }    
-    public void Obtener_dato_arreglo(cabeceras nodo_lado, int placa){
+    public void Obtener_dato_arreglo(cabeceras nodo_lado, long placa){
           for(int cont=0;cont <= 2*pag_primera_particion;cont++){
           if (nodo_lado.valores[cont]==0) {
-           nodo_lado.valores[cont]=placa;   OrganizarNodos(nodo_lado.valores, 5);    arbolPagina.datos_existentes.agregarNodo(placa);
+           nodo_lado.valores[cont]=placa;
+           OrganizarNodos(nodo_lado.valores, 5); 
+           arbolPagina.datos_existentes.agregarNodo(placa);
                 if (cont == 2*pag_primera_particion) {Ingresar_en(nodo_lado);}
                 break;
             } }
@@ -273,40 +262,61 @@ public class arbol_por_paginas {
     }
     }   
     
-    public String obtenerMarca(int subCadena){//solo para grafic
-    String marca="";     
+    public long valorAssci(String subCadena){
+    long result=0;    
+        String str = null;                   
+        str=subCadena;
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray())
+        sb.append((int)c);
+        result=Long.parseLong(sb.toString());   
+    return result;}
+    
+
+    
+    public String obtenerModelo(long valor){//solo para grafic
+    String result="";     
         
       for(int i=0;i<=this.v.size()-1;i++){
-          String sub=this.v.get(i).getPlaca().substring(0,3);
-          String subCa=String.valueOf(subCadena);
-                    if(subCa.length()==2){
-              if(sub.equals("0"+subCa)){                  
-               marca = this.v.get(i).getMarca();
-               }}else{  if(sub.equals(subCa)){                  
-               marca = this.v.get(i).getMarca();
-               }}
-    
-    }
-      return marca;
+          long sub=valorAssci(this.v.get(i).getPlaca());
+          
+           if(sub==valor){
+                                
+               result = this.v.get(i).getModelo();
+            }     
+    } 
+      return result;
     }
     
-    public String obtenerModelo(int subCadena){//solo para grafic
-    String modelo="";     
+    
+    public String obtenerMarca(long valor){//solo para grafic
+    String result="";     
         
       for(int i=0;i<=this.v.size()-1;i++){
-          String sub=this.v.get(i).getPlaca().substring(0,3);
-          String subCa=String.valueOf(subCadena);
-           if(subCa.length()==2){
-              if(sub.equals("0"+subCa)){                  
-               modelo = this.v.get(i).getModelo();
-               }}else{  if(sub.equals(subCa)){                  
-               modelo = this.v.get(i).getModelo();
-               }}
-    
+          long sub=valorAssci(this.v.get(i).getPlaca());
+          
+           if(sub==valor){
+                                
+               result = this.v.get(i).getMarca();
+            }     
+    } 
+      return result;
     }
-      return modelo;
+       public String obtenerPlaca(long valor){//solo para grafic
+    String result="";     
+        
+      for(int i=0;i<=this.v.size()-1;i++){
+          long sub=valorAssci(this.v.get(i).getPlaca());
+          
+           if(sub==valor){
+                                
+               result = this.v.get(i).getPlaca();
+            }     
+    } 
+      return result;
     }
-    public void eliminar_dato(int placa) throws Exception { 
+      
+    public void eliminar_dato(Long placa) throws Exception { 
     boolean existe_placa = false;
         int indes1= 0;
         int indes2=1;
@@ -320,13 +330,13 @@ public class arbol_por_paginas {
         if (existe_placa==true) { arbolPagina.datos_existentes.eliminarNodo(indes1); } else {
          System.out.println("No existe dato");
         }
-        lista_enlazada_simple<Integer> arreglo_comodin = arbolPagina.datos_existentes;
-        arbolPagina.datos_existentes = new lista_enlazada_simple<Integer>();
+        lista_enlazada_simple<Long> arreglo_comodin = arbolPagina.datos_existentes;
+        arbolPagina.datos_existentes = new lista_enlazada_simple<Long>();
         cabeza_nodo = new cabeceras();
         cabeza_nodo.existen_hijos = false;
         int kindex=0;
         while (kindex< arreglo_comodin.tamanioLista()){
-        Integer y = arreglo_comodin.retornarValor(kindex);
+        Long y = arreglo_comodin.retornarValor(kindex);
             int o = y.intValue();
             Vehiculo nada=new Vehiculo();
             agregar_datos(nada);
@@ -360,13 +370,13 @@ public class arbol_por_paginas {
         } else {     altura_N++;  imprimir = 1;}
         generar_recursivo(nodo.nodo[iterBusca]);    }     
         if (nodo.nodo[iterBusca] != null) { cadena_dot_ghrapviz += "[ "; }
-        int hijo=0;  int father=0;
+        long hijo=0;  long father=0;
         int j=0;
         while(nodo.nodo[iterBusca]!=null && j<nodo.nodo[iterBusca].valores.length){
             if (nodo.nodo[iterBusca].valores[j] != 0) {
             father=nodo.nodo[iterBusca].father.valores[0];
             hijo= nodo.nodo[iterBusca].valores[0];                      
-            aux+="{"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+            aux+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
                     obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
                     "}"+"|";                                              
             cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
@@ -394,11 +404,11 @@ this.aux="";
 this.cadena_nodos="";
 this.cadena_direccion="";
 String cadena_dot = generar_recursivo(cabeza_nodo);
-int hijo=0;  int father=0;
+long hijo=0;  int father=0;
 String aux="";
 for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
     hijo =cabeza_nodo.valores[0];
-    aux += "{" +obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+    aux += "{"+cabeza_nodo.valores[i] +"|"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
          obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
             +"}"+ "|";
  }
