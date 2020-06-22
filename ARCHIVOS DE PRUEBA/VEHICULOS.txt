@@ -6,17 +6,17 @@
 571ZHR:Ford:Deportivo:9389:naranja:70211:Mecanica;
 546SKJ:Mitsubishi Motors:Deportivo:0313:índigo:89026:Mecanica;
 913FOH:Citroën:Coupe:6082:violeta:59129:Mecanica;
-885BVH:Buick:Coupe:2845:azul:36962:Automatica;
+085BVH:Buick:Coupe:2845:azul:36962:Automatica;
 210GPE:Suzuki:Racing:2907:verde:44700:Mecanica;
 290BID:Tata Motors:Standard:9522:verde:20571:Automatica;
 725CQU:MINI:Pick Up:0149:azul:85265:Mecanica;
-920XCG:Mercedes-Benz:Deportivo:5033:verde:22272:Mecanica;
+020XCG:Mercedes-Benz:Deportivo:5033:verde:22272:Mecanica;
 477TTC:Chrysler:Camioneta:7089:violeta:77334:Mecanica;
 860RMD:Buick:Pick Up:5457:azul:40642:Mecanica;
 647MGJ:Audi:Pick Up:6132:naranja:12673:Automatica;
 836WTS:Dacia:Pick Up:7790:amarillo:2770:Mecanica;
 282LUO:Buick:Racing:9116:índigo:35784:Automatica;
-660HKC:MINI:Camioneta:0231:amarillo:78017:Automatica;
+060HKC:MINI:Camioneta:0231:amarillo:78017:Automatica;
 207OOW:Renault:Standard:5206:índigo:66016:Mecanica;
 590PXZ:Suzuki:Deportivo:9942:rojo:55058:Mecanica;
 249TVZ:Hyundai Motors:Standard:5378:azul:54188:Mecanica;
@@ -26,5 +26,5 @@
 344SEQ:Honda:Coupe:8073:índigo:87211:Automatica;
 218MOS:Mazda:Standard:0382:naranja:83388:Automatica;
 824HFI:Suzuki:Racing:2700:naranja:82035:Automatica;
-958WOF:RAM Trucks:Standard:2938:naranja:75446:Mecanica;
+058WOF:RAM Trucks:Standard:2938:naranja:75446:Mecanica;
 218WTF:Prueba:pick up P:2938:rojo:75446:prueba;

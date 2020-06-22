@@ -68,8 +68,8 @@ public class arbol_por_paginas {
         String subCadena=null;
         int placa=0;
         if(vehi.getPlaca()!=null){
-            subCadena=vehi.getPlaca();
-            placa=Integer.parseInt(subCadena.substring(0,3));
+        subCadena=vehi.getPlaca();
+        placa=Integer.parseInt(subCadena.substring(0,3));
         v.add(vehi);}
         if (cabeza_nodo.existen_hijos==true) {
          Ingreso_cambio_hijos(cabeza_nodo);
@@ -99,10 +99,17 @@ public class arbol_por_paginas {
         
       for(int i=0;i<=this.v.size()-1;i++){
           String sub=this.v.get(i).getPlaca().substring(0,3);
+         
           String subCa=String.valueOf(subCadena);
-              if(sub.equals(subCa)){                  
+          if(subCa.length()==2){
+          if(sub.equals("0"+subCa)){                  
                placa_entera = this.v.get(i).getPlaca();
                }
+          
+          }else{ if(sub.equals(subCa)){                  
+               placa_entera = this.v.get(i).getPlaca();
+               } }
+          
     
     }
       return placa_entera;
@@ -272,9 +279,12 @@ public class arbol_por_paginas {
       for(int i=0;i<=this.v.size()-1;i++){
           String sub=this.v.get(i).getPlaca().substring(0,3);
           String subCa=String.valueOf(subCadena);
-              if(sub.equals(subCa)){                  
+                    if(subCa.length()==2){
+              if(sub.equals("0"+subCa)){                  
                marca = this.v.get(i).getMarca();
-               }
+               }}else{  if(sub.equals(subCa)){                  
+               marca = this.v.get(i).getMarca();
+               }}
     
     }
       return marca;
@@ -286,9 +296,12 @@ public class arbol_por_paginas {
       for(int i=0;i<=this.v.size()-1;i++){
           String sub=this.v.get(i).getPlaca().substring(0,3);
           String subCa=String.valueOf(subCadena);
-              if(sub.equals(subCa)){                  
+           if(subCa.length()==2){
+              if(sub.equals("0"+subCa)){                  
                modelo = this.v.get(i).getModelo();
-               }
+               }}else{  if(sub.equals(subCa)){                  
+               modelo = this.v.get(i).getModelo();
+               }}
     
     }
       return modelo;
@@ -317,6 +330,7 @@ public class arbol_por_paginas {
             int o = y.intValue();
             Vehiculo nada=new Vehiculo();
             agregar_datos(nada);
+         // agregar_datos(o);
             kindex=kindex+1; 
         }
     }      
@@ -352,7 +366,7 @@ public class arbol_por_paginas {
             if (nodo.nodo[iterBusca].valores[j] != 0) {
             father=nodo.nodo[iterBusca].father.valores[0];
             hijo= nodo.nodo[iterBusca].valores[0];                      
-            aux+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+            aux+="{"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
                     obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
                     "}"+"|";                                              
             cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
@@ -384,7 +398,7 @@ int hijo=0;  int father=0;
 String aux="";
 for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
     hijo =cabeza_nodo.valores[0];
-    aux += "{"+cabeza_nodo.valores[i] +"|"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+    aux += "{" +obtenerPlaca(cabeza_nodo.valores[i])+"|"+
          obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
             +"}"+ "|";
  }
@@ -432,7 +446,6 @@ cadena+="label=\"{Arbol B | placas}\";\n}";
         }
     } 
 }
-
 
 
 
