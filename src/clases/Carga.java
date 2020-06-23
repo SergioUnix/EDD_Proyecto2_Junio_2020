@@ -72,7 +72,9 @@ public class Carga {
         }
     }
 
-    public static void cargaVehiculo(String ruta) throws FileNotFoundException {
+ public static void cargaVehiculo(String ruta) throws FileNotFoundException {
+       long result=0;    
+        String str = null;  
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);
         BufferedReader BR = new BufferedReader(FR);
@@ -84,14 +86,18 @@ public class Carga {
                     Vehiculo nuevoVehiculo = new Vehiculo();
                     String[] atributos = objeto.split(":");
                     nuevoVehiculo.setPlaca(atributos[0].trim());
+                    str=atributos[0].trim();
                     nuevoVehiculo.setMarca(atributos[1].trim());
                     nuevoVehiculo.setModelo(atributos[2].trim());
                     nuevoVehiculo.setAnio(Integer.parseInt(atributos[3].trim()));
                     nuevoVehiculo.setColor(atributos[4].trim());
                     nuevoVehiculo.setPrecio(Double.parseDouble(atributos[5].trim()));
                     nuevoVehiculo.setTransmision(atributos[6].trim());
-
-                    vehiculos.agregar_datos(nuevoVehiculo);
+                    StringBuilder sb = new StringBuilder();
+                    for (char c : str.toCharArray())
+                    sb.append((int)c);
+                    result=Long.parseLong(sb.toString());
+                    vehiculos.agregar_datos(result,nuevoVehiculo);
 
                     System.out.println(nuevoVehiculo.toString());
                 }

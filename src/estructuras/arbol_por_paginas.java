@@ -17,14 +17,14 @@ import clases.Vehiculo;
 
 
 class arbolPagina {   
-    public lista_enlazada_simple<Long> datos_existentes;
-    public arbolPagina(){datos_existentes = new lista_enlazada_simple<Long>(); }        
+    public ArrayList<Long> datos_existentes;
+    public arbolPagina(){datos_existentes = new ArrayList<Long>(); }        
     public boolean buscar_valor(int placa) throws Exception{
         boolean esta = false;
         int index=0;
-        int tamano=datos_existentes.tamanioLista();        
+        int tamano=datos_existentes.size();        
         while(index<tamano && !esta){
-        if (datos_existentes.retornarValor(index) == placa){esta = true;}        
+        if (datos_existentes.get(index) == placa){esta = true;}        
         index++;
         }
         
@@ -66,11 +66,12 @@ public class arbol_por_paginas {
     }
     
     
-    public void agregar_datos(Vehiculo vehi) {
+    public void agregar_datos(long placa ,Vehiculo vehi) {
         String subCadena=null;
         String str = null;  
-        long placa=0;       
-        if(vehi.getPlaca()!=null){            
+               
+        if(vehi.getPlaca()!=null){
+        placa=0;
         str=vehi.getPlaca();
         StringBuilder sb = new StringBuilder();
         for (char c : str.toCharArray())
@@ -88,7 +89,7 @@ public class arbol_por_paginas {
          while(index_insert<tamano_cabeceras){
                if (cabeza_nodo.valores[index_insert] == 0) {
                     cabeza_nodo.valores[index_insert] = placa;
-                    arbolPagina.datos_existentes.agregarNodo(placa);
+                    arbolPagina.datos_existentes.add(placa);
                     auxiliar = index_insert;
                     OrganizarNodos(cabeza_nodo.valores,6);
                     break;
@@ -163,7 +164,7 @@ public class arbol_por_paginas {
           if (nodo_lado.valores[cont]==0) {
            nodo_lado.valores[cont]=placa;
            OrganizarNodos(nodo_lado.valores, 5); 
-           arbolPagina.datos_existentes.agregarNodo(placa);
+           arbolPagina.datos_existentes.add(placa);
                 if (cont == 2*pag_primera_particion) {Ingresar_en(nodo_lado);}
                 break;
             } }
@@ -316,39 +317,44 @@ public class arbol_por_paginas {
       return result;
     }
       
-    public void eliminar_dato(Long placa) throws Exception { 
+    public void eliminar_dato(long placa) throws Exception { 
+              
     boolean existe_placa = false;
         int indes1= 0;
         int indes2=1;
-        while(indes2<arbolPagina.datos_existentes.tamanioLista()+1&& !existe_placa){
-        if (arbolPagina.datos_existentes.retornarValor(indes2) == placa) {
+        while(indes2<arbolPagina.datos_existentes.size()+1&& !existe_placa){
+        if (arbolPagina.datos_existentes.get(indes2) == placa) {
                 existe_placa = true;
                 indes1 = indes2;
             }
           indes2=indes2+1;  
         }
-        if (existe_placa==true) { arbolPagina.datos_existentes.eliminarNodo(indes1); } else {
+        if (existe_placa==true) {////////////////////////////
+        this.removerVehiculo(placa);
+        }
+        if (existe_placa==true) { arbolPagina.datos_existentes.remove(indes1); } else {
          System.out.println("No existe dato");
         }
-        lista_enlazada_simple<Long> arreglo_comodin = arbolPagina.datos_existentes;
-        arbolPagina.datos_existentes = new lista_enlazada_simple<Long>();
+        ArrayList<Long> arreglo_comodin = arbolPagina.datos_existentes;
+        arbolPagina.datos_existentes = new ArrayList<Long>();
         cabeza_nodo = new cabeceras();
         cabeza_nodo.existen_hijos = false;
         int kindex=0;
-        while (kindex< arreglo_comodin.tamanioLista()){
-        Long y = arreglo_comodin.retornarValor(kindex);
-            int o = y.intValue();
+        while (kindex< arreglo_comodin.size()){
+        long y = arreglo_comodin.get(kindex);
+            long  o = y;
             Vehiculo nada=new Vehiculo();
-            agregar_datos(nada);
+            agregar_datos(o,nada);
          // agregar_datos(o);
             kindex=kindex+1; 
         }
     }      
-    public boolean buscar_valor(int placa) throws Exception{
+    public boolean buscar_valor(long placa) throws Exception{
         int desk=0;
         boolean existe_placa_aca = false;
-        while(desk<arbolPagina.datos_existentes.tamanioLista()&& !existe_placa_aca){
-        if(arbolPagina.datos_existentes.retornarValor(desk) == placa){
+        while(desk<arbolPagina.datos_existentes.size()&& !existe_placa_aca){
+            System.out.println("Ingresado  "+placa+"  con el comparado "+arbolPagina.datos_existentes.get(desk));
+        if(arbolPagina.datos_existentes.get(desk) == placa){
                 existe_placa_aca = true;
                 System.out.println("Si existe");
                 return existe_placa_aca;
@@ -357,6 +363,42 @@ public class arbol_por_paginas {
         }
         System.out.println("No existe");
         return false;
+    }public ArrayList<Vehiculo> arrayVehiculos(){    
+    return this.v;//Todo
+    }  
+    public int sizeElementosArbol(){    
+    return this.v.size();
+    }   
+    public Vehiculo obtenerVehiculo(long valor){
+    Vehiculo result=new Vehiculo();      
+      for(int i=0;i<=this.v.size()-1;i++){
+          long sub=valorAssci(this.v.get(i).getPlaca());          
+           if(sub==valor){                                
+               result = this.v.get(i);}     
+    } return result;
+    }
+    public boolean actualizarVehiculo(Vehiculo actualizar){  
+        boolean seInserto=false;
+    Vehiculo result=new Vehiculo();     
+       long valor=0; 
+       if(actualizar!=null){
+        valor=valorAssci(actualizar.getPlaca());
+        }
+      for(int i=0;i<=this.v.size()-1;i++){
+          long sub=valorAssci(this.v.get(i).getPlaca());          
+           if(sub==valor){
+               this.v.set(i,actualizar);
+               seInserto=true;
+            }   
+    } return seInserto;}
+    
+    public void removerVehiculo(long remover){          
+      for(int i=0;i<=this.v.size()-1;i++){
+           long sub=valorAssci(this.v.get(i).getPlaca());
+              if(remover== sub){
+            this.v.remove(i);
+             }   
+    }     
     }
     
     
@@ -436,13 +478,13 @@ cadena+="label=\"{Arbol B | placas}\";\n}";
         }
     }
     public void obtener_generar_grafico() {
-        
+
            try {
        
         String archivoDot=getTxt();
         this.crearTxT(archivoDot);     
             ProcessBuilder pbuilder;
-            pbuilder = new ProcessBuilder("dot", "-Tpng","-Gdpi=300", "-o", "Arbol_B.png", "Arbol_B.txt");
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "Arbol_B.png", "Arbol_B.txt");
             pbuilder.redirectErrorStream(true);
             pbuilder.start();                    
         } catch (Exception e) {
@@ -454,7 +496,11 @@ cadena+="label=\"{Arbol B | placas}\";\n}";
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No esta la Ruta");
         }
-    } 
+    }  
+    
+    
+    
+    
 }
 
 

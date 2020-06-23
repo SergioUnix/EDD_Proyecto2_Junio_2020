@@ -7,16 +7,22 @@ package ventanas;
 
 import clases.Carga;
 import clases.Conductor;
+import clases.Vehiculo;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -32,42 +38,80 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Alejandro Lorenty
  */
-public class menu_Conductor extends javax.swing.JFrame {
+public class menu_Vehiculos extends javax.swing.JFrame {
 
     private int x;
     private int y;
-    private DefaultTableModel modeloConductores;
-    private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
+    String nombre;
+    Pattern pat;
+    Matcher mat;
+    private DefaultTableModel modeloVehiculos;
+    public ImageIcon fondo = new ImageIcon("src/imagenes/vehi_1.jpg");
 
     /**
      * Creates new form menu_Conductor
      */
-    public menu_Conductor() {
+    public menu_Vehiculos() {
         initComponents();
         correrTabla();
+        variable();
+
+        buscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                TableRowSorter<TableModel> filtro = new TableRowSorter<>(VehiculosTabla.getModel());
+                VehiculosTabla.setRowSorter(filtro);
+                String text = buscar.getText();
+                if (text.trim().length() == 0) {
+                    filtro.setRowFilter(null);
+                } else {
+                    filtro.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                };
+
+            }
+        });
+
     }
 
     private void correrTabla() {
-        modeloConductores = (DefaultTableModel) this.ConductoresTabla.getModel();
-        Conductor c;
+        modeloVehiculos = (DefaultTableModel) this.VehiculosTabla.getModel();
+        Vehiculo aux;
 
-        modeloConductores.setNumRows(0);
-        modeloConductores.addColumn("DPI");
-        modeloConductores.addColumn("Nombre");
-        modeloConductores.addColumn("Apellido");
-        modeloConductores.addColumn("Licencia");
-        modeloConductores.addColumn("Genero");
-        modeloConductores.addColumn("Nacimiento");
-        modeloConductores.addColumn("Telefono");
-        modeloConductores.addColumn("Direccion");
+        modeloVehiculos.setRowCount(0);
+        modeloVehiculos.setColumnCount(0);
 
-        //ConductoresTabla.setRowSorter(filtro);
-        if (Carga.conductores.tamanioLista() != 0) {
-            for (int i = 1; i < Carga.conductores.tamanioLista() + 1; i++) {
-                c = Carga.conductores.retornarNodobyIndex(i);
-                modeloConductores.addRow(new Object[]{c.getDPI(), c.getNombres(), c.getApellidos(), c.getLicencia(),
-                    c.getGenero(), c.getFecha_nac(), c.getTelefono(), c.getDireccion()});
+        modeloVehiculos.setNumRows(0);
+        modeloVehiculos.addColumn("Placa");
+        modeloVehiculos.addColumn("Marca");
+        modeloVehiculos.addColumn("Modelo");
+        modeloVehiculos.addColumn("Año");
+        modeloVehiculos.addColumn("Color");
+        modeloVehiculos.addColumn("Precio");
+        modeloVehiculos.addColumn("Tipo De Transmisión");
+
+        //vehiculos
+        if (Carga.vehiculos.sizeElementosArbol() != 0) {
+            ArrayList elementos_arbol = Carga.vehiculos.arrayVehiculos();
+            for (int i = 0; i < elementos_arbol.size(); i++) {
+                aux = (Vehiculo) elementos_arbol.get(i);
+                modeloVehiculos.addRow(new Object[]{aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
+                    aux.getColor(), aux.getPrecio(), aux.getTransmision()});
             }
+        }
+
+    }
+
+    public void variable() {
+        combo.removeAllItems();
+        combo2.removeAllItems();
+        combo.addItem("Seleccione..");
+        combo.addItem("Automatica");
+        combo.addItem("Mecanica");
+        combo2.addItem("Seleccione..");
+        for (int a = 2021; a > 1899; a--) {
+            combo2.addItem(String.valueOf(a));
+
         }
 
     }
@@ -83,7 +127,7 @@ public class menu_Conductor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ConductoresTabla = ConductoresTabla = new javax.swing.JTable(){
+        VehiculosTabla = VehiculosTabla = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
@@ -97,25 +141,21 @@ public class menu_Conductor extends javax.swing.JFrame {
         buscar = new javax.swing.JTextField();
         errorLabel = new javax.swing.JLabel();
         Salir = new javax.swing.JLabel();
-        direccionLabel1 = new javax.swing.JLabel();
-        licencia = new javax.swing.JComboBox<>();
         direccionLabel = new javax.swing.JLabel();
-        direccion = new javax.swing.JTextField();
         telefonoLabel = new javax.swing.JLabel();
-        telefono = new javax.swing.JTextField();
         fechaLabel = new javax.swing.JLabel();
-        anio = new javax.swing.JComboBox<>();
-        mes = new javax.swing.JComboBox<>();
-        dia = new javax.swing.JComboBox<>();
         generoLabel = new javax.swing.JLabel();
-        genero = new javax.swing.JComboBox<>();
         apellidoLabel = new javax.swing.JLabel();
-        apellido = new javax.swing.JTextField();
         nombreLabel = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
         dpiLabel = new javax.swing.JLabel();
-        DPI = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        placa = new javax.swing.JTextField();
+        marca = new javax.swing.JTextField();
+        modelo = new javax.swing.JTextField();
+        color = new javax.swing.JTextField();
+        precio = new javax.swing.JTextField();
+        combo = new javax.swing.JComboBox<>();
+        combo2 = new javax.swing.JComboBox<>();
         imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,10 +174,10 @@ public class menu_Conductor extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ConductoresTabla.setBackground(new java.awt.Color(0, 0, 0));
-        ConductoresTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        ConductoresTabla.setForeground(new java.awt.Color(102, 51, 0));
-        ConductoresTabla.setModel(new javax.swing.table.DefaultTableModel(
+        VehiculosTabla.setBackground(new java.awt.Color(0, 0, 0));
+        VehiculosTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        VehiculosTabla.setForeground(new java.awt.Color(102, 51, 0));
+        VehiculosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -145,7 +185,7 @@ public class menu_Conductor extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(ConductoresTabla);
+        jScrollPane1.setViewportView(VehiculosTabla);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1010, 290));
 
@@ -157,7 +197,7 @@ public class menu_Conductor extends javax.swing.JFrame {
                 LimpiarBotonActionPerformed(evt);
             }
         });
-        jPanel1.add(LimpiarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        jPanel1.add(LimpiarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         EliminarBoton.setBackground(new java.awt.Color(255, 255, 255));
         EliminarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/eliminar.png"))); // NOI18N
@@ -225,96 +265,103 @@ public class menu_Conductor extends javax.swing.JFrame {
         });
         jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
-        direccionLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        direccionLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        direccionLabel1.setText("LICENCIA:");
-        jPanel1.add(direccionLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
-
-        licencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "A", "B", "C" }));
-        jPanel1.add(licencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 150, -1));
-
         direccionLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         direccionLabel.setForeground(new java.awt.Color(255, 255, 255));
-        direccionLabel.setText("DIRECCION:");
+        direccionLabel.setText("TRANSMISION:");
         jPanel1.add(direccionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
-        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 150, -1));
 
         telefonoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         telefonoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        telefonoLabel.setText("TELEFONO:");
+        telefonoLabel.setText("PRECIO:");
         jPanel1.add(telefonoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
-        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                telefonoKeyTyped(evt);
-            }
-        });
-        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, -1));
 
         fechaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fechaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fechaLabel.setText("NACIMIENTO:");
-        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-
-        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0000", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003" }));
-        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
-
-        dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jPanel1.add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
+        fechaLabel.setText("COLOR:");
+        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         generoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         generoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        generoLabel.setText("GENERO:");
+        generoLabel.setText("AÑO:");
         jPanel1.add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-
-        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Femenino", "No deseo especificar", "Helicoptero Apache de Guerra" }));
-        jPanel1.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, -1));
 
         apellidoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         apellidoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        apellidoLabel.setText("APELLIDOS:");
+        apellidoLabel.setText("MODELO:");
         jPanel1.add(apellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
-
-        apellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                apellidoKeyTyped(evt);
-            }
-        });
-        jPanel1.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 150, -1));
 
         nombreLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
-        nombreLabel.setText("NOMBRES:");
+        nombreLabel.setText("MARCA:");
         jPanel1.add(nombreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
-
-        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                nombreKeyTyped(evt);
-            }
-        });
-        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 150, -1));
 
         dpiLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         dpiLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dpiLabel.setText("DPI:");
+        dpiLabel.setText("PLACA:");
         jPanel1.add(dpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        DPI.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                DPIKeyTyped(evt);
-            }
-        });
-        jPanel1.add(DPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 150, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("GESTION DE CONDUCTORES");
+        jLabel1.setText("GESTION DE VEHICULOS");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
 
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/conductor.png"))); // NOI18N
+        placa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                placaFocusLost(evt);
+            }
+        });
+        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 30, 120, -1));
+
+        marca.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                marcaFocusLost(evt);
+            }
+        });
+        marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                marcaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 70, 120, -1));
+
+        modelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                modeloKeyTyped(evt);
+            }
+        });
+        jPanel1.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 110, 120, -1));
+
+        color.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                colorKeyTyped(evt);
+            }
+        });
+        jPanel1.add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 190, 130, -1));
+
+        precio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                precioFocusLost(evt);
+            }
+        });
+        precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioActionPerformed(evt);
+            }
+        });
+        precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                precioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 230, 130, -1));
+
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 130, -1));
+
+        combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, -1));
+
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vehiculos.jpg"))); // NOI18N
         jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -346,63 +393,9 @@ public class menu_Conductor extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SalirMouseClicked
 
-    private void DPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DPIKeyTyped
-        char c = evt.getKeyChar();
-        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-            errorLabel.setText("SOLO NUMEROS PARA EL DPI");
-        }
-        //LIMITAR NUMERO PARA DPI {XXXX XXXXX XXXX}
-        if (DPI.getText().length() == 13 && Character.isDigit(c)) {
-            evt.consume();
-            errorLabel.setText("");
-        } else if (DPI.getText().length() < 13 && Character.isDigit(c)) {
-            errorLabel.setText("EL DPI DEBE RESPETAR SU TAMAÑO {XXXX XXXXX XXXX}");
-        }
-    }//GEN-LAST:event_DPIKeyTyped
-
-    private void telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyTyped
-        char c = evt.getKeyChar();
-        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-            errorLabel.setText("SOLO NUMEROS PARA EL TELEFONO");
-        }
-        //LIMITAR NUMERO PARA TELEFONO {XXXX XXXX}
-        if (telefono.getText().length() == 8 && Character.isDigit(c)) {
-            evt.consume();
-            errorLabel.setText("");
-        } else if (telefono.getText().length() < 8 && Character.isDigit(c)) {
-            errorLabel.setText("EL TELEFONO DEBE RESPETAR SU TAMAÑO {XXXX XXXX}");
-        }
-    }//GEN-LAST:event_telefonoKeyTyped
-
-    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
-        char c = evt.getKeyChar();
-        //SOLO SE ADMITIRÁN LETRAS EN ESTE TEXTBOX
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-            errorLabel.setText("SOLO LETRAS PARA SU NOMBRE");
-        }
-    }//GEN-LAST:event_nombreKeyTyped
-
-    private void apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyTyped
-        char c = evt.getKeyChar();
-        //SOLO SE ADMITIRÁN LETRAS EN ESTE TEXTBOX
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-            evt.consume();
-            errorLabel.setText("SOLO LETRAS PARA SU APELLIDO");
-        }
-    }//GEN-LAST:event_apellidoKeyTyped
-
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
-        TableRowSorter<TableModel> filtro = new TableRowSorter<>(ConductoresTabla.getModel());
-        ConductoresTabla.setRowSorter(filtro);
+        TableRowSorter<TableModel> filtro = new TableRowSorter<>(VehiculosTabla.getModel());
+        VehiculosTabla.setRowSorter(filtro);
         String text = buscar.getText();
         if (text.trim().length() == 0) {
             filtro.setRowFilter(null);
@@ -414,28 +407,24 @@ public class menu_Conductor extends javax.swing.JFrame {
     private void CrearBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBotonActionPerformed
 
         if (CrearBoton.getText().equals("CREAR")) {
-            if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
-                    && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
-                    && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
-                    && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
-                    && !direccion.getText().isEmpty() && !licencia.getSelectedItem().toString().equals("Seleccione uno ...")) {
-                if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
+            if (!placa.getText().isEmpty() && !marca.getText().isEmpty()
+                    && !modelo.getText().isEmpty() && !combo2.getSelectedItem().toString().equals("Seleccione..")
+                    && !color.getText().isEmpty() && !precio.getText().isEmpty()
+                    && !combo.getSelectedItem().toString().equals("Seleccione..")) {
+                if (placa.getText().length() < 6) {
                     errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
                 } else {
                     System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
-                    Conductor nuevoConductor = new Conductor();
-                    nuevoConductor.setDPI(Long.parseLong(DPI.getText().trim()));
-                    nuevoConductor.setNombres(nombre.getText().trim());
-                    nuevoConductor.setApellidos(apellido.getText().trim());
-                    nuevoConductor.setLicencia(licencia.getSelectedItem().toString().trim().charAt(0));
-                    nuevoConductor.setGenero(genero.getSelectedItem().toString().trim());
-                    nuevoConductor.setFecha_nac(dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/"
-                            + anio.getSelectedItem().toString());
-                    nuevoConductor.setTelefono(Integer.parseInt(telefono.getText().trim()));
-                    nuevoConductor.setDireccion(direccion.getText().trim());
+                    Vehiculo nuevo = new Vehiculo();
+                    nuevo.setPlaca(placa.getText());
+                    nuevo.setMarca(marca.getText());
+                    nuevo.setModelo(modelo.getText());
+                    nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
+                    nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
+                    nuevo.setTransmision(combo.getSelectedItem().toString().trim());
 
-                    System.out.println(nuevoConductor.toString());
-                    Carga.conductores.insertarOrdenado(nuevoConductor, nuevoConductor.getDPI());
+                    System.out.println(nuevo.toString());
+                    Carga.vehiculos.agregar_datos(valorAssci(placa.getText()), nuevo);
 
                     for (Component component : jPanel1.getComponents()) {
                         if (component instanceof JTextField) {
@@ -455,28 +444,29 @@ public class menu_Conductor extends javax.swing.JFrame {
                 errorLabel.setText("LLENAR TODOS LOS CAMPOS");
             }
         } else {
-            if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
-                    && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
-                    && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
-                    && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
-                    && !direccion.getText().isEmpty() && !licencia.getSelectedItem().toString().equals("Seleccione uno ...")) {
-                if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
+            if (!placa.getText().isEmpty() && !marca.getText().isEmpty()
+                    && !modelo.getText().isEmpty() && !combo2.getSelectedItem().toString().equals("Seleccione..")
+                    && !color.getText().isEmpty() && !precio.getText().isEmpty()
+                    && !combo.getSelectedItem().toString().equals("Seleccione..")) {
+                if (placa.getText().length() < 6) {
                     errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
                 } else {
                     System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
-                    Conductor nuevoConductor = new Conductor();
-                    nuevoConductor.setDPI(Long.parseLong(DPI.getText().trim()));
-                    nuevoConductor.setNombres(nombre.getText().trim());
-                    nuevoConductor.setApellidos(apellido.getText().trim());
-                    nuevoConductor.setLicencia(licencia.getSelectedItem().toString().trim().charAt(0));
-                    nuevoConductor.setGenero(genero.getSelectedItem().toString().trim());
-                    nuevoConductor.setFecha_nac(dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/"
-                            + anio.getSelectedItem().toString());
-                    nuevoConductor.setTelefono(Integer.parseInt(telefono.getText().trim()));
-                    nuevoConductor.setDireccion(direccion.getText().trim());
+                    Vehiculo nuevo = new Vehiculo();
+                    nuevo.setPlaca(placa.getText());
+                    nuevo.setMarca(marca.getText());
+                    nuevo.setModelo(modelo.getText());
+                    nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
+                    nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
+                    nuevo.setTransmision(combo.getSelectedItem().toString().trim());
 
-                    System.out.println(nuevoConductor.toString());
-                    Carga.conductores.editarDato(nuevoConductor, nuevoConductor.getDPI());
+                    System.out.println(nuevo.toString());
+                    if (Carga.vehiculos.actualizarVehiculo(nuevo)) {
+
+                        JOptionPane.showMessageDialog(null, "Se Actualizo Correctamente ");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo Actualizar, Error de Placa");
+                    }
 
                     for (Component component : jPanel1.getComponents()) {
                         if (component instanceof JTextField) {
@@ -501,33 +491,40 @@ public class menu_Conductor extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
         EliminarBoton.setEnabled(false);
-        modeloConductores.setRowCount(0);
-        modeloConductores.setColumnCount(0);
         correrTabla();
-        modeloConductores.fireTableDataChanged();
+        modeloVehiculos.fireTableDataChanged();
         //ConductoresTabla.repaint();
     }//GEN-LAST:event_CrearBotonActionPerformed
+    public long valorAssci(String subCadena) {
+
+        long result = 0;
+        String str = null;
+        str = subCadena;
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+            sb.append((int) c);
+        }
+        result = Long.parseLong(sb.toString());
+        return result;
+    }
 
     private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
-        if (ConductoresTabla.getSelectedRow() != -1) {
-            long dpi = Long.parseLong(String.valueOf(ConductoresTabla.getValueAt(ConductoresTabla.getSelectedRow(), 0)));
-            System.out.println(dpi);
-            Conductor eC;
-            eC = Carga.conductores.retornarDato(dpi);
-            DPI.setText(String.valueOf(eC.getDPI()));
-            nombre.setText(eC.getNombres());
-            apellido.setText(eC.getApellidos());
-            licencia.setSelectedItem(String.valueOf(eC.getLicencia()));
-            genero.setSelectedItem(eC.getGenero());
 
-            String[] fecha = eC.getFecha_nac().split("/");
-            dia.setSelectedItem(fecha[0]);
-            mes.setSelectedItem(fecha[1]);
-            anio.setSelectedItem(fecha[2]);
+        //seleccionar el vehiculo
+        if (VehiculosTabla.getSelectedRow() != -1) {
+            long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 0)));
+            System.out.println(placaNo);
+            Vehiculo eC;
+            eC = Carga.vehiculos.obtenerVehiculo(placaNo);
+            placa.setText(String.valueOf(eC.getPlaca()));
+            marca.setText(String.valueOf(eC.getMarca()));
+            modelo.setText(eC.getModelo());
+            combo2.setSelectedItem(String.valueOf(eC.getAnio()));
+            color.setText(String.valueOf(eC.getColor()));
+            precio.setText(String.valueOf(eC.getPrecio()));
+            combo.setSelectedItem(String.valueOf(eC.getTransmision()));
 
-            telefono.setText(String.valueOf(eC.getTelefono()));
-            direccion.setText(eC.getDireccion());
-            ConductoresTabla.clearSelection();
+            VehiculosTabla.clearSelection();
             errorLabel.setText("");
 
             CrearBoton.setText("EDITAR");
@@ -538,30 +535,29 @@ public class menu_Conductor extends javax.swing.JFrame {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }
 
+
     }//GEN-LAST:event_selecionarActionPerformed
 
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
-        //MÉTODO PARA CREAR EL ARCHIVO.DOT Y LA IMAGEN.PNG
-        try {
-            Path CMD = Carga.lista_doble_ciruclar_GRAPHVIZ();
-            Carga.dibujarGRAPHVIZ(CMD, "Conductores.png");
-        } catch (IOException ex) {
-            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        File miGraphviz = new File("Conductores.png");
-        try {
-            Desktop.getDesktop().open(miGraphviz);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
-        }
+
+        Carga.vehiculos.obtener_generar_grafico();
 
     }//GEN-LAST:event_graficoActionPerformed
 
     private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
-        long dpi = Long.parseLong(String.valueOf(DPI.getText()));
-        System.out.println(dpi);
-        Carga.conductores.eliminarNodo(dpi);
 
+        long placaNo = valorAssci(placa.getText());
+        System.out.println(placaNo);
+
+        try {
+
+            Carga.vehiculos.eliminar_dato(placaNo);
+
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Carga.conductores.eliminarNodo(dpi);
         for (Component component : jPanel1.getComponents()) {
             if (component instanceof JTextField) {
                 ((JTextField) component).setText("");
@@ -575,11 +571,11 @@ public class menu_Conductor extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        modeloConductores.setRowCount(0);
-        modeloConductores.setColumnCount(0);
+
         correrTabla();
-        modeloConductores.fireTableDataChanged();
+        modeloVehiculos.fireTableDataChanged();
         EliminarBoton.setEnabled(false);
+
     }//GEN-LAST:event_EliminarBotonActionPerformed
 
     private void LimpiarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarBotonActionPerformed
@@ -599,6 +595,102 @@ public class menu_Conductor extends javax.swing.JFrame {
         EliminarBoton.setEnabled(false);
     }//GEN-LAST:event_LimpiarBotonActionPerformed
 
+    public boolean isPlaca(String placa) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("[A-Z][0-9][0-9][0-9][A-Z][A-Z][A-Z]");
+        mat = pat.matcher(placa);
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    private void placaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_placaFocusLost
+
+        if (isPlaca(placa.getText()) && placa.getText().length() <= 7 || placa.getText().length() == 0) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Valor Incorrecto\n Ejemplo: P898AFD", "Error de Datos", JOptionPane.INFORMATION_MESSAGE);
+            placa.setText("");
+        }
+
+    }//GEN-LAST:event_placaFocusLost
+
+
+    private void marcaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_marcaFocusLost
+
+
+    }//GEN-LAST:event_marcaFocusLost
+
+    private void marcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_marcaKeyTyped
+
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {     ///////////////////  Solo se admiten Letras
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo se admiten letras");
+
+        }
+    }//GEN-LAST:event_marcaKeyTyped
+
+    private void modeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modeloKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {     ///////////////////  Solo se admiten Letras
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo se admiten letras");
+
+        }
+    }//GEN-LAST:event_modeloKeyTyped
+
+    private void colorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_colorKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isDigit(c)) {     ///////////////////  Solo se admiten Letras
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo se admiten letras");
+
+        }
+    }//GEN-LAST:event_colorKeyTyped
+
+    private void precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {     ///////////////////  Solo se admiten Numeros
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo se admiten Numeros");
+
+        }
+    }//GEN-LAST:event_precioKeyTyped
+
+    private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioActionPerformed
+    public boolean isDouble(String precio) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("\\d+\\.\\d*$");
+        mat = pat.matcher(precio);
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private void precioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_precioFocusLost
+        if (isDouble(precio.getText()) || precio.getText().length() == 0) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Valor Incorrecto\n Ejemplo: 2334.00 , 3244.3", "Error de Datos", JOptionPane.INFORMATION_MESSAGE);
+            precio.setText("");
+        }
+
+
+    }//GEN-LAST:event_precioFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -616,57 +708,55 @@ public class menu_Conductor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menu_Conductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menu_Conductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menu_Conductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menu_Conductor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu_Conductor().setVisible(true);
+                new menu_Vehiculos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ConductoresTabla;
     private javax.swing.JButton CrearBoton;
-    private javax.swing.JTextField DPI;
     private javax.swing.JButton EliminarBoton;
     private javax.swing.JButton LimpiarBoton;
     private javax.swing.JLabel Salir;
-    private javax.swing.JComboBox<String> anio;
-    private javax.swing.JTextField apellido;
+    private javax.swing.JTable VehiculosTabla;
     private javax.swing.JLabel apellidoLabel;
     private javax.swing.JTextField buscar;
     private javax.swing.JLabel buscarLabel;
-    private javax.swing.JComboBox<String> dia;
-    private javax.swing.JTextField direccion;
+    private javax.swing.JTextField color;
+    private javax.swing.JComboBox<String> combo;
+    private javax.swing.JComboBox<String> combo2;
     private javax.swing.JLabel direccionLabel;
-    private javax.swing.JLabel direccionLabel1;
     private javax.swing.JLabel dpiLabel;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel fechaLabel;
-    private javax.swing.JComboBox<String> genero;
     private javax.swing.JLabel generoLabel;
     private javax.swing.JButton grafico;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> licencia;
-    private javax.swing.JComboBox<String> mes;
-    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField marca;
+    private javax.swing.JTextField modelo;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JTextField placa;
+    private javax.swing.JTextField precio;
     private javax.swing.JButton selecionar;
-    private javax.swing.JTextField telefono;
     private javax.swing.JLabel telefonoLabel;
     // End of variables declaration//GEN-END:variables
 }
