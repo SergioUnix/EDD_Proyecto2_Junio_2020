@@ -515,7 +515,7 @@ public class menu_Cliente extends javax.swing.JFrame {
 
     private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
         if (ClientesTabla.getSelectedRow() != -1) {
-            long dpi = Long.parseLong(String.valueOf(ClientesTabla.getValueAt(ClientesTabla.getSelectedRow(), 0)));
+            long dpi = Long.parseLong(String.valueOf(ClientesTabla.getValueAt(ClientesTabla.getSelectedRow(), 1)));
             System.out.println(dpi);
             Cliente eC = new Cliente();
             clientesTabla = Carga.clientes.devolver_nodo(dpi);
