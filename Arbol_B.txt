@@ -1,10 +1,26 @@
 digraph arbol_por_paginas{
 rankdir=TB;
 node[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];   
-nodo485553667284[ label ="{485553667284|075BHT|toyota|yaris}|"]  
-nodo484950667284[ label ="{484950667284|012BHT|toyota|yaris}|{485552667284|074BHT|toyota|yaris}|"]  
-nodo495155667284[ label ="{495155667284|137BHT|toyota|yaris}|{505253667284|245BHT|toyota|yaris}|"]  
-nodo485553667284->nodo484950667284
-nodo485553667284->nodo495155667284
+nodo535748808890[ label ="{535748808890|590PXZ|Suzuki|Deportivo}|"]  
+nodo484948718069[ label ="{484948718069|010GPE|Suzuki|Racing}|{485153668566|035BUB|Kia Motors|Camioneta}|{485252836981|044SEQ|Honda|Coupe}|{485652748479|084JTO|Buick|Standard}|"]  
+nodo504855797987[ label ="{504855797987|207OOW|Renault|Standard}|{504956777983|218MOS|Mazda|Standard}|{505257848690|249TVZ|Hyundai Motors|Standard}|"]  
+nodo505748667368[ label ="{505748667368|290BID|Tata Motors|Standard}|{525555848467|477TTC|Chrysler|Camioneta}|"]  
+nodo535254837574[ label ="{535254837574|546SKJ|Mitsubishi Motors|Deportivo}|{535549907282|571ZHR|Ford|Deportivo}|"]  
+nodo495754746868[ label ="{495754746868|196JDD|Vauxhall|Racing}|{505650768579|282LUO|Buick|Racing}|{534953768178|515LQN|Skoda|Camioneta}|"]  
+nodo545255777174[ label ="{545255777174|647MGJ|Audi|Pick Up}|{545448727567|660HKC|MINI|Camioneta}|"]  
+nodo555053678185[ label ="{555053678185|725CQU|MINI|Pick Up}|{565052727073|824HFI|Suzuki|Racing}|{565154878483|836WTS|Dacia|Pick Up}|"]  
+nodo565448827768[ label ="{565448827768|860RMD|Buick|Pick Up}|{565456836583|868SAS|Audi|Standard}|"]  
+nodo574951707972[ label ="{574951707972|913FOH|Citroën|Coupe}|{575048886771|920XCG|Mercedes-Benz|Deportivo}|{575356877970|958WOF|RAM Trucks|Standard}|{575548659069|970AZE|Lexus|Deportivo}|"]  
+nodo545656887390[ label ="{545656887390|688XIZ|Mazda|Coupe}|{565357819078|859QZN|Infiniti|Pick Up}|{565653668672|885BVH|Buick|Coupe}|"]  
+nodo495754746868->nodo484948718069
+nodo495754746868->nodo504855797987
+nodo495754746868->nodo505748667368
+nodo495754746868->nodo535254837574
+nodo535748808890->nodo495754746868
+nodo545656887390->nodo545255777174
+nodo545656887390->nodo555053678185
+nodo545656887390->nodo565448827768
+nodo545656887390->nodo574951707972
+nodo535748808890->nodo545656887390
 label="{Arbol B | placas}";
 }

@@ -161,7 +161,7 @@ public class carga_Masiva extends javax.swing.JFrame {
 
     private void CclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CclientesActionPerformed
         String rutaLectura;
-        JFileChooser JF = new JFileChooser();
+        JFileChooser JF = new JFileChooser("./");
         JF.showOpenDialog(null);
         File archivo = JF.getSelectedFile();
         if (archivo != null) {

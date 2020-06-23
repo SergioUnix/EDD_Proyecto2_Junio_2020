@@ -50,11 +50,14 @@ public class menu_Cliente extends javax.swing.JFrame {
         correrTabla();
     }
 
-    private void correrTabla() {
+    public void correrTabla() {
         modeloClientes = (DefaultTableModel) this.ClientesTabla.getModel();
 
         Cliente c;
 
+        modeloClientes.setRowCount(0);
+        modeloClientes.setColumnCount(0);
+        
         modeloClientes.setNumRows(0);
         modeloClientes.addColumn("INDICE");
         modeloClientes.addColumn("DPI");
@@ -505,8 +508,6 @@ public class menu_Cliente extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
         EliminarBoton.setEnabled(false);
-        modeloClientes.setRowCount(0);
-        modeloClientes.setColumnCount(0);
         correrTabla();
         modeloClientes.fireTableDataChanged();
         //ConductoresTabla.repaint();
@@ -590,8 +591,6 @@ public class menu_Cliente extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        modeloClientes.setRowCount(0);
-        modeloClientes.setColumnCount(0);
         correrTabla();
         modeloClientes.fireTableDataChanged();
         EliminarBoton.setEnabled(false);

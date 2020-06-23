@@ -47,9 +47,12 @@ public class menu_Conductor extends javax.swing.JFrame {
         correrTabla();
     }
 
-    private void correrTabla() {
+    public void correrTabla() {
         modeloConductores = (DefaultTableModel) this.ConductoresTabla.getModel();
         Conductor c;
+
+        modeloConductores.setRowCount(0);
+        modeloConductores.setColumnCount(0);
 
         modeloConductores.setNumRows(0);
         modeloConductores.addColumn("DPI");
@@ -501,8 +504,6 @@ public class menu_Conductor extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
         EliminarBoton.setEnabled(false);
-        modeloConductores.setRowCount(0);
-        modeloConductores.setColumnCount(0);
         correrTabla();
         modeloConductores.fireTableDataChanged();
         //ConductoresTabla.repaint();
@@ -575,8 +576,6 @@ public class menu_Conductor extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        modeloConductores.setRowCount(0);
-        modeloConductores.setColumnCount(0);
         correrTabla();
         modeloConductores.fireTableDataChanged();
         EliminarBoton.setEnabled(false);
@@ -626,7 +625,6 @@ public class menu_Conductor extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

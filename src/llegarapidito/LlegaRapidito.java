@@ -28,10 +28,7 @@ public class LlegaRapidito {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-         
-        
-        
-        
+
 //String str = "123abc123";  
 //
 //StringBuilder sb = new StringBuilder();
@@ -116,7 +113,6 @@ public class LlegaRapidito {
 //prueba.agregar_datos(objeto);
 //
 //prueba.obtener_generar_grafico();
-
 //
 //prueba.agregar_datos("arte");
 //prueba.agregar_datos("bart");
@@ -238,12 +234,12 @@ public class LlegaRapidito {
         //Carga.lista_doble_ciruclar_GRAPHVIZ();
         //carga_Masiva ventana = new carga_Masiva();
         //ventana.setVisible(true);
-        menu_Master master = new menu_Master();
-        master.setVisible(true);
         //menu_Cliente cl = new menu_Cliente();
         //cl.setVisible(true);
         //menu_Conductor co1 = new menu_Conductor();
         //co1.setVisible(true);
+        menu_Master master = new menu_Master();
+        master.setVisible(true);
     }
 
 }

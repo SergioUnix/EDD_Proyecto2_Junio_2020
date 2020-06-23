@@ -160,10 +160,12 @@ public class menu_Master extends javax.swing.JFrame {
 
     private void ClienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteBotonActionPerformed
         clie.setVisible(true);
+        clie.correrTabla();
     }//GEN-LAST:event_ClienteBotonActionPerformed
 
     private void ConductorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConductorBotonActionPerformed
         con.setVisible(true);
+        con.correrTabla();
     }//GEN-LAST:event_ConductorBotonActionPerformed
 
     private void CargaBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargaBotonActionPerformed
