@@ -194,7 +194,7 @@ public class carga_Masiva extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
         }
 
-        Carga.vehiculos.obtener_generar_grafico();
+      //  Carga.vehiculos.obtener_generar_grafico();
 
     }//GEN-LAST:event_CvehiculosActionPerformed
 

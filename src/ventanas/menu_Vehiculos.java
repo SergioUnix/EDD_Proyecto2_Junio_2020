@@ -7,6 +7,7 @@ package ventanas;
 
 import clases.Carga;
 import clases.Conductor;
+import clases.Graficas;
 import clases.Vehiculo;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -539,8 +540,13 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_selecionarActionPerformed
 
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
-
-        Carga.vehiculos.obtener_generar_grafico();
+    
+        try {
+            Graficas.graficar(Carga.vehiculos.getCadena(), "ArbolB_");
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }//GEN-LAST:event_graficoActionPerformed
 

@@ -38,8 +38,8 @@ class cabeceras{
     public cabeceras father;
     public long []valores;
     public cabeceras []nodo;
-    public static int numValores;
-    public static int count;
+    public  int numValores;
+    public  int count;
     public boolean existen_hijos = false;
     public cabeceras(){count++;
        nodo = new cabeceras [arbol_por_paginas.pag_primera_particion * 2 + 3];
@@ -440,7 +440,9 @@ public class arbol_por_paginas {
 String aux="";
 String cadena_nodos="";
 String cadena_direccion="";
-public String getTxt() {
+
+
+public String getCadena() {
 this.cadena_dot_ghrapviz="";
 this.aux="";
 this.cadena_nodos="";
@@ -460,44 +462,44 @@ cadena+=this.cadena_direccion;
 cadena+="label=\"{Arbol B | placas}\";\n}";       
         return cadena;
     }    
-    Random r = new Random();
-    int valorDado =0; 
+//    Random r = new Random();
+//    int valorDado =0; 
 
- public void crearTxT(String cadena) {
-    File f;
-    FileWriter wr;
-    try {
-        f = new File("Arbol_B.txt");
-        wr = new FileWriter(f);
-        BufferedWriter bw = new BufferedWriter(wr);
-        PrintWriter salida = new PrintWriter(bw);
-        salida.write(cadena + "\n");
-        salida.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, " NO ESCRIBE ");
-        }
-    }
-    public void obtener_generar_grafico() {
-
-           try {
-       
-        String archivoDot=getTxt();
-        this.crearTxT(archivoDot);     
-            ProcessBuilder pbuilder;
-            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "Arbol_B.png", "Arbol_B.txt");
-            pbuilder.redirectErrorStream(true);
-            pbuilder.start();                    
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se creo la imagen ");
-        }
-        File miArchivo = new File("Arbol_B.png");
-        try {
-            Desktop.getDesktop().open(miArchivo);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No esta la Ruta");
-        }
-    }  
-    
+// public void crearTxT(String cadena) {
+//    File f;
+//    FileWriter wr;
+//    try {
+//        f = new File("Arbol_B.txt");
+//        wr = new FileWriter(f);
+//        BufferedWriter bw = new BufferedWriter(wr);
+//        PrintWriter salida = new PrintWriter(bw);
+//        salida.write(cadena + "\n");
+//        salida.close();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, " NO ESCRIBE ");
+//        }
+//    }
+//    public void obtener_generar_grafico() {
+//
+//           try {
+//       
+//        String archivoDot=getTxt();
+//        this.crearTxT(archivoDot);     
+//            ProcessBuilder pbuilder;
+//            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "Arbol_B.png", "Arbol_B.txt");
+//            pbuilder.redirectErrorStream(true);
+//            pbuilder.start();                    
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "No se creo la imagen ");
+//        }
+//        File miArchivo = new File("Arbol_B.png");
+//        try {
+//            Desktop.getDesktop().open(miArchivo);
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "No esta la Ruta");
+//        }
+//    }  
+//    
     
     
     

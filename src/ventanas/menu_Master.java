@@ -114,6 +114,11 @@ public class menu_Master extends javax.swing.JFrame {
         VehiculoBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         VehiculoBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/ivehiculos.png"))); // NOI18N
         VehiculoBoton.setText("MENU VEHICULOS");
+        VehiculoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VehiculoBotonActionPerformed(evt);
+            }
+        });
         jPanel1.add(VehiculoBoton);
         VehiculoBoton.setBounds(30, 360, 240, 100);
 
@@ -181,6 +186,12 @@ public class menu_Master extends javax.swing.JFrame {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_formMousePressed
+
+    private void VehiculoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehiculoBotonActionPerformed
+       menu_Vehiculos vehi=new menu_Vehiculos();
+        vehi.setVisible(true);
+       
+    }//GEN-LAST:event_VehiculoBotonActionPerformed
 
     /**
      * @param args the command line arguments
