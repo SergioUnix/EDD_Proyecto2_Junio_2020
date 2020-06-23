@@ -5,13 +5,30 @@
  */
 package ventanas;
 
+import clases.Carga;
 import clases.Cliente;
+import clases.Conductor;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+//import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -21,12 +38,48 @@ public class menu_Cliente extends javax.swing.JFrame {
 
     private int x;
     private int y;
+    private DefaultTableModel modeloClientes;
+    private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
+    private LinkedList<Cliente> clientesTabla;
 
     /**
-     * Creates new form menu_Cliente
+     * Creates new form menu_Conductor
      */
     public menu_Cliente() {
         initComponents();
+        correrTabla();
+    }
+
+    private void correrTabla() {
+        modeloClientes = (DefaultTableModel) this.ClientesTabla.getModel();
+
+        Cliente c;
+
+        modeloClientes.setNumRows(0);
+        modeloClientes.addColumn("INDICE");
+        modeloClientes.addColumn("DPI");
+        modeloClientes.addColumn("Nombre");
+        modeloClientes.addColumn("Apellido");
+        modeloClientes.addColumn("Genero");
+        modeloClientes.addColumn("Nacimiento");
+        modeloClientes.addColumn("Telefono");
+        modeloClientes.addColumn("Direccion");
+
+        //ConductoresTabla.setRowSorter(filtro);
+        if (Carga.clientes.getTabla_H() != null) {
+            for (int i = 0; i < Carga.clientes.getCapacidad(); i++) {
+                clientesTabla = Carga.clientes.devolver_nodo(i);
+                if (clientesTabla != null) {
+                    for (int j = 0; j < clientesTabla.size(); j++) {
+                        c = clientesTabla.get(j);
+                        modeloClientes.addRow(new Object[]{i, c.getDPI(), c.getNombres(), c.getApellidos(),
+                            c.getGenero(), c.getFecha_nac(), c.getTelefono(), c.getDireccion()});
+                    }
+                }
+
+            }
+        }
+
     }
 
     /**
@@ -39,12 +92,20 @@ public class menu_Cliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        BuscarBoton1 = new javax.swing.JButton();
-        BuscarBoton = new javax.swing.JButton();
-        DPIbuscar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ClientesTabla = ClientesTabla = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
+        LimpiarBoton = new javax.swing.JButton();
+        EliminarBoton = new javax.swing.JButton();
         CrearBoton = new javax.swing.JButton();
+        grafico = new javax.swing.JButton();
+        selecionar = new javax.swing.JButton();
+        buscarLabel = new javax.swing.JLabel();
+        buscar = new javax.swing.JTextField();
         errorLabel = new javax.swing.JLabel();
-        imagen = new javax.swing.JLabel();
         Salir = new javax.swing.JLabel();
         direccionLabel = new javax.swing.JLabel();
         direccion = new javax.swing.JTextField();
@@ -62,6 +123,8 @@ public class menu_Cliente extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         dpiLabel = new javax.swing.JLabel();
         DPI = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -79,33 +142,88 @@ public class menu_Cliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BuscarBoton1.setText("EDITAR");
-        jPanel1.add(BuscarBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, -1));
+        ClientesTabla.setBackground(new java.awt.Color(0, 0, 0));
+        ClientesTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ClientesTabla.setForeground(new java.awt.Color(51, 102, 255));
+        ClientesTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        BuscarBoton.setText("BUSCAR");
-        jPanel1.add(BuscarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, -1, -1));
+            },
+            new String [] {
 
-        DPIbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                DPIbuscarKeyTyped(evt);
+            }
+        ));
+        jScrollPane1.setViewportView(ClientesTabla);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1010, 290));
+
+        LimpiarBoton.setBackground(new java.awt.Color(255, 255, 255));
+        LimpiarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/limpiar.png"))); // NOI18N
+        LimpiarBoton.setText("LIMPIAR");
+        LimpiarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarBotonActionPerformed(evt);
             }
         });
-        jPanel1.add(DPIbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, 150, -1));
+        jPanel1.add(LimpiarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
+        EliminarBoton.setBackground(new java.awt.Color(255, 255, 255));
+        EliminarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/eliminar.png"))); // NOI18N
+        EliminarBoton.setText("ELIMINAR");
+        EliminarBoton.setEnabled(false);
+        EliminarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, -1, -1));
+
+        CrearBoton.setBackground(new java.awt.Color(255, 255, 255));
+        CrearBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/crear.png"))); // NOI18N
         CrearBoton.setText("CREAR");
         CrearBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearBotonActionPerformed(evt);
             }
         });
-        jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
+        jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, -1, -1));
 
-        errorLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        grafico.setBackground(new java.awt.Color(255, 255, 255));
+        grafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
+        grafico.setText("GRAPHVIZ");
+        grafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(grafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 110, -1, -1));
+
+        selecionar.setBackground(new java.awt.Color(255, 255, 255));
+        selecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/seleccionar.png"))); // NOI18N
+        selecionar.setText("SELECCIONAR");
+        selecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, -1, -1));
+
+        buscarLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        buscarLabel.setForeground(new java.awt.Color(255, 255, 255));
+        buscarLabel.setText("BUSCAR:");
+        jPanel1.add(buscarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
+
+        buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscarKeyTyped(evt);
+            }
+        });
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 100, -1));
+
+        errorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
-        jPanel1.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 370, 20));
-
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.png"))); // NOI18N
-        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 500, 240));
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel1.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 750, 20));
 
         Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/logout72.png"))); // NOI18N
         Salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,7 +231,7 @@ public class menu_Cliente extends javax.swing.JFrame {
                 SalirMouseClicked(evt);
             }
         });
-        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 280, -1, -1));
+        jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
         direccionLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         direccionLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,7 +270,7 @@ public class menu_Cliente extends javax.swing.JFrame {
         generoLabel.setText("GENERO:");
         jPanel1.add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Fenemino", "No deseo especificar", "Helicoptero Apache de Guerra" }));
+        genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione uno ...", "Masculino", "Femenino", "No deseo especificar", "Helicoptero Apache de Guerra" }));
         jPanel1.add(genero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, -1));
 
         apellidoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -191,6 +309,14 @@ public class menu_Cliente extends javax.swing.JFrame {
         });
         jPanel1.add(DPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 150, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("GESTION DE CLIENTES");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
+
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cliente.jpg"))); // NOI18N
+        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,7 +343,7 @@ public class menu_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_SalirMouseClicked
 
     private void DPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DPIKeyTyped
@@ -274,63 +400,219 @@ public class menu_Cliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_apellidoKeyTyped
 
-    private void DPIbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DPIbuscarKeyTyped
-        char c = evt.getKeyChar();
-        //SOLO SE ADMITIRÁN NÚMEROS EN ESTE TEXTBOX
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-            evt.consume();
-            errorLabel.setText("SOLO NUMEROS PARA EL DPI");
+    private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
+        TableRowSorter<TableModel> filtro = new TableRowSorter<>(ClientesTabla.getModel());
+        ClientesTabla.setRowSorter(filtro);
+        String text = buscar.getText();
+        if (text.trim().length() == 0) {
+            filtro.setRowFilter(null);
+        } else {
+            filtro.setRowFilter(RowFilter.regexFilter("(?i)" + text));
         }
-        //LIMITAR NUMERO PARA DPI {XXXX XXXXX XXXX}
-        if (DPIbuscar.getText().length() == 13 && Character.isDigit(c)) {
-            evt.consume();
-            errorLabel.setText("");
-        } else if (DPIbuscar.getText().length() < 13 && Character.isDigit(c)) {
-            errorLabel.setText("EL DPI DEBE RESPETAR SU TAMAÑO {XXXX XXXXX XXXX}");
-        }
-    }//GEN-LAST:event_DPIbuscarKeyTyped
+    }//GEN-LAST:event_buscarKeyTyped
 
     private void CrearBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBotonActionPerformed
 
-        if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
-                && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
-                && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
-                && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
-                && !direccion.getText().isEmpty()) {
-            if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
-                errorLabel.setText("ANTES DE CREAR DEBE RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
-            } else {
-                System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
-                Cliente nuevoCliente = new Cliente();
-                nuevoCliente.setDPI(Long.parseLong(DPI.getText().trim()));
-                nuevoCliente.setNombres(nombre.getText().trim());
-                nuevoCliente.setApellidos(apellido.getText().trim());
-                nuevoCliente.setGenero(genero.getSelectedItem().toString().trim());
-                nuevoCliente.setFecha_nac(dia.getSelectedItem().toString()+"/"+mes.getSelectedItem().toString()+"/"+
-                anio.getSelectedItem().toString());
-                nuevoCliente.setTelefono(Integer.parseInt(telefono.getText().trim()));
-                nuevoCliente.setDireccion(direccion.getText().trim());
-                System.out.println(nuevoCliente.toString());
-                
-                for (Component component : jPanel1.getComponents()) {
-                    if (component instanceof JTextField) {
-                        ((JTextField) component).setText("");
+        if (CrearBoton.getText().equals("CREAR")) {
+            if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
+                    && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
+                    && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
+                    && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
+                    && !direccion.getText().isEmpty()) {
+                if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
+                    errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
+                } else {
+                    System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
+                    Cliente nuevoCliente = new Cliente();
+                    nuevoCliente.setDPI(Long.parseLong(DPI.getText().trim()));
+                    nuevoCliente.setNombres(nombre.getText().trim());
+                    nuevoCliente.setApellidos(apellido.getText().trim());
+                    nuevoCliente.setGenero(genero.getSelectedItem().toString().trim());
+                    nuevoCliente.setFecha_nac(dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/"
+                            + anio.getSelectedItem().toString());
+                    nuevoCliente.setTelefono(Integer.parseInt(telefono.getText().trim()));
+                    nuevoCliente.setDireccion(direccion.getText().trim());
+
+                    System.out.println(nuevoCliente.toString());
+                    Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
+
+                    for (Component component : jPanel1.getComponents()) {
+                        if (component instanceof JTextField) {
+                            ((JTextField) component).setText("");
+                        }
                     }
+                    for (Component component : jPanel1.getComponents()) {
+                        if (component instanceof JComboBox) {
+                            ((JComboBox) component).setSelectedIndex(0);
+                        }
+                    }
+                    //ConductoresTabla.setVisible(true);
+                    //SwingUtilities.updateComponentTreeUI(jPanel1);
                 }
-                for (Component component : jPanel1.getComponents()) {
-                    if (component instanceof JComboBox) {
-                        ((JComboBox) component).setSelectedIndex(0);
+
+            } else {
+                errorLabel.setText("LLENAR TODOS LOS CAMPOS");
+            }
+        } else {
+            if (!DPI.getText().isEmpty() && !nombre.getText().isEmpty()
+                    && !apellido.getText().isEmpty() && !genero.getSelectedItem().toString().equals("Seleccione uno ...")
+                    && !dia.getSelectedItem().toString().equals("00") && !mes.getSelectedItem().toString().equals("00")
+                    && !anio.getSelectedItem().toString().equals("0000") && !telefono.getText().isEmpty()
+                    && !direccion.getText().isEmpty()) {
+                if (DPI.getText().length() < 13 || telefono.getText().length() < 8) {
+                    errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
+                } else {
+                    System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
+                    Cliente nuevoCliente = new Cliente();
+                    nuevoCliente.setDPI(Long.parseLong(DPI.getText().trim()));
+                    nuevoCliente.setNombres(nombre.getText().trim());
+                    nuevoCliente.setApellidos(apellido.getText().trim());
+                    nuevoCliente.setGenero(genero.getSelectedItem().toString().trim());
+                    nuevoCliente.setFecha_nac(dia.getSelectedItem().toString() + "/" + mes.getSelectedItem().toString() + "/"
+                            + anio.getSelectedItem().toString());
+                    nuevoCliente.setTelefono(Integer.parseInt(telefono.getText().trim()));
+                    nuevoCliente.setDireccion(direccion.getText().trim());
+
+                    System.out.println(nuevoCliente.toString());
+                    clientesTabla = Carga.clientes.devolver_nodo(nuevoCliente.getDPI());
+                    for (int i = 0; i < clientesTabla.size(); i++) {
+                        if (clientesTabla.get(i).getDPI() == nuevoCliente.getDPI()) {
+                            clientesTabla.set(i, nuevoCliente);
+                            break;
+                        }
                     }
+
+                    for (Component component : jPanel1.getComponents()) {
+                        if (component instanceof JTextField) {
+                            ((JTextField) component).setText("");
+                        }
+                    }
+                    for (Component component : jPanel1.getComponents()) {
+                        if (component instanceof JComboBox) {
+                            ((JComboBox) component).setSelectedIndex(0);
+                        }
+                    }
+                    CrearBoton.setText("CREAR");
+                    //ConductoresTabla.setVisible(true);
+                    //SwingUtilities.updateComponentTreeUI(jPanel1);
+                }
+
+            } else {
+                errorLabel.setText("LLENAR TODOS LOS CAMPOS");
+            }
+        }
+        CrearBoton.setText("CREAR");
+        CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
+        CrearBoton.repaint();
+        EliminarBoton.setEnabled(false);
+        modeloClientes.setRowCount(0);
+        modeloClientes.setColumnCount(0);
+        correrTabla();
+        modeloClientes.fireTableDataChanged();
+        //ConductoresTabla.repaint();
+    }//GEN-LAST:event_CrearBotonActionPerformed
+
+    private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
+        if (ClientesTabla.getSelectedRow() != -1) {
+            long dpi = Long.parseLong(String.valueOf(ClientesTabla.getValueAt(ClientesTabla.getSelectedRow(), 0)));
+            System.out.println(dpi);
+            Cliente eC = new Cliente();
+            clientesTabla = Carga.clientes.devolver_nodo(dpi);
+            for (int i = 0; i < clientesTabla.size(); i++) {
+                if (clientesTabla.get(i).getDPI() == dpi) {
+                    eC = clientesTabla.get(i);
+                    break;
                 }
             }
+            DPI.setText(String.valueOf(eC.getDPI()));
+            nombre.setText(eC.getNombres());
+            apellido.setText(eC.getApellidos());
+            genero.setSelectedItem(eC.getGenero());
 
+            String[] fecha = eC.getFecha_nac().split("/");
+            dia.setSelectedItem(fecha[0]);
+            mes.setSelectedItem(fecha[1]);
+            anio.setSelectedItem(fecha[2]);
+
+            telefono.setText(String.valueOf(eC.getTelefono()));
+            direccion.setText(eC.getDireccion());
+            ClientesTabla.clearSelection();
+            errorLabel.setText("");
+
+            CrearBoton.setText("EDITAR");
+            CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
+            CrearBoton.repaint();
+            EliminarBoton.setEnabled(true);
         } else {
-            errorLabel.setText("ANTES DE CREAR DEBE RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
+            errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }
 
+    }//GEN-LAST:event_selecionarActionPerformed
 
-    }//GEN-LAST:event_CrearBotonActionPerformed
+    private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
+        //MÉTODO PARA CREAR EL ARCHIVO.DOT Y LA IMAGEN.PNG
+        try {
+            Path CMD = Carga.tabla_hash_GRAPHVIZ();
+            Carga.dibujarGRAPHVIZ(CMD, "Clientes.png");
+        } catch (IOException ex) {
+            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        File miGraphviz = new File("Clientes.png");
+        try {
+            Desktop.getDesktop().open(miGraphviz);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
+        }
+
+    }//GEN-LAST:event_graficoActionPerformed
+
+    private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
+        long dpi = Long.parseLong(String.valueOf(DPI.getText()));
+        System.out.println(dpi);
+        clientesTabla = Carga.clientes.devolver_nodo(dpi);
+        for (int i = 0; i < clientesTabla.size(); i++) {
+            if (clientesTabla.get(i).getDPI() == dpi) {
+                clientesTabla.remove(i);
+                break;
+            }
+        }
+
+        for (Component component : jPanel1.getComponents()) {
+            if (component instanceof JTextField) {
+                ((JTextField) component).setText("");
+            }
+        }
+        for (Component component : jPanel1.getComponents()) {
+            if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0);
+            }
+        }
+        CrearBoton.setText("CREAR");
+        CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
+        CrearBoton.repaint();
+        modeloClientes.setRowCount(0);
+        modeloClientes.setColumnCount(0);
+        correrTabla();
+        modeloClientes.fireTableDataChanged();
+        EliminarBoton.setEnabled(false);
+    }//GEN-LAST:event_EliminarBotonActionPerformed
+
+    private void LimpiarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarBotonActionPerformed
+        for (Component component : jPanel1.getComponents()) {
+            if (component instanceof JTextField) {
+                ((JTextField) component).setText("");
+            }
+        }
+        for (Component component : jPanel1.getComponents()) {
+            if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0);
+            }
+        }
+        CrearBoton.setText("CREAR");
+        CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
+        CrearBoton.repaint();
+        EliminarBoton.setEnabled(false);
+    }//GEN-LAST:event_LimpiarBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,6 +640,9 @@ public class menu_Cliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(menu_Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -368,15 +653,17 @@ public class menu_Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BuscarBoton;
-    private javax.swing.JButton BuscarBoton1;
+    private javax.swing.JTable ClientesTabla;
     private javax.swing.JButton CrearBoton;
     private javax.swing.JTextField DPI;
-    private javax.swing.JTextField DPIbuscar;
+    private javax.swing.JButton EliminarBoton;
+    private javax.swing.JButton LimpiarBoton;
     private javax.swing.JLabel Salir;
     private javax.swing.JComboBox<String> anio;
     private javax.swing.JTextField apellido;
     private javax.swing.JLabel apellidoLabel;
+    private javax.swing.JTextField buscar;
+    private javax.swing.JLabel buscarLabel;
     private javax.swing.JComboBox<String> dia;
     private javax.swing.JTextField direccion;
     private javax.swing.JLabel direccionLabel;
@@ -385,11 +672,15 @@ public class menu_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel fechaLabel;
     private javax.swing.JComboBox<String> genero;
     private javax.swing.JLabel generoLabel;
+    private javax.swing.JButton grafico;
     private javax.swing.JLabel imagen;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> mes;
     private javax.swing.JTextField nombre;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JButton selecionar;
     private javax.swing.JTextField telefono;
     private javax.swing.JLabel telefonoLabel;
     // End of variables declaration//GEN-END:variables

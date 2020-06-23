@@ -15,6 +15,7 @@ import estructuras.lista_enlazada_simple;
 import ventanas.carga_Masiva;
 import ventanas.menu_Cliente;
 import ventanas.menu_Conductor;
+import ventanas.menu_Master;
 //import clases.Vehiculo;
 
 /**
@@ -31,90 +32,90 @@ public class LlegaRapidito {
         
         
         
-String str = "123abc123";  
-
-StringBuilder sb = new StringBuilder();
-for (char c : str.toCharArray())
-sb.append((int)c);
-
-long mInt = new Long(sb.toString());
-System.out.println(mInt);  
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-arbol_por_paginas prueba=new arbol_por_paginas(2);       
-  Vehiculo dark=new Vehiculo();   
-dark.setAnio(1993);
-dark.setColor("morado");
-dark.setMarca("toyota");
-dark.setModelo("yaris");
-dark.setPrecio(120000);
-dark.setTransmision("sencilla");
-dark.setPlaca("137BHT");
-
-Vehiculo dark2=new Vehiculo();   
-dark2.setAnio(1993);
-dark2.setColor("morado");
-dark2.setMarca("toyota");
-dark2.setModelo("yaris");
-dark2.setPrecio(120000);
-dark2.setTransmision("sencilla");
-dark2.setPlaca("245BHT");
-Vehiculo kar=new Vehiculo();   
-kar.setAnio(1993);
-kar.setColor("morado");
-kar.setMarca("toyota");
-kar.setModelo("yaris");
-kar.setPrecio(120000);
-kar.setTransmision("sencilla");
-kar.setPlaca("012BHT");
-Vehiculo kar2=new Vehiculo();   
-kar2.setAnio(1993);
-kar2.setColor("morado");
-kar2.setMarca("toyota");
-kar2.setModelo("yaris");
-kar2.setPrecio(120000);
-kar2.setTransmision("sencilla");
-kar2.setPlaca("075BHT");
-Vehiculo objeto=new Vehiculo();   
-objeto.setAnio(1993);
-objeto.setColor("morado");
-objeto.setMarca("toyota");
-objeto.setModelo("yaris");
-objeto.setPrecio(120000);
-objeto.setTransmision("sencilla");
-objeto.setPlaca("074BHT");
-
-prueba.agregar_datos(dark);
-prueba.agregar_datos(dark2);
-prueba.agregar_datos(kar);
-prueba.agregar_datos(kar2);
-prueba.agregar_datos(objeto);
-
-prueba.obtener_generar_grafico();
+//String str = "123abc123";  
+//
+//StringBuilder sb = new StringBuilder();
+//for (char c : str.toCharArray())
+//sb.append((int)c);
+//
+//long mInt = new Long(sb.toString());
+//System.out.println(mInt);  
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//arbol_por_paginas prueba=new arbol_por_paginas(2);       
+//  Vehiculo dark=new Vehiculo();   
+//dark.setAnio(1993);
+//dark.setColor("morado");
+//dark.setMarca("toyota");
+//dark.setModelo("yaris");
+//dark.setPrecio(120000);
+//dark.setTransmision("sencilla");
+//dark.setPlaca("137BHT");
+//
+//Vehiculo dark2=new Vehiculo();   
+//dark2.setAnio(1993);
+//dark2.setColor("morado");
+//dark2.setMarca("toyota");
+//dark2.setModelo("yaris");
+//dark2.setPrecio(120000);
+//dark2.setTransmision("sencilla");
+//dark2.setPlaca("245BHT");
+//Vehiculo kar=new Vehiculo();   
+//kar.setAnio(1993);
+//kar.setColor("morado");
+//kar.setMarca("toyota");
+//kar.setModelo("yaris");
+//kar.setPrecio(120000);
+//kar.setTransmision("sencilla");
+//kar.setPlaca("012BHT");
+//Vehiculo kar2=new Vehiculo();   
+//kar2.setAnio(1993);
+//kar2.setColor("morado");
+//kar2.setMarca("toyota");
+//kar2.setModelo("yaris");
+//kar2.setPrecio(120000);
+//kar2.setTransmision("sencilla");
+//kar2.setPlaca("075BHT");
+//Vehiculo objeto=new Vehiculo();   
+//objeto.setAnio(1993);
+//objeto.setColor("morado");
+//objeto.setMarca("toyota");
+//objeto.setModelo("yaris");
+//objeto.setPrecio(120000);
+//objeto.setTransmision("sencilla");
+//objeto.setPlaca("074BHT");
+//
+//prueba.agregar_datos(dark);
+//prueba.agregar_datos(dark2);
+//prueba.agregar_datos(kar);
+//prueba.agregar_datos(kar2);
+//prueba.agregar_datos(objeto);
+//
+//prueba.obtener_generar_grafico();
 
 //
 //prueba.agregar_datos("arte");
@@ -237,6 +238,8 @@ prueba.obtener_generar_grafico();
         //Carga.lista_doble_ciruclar_GRAPHVIZ();
         //carga_Masiva ventana = new carga_Masiva();
         //ventana.setVisible(true);
+        menu_Master master = new menu_Master();
+        master.setVisible(true);
         //menu_Cliente cl = new menu_Cliente();
         //cl.setVisible(true);
         //menu_Conductor co1 = new menu_Conductor();

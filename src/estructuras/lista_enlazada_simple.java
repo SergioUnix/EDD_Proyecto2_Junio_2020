@@ -133,7 +133,27 @@ public class lista_enlazada_simple<T> {
                 }
                 return aux.getDato();
             }
-        } else{
+        } else {
+            throw new Exception("Posición No encontrada");
+        }
+    }
+
+    //ESTA FUNCIÓN RETORNA EL VALOR O DATO QUE CONTENGA NUESTRO NODO PARA CICLOS
+    public T retornarValorORDENADO(int indice) throws Exception {
+        //FACTOR PARA DEVOLVER EL ÚLTIMO VALOR DE LA LISTA
+        if (indice >= tamanio) {
+            indice = tamanio - 1;
+        }
+
+        if (indice >= 0 && tamanio > indice) {
+
+            aux = inicio;
+            for (int i = 0; i < indice - 1; i++) {
+                aux = aux.getSiguiente();
+            }
+            return aux.getDato();
+
+        } else {
             throw new Exception("Posición No encontrada");
         }
     }

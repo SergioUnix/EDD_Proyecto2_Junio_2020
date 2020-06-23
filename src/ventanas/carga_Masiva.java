@@ -11,6 +11,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import clases.Carga;
+import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,6 +27,7 @@ public class carga_Masiva extends javax.swing.JFrame {
 
     private int x;
     private int y;
+
     /**
      * Creates new form carga_Masiva
      */
@@ -154,9 +156,7 @@ public class carga_Masiva extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        //System.exit(0);
-        menu_Conductor co1 = new menu_Conductor();
-        co1.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_SalirMouseClicked
 
     private void CclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CclientesActionPerformed
@@ -170,8 +170,10 @@ public class carga_Masiva extends javax.swing.JFrame {
                 Carga.cargaCliente(rutaLectura);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
         }
     }//GEN-LAST:event_CclientesActionPerformed
@@ -188,18 +190,18 @@ public class carga_Masiva extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
         }
-        
+
         Carga.vehiculos.obtener_generar_grafico();
-        
+
     }//GEN-LAST:event_CvehiculosActionPerformed
 
     private void CconductoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CconductoresActionPerformed
-     
+
         String rutaLectura;
-        
+
         JFileChooser JF = new JFileChooser();
         JF.showOpenDialog(null);
         File archivo = JF.getSelectedFile();
@@ -210,7 +212,7 @@ public class carga_Masiva extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
         }
         //*/ 
@@ -228,7 +230,7 @@ public class carga_Masiva extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN ARCHIVO PARA REALIZAR LA CARGA");
         }
     }//GEN-LAST:event_CrutasActionPerformed

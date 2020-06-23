@@ -4,7 +4,6 @@
  */
 package clases;
 
-import estructuras.arbol_por_paginas;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,7 +14,10 @@ import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import estructuras.estructura_Hash;
+import estructuras.arbol_por_paginas;
 import estructuras.lista_enlazada_doble_circular;
+import java.util.LinkedList;
 
 /*
      *
@@ -26,8 +28,11 @@ public class Carga {
 
     public static lista_enlazada_doble_circular<Conductor, Long> conductores = new lista_enlazada_doble_circular();
     public static arbol_por_paginas vehiculos = new arbol_por_paginas(2);
+    public static estructura_Hash<Cliente> clientes = new estructura_Hash(37, 75.0);
+    public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
+    public static LinkedList<Cliente> clientesAUX = new LinkedList();
 
-    public static void cargaCliente(String ruta) throws FileNotFoundException {
+    public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);
         BufferedReader BR = new BufferedReader(FR);
@@ -45,6 +50,15 @@ public class Carga {
                     nuevoCliente.setFecha_nac(atributos[4].trim());
                     nuevoCliente.setTelefono(Integer.parseInt(atributos[5].trim()));
                     nuevoCliente.setDireccion(atributos[6].trim());
+
+                    clientes.add(nuevoCliente, nuevoCliente.getDPI());
+                    clientesAUX = clientes.restablecer_tamanio();
+                    if (!clientesAUX.isEmpty()) {
+                        for (int i = 0; i < clientesAUX.size(); i++) {
+                            clientesAlternative.add(clientesAUX.get(i), clientesAUX.get(i).getDPI());
+                        }
+                        clientes = clientesAlternative;
+                    }
 
                     System.out.println(nuevoCliente.toString());
                 }
@@ -153,6 +167,81 @@ public class Carga {
         }
     }
 //************************************************************************************************
+
+    public static Path tabla_hash_GRAPHVIZ() throws IOException {
+        Cliente clienteG;
+        Cliente clienteG2;
+        //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
+        String ARCHIVO = "Clientes.dot";
+        Path rutaRelativa = Paths.get(ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        //IMPRIMIR LA RUTA PARA REVISAR
+        System.out.println(rutaAbsoluta);
+        //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
+        File archivo = new File(rutaAbsoluta.toString());
+        BufferedWriter BW;
+
+        //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
+        if (archivo.exists()) {
+
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph DoublyCList {\n");
+            BW.write("node[shape=box];\n");
+            BW.write("rankdir=LR;");
+            for (int i = 0; i < clientes.getTabla_H().length; i++) {
+                if (clientes.getTabla_H()[i] != null) {
+                    LinkedList<Cliente> vector = clientes.getTabla_H()[i];
+                    BW.write("\"" + i + "\";\n");
+
+                    for (int j = 0; j < vector.size(); j++) {
+                        clienteG = vector.get(j);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getNombres() + "\"];\n");
+                    }
+                    for (int j = 0; j < vector.size() - 1; j++) {
+                        clienteG = vector.get(j);
+                        clienteG2 = vector.get(j + 1);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "->\"" + String.valueOf(clienteG2.getDPI()) + "\";\n");
+
+                    }
+                    clienteG = vector.get(0);
+                    BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }
+            }
+            BW.write("}" + "\n");
+
+        } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
+        else {
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph DoublyCList {\n");
+            BW.write("node[shape=box];\n");
+            BW.write("rankdir=LR;");
+            for (int i = 0; i < clientes.getTabla_H().length; i++) {
+                if (clientes.getTabla_H()[i] != null) {
+                    LinkedList<Cliente> vector = clientes.getTabla_H()[i];
+                    BW.write("\"" + i + "\";\n");
+
+                    for (int j = 0; j < vector.size(); j++) {
+                        clienteG = vector.get(j);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getNombres() + "\"];\n");
+                    }
+                    for (int j = 0; j < vector.size() - 1; j++) {
+                        clienteG = vector.get(j);
+                        clienteG2 = vector.get(j + 1);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "->\"" + String.valueOf(clienteG2.getDPI()) + "\";\n");
+
+                    }
+                    clienteG = vector.get(0);
+                    BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }
+            }
+            BW.write("}" + "\n");
+
+        }
+
+        BW.close();
+        //RETORNAMOS LA RUTA PARA CREAR EL GRÁFICO
+        return rutaAbsoluta;
+    }
 
     public static Path lista_doble_ciruclar_GRAPHVIZ() throws IOException {
         //VARIABLES PARA OBTENER LOS DATOS DE LOS CONDUTORES EN LA LISTA
