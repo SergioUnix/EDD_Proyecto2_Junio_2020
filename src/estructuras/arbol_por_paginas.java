@@ -418,7 +418,7 @@ public class arbol_por_paginas {
             if (nodo.nodo[iterBusca].valores[j] != 0) {
             father=nodo.nodo[iterBusca].father.valores[0];
             hijo= nodo.nodo[iterBusca].valores[0];                      
-            aux2+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+            aux2+="{"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
                     obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
                     "}"+"|";                                              
             cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
@@ -456,7 +456,7 @@ long hijo=0;  int father=0;
 
 for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
     hijo =cabeza_nodo.valores[0];
-    aux += "{"+cabeza_nodo.valores[i] +"|"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+    aux += "{"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
          obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
             +"}"+ "|";
  }
@@ -467,44 +467,7 @@ cadena+=this.cadena_direccion;
 cadena+="label=\"{Arbol B | placas}\";\n";       
         return cadena+"}";
     }    
-//    Random r = new Random();
-//    int valorDado =0; 
 
-// public void crearTxT(String cadena) {
-//    File f;
-//    FileWriter wr;
-//    try {
-//        f = new File("Arbol_B.txt");
-//        wr = new FileWriter(f);
-//        BufferedWriter bw = new BufferedWriter(wr);
-//        PrintWriter salida = new PrintWriter(bw);
-//        salida.write(cadena + "\n");
-//        salida.close();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, " NO ESCRIBE ");
-//        }
-//    }
-//    public void obtener_generar_grafico() {
-//
-//           try {
-//       
-//        String archivoDot=getTxt();
-//        this.crearTxT(archivoDot);     
-//            ProcessBuilder pbuilder;
-//            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "Arbol_B.png", "Arbol_B.txt");
-//            pbuilder.redirectErrorStream(true);
-//            pbuilder.start();                    
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "No se creo la imagen ");
-//        }
-//        File miArchivo = new File("Arbol_B.png");
-//        try {
-//            Desktop.getDesktop().open(miArchivo);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "No esta la Ruta");
-//        }
-//    }  
-//    
     
     
     
