@@ -38,8 +38,8 @@ class cabeceras{
     public cabeceras father;
     public long []valores;
     public cabeceras []nodo;
-    public  int numValores;
-    public  int count;
+    public static int numValores;
+    public static int count;
     public boolean existen_hijos = false;
     public cabeceras(){count++;
        nodo = new cabeceras [arbol_por_paginas.pag_primera_particion * 2 + 3];
@@ -55,7 +55,7 @@ public class arbol_por_paginas {
     public static int imprimir = 1;
     public static String cadena_dot_ghrapviz = ""; 
     public cabeceras cabeza_nodo;
-    String cadena="digraph arbol_por_paginas{\nrankdir=TB;\nnode[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];   \n";
+   
     public arbolPagina arbolPagina = new arbolPagina();
     
     public arbol_por_paginas(int pag_primera_particion)
@@ -401,7 +401,7 @@ public class arbol_por_paginas {
     }     
     }
     
-    
+   String aux2=""; 
     public String generar_recursivo(cabeceras nodo) {
         cadena_dot_ghrapviz += "\n";
         int iterBusca=0;
@@ -418,7 +418,7 @@ public class arbol_por_paginas {
             if (nodo.nodo[iterBusca].valores[j] != 0) {
             father=nodo.nodo[iterBusca].father.valores[0];
             hijo= nodo.nodo[iterBusca].valores[0];                      
-            aux+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+            aux2+="{"+nodo.nodo[iterBusca].valores[j]+"|"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
                     obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
                     "}"+"|";                                              
             cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
@@ -426,9 +426,9 @@ public class arbol_por_paginas {
         j=j+1;
         }
         if (nodo.nodo[iterBusca] != null) {         
-        this.cadena_nodos +="nodo"+hijo+"[ label =\""+aux+"\"]  \n";
+        this.cadena_nodos +="nodo"+hijo+"[ label =\""+aux2+"\"]  \n";
         this.cadena_direccion += "nodo"+father+"->"+"nodo"+hijo+"\n";
-        aux="";
+        aux2="";
         cadena_dot_ghrapviz += " ]";
         } 
         iterBusca=iterBusca+1;
@@ -437,6 +437,8 @@ public class arbol_por_paginas {
         return cadena_dot_ghrapviz;
     }
 
+    
+String cadena="";
 String aux="";
 String cadena_nodos="";
 String cadena_direccion="";
@@ -445,11 +447,13 @@ String cadena_direccion="";
 public String getCadena() {
 this.cadena_dot_ghrapviz="";
 this.aux="";
+this.aux2="";
 this.cadena_nodos="";
 this.cadena_direccion="";
+this.cadena="digraph arbol_por_paginas{\nrankdir=TB;\nnode[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];\n  ";
 String cadena_dot = generar_recursivo(cabeza_nodo);
 long hijo=0;  int father=0;
-String aux="";
+
 for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
     hijo =cabeza_nodo.valores[0];
     aux += "{"+cabeza_nodo.valores[i] +"|"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
@@ -457,10 +461,11 @@ for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i+
             +"}"+ "|";
  }
 cadena +="nodo"+hijo+"[ label =\""+aux+"\"]  \n";
+
 cadena+=this.cadena_nodos;
 cadena+=this.cadena_direccion;
-cadena+="label=\"{Arbol B | placas}\";\n}";       
-        return cadena;
+cadena+="label=\"{Arbol B | placas}\";\n";       
+        return cadena+"}";
     }    
 //    Random r = new Random();
 //    int valorDado =0; 

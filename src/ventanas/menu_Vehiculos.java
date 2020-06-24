@@ -41,6 +41,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class menu_Vehiculos extends javax.swing.JFrame {
 
+     
     private int x;
     private int y;
     String nombre;
