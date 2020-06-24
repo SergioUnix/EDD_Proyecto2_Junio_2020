@@ -4,6 +4,7 @@
  */
 package estructuras;
 
+import clases.Cliente;
 import java.util.LinkedList;
 
 public class estructura_Hash<T> {
@@ -58,7 +59,6 @@ public class estructura_Hash<T> {
             tabla_H[funcion_hash(parametroH)] = new LinkedList();
         }
         tabla_H[funcion_hash(parametroH)].add(dato);
-        System.out.println(funcion_hash(parametroH) + " " + String.valueOf(dato));
     }
 
     public LinkedList<T> devolver_nodo(long parametroH) {
@@ -86,16 +86,16 @@ public class estructura_Hash<T> {
     public LinkedList<T> restablecer_tamanio() throws Exception {
         int uso = 0;
         double utilidad;
+        Cliente auxiliar = new Cliente();
         LinkedList<T> aux = new LinkedList();
         for (int i = 1; i < capacidad; i++) {
-            if (tabla_H[i] != null) {
+            if (tabla_H[i] != null || !tabla_H[i].isEmpty() ) {
                 uso++;
             }
         }
         utilidad = (uso * 100) / capacidad;
-        System.out.println(utilidad);
         if (utilidad >= ocupacion) {
-
+            System.out.println("SE HA REVASADO EL PORCENTAJE DE OCUPACION SE HARA REHASHING " + utilidad + "%"+"\n");
             for (int i = 0; i < capacidad; i++) {
                 if (tabla_H[i] != null) {
                     for (int j = 0; j < tabla_H[i].size(); j++) {
@@ -105,10 +105,16 @@ public class estructura_Hash<T> {
                     }
                 }
             }
-
-        } else {
-            System.out.println("LA TABLA TODAVÍA ES UTILIZABLE");
+        } else if (utilidad <= 50.0 ) {
+            System.out.println("LA TABLA TODAVÍA ES UTILIZABLE " + utilidad + "%");
+        } else if (utilidad >= 50.0 && utilidad < 60.0) {
+            System.out.println("LA TABLA SE ENCUENTRA A MAS 50% DE SU CAPACIDAD, Y SE HARA REHASHING \"" + utilidad + "\"%");
+        } else if (utilidad >= 60.0 && utilidad < 70.0) {
+            System.out.println("LA TABLA SE ENCUENTRA A MAS 60% DE SU CAPACIDAD, Y SE HARA REHASHING \"" + utilidad + "\"%");
+        } else if (utilidad >= 70.0) {
+            System.out.println("LA TABLA SE ENCUENTRA A MAS 70% DE SU CAPACIDAD, Y SE HARA REHASHING \"" + utilidad + "\"%");
         }
+
         return aux;
     }
 }

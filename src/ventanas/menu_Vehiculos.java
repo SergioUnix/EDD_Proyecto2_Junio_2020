@@ -392,7 +392,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_SalirMouseClicked
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped

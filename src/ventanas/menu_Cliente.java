@@ -6,8 +6,10 @@
 package ventanas;
 
 import clases.Carga;
+import static clases.Carga.clientes;
 import clases.Cliente;
 import clases.Conductor;
+import estructuras.estructura_Hash;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -41,6 +43,7 @@ public class menu_Cliente extends javax.swing.JFrame {
     private DefaultTableModel modeloClientes;
     private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
     private LinkedList<Cliente> clientesTabla;
+    public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(Carga.clientes.getCapacidad() + 37, 75.0);
 
     /**
      * Creates new form menu_Conductor
@@ -57,7 +60,7 @@ public class menu_Cliente extends javax.swing.JFrame {
 
         modeloClientes.setRowCount(0);
         modeloClientes.setColumnCount(0);
-        
+
         modeloClientes.setNumRows(0);
         modeloClientes.addColumn("INDICE");
         modeloClientes.addColumn("DPI");
@@ -438,6 +441,18 @@ public class menu_Cliente extends javax.swing.JFrame {
 
                     System.out.println(nuevoCliente.toString());
                     Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
+
+                    try {
+                        clientesTabla = Carga.clientes.restablecer_tamanio();
+                    } catch (Exception ex) {
+                        Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (!clientesTabla.isEmpty()) {
+                        for (int i = 0; i < clientesTabla.size(); i++) {
+                            clientesAlternative.add(clientesTabla.get(i), clientesTabla.get(i).getDPI());
+                        }
+                        clientes = clientesAlternative;
+                    }
 
                     for (Component component : jPanel1.getComponents()) {
                         if (component instanceof JTextField) {
