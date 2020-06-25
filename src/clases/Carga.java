@@ -32,7 +32,8 @@ public class Carga {
     public static estructura_Hash<Cliente> clientes = new estructura_Hash(37, 75.0);
     public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
     public static LinkedList<Cliente> clientesAUX = new LinkedList();
-    public static estructura_grafo grafo=new estructura_grafo();
+    public static estructura_grafo grafo = new estructura_grafo();
+
     public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);
@@ -193,9 +194,14 @@ public class Carga {
         if (archivo.exists()) {
 
             BW = new BufferedWriter(new FileWriter(archivo));
-            BW.write("digraph DoublyCList {\n");
-            BW.write("node[shape=box];\n");
-            BW.write("rankdir=LR;");
+            BW.write("digraph HashTable {\n");
+            BW.write("node[shape=box style=\"filled\" color=\"cyan3\" fontcolor = \"white\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=black;\n");
+
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
                     LinkedList<Cliente> vector = clientes.getTabla_H()[i];
@@ -203,7 +209,7 @@ public class Carga {
 
                     for (int j = 0; j < vector.size(); j++) {
                         clienteG = vector.get(j);
-                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getNombres() + "\"];\n");
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getDPI() + "\n" + clienteG.getNombres() + "\"];\n");
                     }
                     for (int j = 0; j < vector.size() - 1; j++) {
                         clienteG = vector.get(j);
@@ -216,13 +222,19 @@ public class Carga {
                 }
             }
             BW.write("}" + "\n");
+            BW.write("}" + "\n");
 
         } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
         else {
             BW = new BufferedWriter(new FileWriter(archivo));
-            BW.write("digraph DoublyCList {\n");
-            BW.write("node[shape=box];\n");
-            BW.write("rankdir=LR;");
+            BW.write("digraph HashTable {\n");
+            BW.write("node[shape=box style=\"filled\" color=\"cyan3\" fontcolor = \"white\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=black;\n");
+
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
                     LinkedList<Cliente> vector = clientes.getTabla_H()[i];
@@ -230,7 +242,7 @@ public class Carga {
 
                     for (int j = 0; j < vector.size(); j++) {
                         clienteG = vector.get(j);
-                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getNombres() + "\"];\n");
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getDPI() + "\n" + clienteG.getNombres() + "\"];\n");
                     }
                     for (int j = 0; j < vector.size() - 1; j++) {
                         clienteG = vector.get(j);
@@ -242,6 +254,7 @@ public class Carga {
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
                 }
             }
+            BW.write("}" + "\n");
             BW.write("}" + "\n");
 
         }
@@ -307,7 +320,7 @@ public class Carga {
         } else {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
-            BW.write("subgraph Conductores{\n");
+            BW.write("subgraph cluster_0{\n");
             BW.write("style=filled;\n");
             BW.write("color=black;");
             BW.write("node[shape=record];\n");

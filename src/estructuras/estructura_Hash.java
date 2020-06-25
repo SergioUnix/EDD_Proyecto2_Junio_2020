@@ -89,13 +89,16 @@ public class estructura_Hash<T> {
         Cliente auxiliar = new Cliente();
         LinkedList<T> aux = new LinkedList();
         for (int i = 1; i < capacidad; i++) {
-            if (tabla_H[i] != null || !tabla_H[i].isEmpty() ) {
+            if (tabla_H[i] != null) {
                 uso++;
+            }
+            if (tabla_H[i] != null && tabla_H[i].isEmpty()) {
+                uso--;
             }
         }
         utilidad = (uso * 100) / capacidad;
         if (utilidad >= ocupacion) {
-            System.out.println("SE HA REVASADO EL PORCENTAJE DE OCUPACION SE HARA REHASHING " + utilidad + "%"+"\n");
+            System.out.println("SE HA REVASADO EL PORCENTAJE DE OCUPACION SE HARA REHASHING " + utilidad + "%" + "\n");
             for (int i = 0; i < capacidad; i++) {
                 if (tabla_H[i] != null) {
                     for (int j = 0; j < tabla_H[i].size(); j++) {
@@ -105,7 +108,7 @@ public class estructura_Hash<T> {
                     }
                 }
             }
-        } else if (utilidad <= 50.0 ) {
+        } else if (utilidad <= 50.0) {
             System.out.println("LA TABLA TODAVÍA ES UTILIZABLE " + utilidad + "%");
         } else if (utilidad >= 50.0 && utilidad < 60.0) {
             System.out.println("LA TABLA SE ENCUENTRA A MAS 50% DE SU CAPACIDAD, Y SE HARA REHASHING \"" + utilidad + "\"%");

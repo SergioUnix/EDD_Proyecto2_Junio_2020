@@ -195,6 +195,8 @@ public class LlegaRapidito {
         //co1.setVisible(true);
   //      menu_Master master = new menu_Master();
    //     master.setVisible(true);
+   
+   
     }
 
 }

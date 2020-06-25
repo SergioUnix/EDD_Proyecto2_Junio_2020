@@ -180,7 +180,7 @@ public class carga_Masiva extends javax.swing.JFrame {
 
     private void CvehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CvehiculosActionPerformed
         String rutaLectura;
-        JFileChooser JF = new JFileChooser();
+        JFileChooser JF = new JFileChooser("./");
         JF.showOpenDialog(null);
         File archivo = JF.getSelectedFile();
         if (archivo != null) {
@@ -202,7 +202,7 @@ public class carga_Masiva extends javax.swing.JFrame {
 
         String rutaLectura;
 
-        JFileChooser JF = new JFileChooser();
+        JFileChooser JF = new JFileChooser("./");
         JF.showOpenDialog(null);
         File archivo = JF.getSelectedFile();
         if (archivo != null) {
@@ -220,7 +220,7 @@ public class carga_Masiva extends javax.swing.JFrame {
 
     private void CrutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrutasActionPerformed
         String rutaLectura;
-        JFileChooser JF = new JFileChooser();
+        JFileChooser JF = new JFileChooser("./");
         JF.showOpenDialog(null);
         File archivo = JF.getSelectedFile();
         if (archivo != null) {

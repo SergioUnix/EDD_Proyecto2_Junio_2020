@@ -39,6 +39,7 @@ public class menu_Master extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Salir = new javax.swing.JLabel();
         ReporteBoton = new javax.swing.JButton();
+        ReporteBoton1 = new javax.swing.JButton();
         CargaBoton = new javax.swing.JButton();
         ClienteBoton1 = new javax.swing.JButton();
         ConductorBoton = new javax.swing.JButton();
@@ -74,10 +75,17 @@ public class menu_Master extends javax.swing.JFrame {
 
         ReporteBoton.setBackground(new java.awt.Color(255, 102, 0));
         ReporteBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        ReporteBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
-        ReporteBoton.setText("MENU REPORTE");
+        ReporteBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/seleccionar.png"))); // NOI18N
+        ReporteBoton.setText("MENU VIAJES");
         jPanel1.add(ReporteBoton);
-        ReporteBoton.setBounds(820, 360, 240, 100);
+        ReporteBoton.setBounds(820, 190, 240, 100);
+
+        ReporteBoton1.setBackground(new java.awt.Color(255, 102, 0));
+        ReporteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ReporteBoton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
+        ReporteBoton1.setText("MENU REPORTE");
+        jPanel1.add(ReporteBoton1);
+        ReporteBoton1.setBounds(820, 410, 240, 100);
 
         CargaBoton.setBackground(new java.awt.Color(255, 102, 0));
         CargaBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -89,7 +97,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CargaBoton);
-        CargaBoton.setBounds(820, 140, 240, 100);
+        CargaBoton.setBounds(820, 300, 240, 100);
 
         ClienteBoton1.setBackground(new java.awt.Color(255, 102, 0));
         ClienteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -101,7 +109,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ClienteBoton1);
-        ClienteBoton1.setBounds(440, 360, 240, 100);
+        ClienteBoton1.setBounds(210, 410, 240, 100);
 
         ConductorBoton.setBackground(new java.awt.Color(255, 102, 0));
         ConductorBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -113,7 +121,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ConductorBoton);
-        ConductorBoton.setBounds(440, 140, 240, 100);
+        ConductorBoton.setBounds(390, 280, 240, 100);
 
         VehiculoBoton.setBackground(new java.awt.Color(255, 102, 0));
         VehiculoBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -125,7 +133,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(VehiculoBoton);
-        VehiculoBoton.setBounds(30, 360, 240, 100);
+        VehiculoBoton.setBounds(20, 280, 240, 100);
 
         ClienteBoton.setBackground(new java.awt.Color(255, 102, 0));
         ClienteBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -137,7 +145,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ClienteBoton);
-        ClienteBoton.setBounds(20, 140, 240, 100);
+        ClienteBoton.setBounds(210, 150, 240, 100);
 
         titulo.setFont(new java.awt.Font("TI Uni", 1, 48)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 102, 0));
@@ -244,6 +252,7 @@ public class menu_Master extends javax.swing.JFrame {
     private javax.swing.JButton ClienteBoton1;
     private javax.swing.JButton ConductorBoton;
     private javax.swing.JButton ReporteBoton;
+    private javax.swing.JButton ReporteBoton1;
     private javax.swing.JLabel Salir;
     private javax.swing.JButton VehiculoBoton;
     private javax.swing.JLabel fondo;

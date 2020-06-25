@@ -495,7 +495,8 @@ public class menu_Cliente extends javax.swing.JFrame {
                     clientesTabla = Carga.clientes.devolver_nodo(nuevoCliente.getDPI());
                     for (int i = 0; i < clientesTabla.size(); i++) {
                         if (clientesTabla.get(i).getDPI() == nuevoCliente.getDPI()) {
-                            clientesTabla.set(i, nuevoCliente);
+                            clientesTabla.remove(i);
+                            Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
                             break;
                         }
                     }

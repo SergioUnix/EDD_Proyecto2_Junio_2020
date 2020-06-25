@@ -165,7 +165,7 @@ public class menu_Rutas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(VehiculosTabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 1030, 170));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1030, 170));
 
         LimpiarBoton.setBackground(new java.awt.Color(255, 255, 255));
         LimpiarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/limpiar.png"))); // NOI18N
@@ -205,7 +205,7 @@ public class menu_Rutas extends javax.swing.JFrame {
                 selecionarActionPerformed(evt);
             }
         });
-        jPanel1.add(selecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, -1, -1));
+        jPanel1.add(selecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 210, -1, -1));
 
         buscarLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         buscarLabel.setForeground(new java.awt.Color(255, 255, 255));
