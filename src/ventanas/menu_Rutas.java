@@ -401,10 +401,18 @@ public class menu_Rutas extends javax.swing.JFrame {
             long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 0)));
             System.out.println(placaNo);
             Vehiculo eC;
-            eC = Carga.vehiculos.obtenerVehiculo(placaNo);
+            try {
+                eC = Carga.vehiculos.obtenerVehiculo(placaNo);
             placa.setText(String.valueOf(eC.getPlaca()));
             marca.setText(String.valueOf(eC.getMarca()));
             modelo.setText(eC.getModelo());
+            
+            
+            
+            } catch (Exception ex) {
+                Logger.getLogger(menu_Rutas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    
            
 
             VehiculosTabla.clearSelection();
@@ -423,8 +431,9 @@ public class menu_Rutas extends javax.swing.JFrame {
 
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
     
-         Carga.grafo.imprimir();
         try {
+            Carga.grafo.imprimir();
+            
             Graficas.graficar(Carga.grafo.cadenaGrafico(), "grafo");
         } catch (Exception ex) {
             Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);

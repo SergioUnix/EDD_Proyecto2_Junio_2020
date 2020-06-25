@@ -7,6 +7,8 @@ package ventanas;
 
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -201,8 +203,14 @@ public class menu_Master extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void VehiculoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehiculoBotonActionPerformed
-       menu_Vehiculos vehi=new menu_Vehiculos();
-        vehi.setVisible(true);
+       menu_Vehiculos vehi;
+        try {
+            vehi = new menu_Vehiculos();
+             vehi.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Master.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
        
     }//GEN-LAST:event_VehiculoBotonActionPerformed
 
