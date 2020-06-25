@@ -709,6 +709,11 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       Carga.grafo.imprimir();
+        try {
+            Graficas.graficar(Carga.grafo.cadenaGrafico(), "grafo");
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

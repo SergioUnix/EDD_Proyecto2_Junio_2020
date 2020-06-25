@@ -127,19 +127,20 @@ public class estructura_grafo {
             }
          }
          public String cadenaGrafico(){
-             String res="";
+            String res="graph grafoRutas { \n" +"layout=\"circo\";\n" +"size = \"30\"\n" +"node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];\n";
+            String direccion="";
             estructura_grafo aux=this.next1;
             System.out.println("-----------"+origen);
             for(int i=0;i<transiciones.size();i++){
-            System.out.println("           "+transiciones.get(i).getNombre()+"    "+transiciones.get(i).getDireccion()); 
+            direccion=direccion+"\""+origen+"\"-- \""+transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
             }
-            while(aux!=null){                
-            System.out.println(" ----------"+aux.getOrigen());
+            while(aux!=null){
             for(int i=0;i<aux.transiciones.size();i++){
-            System.out.println("           "+aux.transiciones.get(i).getNombre()+"    "+aux.transiciones.get(i).getDireccion()); 
+            direccion=direccion+"\""+aux.getOrigen()+"\"-- \""+aux.transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+aux.transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
             }           
             aux=aux.getNext1();
             }
+           res=res+direccion;
             return res+"}";
          }
 
