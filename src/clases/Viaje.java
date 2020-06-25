@@ -153,8 +153,8 @@ public class Viaje {
         return clave;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setClave() {
+        this.clave = vehiculo.getPlaca() + String.valueOf(dia) + String.valueOf(mes) + String.valueOf(anio) + String.valueOf(hora) + ":" + String.valueOf(minuto);
     }
 
 }
