@@ -47,4 +47,5 @@ node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fonts
 "Bilbao"-- "Zaragoza"[dir="forward", color=crimson,label = "324", fontcolor=darkolivegreen4]; 
 "Bilbao"-- "Oviedo"[dir="forward", color=crimson,label = "304", fontcolor=darkolivegreen4]; 
 "Oviedo"-- "Bilbao"[dir="forward", color=crimson,label = "304", fontcolor=darkolivegreen4]; 
-}
+label="{Rutas de Llega Rapidito}";
+ }

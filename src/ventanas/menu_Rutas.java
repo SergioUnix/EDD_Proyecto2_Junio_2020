@@ -39,7 +39,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Alejandro Lorenty
  */
-public class menu_Vehiculos extends javax.swing.JFrame {
+public class menu_Rutas extends javax.swing.JFrame {
 
      
     private int x;
@@ -48,12 +48,12 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     Pattern pat;
     Matcher mat;
     private DefaultTableModel modeloVehiculos;
-    public ImageIcon fondo = new ImageIcon("src/imagenes/vehi_1.jpg");
+    public ImageIcon fondo = new ImageIcon("src/imagenes/rutas.jpg");
 
     /**
      * Creates new form menu_Conductor
      */
-    public menu_Vehiculos() {
+    public menu_Rutas() {
         initComponents();
         correrTabla();
         variable();
@@ -78,43 +78,28 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     private void correrTabla() {
         modeloVehiculos = (DefaultTableModel) this.VehiculosTabla.getModel();
-        Vehiculo aux;
+   
 
         modeloVehiculos.setRowCount(0);
         modeloVehiculos.setColumnCount(0);
 
         modeloVehiculos.setNumRows(0);
-        modeloVehiculos.addColumn("Placa");
-        modeloVehiculos.addColumn("Marca");
-        modeloVehiculos.addColumn("Modelo");
-        modeloVehiculos.addColumn("Año");
-        modeloVehiculos.addColumn("Color");
-        modeloVehiculos.addColumn("Precio");
-        modeloVehiculos.addColumn("Tipo De Transmisión");
+        modeloVehiculos.addColumn("No.Ruta");
+        modeloVehiculos.addColumn("NOMBRE");
 
-        //vehiculos
-        if (Carga.vehiculos.sizeElementosArbol() != 0) {
-            ArrayList elementos_arbol = Carga.vehiculos.arrayVehiculos();
-            for (int i = 0; i < elementos_arbol.size(); i++) {
-                aux = (Vehiculo) elementos_arbol.get(i);
-                modeloVehiculos.addRow(new Object[]{aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
-                    aux.getColor(), aux.getPrecio(), aux.getTransmision()});
+        //Rutas
+        if (Carga.grafo.getSize()!= 0) {
+            
+            for (int i = 0; i < Carga.grafo.getSize(); i++) {
+                
+                modeloVehiculos.addRow(new Object[]{i+1, Carga.grafo.getRuta(i) });
             }
         }
 
     }
 
     public void variable() {
-        combo.removeAllItems();
-        combo2.removeAllItems();
-        combo.addItem("Seleccione..");
-        combo.addItem("Automatica");
-        combo.addItem("Mecanica");
-        combo2.addItem("Seleccione..");
-        for (int a = 2021; a > 1899; a--) {
-            combo2.addItem(String.valueOf(a));
-
-        }
+       
 
     }
 
@@ -135,7 +120,6 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             }
         };
         LimpiarBoton = new javax.swing.JButton();
-        EliminarBoton = new javax.swing.JButton();
         CrearBoton = new javax.swing.JButton();
         grafico = new javax.swing.JButton();
         selecionar = new javax.swing.JButton();
@@ -143,10 +127,6 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         buscar = new javax.swing.JTextField();
         errorLabel = new javax.swing.JLabel();
         Salir = new javax.swing.JLabel();
-        direccionLabel = new javax.swing.JLabel();
-        telefonoLabel = new javax.swing.JLabel();
-        fechaLabel = new javax.swing.JLabel();
-        generoLabel = new javax.swing.JLabel();
         apellidoLabel = new javax.swing.JLabel();
         nombreLabel = new javax.swing.JLabel();
         dpiLabel = new javax.swing.JLabel();
@@ -154,10 +134,6 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         placa = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
         modelo = new javax.swing.JTextField();
-        color = new javax.swing.JTextField();
-        precio = new javax.swing.JTextField();
-        combo = new javax.swing.JComboBox<>();
-        combo2 = new javax.swing.JComboBox<>();
         imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -189,7 +165,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(VehiculosTabla);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 1010, 290));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 1030, 170));
 
         LimpiarBoton.setBackground(new java.awt.Color(255, 255, 255));
         LimpiarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/limpiar.png"))); // NOI18N
@@ -201,17 +177,6 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         });
         jPanel1.add(LimpiarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
-        EliminarBoton.setBackground(new java.awt.Color(255, 255, 255));
-        EliminarBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/eliminar.png"))); // NOI18N
-        EliminarBoton.setText("ELIMINAR");
-        EliminarBoton.setEnabled(false);
-        EliminarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarBotonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(EliminarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, -1, -1));
-
         CrearBoton.setBackground(new java.awt.Color(255, 255, 255));
         CrearBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/crear.png"))); // NOI18N
         CrearBoton.setText("CREAR");
@@ -220,7 +185,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                 CrearBotonActionPerformed(evt);
             }
         });
-        jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, -1, -1));
+        jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         grafico.setBackground(new java.awt.Color(255, 255, 255));
         grafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
@@ -245,19 +210,24 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         buscarLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         buscarLabel.setForeground(new java.awt.Color(255, 255, 255));
         buscarLabel.setText("BUSCAR:");
-        jPanel1.add(buscarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 390, -1, -1));
+        jPanel1.add(buscarLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 250, -1, -1));
 
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 buscarKeyTyped(evt);
             }
         });
-        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 100, -1));
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, 280, -1));
 
         errorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         errorLabel.setForeground(new java.awt.Color(255, 0, 0));
         errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 750, 20));
+        jPanel1.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 750, 20));
 
         Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/logout72.png"))); // NOI18N
         Salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -267,52 +237,37 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         });
         jPanel1.add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
-        direccionLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        direccionLabel.setForeground(new java.awt.Color(255, 255, 255));
-        direccionLabel.setText("TRANSMISION:");
-        jPanel1.add(direccionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
-
-        telefonoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        telefonoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        telefonoLabel.setText("PRECIO:");
-        jPanel1.add(telefonoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
-        fechaLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        fechaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fechaLabel.setText("COLOR:");
-        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-
-        generoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        generoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        generoLabel.setText("AÑO:");
-        jPanel1.add(generoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-
         apellidoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         apellidoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        apellidoLabel.setText("MODELO:");
-        jPanel1.add(apellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        apellidoLabel.setText("Tiempo Ruta:");
+        jPanel1.add(apellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         nombreLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
-        nombreLabel.setText("MARCA:");
-        jPanel1.add(nombreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        nombreLabel.setText("Lugar Destino:");
+        jPanel1.add(nombreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         dpiLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         dpiLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dpiLabel.setText("PLACA:");
-        jPanel1.add(dpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        dpiLabel.setText("Lugar Origen:");
+        jPanel1.add(dpiLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("GESTION DE VEHICULOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
+        jLabel1.setText("GESTION DE RUTAS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, -1));
 
         placa.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 placaFocusLost(evt);
             }
         });
-        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 30, 120, -1));
+        placa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                placaKeyTyped(evt);
+            }
+        });
+        jPanel1.add(placa, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 120, -1));
 
         marca.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -324,47 +279,17 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                 marcaKeyTyped(evt);
             }
         });
-        jPanel1.add(marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 70, 120, -1));
+        jPanel1.add(marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 120, -1));
 
         modelo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 modeloKeyTyped(evt);
             }
         });
-        jPanel1.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 110, 120, -1));
+        jPanel1.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 120, -1));
 
-        color.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                colorKeyTyped(evt);
-            }
-        });
-        jPanel1.add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 190, 130, -1));
-
-        precio.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                precioFocusLost(evt);
-            }
-        });
-        precio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precioActionPerformed(evt);
-            }
-        });
-        precio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                precioKeyTyped(evt);
-            }
-        });
-        jPanel1.add(precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 230, 130, -1));
-
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 130, -1));
-
-        combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, -1));
-
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vehiculos.jpg"))); // NOI18N
-        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rutas.jpg"))); // NOI18N
+        jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -374,7 +299,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -410,24 +335,14 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         if (CrearBoton.getText().equals("CREAR")) {
             if (!placa.getText().isEmpty() && !marca.getText().isEmpty()
-                    && !modelo.getText().isEmpty() && !combo2.getSelectedItem().toString().equals("Seleccione..")
-                    && !color.getText().isEmpty() && !precio.getText().isEmpty()
-                    && !combo.getSelectedItem().toString().equals("Seleccione..")) {
+                    && !modelo.getText().isEmpty()) {
                 if (placa.getText().length() < 6) {
                     errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
                 } else {
                     System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
-                    Vehiculo nuevo = new Vehiculo();
-                    nuevo.setPlaca(placa.getText());
-                    nuevo.setMarca(marca.getText());
-                    nuevo.setModelo(modelo.getText());
-                    nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
-                    nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
-                    nuevo.setTransmision(combo.getSelectedItem().toString().trim());
-
-                    System.out.println(nuevo.toString());
-                    Carga.vehiculos.agregar_datos(valorAssci(placa.getText()), nuevo);
-
+ 
+                    Carga.grafo.agregoRuta(placa.getText(),marca.getText(),modelo.getText());
+                    System.out.println(placa.getText()+"   "+marca.getText()+"   "+modelo.getText());
                     for (Component component : jPanel1.getComponents()) {
                         if (component instanceof JTextField) {
                             ((JTextField) component).setText("");
@@ -438,8 +353,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                             ((JComboBox) component).setSelectedIndex(0);
                         }
                     }
-                    //ConductoresTabla.setVisible(true);
-                    //SwingUtilities.updateComponentTreeUI(jPanel1);
+                   
                 }
 
             } else {
@@ -447,42 +361,12 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             }
         } else {
             if (!placa.getText().isEmpty() && !marca.getText().isEmpty()
-                    && !modelo.getText().isEmpty() && !combo2.getSelectedItem().toString().equals("Seleccione..")
-                    && !color.getText().isEmpty() && !precio.getText().isEmpty()
-                    && !combo.getSelectedItem().toString().equals("Seleccione..")) {
+                    && !modelo.getText().isEmpty() ) {
                 if (placa.getText().length() < 6) {
                     errorLabel.setText("RESPETAR TODAS LAS RESTRICCIONES DE DATOS");
                 } else {
-                    System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
-                    Vehiculo nuevo = new Vehiculo();
-                    nuevo.setPlaca(placa.getText());
-                    nuevo.setMarca(marca.getText());
-                    nuevo.setModelo(modelo.getText());
-                    nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
-                    nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
-                    nuevo.setTransmision(combo.getSelectedItem().toString().trim());
-
-                    System.out.println(nuevo.toString());
-                    if (Carga.vehiculos.actualizarVehiculo(nuevo)) {
-
-                        JOptionPane.showMessageDialog(null, "Se Actualizo Correctamente ");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo Actualizar, Error de Placa");
-                    }
-
-                    for (Component component : jPanel1.getComponents()) {
-                        if (component instanceof JTextField) {
-                            ((JTextField) component).setText("");
-                        }
-                    }
-                    for (Component component : jPanel1.getComponents()) {
-                        if (component instanceof JComboBox) {
-                            ((JComboBox) component).setSelectedIndex(0);
-                        }
-                    }
-                    CrearBoton.setText("CREAR");
-                    //ConductoresTabla.setVisible(true);
-                    //SwingUtilities.updateComponentTreeUI(jPanel1);
+                  ///// Es para modificar..
+                  
                 }
 
             } else {
@@ -492,7 +376,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        EliminarBoton.setEnabled(false);
+      //EliminarBoton.setEnabled(false);
         correrTabla();
         modeloVehiculos.fireTableDataChanged();
         //ConductoresTabla.repaint();
@@ -521,10 +405,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             placa.setText(String.valueOf(eC.getPlaca()));
             marca.setText(String.valueOf(eC.getMarca()));
             modelo.setText(eC.getModelo());
-            combo2.setSelectedItem(String.valueOf(eC.getAnio()));
-            color.setText(String.valueOf(eC.getColor()));
-            precio.setText(String.valueOf(eC.getPrecio()));
-            combo.setSelectedItem(String.valueOf(eC.getTransmision()));
+           
 
             VehiculosTabla.clearSelection();
             errorLabel.setText("");
@@ -532,7 +413,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             CrearBoton.setText("EDITAR");
             CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
             CrearBoton.repaint();
-            EliminarBoton.setEnabled(true);
+       //     EliminarBoton.setEnabled(true);
         } else {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }
@@ -542,48 +423,14 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
     
+         Carga.grafo.imprimir();
         try {
-            Graficas.graficar(Carga.vehiculos.getCadena(), "ArbolB_");
+            Graficas.graficar(Carga.grafo.cadenaGrafico(), "grafo");
         } catch (Exception ex) {
             Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }//GEN-LAST:event_graficoActionPerformed
-
-    private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
-
-        long placaNo = valorAssci(placa.getText());
-        System.out.println(placaNo);
-
-        try {
-
-            Carga.vehiculos.eliminar_dato(placaNo);
-
-        } catch (Exception ex) {
-            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Carga.conductores.eliminarNodo(dpi);
-        for (Component component : jPanel1.getComponents()) {
-            if (component instanceof JTextField) {
-                ((JTextField) component).setText("");
-            }
-        }
-        for (Component component : jPanel1.getComponents()) {
-            if (component instanceof JComboBox) {
-                ((JComboBox) component).setSelectedIndex(0);
-            }
-        }
-        CrearBoton.setText("CREAR");
-        CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
-        CrearBoton.repaint();
-
-        correrTabla();
-        modeloVehiculos.fireTableDataChanged();
-        EliminarBoton.setEnabled(false);
-
-    }//GEN-LAST:event_EliminarBotonActionPerformed
 
     private void LimpiarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarBotonActionPerformed
         for (Component component : jPanel1.getComponents()) {
@@ -599,30 +446,13 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        EliminarBoton.setEnabled(false);
+      //  EliminarBoton.setEnabled(false);
     }//GEN-LAST:event_LimpiarBotonActionPerformed
 
-    public boolean isPlaca(String placa) {
-        Pattern pat = null;
-        Matcher mat = null;
-        pat = Pattern.compile("[A-Z][0-9][0-9][0-9][A-Z][A-Z][A-Z]");
-        mat = pat.matcher(placa);
-        if (mat.find()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
 
     private void placaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_placaFocusLost
-
-        if (isPlaca(placa.getText()) && placa.getText().length() <= 7 || placa.getText().length() == 0) {
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Valor Incorrecto\n Ejemplo: P898AFD", "Error de Datos", JOptionPane.INFORMATION_MESSAGE);
-            placa.setText("");
-        }
 
     }//GEN-LAST:event_placaFocusLost
 
@@ -644,60 +474,31 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_marcaKeyTyped
 
     private void modeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modeloKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isDigit(c)) {     ///////////////////  Solo se admiten Letras
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(null, "Solo se admiten letras");
-
-        }
+    char c=evt.getKeyChar();
+     if(Character.isLetter(c)){     ///////////////////  Solo se admiten Numeros
+     getToolkit().beep(); evt.consume();
+     JOptionPane.showMessageDialog(null, "Solo se admiten Numeros");
+     
+     }
     }//GEN-LAST:event_modeloKeyTyped
 
-    private void colorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_colorKeyTyped
-        char c = evt.getKeyChar();
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void placaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_placaKeyTyped
+ char c = evt.getKeyChar();
         if (Character.isDigit(c)) {     ///////////////////  Solo se admiten Letras
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "Solo se admiten letras");
 
         }
-    }//GEN-LAST:event_colorKeyTyped
-
-    private void precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioKeyTyped
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {     ///////////////////  Solo se admiten Numeros
-            getToolkit().beep();
-            evt.consume();
-            JOptionPane.showMessageDialog(null, "Solo se admiten Numeros");
-
-        }
-    }//GEN-LAST:event_precioKeyTyped
-
-    private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_precioActionPerformed
-    public boolean isDouble(String precio) {
-        Pattern pat = null;
-        Matcher mat = null;
-        pat = Pattern.compile("\\d+\\.\\d*$");
-        mat = pat.matcher(precio);
-        if (mat.find()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    private void precioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_precioFocusLost
-        if (isDouble(precio.getText()) || precio.getText().length() == 0) {
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Valor Incorrecto\n Ejemplo: 2334.00 , 3244.3", "Error de Datos", JOptionPane.INFORMATION_MESSAGE);
-            precio.setText("");
-        }
-
-
-    }//GEN-LAST:event_precioFocusLost
-
+        
+        
+        
+    }//GEN-LAST:event_placaKeyTyped
+    
     /**
      * @param args the command line arguments
      */
@@ -715,14 +516,18 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Rutas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Rutas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Rutas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menu_Vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(menu_Rutas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -731,28 +536,21 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu_Vehiculos().setVisible(true);
+                new menu_Rutas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CrearBoton;
-    private javax.swing.JButton EliminarBoton;
     private javax.swing.JButton LimpiarBoton;
     private javax.swing.JLabel Salir;
     private javax.swing.JTable VehiculosTabla;
     private javax.swing.JLabel apellidoLabel;
     private javax.swing.JTextField buscar;
     private javax.swing.JLabel buscarLabel;
-    private javax.swing.JTextField color;
-    private javax.swing.JComboBox<String> combo;
-    private javax.swing.JComboBox<String> combo2;
-    private javax.swing.JLabel direccionLabel;
     private javax.swing.JLabel dpiLabel;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JLabel fechaLabel;
-    private javax.swing.JLabel generoLabel;
     private javax.swing.JButton grafico;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
@@ -762,8 +560,6 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JTextField modelo;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField placa;
-    private javax.swing.JTextField precio;
     private javax.swing.JButton selecionar;
-    private javax.swing.JLabel telefonoLabel;
     // End of variables declaration//GEN-END:variables
 }

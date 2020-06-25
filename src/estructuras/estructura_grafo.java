@@ -17,6 +17,7 @@ public class estructura_grafo {
         estructura_grafo next2;
 
         int peso;
+        int tamanio=0;
         String origen;
         String destino;    
         ArrayList<transicion> transiciones = new ArrayList<transicion>();
@@ -76,6 +77,9 @@ public class estructura_grafo {
             this.transiciones.add(b);
         }
         
+        public int getSize(){return this.tamanio;}
+        
+        
         
         public void agregoRuta(String origenC, String destinoC,String pesoC){
             estructura_grafo nuevo=new estructura_grafo();
@@ -88,11 +92,11 @@ public class estructura_grafo {
             boolean verifco=false;
             if(origen.equals(origenC)){              
                transiciones.add(new transicion(destinoC,pesoC));
-            // System.out.println(">>>> primer if"+origenC);
+          
             }else if(origen.equals("")){
             this.origen=origenC;
             this.addTransicion(new transicion (destinoC,pesoC));
-           //System.out.println("++++++   segundo if"+origenC);
+            tamanio++;
             }else{
               //System.out.println("---  entro al else  "+origenC);
                 while(aux!=null){
@@ -102,10 +106,10 @@ public class estructura_grafo {
                      aux.addTransicion(new transicion(destinoC,pesoC));                     
                  break;  
                  }
-                 if(aux.getNext1()==null){aux.setNext1(nuevo); break; }
+                 if(aux.getNext1()==null){aux.setNext1(nuevo);tamanio++;  break; }
                 aux=aux.getNext1();
                 }
-                if(aux==null){this.setNext1(nuevo);}
+                if(aux==null){this.setNext1(nuevo); tamanio++;}
               
             }
            
@@ -141,7 +145,27 @@ public class estructura_grafo {
             aux=aux.getNext1();
             }
            res=res+direccion;
-            return res+"}";
+            return res+"label=\"{Rutas de Llega Rapidito}\";\n }";
          }
+         
+        public String getRuta(int index){
+        int comodin=1;
+        if(index==0){
+              System.out.println("tamanio "+this.tamanio+" origen"+this.origen+"  index  "+index);
+            return this.origen;          
+        }else{
+            estructura_grafo aux=this.getNext1();
+            while(comodin<this.tamanio){
+                
+            System.out.println("tamanio "+this.tamanio+" origen"+aux.origen+"  index "+index);
+                 
+           if(comodin==index){  return aux.origen;}      
+           aux=aux.getNext1();
+           comodin++;  
+            }
+        }
+        return "";
+        }
+         
 
 }

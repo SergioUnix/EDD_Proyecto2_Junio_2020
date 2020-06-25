@@ -95,6 +95,11 @@ public class menu_Master extends javax.swing.JFrame {
         ClienteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ClienteBoton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/irutas.png"))); // NOI18N
         ClienteBoton1.setText("MENU RUTAS");
+        ClienteBoton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClienteBoton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(ClienteBoton1);
         ClienteBoton1.setBounds(440, 360, 240, 100);
 
@@ -192,6 +197,11 @@ public class menu_Master extends javax.swing.JFrame {
         vehi.setVisible(true);
        
     }//GEN-LAST:event_VehiculoBotonActionPerformed
+
+    private void ClienteBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteBoton1ActionPerformed
+        menu_Rutas rut=new menu_Rutas();
+        rut.setVisible(true);
+    }//GEN-LAST:event_ClienteBoton1ActionPerformed
 
     /**
      * @param args the command line arguments
