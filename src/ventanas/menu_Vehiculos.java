@@ -9,6 +9,7 @@ import clases.Carga;
 import clases.Conductor;
 import clases.Graficas;
 import clases.Vehiculo;
+import estructuras.lista_simple;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -19,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -53,7 +53,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     /**
      * Creates new form menu_Conductor
      */
-    public menu_Vehiculos() {
+    public menu_Vehiculos() throws Exception {
         initComponents();
         correrTabla();
         variable();
@@ -76,7 +76,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     }
 
-    private void correrTabla() {
+    private void correrTabla() throws Exception {
         modeloVehiculos = (DefaultTableModel) this.VehiculosTabla.getModel();
         Vehiculo aux;
 
@@ -94,7 +94,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         //vehiculos
         if (Carga.vehiculos.sizeElementosArbol() != 0) {
-            ArrayList elementos_arbol = Carga.vehiculos.arrayVehiculos();
+            lista_simple<Vehiculo> elementos_arbol = Carga.vehiculos.arrayVehiculos();
             for (int i = 0; i < elementos_arbol.size(); i++) {
                 aux = (Vehiculo) elementos_arbol.get(i);
                 modeloVehiculos.addRow(new Object[]{aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
@@ -463,11 +463,15 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                     nuevo.setTransmision(combo.getSelectedItem().toString().trim());
 
                     System.out.println(nuevo.toString());
-                    if (Carga.vehiculos.actualizarVehiculo(nuevo)) {
-
-                        JOptionPane.showMessageDialog(null, "Se Actualizo Correctamente ");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo Actualizar, Error de Placa");
+                    try {
+                        if (Carga.vehiculos.actualizarVehiculo(nuevo)) {
+                            
+                            JOptionPane.showMessageDialog(null, "Se Actualizo Correctamente ");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se pudo Actualizar, Error de Placa");
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     for (Component component : jPanel1.getComponents()) {
@@ -493,7 +497,11 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
         EliminarBoton.setEnabled(false);
-        correrTabla();
+        try {
+            correrTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modeloVehiculos.fireTableDataChanged();
         //ConductoresTabla.repaint();
     }//GEN-LAST:event_CrearBotonActionPerformed
@@ -517,22 +525,26 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 0)));
             System.out.println(placaNo);
             Vehiculo eC;
-            eC = Carga.vehiculos.obtenerVehiculo(placaNo);
-            placa.setText(String.valueOf(eC.getPlaca()));
+            try {
+                eC = Carga.vehiculos.obtenerVehiculo(placaNo);
+                 placa.setText(String.valueOf(eC.getPlaca()));
             marca.setText(String.valueOf(eC.getMarca()));
             modelo.setText(eC.getModelo());
             combo2.setSelectedItem(String.valueOf(eC.getAnio()));
             color.setText(String.valueOf(eC.getColor()));
             precio.setText(String.valueOf(eC.getPrecio()));
             combo.setSelectedItem(String.valueOf(eC.getTransmision()));
-
             VehiculosTabla.clearSelection();
             errorLabel.setText("");
-
             CrearBoton.setText("EDITAR");
             CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
             CrearBoton.repaint();
             EliminarBoton.setEnabled(true);
+            
+             } catch (Exception ex) {
+                Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         } else {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }
@@ -579,7 +591,11 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
 
-        correrTabla();
+        try {
+            correrTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modeloVehiculos.fireTableDataChanged();
         EliminarBoton.setEnabled(false);
 
@@ -731,7 +747,11 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu_Vehiculos().setVisible(true);
+                try {
+                    new menu_Vehiculos().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

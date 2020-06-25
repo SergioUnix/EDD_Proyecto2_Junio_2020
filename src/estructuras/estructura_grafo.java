@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package estructuras;
-
-import clases.transicion;
-import java.util.ArrayList;
-
 /**
  *
- * @author ADMIN
+ * @author Sergio Ariel Ramirez Castro
  */
+package estructuras;
+import clases.transicion;
+
+
 public class estructura_grafo {
         estructura_grafo next1;
         estructura_grafo next2;
@@ -20,7 +14,7 @@ public class estructura_grafo {
         int tamanio=0;
         String origen;
         String destino;    
-        ArrayList<transicion> transiciones = new ArrayList<transicion>();
+        lista_simple<transicion> transiciones = new lista_simple<transicion>();
 
         public estructura_grafo()
         {
@@ -116,7 +110,7 @@ public class estructura_grafo {
             
         }
         
-         public void imprimir(){
+         public void imprimir() throws Exception{
             estructura_grafo aux=this.next1;
             System.out.println("-----------"+origen);
             for(int i=0;i<transiciones.size();i++){
@@ -130,7 +124,7 @@ public class estructura_grafo {
             aux=aux.getNext1();
             }
          }
-         public String cadenaGrafico(){
+         public String cadenaGrafico() throws Exception{
             String res="graph grafoRutas { \n" +"layout=\"circo\";\n" +"size = \"30\"\n" +"node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];\n";
             String direccion="";
             estructura_grafo aux=this.next1;

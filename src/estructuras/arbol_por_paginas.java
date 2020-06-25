@@ -1,6 +1,6 @@
 /**
  *
- * @author ADMIN
+ * @Sergio Ariel Ramirez Castro
  */
 
 package estructuras;
@@ -10,15 +10,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import clases.Vehiculo;
 
 
 class arbolPagina {   
-    public ArrayList<Long> datos_existentes;
-    public arbolPagina(){datos_existentes = new ArrayList<Long>(); }        
+    public lista_simple<Long> datos_existentes;
+    public arbolPagina(){datos_existentes = new lista_simple<Long>(); }        
     public boolean buscar_valor(int placa) throws Exception{
         boolean esta = false;
         int index=0;
@@ -40,7 +39,7 @@ class cabeceras{
     public cabeceras []nodo;
     public static int numValores;
     public static int count;
-    public boolean existen_hijos = false;
+    public boolean existen_hijos = false; 
     public cabeceras(){count++;
        nodo = new cabeceras [arbol_por_paginas.pag_primera_particion * 2 + 3];
        valores = new long [arbol_por_paginas.pag_primera_particion * 2 + 1];
@@ -51,7 +50,7 @@ public class arbol_por_paginas {
     public static int pag_primera_particion;   
     public static boolean verifico_pag_primero;
     public static int altura_N = 1;
-    ArrayList <Vehiculo> v=new ArrayList<>();
+    lista_simple <Vehiculo> v=new lista_simple<>();
     public static int imprimir = 1;
     public static String cadena_dot_ghrapviz = ""; 
     public cabeceras cabeza_nodo;
@@ -275,7 +274,7 @@ public class arbol_por_paginas {
     
 
     
-    public String obtenerModelo(long valor){//solo para grafic
+    public String obtenerModelo(long valor) throws Exception{//solo para grafic
     String result="";     
         
       for(int i=0;i<=this.v.size()-1;i++){
@@ -290,7 +289,7 @@ public class arbol_por_paginas {
     }
     
     
-    public String obtenerMarca(long valor){//solo para grafic
+    public String obtenerMarca(long valor) throws Exception{//solo para grafic
     String result="";     
         
       for(int i=0;i<=this.v.size()-1;i++){
@@ -303,7 +302,7 @@ public class arbol_por_paginas {
     } 
       return result;
     }
-       public String obtenerPlaca(long valor){//solo para grafic
+       public String obtenerPlaca(long valor) throws Exception{//solo para grafic
     String result="";     
         
       for(int i=0;i<=this.v.size()-1;i++){
@@ -335,8 +334,8 @@ public class arbol_por_paginas {
         if (existe_placa==true) { arbolPagina.datos_existentes.remove(indes1); } else {
          System.out.println("No existe dato");
         }
-        ArrayList<Long> arreglo_comodin = arbolPagina.datos_existentes;
-        arbolPagina.datos_existentes = new ArrayList<Long>();
+        lista_simple<Long> arreglo_comodin = arbolPagina.datos_existentes;
+        arbolPagina.datos_existentes = new lista_simple<Long>();
         cabeza_nodo = new cabeceras();
         cabeza_nodo.existen_hijos = false;
         int kindex=0;
@@ -363,13 +362,13 @@ public class arbol_por_paginas {
         }
         System.out.println("No existe");
         return false;
-    }public ArrayList<Vehiculo> arrayVehiculos(){    
+    }public lista_simple<Vehiculo> arrayVehiculos(){    
     return this.v;//Todo
     }  
     public int sizeElementosArbol(){    
     return this.v.size();
     }   
-    public Vehiculo obtenerVehiculo(long valor){
+    public Vehiculo obtenerVehiculo(long valor) throws Exception{
     Vehiculo result=new Vehiculo();      
       for(int i=0;i<=this.v.size()-1;i++){
           long sub=valorAssci(this.v.get(i).getPlaca());          
@@ -377,7 +376,7 @@ public class arbol_por_paginas {
                result = this.v.get(i);}     
     } return result;
     }
-    public boolean actualizarVehiculo(Vehiculo actualizar){  
+    public boolean actualizarVehiculo(Vehiculo actualizar) throws Exception{  
         boolean seInserto=false;
     Vehiculo result=new Vehiculo();     
        long valor=0; 
@@ -392,7 +391,7 @@ public class arbol_por_paginas {
             }   
     } return seInserto;}
     
-    public void removerVehiculo(long remover){          
+    public void removerVehiculo(long remover) throws Exception{          
       for(int i=0;i<=this.v.size()-1;i++){
            long sub=valorAssci(this.v.get(i).getPlaca());
               if(remover== sub){
@@ -402,7 +401,7 @@ public class arbol_por_paginas {
     }
     
    String aux2=""; 
-    public String generar_recursivo(cabeceras nodo) {
+    public String generar_recursivo(cabeceras nodo) throws Exception {
         cadena_dot_ghrapviz += "\n";
         int iterBusca=0;
         while(iterBusca<2*pag_primera_particion+1){   
@@ -444,7 +443,7 @@ String cadena_nodos="";
 String cadena_direccion="";
 
 
-public String getCadena() {
+public String getCadena() throws Exception {
 this.cadena_dot_ghrapviz="";
 this.aux="";
 this.aux2="";
