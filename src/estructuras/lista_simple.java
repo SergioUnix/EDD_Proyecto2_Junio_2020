@@ -121,7 +121,7 @@ public class lista_simple <T> {
         return encontrado; //Retorna si esta el dato buscado ..
     }
     
- public T get(int posicion) throws Exception{
+ public T get(int posicion) throws Exception{    
         if(posicion>=0 && posicion<size){  //Si esta en el rago entra..
             if (posicion == 0) {
                 return this.inicio.getValor();

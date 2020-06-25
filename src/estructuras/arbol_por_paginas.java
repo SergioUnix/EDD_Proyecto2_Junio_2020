@@ -76,7 +76,7 @@ public class arbol_por_paginas {
         for (char c : str.toCharArray())
         sb.append((int)c);
         placa=Long.parseLong(sb.toString());        
-        v.add(vehi);
+        if(vehi.getPlaca().length()>0){  v.add(vehi);}
         }
         if (cabeza_nodo.existen_hijos==true) {
          Ingreso_cambio_hijos(cabeza_nodo);
@@ -320,8 +320,8 @@ public class arbol_por_paginas {
               
     boolean existe_placa = false;
         int indes1= 0;
-        int indes2=1;
-        while(indes2<arbolPagina.datos_existentes.size()+1&& !existe_placa){
+        int indes2=0;
+        while(indes2<arbolPagina.datos_existentes.size()&& !existe_placa){
         if (arbolPagina.datos_existentes.get(indes2) == placa) {
                 existe_placa = true;
                 indes1 = indes2;

@@ -83,7 +83,8 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         modeloVehiculos.setRowCount(0);
         modeloVehiculos.setColumnCount(0);
 
-        modeloVehiculos.setNumRows(0);
+        modeloVehiculos.setNumRows(0);        
+        modeloVehiculos.addColumn("No. ");
         modeloVehiculos.addColumn("Placa");
         modeloVehiculos.addColumn("Marca");
         modeloVehiculos.addColumn("Modelo");
@@ -97,7 +98,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             lista_simple<Vehiculo> elementos_arbol = Carga.vehiculos.arrayVehiculos();
             for (int i = 0; i < elementos_arbol.size(); i++) {
                 aux = (Vehiculo) elementos_arbol.get(i);
-                modeloVehiculos.addRow(new Object[]{aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
+                modeloVehiculos.addRow(new Object[]{i+1,aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
                     aux.getColor(), aux.getPrecio(), aux.getTransmision()});
             }
         }
@@ -420,6 +421,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                     Vehiculo nuevo = new Vehiculo();
                     nuevo.setPlaca(placa.getText());
                     nuevo.setMarca(marca.getText());
+                    nuevo.setColor(color.getText());
                     nuevo.setModelo(modelo.getText());
                     nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
                     nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
@@ -457,6 +459,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                     Vehiculo nuevo = new Vehiculo();
                     nuevo.setPlaca(placa.getText());
                     nuevo.setMarca(marca.getText());
+                    nuevo.setColor(color.getText());
                     nuevo.setModelo(modelo.getText());
                     nuevo.setAnio(Integer.parseInt(combo2.getSelectedItem().toString().trim()));
                     nuevo.setPrecio(Double.valueOf(precio.getText().trim()));
@@ -522,10 +525,11 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         //seleccionar el vehiculo
         if (VehiculosTabla.getSelectedRow() != -1) {
-            long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 0)));
+           
+            try {
+            long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 1)));
             System.out.println(placaNo);
             Vehiculo eC;
-            try {
                 eC = Carga.vehiculos.obtenerVehiculo(placaNo);
                  placa.setText(String.valueOf(eC.getPlaca()));
             marca.setText(String.valueOf(eC.getMarca()));
@@ -565,14 +569,22 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
 
-        long placaNo = valorAssci(placa.getText());
+     
+        try {
+               long placaNo = valorAssci(placa.getText());
         System.out.println(placaNo);
 
-        try {
-
-            Carga.vehiculos.eliminar_dato(placaNo);
+            
+            if(Carga.vehiculos.buscar_valor(placaNo)){
+            Carga.vehiculos.eliminar_dato(placaNo); 
+           // JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente");
+            }else{                
+            JOptionPane.showMessageDialog(null, "No se encontro el Registro a eliminar");
+            }
+           
 
         } catch (Exception ex) {
+            System.out.println(ex);
             Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
         }
 

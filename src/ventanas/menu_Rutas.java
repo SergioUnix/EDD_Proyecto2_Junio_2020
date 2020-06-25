@@ -82,7 +82,6 @@ public class menu_Rutas extends javax.swing.JFrame {
 
         modeloVehiculos.setRowCount(0);
         modeloVehiculos.setColumnCount(0);
-
         modeloVehiculos.setNumRows(0);
         modeloVehiculos.addColumn("No.Ruta");
         modeloVehiculos.addColumn("NOMBRE");
