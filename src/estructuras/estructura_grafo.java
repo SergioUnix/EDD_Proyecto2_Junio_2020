@@ -16,42 +16,43 @@ public class estructura_grafo {
         estructura_grafo next1;
         estructura_grafo next2;
 
-        int estado;
-        String Id;
-        String Tipo;    
+        int peso;
+        String origen;
+        String destino;    
         ArrayList<transicion> transiciones = new ArrayList<transicion>();
 
         public estructura_grafo()
         {
-            this.Id = "";
-            this.Tipo = "";
-            this.estado = 0;
+            this.origen = "";
+            this.destino = "";
+            this.peso = 0;
             this.next1 = null;
             this.next2 = null;
         }
-        public String getId()
+        
+        public String getOrigen()
         {
-            return this.Id;
+            return this.origen;
         }
-                public void setId(String i)
+                public void setOrigen(String i)
         {
-            this.Id = i;
+            this.origen = i;
         }
-          public void setTipo(String b)
+          public void setDestino(String b)
         {
-            this.Tipo = b;
+            this.destino = b;
         }
-        public String getTipo()
+        public String getDestino()
         {
-            return this.Tipo;
+            return this.destino;
         }
-                public int getEstado()
+                public int getPeso()
         {
-           return  this.estado;
+           return  this.peso;
         }
-                public void setEstado(int s)
+                public void setPeso(int s)
         {
-            this.estado = s;
+            this.peso = s;
         }
                 public void setNext1(estructura_grafo next1)
         {
@@ -76,11 +77,70 @@ public class estructura_grafo {
         }
         
         
+        public void agregoRuta(String origenC, String destinoC,String pesoC){
+            estructura_grafo nuevo=new estructura_grafo();
+            nuevo.setOrigen(origenC);
+            nuevo.setDestino(pesoC);
+            nuevo.addTransicion(new transicion(destinoC,pesoC));
+            
+            estructura_grafo aux=this.next1;
+            
+            boolean verifco=false;
+            if(origen.equals(origenC)){              
+               transiciones.add(new transicion(destinoC,pesoC));
+            // System.out.println(">>>> primer if"+origenC);
+            }else if(origen.equals("")){
+            this.origen=origenC;
+            this.addTransicion(new transicion (destinoC,pesoC));
+           //System.out.println("++++++   segundo if"+origenC);
+            }else{
+              //System.out.println("---  entro al else  "+origenC);
+                while(aux!=null){
+                // System.out.println("---  entro al while"+origenC);
+                 
+                 if(aux.origen.equals(origenC)){
+                     aux.addTransicion(new transicion(destinoC,pesoC));                     
+                 break;  
+                 }
+                 if(aux.getNext1()==null){aux.setNext1(nuevo); break; }
+                aux=aux.getNext1();
+                }
+                if(aux==null){this.setNext1(nuevo);}
+              
+            }
+           
+            
+        }
         
-        
-        
-        
-        
-        
-        
+         public void imprimir(){
+            estructura_grafo aux=this.next1;
+            System.out.println("-----------"+origen);
+            for(int i=0;i<transiciones.size();i++){
+            System.out.println("           "+transiciones.get(i).getNombre()+"    "+transiciones.get(i).getDireccion()); 
+            }
+            while(aux!=null){                
+            System.out.println(" ----------"+aux.getOrigen());
+            for(int i=0;i<aux.transiciones.size();i++){
+            System.out.println("           "+aux.transiciones.get(i).getNombre()+"    "+aux.transiciones.get(i).getDireccion()); 
+            }           
+            aux=aux.getNext1();
+            }
+         }
+         public String cadenaGrafico(){
+             String res="";
+            estructura_grafo aux=this.next1;
+            System.out.println("-----------"+origen);
+            for(int i=0;i<transiciones.size();i++){
+            System.out.println("           "+transiciones.get(i).getNombre()+"    "+transiciones.get(i).getDireccion()); 
+            }
+            while(aux!=null){                
+            System.out.println(" ----------"+aux.getOrigen());
+            for(int i=0;i<aux.transiciones.size();i++){
+            System.out.println("           "+aux.transiciones.get(i).getNombre()+"    "+aux.transiciones.get(i).getDireccion()); 
+            }           
+            aux=aux.getNext1();
+            }
+            return res+"}";
+         }
+
 }

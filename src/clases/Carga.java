@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 
 import estructuras.estructura_Hash;
 import estructuras.arbol_por_paginas;
+import estructuras.estructura_grafo;
 import estructuras.lista_enlazada_doble_circular;
 import java.util.LinkedList;
 
@@ -31,7 +32,7 @@ public class Carga {
     public static estructura_Hash<Cliente> clientes = new estructura_Hash(37, 75.0);
     public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
     public static LinkedList<Cliente> clientesAUX = new LinkedList();
-
+    public static estructura_grafo grafo=new estructura_grafo();
     public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);
@@ -161,7 +162,7 @@ public class Carga {
                     nuevaRuta.setOrigen(atributos[0].trim());
                     nuevaRuta.setDestino(atributos[1].trim());
                     nuevaRuta.setTiempo(Integer.parseInt(atributos[2].trim()));
-
+                    grafo.agregoRuta(atributos[0].trim(), atributos[1].trim(), atributos[2].trim());
                     System.out.println(nuevaRuta.toString());
                 }
 

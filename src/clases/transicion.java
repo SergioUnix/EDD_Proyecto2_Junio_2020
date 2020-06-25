@@ -10,28 +10,28 @@ package clases;
  * @author ADMIN
  */
 public class transicion {
-    String nombre;
+    String destino;
     String direccion;
     public transicion(){
-    this.nombre="";
+    this.destino="";
     }
      public transicion(String no,String dir)
         {
-            this.nombre = no;
+            this.destino = no;
             this.direccion = dir;
         }
 
         public void setNombre(String a)
         {
-            this.nombre = a;
+            this.destino = a;
         }
         public void setDireccion(String b)
         {
-            this.nombre = b;
+            this.destino = b;
         }
         public String getNombre()
         {
-            return nombre;
+            return destino;
         }
         public String getDireccion()
         {
