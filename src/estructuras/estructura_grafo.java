@@ -15,6 +15,17 @@ public class estructura_grafo {
         String origen;
         String destino;    
         lista_simple<transicion> transiciones = new lista_simple<transicion>();
+        
+        ///Atributos para la matrix adyacente
+        public int totalVertices_;  ///este es el tamanio de lista tambien
+        public int totalAristas_;
+        public int numeroAristas;
+        public int matriz_rutas[][];
+        public lista_simple<String> nameRutas=new lista_simple<>();
+        
+        
+        
+        
 
         public estructura_grafo()
         {
@@ -23,6 +34,31 @@ public class estructura_grafo {
             this.peso = 0;
             this.next1 = null;
             this.next2 = null;
+            //inizializando para la matriz_rutas
+            numeroAristas=0;
+            totalVertices_=0;
+            totalAristas_=0;
+            matriz_rutas=null;
+        }
+        
+        ////metodo hace que mi matriz sea del tamanio cuando quiera...
+        public void inicializandoMatriz(int cantidadVertices,int cantidadAristas){
+            this.totalVertices_=cantidadVertices;
+            this.totalAristas_=cantidadAristas;
+            matriz_rutas=new int[this.tamanio+20][this.tamanio+20];        
+        }
+        
+        
+        public void insertaArista(int v1, int v2, int dist)
+        throws ArrayIndexOutOfBoundsException, UnsupportedOperationException {
+        if (v1 >= this.tamanio || v2 >= this.tamanio) {
+        throw new ArrayIndexOutOfBoundsException(
+        "Vertices inválidos, fuera de rango" + "nRango de vertices: 0 - " + (this.totalVertices_ - 1));
+        } else if (numeroAristas == this.totalAristas_) {
+        throw new UnsupportedOperationException("No se puede añadir más aristas");
+        } else {
+        matriz_rutas[v1][v2] = dist;
+        }
         }
         
         public String getOrigen()
@@ -88,9 +124,9 @@ public class estructura_grafo {
                transiciones.add(new transicion(destinoC,pesoC));
           
             }else if(origen.equals("")){
-            this.origen=origenC;
+            this.origen=origenC;   
             this.addTransicion(new transicion (destinoC,pesoC));
-            tamanio++;
+            tamanio++;      nameRutas.add(this.origen);
             }else{
               //System.out.println("---  entro al else  "+origenC);
                 while(aux!=null){
@@ -100,10 +136,10 @@ public class estructura_grafo {
                      aux.addTransicion(new transicion(destinoC,pesoC));                     
                  break;  
                  }
-                 if(aux.getNext1()==null){aux.setNext1(nuevo);tamanio++;  break; }
+                 if(aux.getNext1()==null){aux.setNext1(nuevo);tamanio++; nameRutas.add(nuevo.origen); break; }
                 aux=aux.getNext1();
                 }
-                if(aux==null){this.setNext1(nuevo); tamanio++;}
+                if(aux==null){this.setNext1(nuevo); tamanio++;nameRutas.add(nuevo.origen);}
               
             }
            
@@ -161,5 +197,63 @@ public class estructura_grafo {
         return "";
         }
          
+        //////////////////////proceso de agregar a mi matriz 
+        
+        public int obtenerPeso(String nombreNota,String transi) throws Exception {
+            int result=0;
+        int comodin=1;
+        if(nombreNota.equals(origen)){
+              for(int k=0;k<transiciones.size();k++){
+                  if(transi.equals(transiciones.get(k).destino)){ result=Integer.parseInt(transiciones.get(k).direccion);  };    }
+            return result;          
+        }else{
+            estructura_grafo aux=this.getNext1();
+            while(comodin<this.tamanio){
+                        if(nombreNota.equals(aux.origen)){
+                        for(int k=0;k<aux.transiciones.size();k++){
+                        if(transi.equals(aux.transiciones.get(k).destino)){ result=Integer.parseInt(aux.transiciones.get(k).direccion);  };    }     
+                        }
+           aux=aux.getNext1();
+           comodin++;  
+            }
+        }
+        return result;
+        
+        }
+        
+        
+        public void  llenoMatriz() throws Exception{
+        //inicializo la matriz
+        this.inicializandoMatriz(tamanio, tamanio);
+        int i,j;
+        
+        for(i=1;i<=tamanio;i++){
+          for(j=1;j<=tamanio;j++)
+          {
+           matriz_rutas[i][j]=obtenerPeso(nameRutas.get(i-1),nameRutas.get(j-1));
+           if(matriz_rutas[i][j]==0)
+           matriz_rutas[i][j]=999;
+          }
+       }
+        this.imprimirMatriz();
+        }
+        
+        
+        public void imprimirMatriz(){
+        int i,j;
+        for(i=0;i<=tamanio;i++){
+          for(j=0;j<=tamanio;j++)
+          {
+           System.out.println(matriz_rutas[i][j]+"  "); 
+          }
+           System.out.println("\n");
+  }
+        
+        }
+        
+        
+        
+        
+        
 
 }

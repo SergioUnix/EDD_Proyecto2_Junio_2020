@@ -1,6 +1,26 @@
 digraph arbol_por_paginas{
 rankdir=TB;
 node[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];
-  nodo0[ label =""]  
+  nodo80485448727567[ label ="{P060HKC|MINI|Camioneta}|"]  
+nodo67485048886771[ label ="{C020XCG|Mercedes-Benz|Deportivo}|{C196JDD|Vauxhall|Racing}|{C207OOW|Renault|Standard}|"]  
+nodo67504956878470[ label ="{C218WTF|Prueba|pick up P}|{C249TVZ|Hyundai Motors|Standard}|{C282LUO|Buick|Racing}|"]  
+nodo67525555848467[ label ="{C477TTC|Chrysler|Camioneta}|{C484JTO|Buick|Standard}|"]  
+nodo67545255777174[ label ="{C647MGJ|Audi|Pick Up}|{C824HFI|Suzuki|Racing}|{C913FOH|Citroën|Coupe}|{P058WOF|RAM Trucks|Standard}|"]  
+nodo67504948718069[ label ="{C210GPE|Suzuki|Racing}|{C344SEQ|Honda|Coupe}|{C571ZHR|Ford|Deportivo}|"]  
+nodo80485653668672[ label ="{P085BVH|Buick|Coupe}|{P218MOS|Mazda|Standard}|{P290BID|Tata Motors|Standard}|"]  
+nodo80535153668566[ label ="{P535BUB|Kia Motors|Camioneta}|{P546SKJ|Mitsubishi Motors|Deportivo}|{P590PXZ|Suzuki|Deportivo}|"]  
+nodo80555053678185[ label ="{P725CQU|MINI|Pick Up}|{P836WTS|Dacia|Pick Up}|"]  
+nodo80565456836583[ label ="{P868SAS|Audi|Standard}|{P970AZE|Lexus|Deportivo}|"]  
+nodo80534953768178[ label ="{P515LQN|Skoda|Camioneta}|{P688XIZ|Mazda|Coupe}|{P860RMD|Buick|Pick Up}|"]  
+nodo67504948718069->nodo67485048886771
+nodo67504948718069->nodo67504956878470
+nodo67504948718069->nodo67525555848467
+nodo67504948718069->nodo67545255777174
+nodo80485448727567->nodo67504948718069
+nodo80534953768178->nodo80485653668672
+nodo80534953768178->nodo80535153668566
+nodo80534953768178->nodo80555053678185
+nodo80534953768178->nodo80565456836583
+nodo80485448727567->nodo80534953768178
 label="{Arbol B | placas}";
 }

@@ -11,6 +11,7 @@ package llegarapidito;
 import clases.Graficas;
 import clases.Vehiculo;
 import estructuras.arbol_por_paginas;
+import estructuras.estructura_BloqueC.Encriptar;
 import estructuras.estructura_Hash;
 import estructuras.lista_enlazada_simple;
 import ventanas.carga_Masiva;
@@ -28,12 +29,13 @@ public class LlegaRapidito {
     /**
      * @param args the command line arguments
      */
-    
+    Encriptar c;
   
     public static void main(String[] args) throws Exception {
        menu_Master master = new menu_Master();
        master.setVisible(true);
-   
+   //String resultado=Encriptar.MD5Code("6e21d5c6caf8016e88aba2aca59929a7");
+  // System.out.print("resultado     "+resultado);
    
 //String str = "123abc123";  
 //
@@ -46,20 +48,15 @@ public class LlegaRapidito {
 //        
 //        
 //        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
+//    
+
+
+
+
+
+
+
+
 //        
 //        
 //        

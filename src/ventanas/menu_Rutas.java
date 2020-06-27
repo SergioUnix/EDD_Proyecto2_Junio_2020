@@ -133,6 +133,7 @@ public class menu_Rutas extends javax.swing.JFrame {
         placa = new javax.swing.JTextField();
         marca = new javax.swing.JTextField();
         modelo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -286,6 +287,14 @@ public class menu_Rutas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 120, -1));
+
+        jButton1.setText("prueba de llenado matriz adyacente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, -1, -1));
 
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rutas.jpg"))); // NOI18N
         jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 480));
@@ -506,6 +515,14 @@ public class menu_Rutas extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_placaKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            Carga.grafo.llenoMatriz();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Rutas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -561,6 +578,7 @@ public class menu_Rutas extends javax.swing.JFrame {
     private javax.swing.JLabel errorLabel;
     private javax.swing.JButton grafico;
     private javax.swing.JLabel imagen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

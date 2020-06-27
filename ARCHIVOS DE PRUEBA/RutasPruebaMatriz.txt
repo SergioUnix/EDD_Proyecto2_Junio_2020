@@ -1,0 +1,10 @@
+Jaen/Madrid/335%
+Madrid/Jaen/335%
+Murcia/Valencia/241%
+Valencia/Murcia/241%
+Murcia/Albacete/150%
+Albacete/Murcia/150%
+Albacete/Valencia/191%
+Valencia/Albacete/191%
+Albacete/Madrid/251%
+Madrid/Albacete/251%

@@ -7,10 +7,10 @@ import java.security.NoSuchAlgorithmException;
  */
 public class estructura_BloqueC<T, V> {
 
-    public class Encriptar {
+    public static class Encriptar {
 
         //MÉTODO PARA LA ENCRIPTAR LA PALABRA O CONJUNTO DE LETRAS QUE SE DESE CODIFICAR
-        public String generarEncriptamiento(String clave, String modo) throws NoSuchAlgorithmException {
+        public static String generarEncriptamiento(String clave, String modo) throws NoSuchAlgorithmException {
             try {
                 //CREAMOS NUESTRO DECODIFICADOR DE MENSAJES "EL MODO DEPENDE SI SE DESEA MD5 O SHA1"
                 java.security.MessageDigest MD = java.security.MessageDigest.getInstance(modo);
@@ -31,12 +31,12 @@ public class estructura_BloqueC<T, V> {
         }
 
         //RETORNAR LA PALABRA ENCRIPTADA EN MD5
-        public String MD5Code(String word) throws NoSuchAlgorithmException {
+        public static String MD5Code(String word) throws NoSuchAlgorithmException {
             return generarEncriptamiento(word, "MD5");
         }
 
         //RETORNAR LA PALABRA ENCRIPTADA EN SHA1
-        public String SHA1Code(String word) throws NoSuchAlgorithmException {
+        public static String SHA1Code(String word) throws NoSuchAlgorithmException {
             return generarEncriptamiento(word, "SHA1");
         }
     }

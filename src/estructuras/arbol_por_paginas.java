@@ -5,13 +5,7 @@
 
 package estructuras;
 
-import java.awt.Desktop;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Random;
-import javax.swing.JOptionPane;
+
 import clases.Vehiculo;
 
 
@@ -50,7 +44,7 @@ public class arbol_por_paginas {
     public static int pag_primera_particion;   
     public static boolean verifico_pag_primero;
     public static int altura_N = 1;
-    lista_simple <Vehiculo> v=new lista_simple<>();
+    lista_simple<Vehiculo> v=new lista_simple<>();
     public static int imprimir = 1;
     public static String cadena_dot_ghrapviz = ""; 
     public cabeceras cabeza_nodo;
@@ -66,9 +60,7 @@ public class arbol_por_paginas {
     
     
     public void agregar_datos(long placa ,Vehiculo vehi) {
-        String subCadena=null;
-        String str = null;  
-               
+        String str = null;                 
         if(vehi.getPlaca()!=null){
         placa=0;
         str=vehi.getPlaca();
@@ -328,7 +320,7 @@ public class arbol_por_paginas {
             }
           indes2=indes2+1;  
         }
-        if (existe_placa==true) {////////////////////////////
+        if (existe_placa==true) {
         this.removerVehiculo(placa);
         }
         if (existe_placa==true) { arbolPagina.datos_existentes.remove(indes1); } else {

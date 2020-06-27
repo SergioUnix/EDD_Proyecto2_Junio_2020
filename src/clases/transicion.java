@@ -10,9 +10,10 @@ package clases;
  * @author ADMIN
  */
 public class transicion {
-    String destino;
-    String direccion;
+    public String destino;
+    public String direccion;
     public transicion(){
+    this.destino="";
     this.destino="";
     }
      public transicion(String no,String dir)
