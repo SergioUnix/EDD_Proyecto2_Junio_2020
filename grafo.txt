@@ -2,15 +2,13 @@ graph grafoRutas {
 layout="circo";
 size = "30"
 node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];
-"Jaen"-- "Madrid"[dir="forward", color=crimson,label = "335", fontcolor=darkolivegreen4]; 
-"Madrid"-- "Jaen"[dir="forward", color=crimson,label = "335", fontcolor=darkolivegreen4]; 
-"Madrid"-- "Albacete"[dir="forward", color=crimson,label = "251", fontcolor=darkolivegreen4]; 
-"Murcia"-- "Valencia"[dir="forward", color=crimson,label = "241", fontcolor=darkolivegreen4]; 
-"Murcia"-- "Albacete"[dir="forward", color=crimson,label = "150", fontcolor=darkolivegreen4]; 
-"Valencia"-- "Murcia"[dir="forward", color=crimson,label = "241", fontcolor=darkolivegreen4]; 
-"Valencia"-- "Albacete"[dir="forward", color=crimson,label = "191", fontcolor=darkolivegreen4]; 
-"Albacete"-- "Murcia"[dir="forward", color=crimson,label = "150", fontcolor=darkolivegreen4]; 
-"Albacete"-- "Valencia"[dir="forward", color=crimson,label = "191", fontcolor=darkolivegreen4]; 
-"Albacete"-- "Madrid"[dir="forward", color=crimson,label = "251", fontcolor=darkolivegreen4]; 
+"1.Murcia"-- "2.Valencia"[dir="forward", color=crimson,label = "241", fontcolor=darkolivegreen4]; 
+"1.Murcia"-- "3.Albacete"[dir="forward", color=crimson,label = "150", fontcolor=darkolivegreen4]; 
+"2.Valencia"-- "1.Murcia"[dir="forward", color=crimson,label = "241", fontcolor=darkolivegreen4]; 
+"2.Valencia"-- "3.Albacete"[dir="forward", color=crimson,label = "191", fontcolor=darkolivegreen4]; 
+"3.Albacete"-- "1.Murcia"[dir="forward", color=crimson,label = "150", fontcolor=darkolivegreen4]; 
+"3.Albacete"-- "2.Valencia"[dir="forward", color=crimson,label = "191", fontcolor=darkolivegreen4]; 
+"3.Albacete"-- "4.Madrid"[dir="forward", color=crimson,label = "251", fontcolor=darkolivegreen4]; 
+"4.Madrid"-- "3.Albacete"[dir="forward", color=crimson,label = "251", fontcolor=darkolivegreen4]; 
 label="{Rutas de Llega Rapidito}";
  }

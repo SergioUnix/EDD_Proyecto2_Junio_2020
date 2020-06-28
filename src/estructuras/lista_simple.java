@@ -194,5 +194,21 @@ public class lista_simple<T> {
             }
         }
     }
+    //acepta string y devuelve su posicion en forma de indice... 
+    public int getPosicion(String referencia) throws Exception{       
+        if (buscar(referencia)) {
+            Nodo aux = inicio;
+            int cont = 0;
+            while(!referencia.equals(aux.getValor())){
+                              
+                cont ++;
+                aux = aux.getSiguiente();
+            }
+            return cont;
+        } else {
+            throw new Exception("Valor inexistente en la lista.");
+        }
+      // return 
+    }
 
 }

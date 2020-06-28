@@ -4,6 +4,9 @@
  */
 package estructuras;
 import clases.transicion;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 
 public class estructura_grafo {
@@ -22,7 +25,7 @@ public class estructura_grafo {
         public int numeroAristas;
         public int matriz_rutas[][];
         public lista_simple<String> nameRutas=new lista_simple<>();
-        
+        public  int distance[];
         
         
         
@@ -42,24 +45,13 @@ public class estructura_grafo {
         }
         
         ////metodo hace que mi matriz sea del tamanio cuando quiera...
-        public void inicializandoMatriz(int cantidadVertices,int cantidadAristas){
-            this.totalVertices_=cantidadVertices;
-            this.totalAristas_=cantidadAristas;
-            matriz_rutas=new int[this.tamanio+20][this.tamanio+20];        
+        public void inicializandoMatriz(int cantidadVertices){
+            this.totalVertices_=cantidadVertices;    
+            matriz_rutas=new int[this.tamanio+20][this.tamanio+20];   
+            this.distance = new int[this.tamanio+20];
         }
         
         
-        public void insertaArista(int v1, int v2, int dist)
-        throws ArrayIndexOutOfBoundsException, UnsupportedOperationException {
-        if (v1 >= this.tamanio || v2 >= this.tamanio) {
-        throw new ArrayIndexOutOfBoundsException(
-        "Vertices inválidos, fuera de rango" + "nRango de vertices: 0 - " + (this.totalVertices_ - 1));
-        } else if (numeroAristas == this.totalAristas_) {
-        throw new UnsupportedOperationException("No se puede añadir más aristas");
-        } else {
-        matriz_rutas[v1][v2] = dist;
-        }
-        }
         
         public String getOrigen()
         {
@@ -119,27 +111,28 @@ public class estructura_grafo {
             
             estructura_grafo aux=this.next1;
             
-            boolean verifco=false;
+          //  boolean verifco=false;
             if(origen.equals(origenC)){              
                transiciones.add(new transicion(destinoC,pesoC));
+               this.totalAristas_++;
           
             }else if(origen.equals("")){
             this.origen=origenC;   
             this.addTransicion(new transicion (destinoC,pesoC));
-            tamanio++;      nameRutas.add(this.origen);
+            tamanio++;      nameRutas.add(this.origen);  this.totalAristas_++;
             }else{
               //System.out.println("---  entro al else  "+origenC);
                 while(aux!=null){
                 // System.out.println("---  entro al while"+origenC);
                  
                  if(aux.origen.equals(origenC)){
-                     aux.addTransicion(new transicion(destinoC,pesoC));                     
+                     aux.addTransicion(new transicion(destinoC,pesoC));  this.totalAristas_++;                    
                  break;  
                  }
-                 if(aux.getNext1()==null){aux.setNext1(nuevo);tamanio++; nameRutas.add(nuevo.origen); break; }
+                 if(aux.getNext1()==null){aux.setNext1(nuevo);tamanio++; nameRutas.add(nuevo.origen); this.totalAristas_++;break; }
                 aux=aux.getNext1();
                 }
-                if(aux==null){this.setNext1(nuevo); tamanio++;nameRutas.add(nuevo.origen);}
+                if(aux==null){this.setNext1(nuevo); tamanio++;nameRutas.add(nuevo.origen);  this.totalAristas_++;}
               
             }
            
@@ -163,16 +156,18 @@ public class estructura_grafo {
          public String cadenaGrafico() throws Exception{
             String res="graph grafoRutas { \n" +"layout=\"circo\";\n" +"size = \"30\"\n" +"node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];\n";
             String direccion="";
+         
             estructura_grafo aux=this.next1;
             System.out.println("-----------"+origen);
             for(int i=0;i<transiciones.size();i++){
-            direccion=direccion+"\""+origen+"\"-- \""+transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
+            direccion=direccion+"\""+(nameRutas.getPosicion(origen)+1)+"."+origen+"\"-- \""+(nameRutas.getPosicion(transiciones.get(i).getNombre())+1)+"."+transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
             }
+      
             while(aux!=null){
             for(int i=0;i<aux.transiciones.size();i++){
-            direccion=direccion+"\""+aux.getOrigen()+"\"-- \""+aux.transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+aux.transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
+            direccion=direccion+"\""+(nameRutas.getPosicion(aux.getOrigen())+1)+"."+aux.getOrigen()+"\"-- \""+(nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1)+"."+aux.transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+aux.transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
             }           
-            aux=aux.getNext1();
+            aux=aux.getNext1(); 
             }
            res=res+direccion;
             return res+"label=\"{Rutas de Llega Rapidito}\";\n }";
@@ -181,13 +176,13 @@ public class estructura_grafo {
         public String getRuta(int index){
         int comodin=1;
         if(index==0){
-              System.out.println("tamanio "+this.tamanio+" origen"+this.origen+"  index  "+index);
+            //  System.out.println("tamanio "+this.tamanio+" origen"+this.origen+"  index  "+index);
             return this.origen;          
         }else{
             estructura_grafo aux=this.getNext1();
             while(comodin<this.tamanio){
                 
-            System.out.println("tamanio "+this.tamanio+" origen"+aux.origen+"  index "+index);
+          //  System.out.println("tamanio "+this.tamanio+" origen"+aux.origen+"  index "+index);
                  
            if(comodin==index){  return aux.origen;}      
            aux=aux.getNext1();
@@ -196,6 +191,12 @@ public class estructura_grafo {
         }
         return "";
         }
+        
+        
+        
+        
+        
+        
          
         //////////////////////proceso de agregar a mi matriz 
         
@@ -224,7 +225,7 @@ public class estructura_grafo {
         
         public void  llenoMatriz() throws Exception{
         //inicializo la matriz
-        this.inicializandoMatriz(tamanio, tamanio);
+        this.inicializandoMatriz(tamanio);
         int i,j;
         
         for(i=1;i<=tamanio;i++){
@@ -235,7 +236,10 @@ public class estructura_grafo {
            matriz_rutas[i][j]=999;
           }
        }
-        this.imprimirMatriz();
+    //this.imprimirMatriz();
+   // this.caminoMasCorto("Madrid");
+    this.metCorto("Valencia","Albacete");
+        
         }
         
         
@@ -244,7 +248,7 @@ public class estructura_grafo {
         for(i=0;i<=tamanio;i++){
           for(j=0;j<=tamanio;j++)
           {
-           System.out.println(matriz_rutas[i][j]+"  "); 
+           System.out.print(matriz_rutas[i][j]+"  "); 
           }
            System.out.println("\n");
   }
@@ -255,5 +259,90 @@ public class estructura_grafo {
         
         
         
+  public void calc(int n,int s)
+ {
+  int flag[] = new int[n+1];
+  int i,minpos=1,k,c,minimum;
+  
+  for(i=1;i<=n;i++)
+  {  
+      flag[i]=0; 
+      this.distance[i]=this.matriz_rutas[s][i]; 
+  }
+  c=2;
+  while(c<=n)
+  {
+   minimum=99;
+   for(k=1;k<=n;k++)
+   { 
+          if(this.distance[k]<minimum && flag[k]!=1)
+       {
+        minimum=this.distance[i];
+        minpos=k;
+       }
+      } 
+            flag[minpos]=1;
+      c++;
+      for(k=1;k<=n;k++){
+       if(this.distance[minpos]+this.matriz_rutas[minpos][k] <  this.distance[k] && flag[k]!=1 )
+       this.distance[k]=this.distance[minpos]+this.matriz_rutas[minpos][k];
+   }   
+  } 
+  
+ }       
+     
+   
+ public void caminoMasCorto(String Destino) throws Exception{
+     int valordeOrigen=nameRutas.getPosicion(Destino)+1;
+     int i,j;  
+     
+     for(int t=0;t<nameRutas.size();t++){
+      System.out.println("Valor de los vertices "+ nameRutas.get(t)+"  posicion arreglo "+(t)+" valor de Origen obtenido  " +valordeOrigen+"\n");
+     }
+     
+ this.calc(tamanio,valordeOrigen);
+  System.out.println("The Shortest Path from Source \t"+valordeOrigen+"\t to all other vertices are : \n");
+        for(i=1;i<=tamanio;i++)
+          if(i!=valordeOrigen)
+  System.out.println("source :"+valordeOrigen+"\t destination :"+i+"\t MinCost is :"+this.distance[i]+"\t");
+        
+ }       
+        
+        
+  ////////////////////////////////////////////Se calcula el camino mas corto de un nodo origen hacia un nodo destino      
+  public void metCorto(String origenIngresado,String destinoIngresado) throws Exception {
+        int E , origen, destino , peso , inicial, V;
+       //numero total de Vertices
+        V = this.tamanio;
+       //total de aristas
+        E = this.totalAristas_++;
+        ruta_corta dijkstraAlgorithm = new ruta_corta(V);
+        
+        
+                
+
+            estructura_grafo aux=this.next1;
+            for(int i=0;i<transiciones.size();i++){
+                dijkstraAlgorithm.addEdge(nameRutas.getPosicion(this.origen)+1,    nameRutas.getPosicion(transiciones.get(i).getNombre())+1, Integer.parseInt(transiciones.get(i).getDireccion())   , true);
+            }
+            while(aux!=null){
+            for(int i=0;i<aux.transiciones.size();i++){
+           dijkstraAlgorithm.addEdge(nameRutas.getPosicion(aux.origen)+1,    nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1, Integer.parseInt(aux.transiciones.get(i).getDireccion())   , true);  
+            }           
+            aux=aux.getNext1(); 
+            }
+
+ 
+        
+        System.out.print("Ingrese el vertice inicial: ");
+        inicial =nameRutas.getPosicion(origenIngresado)+1;
+        dijkstraAlgorithm.dijkstra(inicial);
+        destino =nameRutas.getPosicion(destinoIngresado)+1;
+        dijkstraAlgorithm.printShortestPath(destino);
+    }       
+ 
+ 
+ 
+ 
 
 }
