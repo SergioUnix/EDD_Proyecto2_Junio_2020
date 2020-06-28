@@ -16,9 +16,10 @@ import java.nio.file.Paths;
 
 import estructuras.estructura_Hash;
 import estructuras.arbol_por_paginas;
+import estructuras.estructura_BloqueC;
 import estructuras.estructura_grafo;
 import estructuras.lista_enlazada_doble_circular;
-import java.util.LinkedList;
+import estructuras.lista_simple;
 
 /*
      *
@@ -31,8 +32,9 @@ public class Carga {
     public static arbol_por_paginas vehiculos = new arbol_por_paginas(2);
     public static estructura_Hash<Cliente> clientes = new estructura_Hash(37, 75.0);
     public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
-    public static LinkedList<Cliente> clientesAUX = new LinkedList();
+    public static lista_simple<Cliente> clientesAUX;
     public static estructura_grafo grafo = new estructura_grafo();
+    public static estructura_BloqueC<Viaje,String> viajes = new estructura_BloqueC();
 
     public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
@@ -177,7 +179,7 @@ public class Carga {
     }
 //************************************************************************************************
 
-    public static Path tabla_hash_GRAPHVIZ() throws IOException {
+    public static Path tabla_hash_GRAPHVIZ() throws IOException, Exception {
         Cliente clienteG;
         Cliente clienteG2;
         //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
@@ -204,7 +206,7 @@ public class Carga {
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
-                    LinkedList<Cliente> vector = clientes.getTabla_H()[i];
+                    lista_simple<Cliente> vector = clientes.getTabla_H()[i];
                     BW.write("\"" + i + "\";\n");
 
                     for (int j = 0; j < vector.size(); j++) {
@@ -237,7 +239,7 @@ public class Carga {
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
-                    LinkedList<Cliente> vector = clientes.getTabla_H()[i];
+                    lista_simple<Cliente> vector = clientes.getTabla_H()[i];
                     BW.write("\"" + i + "\";\n");
 
                     for (int j = 0; j < vector.size(); j++) {

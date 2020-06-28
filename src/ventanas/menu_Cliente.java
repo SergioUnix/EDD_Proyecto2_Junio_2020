@@ -10,6 +10,7 @@ import static clases.Carga.clientes;
 import clases.Cliente;
 import clases.Conductor;
 import estructuras.estructura_Hash;
+import estructuras.lista_simple;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Image;
@@ -18,7 +19,6 @@ import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -42,18 +42,18 @@ public class menu_Cliente extends javax.swing.JFrame {
     private int y;
     private DefaultTableModel modeloClientes;
     private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
-    private LinkedList<Cliente> clientesTabla;
+    private lista_simple<Cliente> clientesTabla;
     public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(Carga.clientes.getCapacidad() + 37, 75.0);
 
     /**
      * Creates new form menu_Conductor
      */
-    public menu_Cliente() {
+    public menu_Cliente() throws Exception {
         initComponents();
         correrTabla();
     }
 
-    public void correrTabla() {
+    public void correrTabla() throws Exception {
         modeloClientes = (DefaultTableModel) this.ClientesTabla.getModel();
 
         Cliente c;
@@ -449,7 +449,11 @@ public class menu_Cliente extends javax.swing.JFrame {
                     }
                     if (!clientesTabla.isEmpty()) {
                         for (int i = 0; i < clientesTabla.size(); i++) {
-                            clientesAlternative.add(clientesTabla.get(i), clientesTabla.get(i).getDPI());
+                            try {
+                                clientesAlternative.add(clientesTabla.get(i), clientesTabla.get(i).getDPI());
+                            } catch (Exception ex) {
+                                Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                         clientes = clientesAlternative;
                     }
@@ -494,10 +498,14 @@ public class menu_Cliente extends javax.swing.JFrame {
                     System.out.println(nuevoCliente.toString());
                     clientesTabla = Carga.clientes.devolver_nodo(nuevoCliente.getDPI());
                     for (int i = 0; i < clientesTabla.size(); i++) {
-                        if (clientesTabla.get(i).getDPI() == nuevoCliente.getDPI()) {
-                            clientesTabla.remove(i);
-                            Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
-                            break;
+                        try {
+                            if (clientesTabla.get(i).getDPI() == nuevoCliente.getDPI()) {
+                                clientesTabla.remove(i);
+                                Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
+                                break;
+                            }
+                        } catch (Exception ex) {
+                            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
 
@@ -524,7 +532,11 @@ public class menu_Cliente extends javax.swing.JFrame {
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
         EliminarBoton.setEnabled(false);
-        correrTabla();
+        try {
+            correrTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modeloClientes.fireTableDataChanged();
         //ConductoresTabla.repaint();
     }//GEN-LAST:event_CrearBotonActionPerformed
@@ -536,9 +548,13 @@ public class menu_Cliente extends javax.swing.JFrame {
             Cliente eC = new Cliente();
             clientesTabla = Carga.clientes.devolver_nodo(dpi);
             for (int i = 0; i < clientesTabla.size(); i++) {
-                if (clientesTabla.get(i).getDPI() == dpi) {
-                    eC = clientesTabla.get(i);
-                    break;
+                try {
+                    if (clientesTabla.get(i).getDPI() == dpi) {
+                        eC = clientesTabla.get(i);
+                        break;
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             DPI.setText(String.valueOf(eC.getDPI()));
@@ -573,11 +589,13 @@ public class menu_Cliente extends javax.swing.JFrame {
             Carga.dibujarGRAPHVIZ(CMD, "Clientes.png");
         } catch (IOException ex) {
             Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         File miGraphviz = new File("Clientes.png");
         try {
             Desktop.getDesktop().open(miGraphviz);
-        } catch (Exception e) {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
         }
 
@@ -588,9 +606,13 @@ public class menu_Cliente extends javax.swing.JFrame {
         System.out.println(dpi);
         clientesTabla = Carga.clientes.devolver_nodo(dpi);
         for (int i = 0; i < clientesTabla.size(); i++) {
-            if (clientesTabla.get(i).getDPI() == dpi) {
-                clientesTabla.remove(i);
-                break;
+            try {
+                if (clientesTabla.get(i).getDPI() == dpi) {
+                    clientesTabla.remove(i);
+                    break;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -607,7 +629,11 @@ public class menu_Cliente extends javax.swing.JFrame {
         CrearBoton.setText("CREAR");
         CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/crear.png"));
         CrearBoton.repaint();
-        correrTabla();
+        try {
+            correrTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modeloClientes.fireTableDataChanged();
         EliminarBoton.setEnabled(false);
     }//GEN-LAST:event_EliminarBotonActionPerformed
@@ -661,8 +687,13 @@ public class menu_Cliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new menu_Cliente().setVisible(true);
+                try {
+                    new menu_Cliente().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -1,4 +1,4 @@
-digraph DoublyCList {
+digraph HashTable {
 node[shape=box style="filled" color="cyan3" fontcolor = "white" penwidth=3];
 edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
 rankdir=LR;

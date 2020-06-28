@@ -4,7 +4,7 @@
  */
 package clases;
 
-import estructuras.lista_enlazada_simple;
+import estructuras.lista_simple;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -23,7 +23,7 @@ public class Viaje {
     private Cliente cliente;
     private Vehiculo vehiculo;
     private Conductor conductor;
-    private lista_enlazada_simple<String, String> viaje;
+    private lista_simple<String> viaje;
     private String clave; //PLACAFECHAHORAMINUTO
 
     public Viaje() {
@@ -43,7 +43,7 @@ public class Viaje {
         this.clave = null;
     }
 
-    public Viaje(String lugarOrigen, String lugarDestino, Cliente cliente, Vehiculo vehiculo, Conductor conductor, lista_enlazada_simple<String, String> viaje, String clave) {
+    public Viaje(String lugarOrigen, String lugarDestino, Cliente cliente, Vehiculo vehiculo, Conductor conductor, lista_simple<String> viaje, String clave) {
         this.lugarOrigen = lugarOrigen;
         this.lugarDestino = lugarDestino;
         this.cliente = cliente;
@@ -141,11 +141,11 @@ public class Viaje {
         this.conductor = conductor;
     }
 
-    public lista_enlazada_simple<String, String> getViaje() {
+    public lista_simple<String> getViaje() {
         return viaje;
     }
 
-    public void setViaje(lista_enlazada_simple<String, String> viaje) {
+    public void setViaje(lista_simple<String> viaje) {
         this.viaje = viaje;
     }
 

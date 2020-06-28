@@ -4,12 +4,10 @@
  */
 package estructuras;
 
-import clases.Cliente;
-import java.util.LinkedList;
 
 public class estructura_Hash<T> {
 
-    private LinkedList<T> tabla_H[];
+    private lista_simple<T> tabla_H[];
     private int capacidad;
     private double ocupacion;
 
@@ -19,11 +17,11 @@ public class estructura_Hash<T> {
         this.ocupacion = 0;
     }
 
-    public LinkedList<T>[] getTabla_H() {
+    public lista_simple<T>[] getTabla_H() {
         return tabla_H;
     }
 
-    public void setTabla_H(LinkedList<T>[] tabla_H) {
+    public void setTabla_H(lista_simple<T>[] tabla_H) {
         this.tabla_H = tabla_H;
     }
 
@@ -45,7 +43,7 @@ public class estructura_Hash<T> {
 //*************************************************************************************************************
 
     public estructura_Hash(int capacidad, double ocupacion) {
-        this.tabla_H = new LinkedList[capacidad];
+        this.tabla_H = new lista_simple[capacidad];
         this.capacidad = capacidad;
         this.ocupacion = ocupacion;
     }
@@ -56,12 +54,12 @@ public class estructura_Hash<T> {
 
     public void add(T dato, long parametroH) {
         if (tabla_H[funcion_hash(parametroH)] == null) {
-            tabla_H[funcion_hash(parametroH)] = new LinkedList();
+            tabla_H[funcion_hash(parametroH)] = new lista_simple();
         }
         tabla_H[funcion_hash(parametroH)].add(dato);
     }
 
-    public LinkedList<T> devolver_nodo(long parametroH) {
+    public lista_simple<T> devolver_nodo(long parametroH) {
         if (tabla_H[funcion_hash(parametroH)] == null) {
             return null;
         }
@@ -72,7 +70,7 @@ public class estructura_Hash<T> {
         }
     }
 
-    public LinkedList<T> devolverDato(int indice) {
+    public lista_simple<T> devolverDato(int indice) {
         if (indice <= capacidad) {
             for (int i = 0; i < indice; i++) {
                 if (!tabla_H[i].isEmpty()) {
@@ -83,11 +81,10 @@ public class estructura_Hash<T> {
         return null;
     }
 
-    public LinkedList<T> restablecer_tamanio() throws Exception {
+    public lista_simple<T> restablecer_tamanio() throws Exception {
         int uso = 0;
         double utilidad;
-        Cliente auxiliar = new Cliente();
-        LinkedList<T> aux = new LinkedList();
+        lista_simple<T> aux = new lista_simple();
         for (int i = 1; i < capacidad; i++) {
             if (tabla_H[i] != null) {
                 uso++;
