@@ -4,10 +4,6 @@
  */
 package estructuras;
 import clases.transicion;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-
 
 public class estructura_grafo {
         estructura_grafo next1;
@@ -237,8 +233,8 @@ public class estructura_grafo {
           }
        }
     //this.imprimirMatriz();
-   // this.caminoMasCorto("Madrid");
-    this.metCorto("Valencia","Albacete");
+    //this.caminoMasCorto("Madrid");
+    this.metCorto("Cadiz","Coruna");
         
         }
         
