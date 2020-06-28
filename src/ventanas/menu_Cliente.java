@@ -47,6 +47,7 @@ public class menu_Cliente extends javax.swing.JFrame {
 
     /**
      * Creates new form menu_Conductor
+     * @throws java.lang.Exception
      */
     public menu_Cliente() throws Exception {
         initComponents();

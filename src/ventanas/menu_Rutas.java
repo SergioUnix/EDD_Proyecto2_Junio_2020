@@ -154,7 +154,7 @@ public class menu_Rutas extends javax.swing.JFrame {
 
         VehiculosTabla.setBackground(new java.awt.Color(0, 0, 0));
         VehiculosTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        VehiculosTabla.setForeground(new java.awt.Color(102, 51, 0));
+        VehiculosTabla.setForeground(new java.awt.Color(255, 0, 0));
         VehiculosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
