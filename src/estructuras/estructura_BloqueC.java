@@ -1,4 +1,5 @@
 package estructuras;
+
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -151,6 +152,21 @@ public class estructura_BloqueC<T, V> {
             for (int i = 0; i < numeroBloques; i++) {
                 if (alter.getLlave() == llave) {
                     return alter;
+                }
+                alter = alter.getSiguiente();
+            }
+        }
+        return null;
+    }
+
+    public T buscarTransaccion(V llave) {
+        if (cadenaVacia()) {
+            return null;
+        } else {
+            alter = inicio;
+            for (int i = 0; i < numeroBloques; i++) {
+                if (alter.getLlave() == llave) {
+                    return alter.getTransaccion();
                 }
                 alter = alter.getSiguiente();
             }

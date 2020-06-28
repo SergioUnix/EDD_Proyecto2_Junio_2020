@@ -69,13 +69,16 @@
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/iconos/seleccionar.png"/>
+              <Image iconType="3" name="/imagenes/iconos/iviajes.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="MENU VIAJES"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReporteBotonActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="820" y="190" width="240" height="100"/>
+              <AbsoluteConstraints x="820" y="300" width="240" height="100"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -116,7 +119,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="820" y="300" width="240" height="100"/>
+              <AbsoluteConstraints x="820" y="190" width="240" height="100"/>
             </Constraint>
           </Constraints>
         </Component>

@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  */
 public class menu_Master extends javax.swing.JFrame {
 
-    private menu_Cliente clie = new menu_Cliente();
     private menu_Conductor con = new menu_Conductor();
     private carga_Masiva car = new carga_Masiva();
+    private menu_Viajes via = new menu_Viajes();
     private int x;
     private int y;
 
@@ -77,10 +77,15 @@ public class menu_Master extends javax.swing.JFrame {
 
         ReporteBoton.setBackground(new java.awt.Color(255, 102, 0));
         ReporteBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        ReporteBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/seleccionar.png"))); // NOI18N
+        ReporteBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/iviajes.png"))); // NOI18N
         ReporteBoton.setText("MENU VIAJES");
+        ReporteBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporteBotonActionPerformed(evt);
+            }
+        });
         jPanel1.add(ReporteBoton);
-        ReporteBoton.setBounds(820, 190, 240, 100);
+        ReporteBoton.setBounds(820, 300, 240, 100);
 
         ReporteBoton1.setBackground(new java.awt.Color(255, 102, 0));
         ReporteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -99,7 +104,7 @@ public class menu_Master extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CargaBoton);
-        CargaBoton.setBounds(820, 300, 240, 100);
+        CargaBoton.setBounds(820, 190, 240, 100);
 
         ClienteBoton1.setBackground(new java.awt.Color(255, 102, 0));
         ClienteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -179,8 +184,18 @@ public class menu_Master extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirMouseClicked
 
     private void ClienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteBotonActionPerformed
-        clie.setVisible(true);
-        clie.correrTabla();
+        menu_Cliente clie = null;
+        try {
+            clie = new menu_Cliente();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Master.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            clie.setVisible(true);
+            clie.correrTabla();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Master.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ClienteBotonActionPerformed
 
     private void ConductorBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConductorBotonActionPerformed
@@ -203,21 +218,31 @@ public class menu_Master extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void VehiculoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehiculoBotonActionPerformed
-       menu_Vehiculos vehi;
+        menu_Vehiculos vehi;
         try {
             vehi = new menu_Vehiculos();
-             vehi.setVisible(true);
+            vehi.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(menu_Master.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-       
+
+
     }//GEN-LAST:event_VehiculoBotonActionPerformed
 
     private void ClienteBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteBoton1ActionPerformed
-        menu_Rutas rut=new menu_Rutas();
+        menu_Rutas rut = new menu_Rutas();
         rut.setVisible(true);
     }//GEN-LAST:event_ClienteBoton1ActionPerformed
+
+    private void ReporteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteBotonActionPerformed
+        via.setVisible(true);
+        try {
+            via.llenarComboBox();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Master.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_ReporteBotonActionPerformed
 
     /**
      * @param args the command line arguments

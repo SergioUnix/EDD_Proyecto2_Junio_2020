@@ -41,7 +41,6 @@ import javax.swing.table.TableRowSorter;
  */
 public class menu_Vehiculos extends javax.swing.JFrame {
 
-     
     private int x;
     private int y;
     String nombre;
@@ -83,7 +82,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         modeloVehiculos.setRowCount(0);
         modeloVehiculos.setColumnCount(0);
 
-        modeloVehiculos.setNumRows(0);        
+        modeloVehiculos.setNumRows(0);
         modeloVehiculos.addColumn("No. ");
         modeloVehiculos.addColumn("Placa");
         modeloVehiculos.addColumn("Marca");
@@ -98,7 +97,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             lista_simple<Vehiculo> elementos_arbol = Carga.vehiculos.arrayVehiculos();
             for (int i = 0; i < elementos_arbol.size(); i++) {
                 aux = (Vehiculo) elementos_arbol.get(i);
-                modeloVehiculos.addRow(new Object[]{i+1,aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
+                modeloVehiculos.addRow(new Object[]{i + 1, aux.getPlaca(), aux.getMarca(), aux.getModelo(), aux.getAnio(),
                     aux.getColor(), aux.getPrecio(), aux.getTransmision()});
             }
         }
@@ -179,7 +178,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         VehiculosTabla.setBackground(new java.awt.Color(0, 0, 0));
         VehiculosTabla.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        VehiculosTabla.setForeground(new java.awt.Color(102, 51, 0));
+        VehiculosTabla.setForeground(new java.awt.Color(255, 255, 0));
         VehiculosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -468,7 +467,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
                     System.out.println(nuevo.toString());
                     try {
                         if (Carga.vehiculos.actualizarVehiculo(nuevo)) {
-                            
+
                             JOptionPane.showMessageDialog(null, "Se Actualizo Correctamente ");
                         } else {
                             JOptionPane.showMessageDialog(null, "No se pudo Actualizar, Error de Placa");
@@ -525,30 +524,30 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         //seleccionar el vehiculo
         if (VehiculosTabla.getSelectedRow() != -1) {
-           
+
             try {
-            long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 1)));
-            System.out.println(placaNo);
-            Vehiculo eC;
+                long placaNo = valorAssci(String.valueOf(VehiculosTabla.getValueAt(VehiculosTabla.getSelectedRow(), 1)));
+                System.out.println(placaNo);
+                Vehiculo eC;
                 eC = Carga.vehiculos.obtenerVehiculo(placaNo);
-                 placa.setText(String.valueOf(eC.getPlaca()));
-            marca.setText(String.valueOf(eC.getMarca()));
-            modelo.setText(eC.getModelo());
-            combo2.setSelectedItem(String.valueOf(eC.getAnio()));
-            color.setText(String.valueOf(eC.getColor()));
-            precio.setText(String.valueOf(eC.getPrecio()));
-            combo.setSelectedItem(String.valueOf(eC.getTransmision()));
-            VehiculosTabla.clearSelection();
-            errorLabel.setText("");
-            CrearBoton.setText("EDITAR");
-            CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
-            CrearBoton.repaint();
-            EliminarBoton.setEnabled(true);
-            
-             } catch (Exception ex) {
+                placa.setText(String.valueOf(eC.getPlaca()));
+                marca.setText(String.valueOf(eC.getMarca()));
+                modelo.setText(eC.getModelo());
+                combo2.setSelectedItem(String.valueOf(eC.getAnio()));
+                color.setText(String.valueOf(eC.getColor()));
+                precio.setText(String.valueOf(eC.getPrecio()));
+                combo.setSelectedItem(String.valueOf(eC.getTransmision()));
+                VehiculosTabla.clearSelection();
+                errorLabel.setText("");
+                CrearBoton.setText("EDITAR");
+                CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
+                CrearBoton.repaint();
+                EliminarBoton.setEnabled(true);
+
+            } catch (Exception ex) {
                 Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } else {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }
@@ -557,31 +556,28 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     }//GEN-LAST:event_selecionarActionPerformed
 
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
-    
+
         try {
             Graficas.graficar(Carga.vehiculos.getCadena(), "ArbolB_");
         } catch (Exception ex) {
             Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_graficoActionPerformed
 
     private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
 
-     
         try {
-               long placaNo = valorAssci(placa.getText());
-        System.out.println(placaNo);
+            long placaNo = valorAssci(placa.getText());
+            System.out.println(placaNo);
 
-            
-            if(Carga.vehiculos.buscar_valor(placaNo)){
-            Carga.vehiculos.eliminar_dato(placaNo); 
-           // JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente");
-            }else{                
-            JOptionPane.showMessageDialog(null, "No se encontro el Registro a eliminar");
+            if (Carga.vehiculos.buscar_valor(placaNo)) {
+                Carga.vehiculos.eliminar_dato(placaNo);
+                // JOptionPane.showMessageDialog(null, "Registro Eliminado Correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro el Registro a eliminar");
             }
-           
 
         } catch (Exception ex) {
             System.out.println(ex);
