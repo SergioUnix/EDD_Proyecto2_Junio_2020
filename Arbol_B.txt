@@ -1,26 +1,27 @@
 digraph arbol_por_paginas{
 rankdir=TB;
-node[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];
-  nodo67565357819078[ label ="{C859QZN|Infiniti|Pick Up}|"]  
-nodo67485048886771[ label ="{C020XCG|Mercedes-Benz|Deportivo}|{C196JDD|Vauxhall|Racing}|{C207OOW|Renault|Standard}|"]  
-nodo67504956878470[ label ="{C218WTF|Prueba|pick up P}|{C249TVZ|Hyundai Motors|Standard}|{C282LUO|Buick|Racing}|{C344SEQ|Honda|Coupe}|"]  
-nodo67525652748479[ label ="{C484JTO|Buick|Standard}|{C571ZHR|Ford|Deportivo}|{C647MGJ|Audi|Pick Up}|{C824HFI|Suzuki|Racing}|"]  
-nodo67504948718069[ label ="{C210GPE|Suzuki|Racing}|{C477TTC|Chrysler|Camioneta}|"]  
-nodo67574951707972[ label ="{C913FOH|Citroën|Coupe}|{P058WOF|RAM Trucks|Standard}|{P060HKC|MINI|Camioneta}|"]  
-nodo80504956777983[ label ="{P218MOS|Mazda|Standard}|{P290BID|Tata Motors|Standard}|"]  
-nodo80535153668566[ label ="{P535BUB|Kia Motors|Camioneta}|{P546SKJ|Mitsubishi Motors|Deportivo}|{P590PXZ|Suzuki|Deportivo}|"]  
-nodo80555053678185[ label ="{P725CQU|MINI|Pick Up}|{P836WTS|Dacia|Pick Up}|"]  
-nodo80565456836583[ label ="{P868SAS|Audi|Standard}|{P970AZE|Lexus|Deportivo}|"]  
-nodo80485653668672[ label ="{P085BVH|Buick|Coupe}|{P515LQN|Skoda|Camioneta}|{P688XIZ|Mazda|Coupe}|{P860RMD|Buick|Pick Up}|"]  
-nodo67504948718069->nodo67485048886771
-nodo67504948718069->nodo67504956878470
-nodo67504948718069->nodo67525652748479
-nodo67565357819078->nodo67504948718069
-nodo80485653668672->nodo67574951707972
-nodo80485653668672->nodo80504956777983
-nodo80485653668672->nodo80535153668566
-nodo80485653668672->nodo80555053678185
-nodo80485653668672->nodo80565456836583
-nodo67565357819078->nodo80485653668672
+bgcolor="oldlace"; 
+node[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style = filled, shape = record, width = 1 height = 1];
+  67565357819078[ label ="{<C859QZN>C859QZN|Infiniti|Pick Up}"]  
+67485048886771[ label ="{<C020XCG>C020XCG|Mercedes-Benz|Deportivo}|{<C196JDD>C196JDD|Vauxhall|Racing}|{<C207OOW>C207OOW|Renault|Standard}"]  
+67504956878470[ label ="{<C218WTF>C218WTF|Prueba|pick up P}|{<C249TVZ>C249TVZ|Hyundai Motors|Standard}|{<C282LUO>C282LUO|Buick|Racing}|{<C344SEQ>C344SEQ|Honda|Coupe}"]  
+67525652748479[ label ="{<C484JTO>C484JTO|Buick|Standard}|{<C571ZHR>C571ZHR|Ford|Deportivo}|{<C647MGJ>C647MGJ|Audi|Pick Up}|{<C824HFI>C824HFI|Suzuki|Racing}"]  
+67504948718069[ label ="{<C210GPE>C210GPE|Suzuki|Racing}|{<C477TTC>C477TTC|Chrysler|Camioneta}"]  
+67574951707972[ label ="{<C913FOH>C913FOH|Citroën|Coupe}|{<P058WOF>P058WOF|RAM Trucks|Standard}|{<P060HKC>P060HKC|MINI|Camioneta}"]  
+80504956777983[ label ="{<P218MOS>P218MOS|Mazda|Standard}|{<P290BID>P290BID|Tata Motors|Standard}"]  
+80535153668566[ label ="{<P535BUB>P535BUB|Kia Motors|Camioneta}|{<P546SKJ>P546SKJ|Mitsubishi Motors|Deportivo}|{<P590PXZ>P590PXZ|Suzuki|Deportivo}"]  
+80555053678185[ label ="{<P725CQU>P725CQU|MINI|Pick Up}|{<P836WTS>P836WTS|Dacia|Pick Up}"]  
+80565456836583[ label ="{<P868SAS>P868SAS|Audi|Standard}|{<P970AZE>P970AZE|Lexus|Deportivo}"]  
+80485653668672[ label ="{<P085BVH>P085BVH|Buick|Coupe}|{<P515LQN>P515LQN|Skoda|Camioneta}|{<P688XIZ>P688XIZ|Mazda|Coupe}|{<P860RMD>P860RMD|Buick|Pick Up}"]  
+67504948718069->67485048886771[dir="forward", color=mediumorchid4];
+67504948718069->67504956878470[dir="forward", color=mediumorchid4];
+67504948718069->67525652748479[dir="forward", color=mediumorchid4];
+67565357819078->67504948718069[dir="forward", color=mediumorchid4];
+80485653668672->67574951707972[dir="forward", color=mediumorchid4];
+80485653668672->80504956777983[dir="forward", color=mediumorchid4];
+80485653668672->80535153668566[dir="forward", color=mediumorchid4];
+80485653668672->80555053678185[dir="forward", color=mediumorchid4];
+80485653668672->80565456836583[dir="forward", color=mediumorchid4];
+67565357819078->80485653668672[dir="forward", color=mediumorchid4];
 label="{Arbol B | placas}";
 }

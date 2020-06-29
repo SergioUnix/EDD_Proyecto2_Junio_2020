@@ -409,16 +409,17 @@ public class arbol_por_paginas {
             if (nodo.nodo[iterBusca].valores[j] != 0) {
             father=nodo.nodo[iterBusca].father.valores[0];
             hijo= nodo.nodo[iterBusca].valores[0];                      
-            aux2+="{"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+            aux2+="{"+"<"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+">"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
                     obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
                     "}"+"|";                                              
             cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
             }
         j=j+1;
         }
-        if (nodo.nodo[iterBusca] != null) {         
-        this.cadena_nodos +="nodo"+hijo+"[ label =\""+aux2+"\"]  \n";
-        this.cadena_direccion += "nodo"+father+"->"+"nodo"+hijo+"\n";
+        if (nodo.nodo[iterBusca] != null) {
+       if(aux2.length()>0)aux2 = aux2.substring(0, aux2.length() - 1);
+        this.cadena_nodos +=""+hijo+"[ label =\""+aux2+"\"]  \n";
+        this.cadena_direccion += ""+father+"->"+""+hijo+"[dir=\"forward\", color=mediumorchid4];\n";
         aux2="";
         cadena_dot_ghrapviz += " ]";
         } 
@@ -441,17 +442,19 @@ this.aux="";
 this.aux2="";
 this.cadena_nodos="";
 this.cadena_direccion="";
-this.cadena="digraph arbol_por_paginas{\nrankdir=TB;\nnode[fillcolor =green , fontcolor = navy , color = darkolivegreen3 ,style = filled, shape = record, width = .1, height = .1];\n  ";
+this.cadena="digraph arbol_por_paginas{\nrankdir=TB;\nbgcolor=\"oldlace\"; \nnode[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style = filled, shape = record, width = 1 height = 1];\n  ";
 String cadena_dot = generar_recursivo(cabeza_nodo);
 long hijo=0;  int father=0;
 
 for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
     hijo =cabeza_nodo.valores[0];
-    aux += "{"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+    aux += "{"+"<"+obtenerPlaca(cabeza_nodo.valores[i])+">"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
          obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
             +"}"+ "|";
  }
-cadena +="nodo"+hijo+"[ label =\""+aux+"\"]  \n";
+if(aux.length()>0)aux = aux.substring(0, aux.length() - 1);
+
+cadena +=""+hijo+"[ label =\""+aux+"\"]  \n";
 
 cadena+=this.cadena_nodos;
 cadena+=this.cadena_direccion;
@@ -460,7 +463,79 @@ cadena+="label=\"{Arbol B | placas}\";\n";
     }    
 
     
+
+
+
+
+  
+   String auxRepo=""; 
+    public String reporteGrafo(cabeceras nodo) throws Exception {
+        cadena_dot_ghrapviz += "\n";
+        int iterBusca=0;
+        while(iterBusca<2*pag_primera_particion+1){   
+
+        if (nodo.nodo[iterBusca] != null) {
+            if (iterBusca != 0) { imprimir ++;
+        } else {     altura_N++;  imprimir = 1;}
+        reporteGrafo(nodo.nodo[iterBusca]);    }     
+        if (nodo.nodo[iterBusca] != null) { cadena_dot_ghrapviz += "[ "; }
+        long hijo=0;  long father=0;
+        int j=0;
+        while(nodo.nodo[iterBusca]!=null && j<nodo.nodo[iterBusca].valores.length){
+            if (nodo.nodo[iterBusca].valores[j] != 0) {
+            father=nodo.nodo[iterBusca].father.valores[0];
+            hijo= nodo.nodo[iterBusca].valores[0];                      
+            auxRepo+="{"+"<"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+">"+obtenerPlaca(nodo.nodo[iterBusca].valores[j])+"|"+
+                    obtenerMarca(nodo.nodo[iterBusca].valores[j])+"|"+ obtenerModelo(nodo.nodo[iterBusca].valores[j])+
+                    "}"+"|";                                              
+            cadena_dot_ghrapviz += nodo.nodo[iterBusca].valores[j] + "N"+nodo.nodo[iterBusca].father.valores[0]+", ";                                  
+            }
+        j=j+1;
+        }
+        if (nodo.nodo[iterBusca] != null) { 
+        if(auxRepo.length()>0)auxRepo = auxRepo.substring(0, auxRepo.length() - 1);
+        this.NodosRepo +=""+hijo+"[ label =\""+auxRepo+"\"]  \n";
+        this.cadDire += ""+father+"->"+""+hijo+"\n";
+        auxRepo="";
+        cadena_dot_ghrapviz += " ]";
+        } 
+        iterBusca=iterBusca+1;
+        }
+        if (cadena_dot_ghrapviz.length() > (2*pag_primera_particion+3)*4) {return cadena_dot_ghrapviz;}
+        return cadena_dot_ghrapviz;
+    }
+
     
+String CadenaRepo="";
+String auxR1="";
+String NodosRepo="";
+String cadDire="";
+
+
+public String getCadenaSubgrafo() throws Exception {
+this.cadena_dot_ghrapviz="";
+this.auxR1="";
+this.auxRepo="";
+this.NodosRepo="";
+this.cadDire="";
+this.CadenaRepo="subgraph cluster_0{\nrankdir=TB;\nbgcolor=\"oldlace\"; \nnode[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style = filled, shape = record, width = 1 height = 1];\n  ";
+String cadena_dot = reporteGrafo(cabeza_nodo);
+long hijo=0;  int father=0;
+
+for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
+    hijo =cabeza_nodo.valores[0];
+    auxR1 += "{"+"<"+obtenerPlaca(cabeza_nodo.valores[i])+">"+obtenerPlaca(cabeza_nodo.valores[i])+"|"+
+         obtenerMarca(cabeza_nodo.valores[i])+"|"+ obtenerModelo(cabeza_nodo.valores[i])
+            +"}"+ "|";
+ }
+if(auxR1.length()>0)auxR1 = auxR1.substring(0, auxR1.length() - 1);
+CadenaRepo +=""+hijo+"[ label =\""+auxR1+"\"]  \n";
+
+CadenaRepo+=this.NodosRepo;
+CadenaRepo+=this.cadDire;
+CadenaRepo+="label=\"{Arbol B | placas}\";\n";       
+        return CadenaRepo+"}";
+    }    
     
 }
 
