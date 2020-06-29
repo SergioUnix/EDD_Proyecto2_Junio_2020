@@ -137,6 +137,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         LimpiarBoton = new javax.swing.JButton();
         EliminarBoton = new javax.swing.JButton();
         CrearBoton = new javax.swing.JButton();
+        ImagenBoton = new javax.swing.JButton();
         grafico = new javax.swing.JButton();
         selecionar = new javax.swing.JButton();
         buscarLabel = new javax.swing.JLabel();
@@ -221,6 +222,16 @@ public class menu_Vehiculos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CrearBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, -1, -1));
+
+        ImagenBoton.setBackground(new java.awt.Color(255, 255, 255));
+        ImagenBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/imagen.png"))); // NOI18N
+        ImagenBoton.setText("IMAGEN");
+        ImagenBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImagenBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ImagenBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, -1, -1));
 
         grafico.setBackground(new java.awt.Color(255, 255, 255));
         grafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
@@ -558,7 +569,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
 
         try {
-            Graficas.graficar(Carga.vehiculos.getCadena(), "ArbolB_");
+            Graficas.graficar(Carga.vehiculos.getCadena(), "Arbol_B");
         } catch (Exception ex) {
             Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -722,6 +733,20 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_precioFocusLost
 
+    private void ImagenBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImagenBotonActionPerformed
+        File miGraphviz = new File("Arbol_B.png");
+        try {
+            Desktop.getDesktop().open(miGraphviz);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
+        }
+        mostrador_imagen imagen = new mostrador_imagen();
+        ImageIcon foto = new ImageIcon("./Arbol_B.png");
+        Icon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.GraphvizLabel.getWidth(), imagen.GraphvizLabel.getHeight(), Image.SCALE_DEFAULT));
+        imagen.GraphvizLabel.setIcon(icono);
+        imagen.setVisible(true);
+    }//GEN-LAST:event_ImagenBotonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -767,6 +792,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CrearBoton;
     private javax.swing.JButton EliminarBoton;
+    private javax.swing.JButton ImagenBoton;
     private javax.swing.JButton LimpiarBoton;
     private javax.swing.JLabel Salir;
     private javax.swing.JTable VehiculosTabla;

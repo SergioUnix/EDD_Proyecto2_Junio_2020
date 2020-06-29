@@ -4,6 +4,7 @@
  */
 package clases;
 
+import estructuras.lista_enlazada_doble_circular;
 import estructuras.lista_simple;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,6 +16,7 @@ public class Viaje {
     private int tiempoTotal;       //// suma de todo el recorrido  
     public lista_simple<Integer> pesoCamino;  /// 0, 250, 150, .....
 
+    private String fecha;
     private int anio;
     private int mes;
     private int dia;
@@ -22,9 +24,10 @@ public class Viaje {
     private int minuto;
     private int segundo;
 
-    private Cliente cliente;
-    private Vehiculo vehiculo;
-    private Conductor conductor;
+    private lista_enlazada_doble_circular<Cliente, Long> cliente;
+    private lista_enlazada_doble_circular<Conductor, Long> conductor;
+    private lista_enlazada_doble_circular<Vehiculo, String> vehiculo;
+
     private lista_simple<String> viaje;
     private String clave; //PLACAFECHAHORAMINUTO
 
@@ -33,31 +36,28 @@ public class Viaje {
         Calendar fecha = new GregorianCalendar();
         this.lugarOrigen = null;
         this.lugarDestino = null;
+        this.fecha = null;
         this.anio = fecha.get(Calendar.YEAR);
         this.mes = fecha.get(Calendar.MONTH);;
         this.dia = fecha.get(Calendar.DAY_OF_MONTH);
         this.hora = fecha.get(Calendar.HOUR_OF_DAY);
         this.minuto = fecha.get(Calendar.MINUTE);
         this.segundo = fecha.get(Calendar.SECOND);
-        this.cliente = null;
-        this.vehiculo = null;
-        this.conductor = null;
+        this.cliente = new lista_enlazada_doble_circular();
+        this.vehiculo = new lista_enlazada_doble_circular();
+        this.conductor = new lista_enlazada_doble_circular();
         this.viaje = null;
         this.clave = null;
-        this.pesoCamino=null;
+        this.pesoCamino = null;
     }
 
-    public Viaje(String lugarOrigen, String lugarDestino, Cliente cliente, Vehiculo vehiculo, Conductor conductor, lista_simple<String> viaje, String clave) {
+    public Viaje(String lugarOrigen, String lugarDestino, lista_simple<String> viaje, String clave) {
         this.lugarOrigen = lugarOrigen;
         this.lugarDestino = lugarDestino;
-        this.cliente = cliente;
-        this.vehiculo = vehiculo;
-        this.conductor = conductor;
         this.viaje = viaje;
         this.clave = clave;
     }
 
-    
     public lista_simple<Integer> getPesoCamino() {
         return pesoCamino;
     }
@@ -65,14 +65,15 @@ public class Viaje {
     public void setPesoCamino(lista_simple<Integer> pesoCamino) {
         this.pesoCamino = pesoCamino;
     }
+
     public int getTiempoTotal() {
         return tiempoTotal;
     }
 
     public void setTiempoTotal(int tiempoTotal) {
         this.tiempoTotal = tiempoTotal;
-    }   
-    
+    }
+
     public String getLugarOrigen() {
         return lugarOrigen;
     }
@@ -137,28 +138,28 @@ public class Viaje {
         this.segundo = segundo;
     }
 
-    public Cliente getCliente() {
+    public lista_enlazada_doble_circular<Cliente, Long> getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(lista_enlazada_doble_circular<Cliente, Long> cliente) {
         this.cliente = cliente;
     }
 
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
-    public Conductor getConductor() {
+    public lista_enlazada_doble_circular<Conductor, Long> getConductor() {
         return conductor;
     }
 
-    public void setConductor(Conductor conductor) {
+    public void setConductor(lista_enlazada_doble_circular<Conductor, Long> conductor) {
         this.conductor = conductor;
+    }
+
+    public lista_enlazada_doble_circular<Vehiculo, String> getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(lista_enlazada_doble_circular<Vehiculo, String> vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     public lista_simple<String> getViaje() {
@@ -173,8 +174,16 @@ public class Viaje {
         return clave;
     }
 
-    public void setClave() {
-        this.clave = vehiculo.getPlaca() + String.valueOf(dia) + String.valueOf(mes) + String.valueOf(anio) + String.valueOf(hora) + ":" + String.valueOf(minuto);
+    public void setClave(String placa) {
+        this.clave = placa + String.valueOf(dia) + String.valueOf(mes) + String.valueOf(anio) + String.valueOf(hora) + ":" + String.valueOf(minuto);
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha() {
+        this.fecha = String.valueOf(dia) + "/" + String.valueOf(mes) + "/" + String.valueOf(anio)+" " + String.valueOf(hora) + ":" + String.valueOf(minuto);
     }
 
 }

@@ -1,0 +1,89 @@
+digraph BlockChain {
+node[shape=component style="solid" color="blue" fontcolor = "black" penwidth=3];
+edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
+rankdir=LR;
+subgraph cluster_0{
+style=filled;
+color=white;
+"e3bda1ab6da3b3e6a32bcfc2a1a879f2"[label="e3bda1ab6da3b3e6a32bcfc2a1a879f2
+ FECHA: 29/5/2020 7:24
+CLIENTE: 4255040741108
+CONDUCTOR: 1511042948678
+VEHICULO: P688XIZ"];
+"0Cadiz"[label="Cadiz
+0"];
+"0Sevilla"[label="Sevilla
+125"];
+"0Jaen"[label="Jaen
+367"];
+"0Madrid"[label="Madrid
+702"];
+"0Bilbao"[label="Bilbao
+1097"];
+"0Cadiz"->"0Sevilla"
+"0Sevilla"->"0Jaen"
+"0Jaen"->"0Madrid"
+"0Madrid"->"0Bilbao"
+{ rank = same;"e3bda1ab6da3b3e6a32bcfc2a1a879f2";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Bilbao";}
+"e3bda1ab6da3b3e6a32bcfc2a1a879f2"->"0Cadiz""2bac998876ab6134b9bb02dac5194bd6"[label="e3bda1ab6da3b3e6a32bcfc2a1a879f2
+ FECHA: 29/5/2020 7:25
+CLIENTE: 8881189800232
+CONDUCTOR: 1511042948678
+VEHICULO: C859QZN"];
+"1Sevilla"[label="Sevilla
+0"];
+"1Jaen"[label="Jaen
+242"];
+"1Madrid"[label="Madrid
+577"];
+"1Badajoz"[label="Badajoz
+980"];
+"1Sevilla"->"1Jaen"
+"1Jaen"->"1Madrid"
+"1Madrid"->"1Badajoz"
+{ rank = same;"2bac998876ab6134b9bb02dac5194bd6";"1Sevilla";"1Jaen";"1Madrid";"1Badajoz";}
+"2bac998876ab6134b9bb02dac5194bd6"->"1Sevilla"
+"f0bd6f8b2141bddcb40814b1f0737268"[label="2bac998876ab6134b9bb02dac5194bd6
+ FECHA: 29/5/2020 7:25
+CLIENTE: 7176750467119
+CONDUCTOR: 5375090919096
+VEHICULO: P546SKJ"];
+"2Murcia"[label="Murcia
+0"];
+"2Albacete"[label="Albacete
+150"];
+"2Madrid"[label="Madrid
+401"];
+"2Valladolid"[label="Valladolid
+594"];
+"2Murcia"->"2Albacete"
+"2Albacete"->"2Madrid"
+"2Madrid"->"2Valladolid"
+{ rank = same;"f0bd6f8b2141bddcb40814b1f0737268";"2Murcia";"2Albacete";"2Madrid";"2Valladolid";}
+"f0bd6f8b2141bddcb40814b1f0737268"->"2Murcia"
+"2221c6f6bd610b8b501bcaf9efced36b"[label="f0bd6f8b2141bddcb40814b1f0737268
+ FECHA: 29/5/2020 7:25
+CLIENTE: 345056202069
+CONDUCTOR: 3500641864904
+VEHICULO: P860RMD"];
+"3Badajoz"[label="Badajoz
+0"];
+"3Madrid"[label="Madrid
+403"];
+"3Jaen"[label="Jaen
+738"];
+"3Sevilla"[label="Sevilla
+980"];
+"3Cadiz"[label="Cadiz
+1105"];
+"3Badajoz"->"3Madrid"
+"3Madrid"->"3Jaen"
+"3Jaen"->"3Sevilla"
+"3Sevilla"->"3Cadiz"
+{ rank = same;"2221c6f6bd610b8b501bcaf9efced36b";"3Badajoz";"3Madrid";"3Jaen";"3Sevilla";"3Cadiz";}
+"2221c6f6bd610b8b501bcaf9efced36b"->"3Badajoz"
+"e3bda1ab6da3b3e6a32bcfc2a1a879f2"->"2bac998876ab6134b9bb02dac5194bd6"
+"2bac998876ab6134b9bb02dac5194bd6"->"f0bd6f8b2141bddcb40814b1f0737268"
+"f0bd6f8b2141bddcb40814b1f0737268"->"2221c6f6bd610b8b501bcaf9efced36b"
+}
+}

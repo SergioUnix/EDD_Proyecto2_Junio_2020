@@ -47,6 +47,8 @@ public class estructura_BloqueC<T, V> {
 
         private nodo_bloque<T, V> siguiente;
         private nodo_bloque<T, V> anterior;
+        private String selloTiempo;
+        private int nonce;
         private V llaveAnterior;
         private V llave;
         private T transaccion;
@@ -54,14 +56,18 @@ public class estructura_BloqueC<T, V> {
         public nodo_bloque() {
             this.siguiente = null;
             this.anterior = null;
+            this.selloTiempo = null;
+            this.nonce = 0;
             this.llaveAnterior = null;
             this.llave = null;
             this.transaccion = null;
         }
 
-        public nodo_bloque(nodo_bloque<T, V> siguiente, nodo_bloque<T, V> anterior, V llaveAnterior, V llave, T transaccion) {
+        public nodo_bloque(nodo_bloque<T, V> siguiente, nodo_bloque<T, V> anterior, String selloTiempo, int nonce, V llaveAnterior, V llave, T transaccion) {
             this.siguiente = siguiente;
             this.anterior = anterior;
+            this.selloTiempo = selloTiempo;
+            this.nonce = nonce;
             this.llaveAnterior = llaveAnterior;
             this.llave = llave;
             this.transaccion = transaccion;
@@ -103,6 +109,22 @@ public class estructura_BloqueC<T, V> {
             return transaccion;
         }
 
+        public String getSelloTiempo() {
+            return selloTiempo;
+        }
+
+        public int getNonce() {
+            return nonce;
+        }
+
+        public void setNonce(int nonce) {
+            this.nonce = nonce;
+        }
+
+        public void setSelloTiempo(String selloTiempo) {
+            this.selloTiempo = selloTiempo;
+        }
+
         public void setTransaccion(T transaccion) {
             this.transaccion = transaccion;
         }
@@ -127,14 +149,16 @@ public class estructura_BloqueC<T, V> {
         return this.numeroBloques;
     }
 
-    public void nuevoBloque(T transaccion, V llave) {
+    public void nuevoBloque(T transaccion, V llave, String selloTiempo) {
         nodo_bloque<T, V> nuevoBloque = new nodo_bloque();
         nuevoBloque.setTransaccion(transaccion);
         nuevoBloque.setLlave(llave);
+        nuevoBloque.setSelloTiempo(selloTiempo);
+        nuevoBloque.setNonce(numeroBloques + 1);
         if (cadenaVacia()) {
             nuevoBloque.setLlaveAnterior(null);
             inicio = nuevoBloque;
-            ultimo = nuevoBloque;
+            ultimo = inicio;
         } else {
             nuevoBloque.setLlaveAnterior(ultimo.getLlave());
             ultimo.setSiguiente(nuevoBloque);
@@ -174,4 +198,21 @@ public class estructura_BloqueC<T, V> {
         return null;
     }
 
+    public nodo_bloque<T, V> retornarBloque(int indice) {
+        alter = inicio;
+        if (cadenaVacia()) {
+            return null;
+
+        }
+        if (indice == 0) {
+            return alter;
+        } else {
+
+            for (int i = 0; i < indice; i++) {
+                alter = alter.getSiguiente();
+
+            }
+            return alter;
+        }
+    }
 }

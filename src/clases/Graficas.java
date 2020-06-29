@@ -36,8 +36,8 @@ public class Graficas {
             pbuilder.redirectErrorStream(true);
             pbuilder.start();     
         //Abro mi Imagen generada
-        File miArchivo = new File(nombre_grafica+".png");
-        Desktop.getDesktop().open(miArchivo);     
+        //File miArchivo = new File(nombre_grafica+".png");
+        //Desktop.getDesktop().open(miArchivo);     
         } catch (Exception e) {
            // JOptionPane.showMessageDialog(null, "No esta la Ruta");
         }      

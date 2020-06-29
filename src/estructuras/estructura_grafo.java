@@ -308,7 +308,7 @@ public class estructura_grafo {
         
         
   ////////////////////////////////////////////Se calcula el camino mas corto de un nodo origen hacia un nodo destino      
-  public void metCorto(String origenIngresado,String destinoIngresado) throws Exception {
+  public Viaje metCorto(String origenIngresado,String destinoIngresado) throws Exception {
         int totalVertices , localinicial,localdestino, Aristasgrafo;
        //numero total de Vertices
         totalVertices = this.tamanio;
@@ -372,8 +372,9 @@ public class estructura_grafo {
         
         
                
-//                   
-        Carga.viajeUsuario=resuelto;
+//           
+return resuelto;
+       // Carga.viajeUsuario=resuelto;
     
         
     }       

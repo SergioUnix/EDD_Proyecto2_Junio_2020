@@ -17,8 +17,10 @@ import java.nio.file.Paths;
 import estructuras.estructura_Hash;
 import estructuras.arbol_por_paginas;
 import estructuras.estructura_BloqueC;
+import estructuras.estructura_BloqueC.nodo_bloque;
 import estructuras.estructura_grafo;
 import estructuras.lista_enlazada_doble_circular;
+import estructuras.lista_enlazada_doble_circular.nodo_doble;
 import estructuras.lista_simple;
 
 /*
@@ -31,11 +33,10 @@ public class Carga {
     public static lista_enlazada_doble_circular<Conductor, Long> conductores = new lista_enlazada_doble_circular();
     public static arbol_por_paginas vehiculos = new arbol_por_paginas(2);
     public static estructura_Hash<Cliente> clientes = new estructura_Hash(37, 75.0);
-    public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
     public static lista_simple<Cliente> clientesAUX;
     public static estructura_grafo grafo = new estructura_grafo();
-    public static estructura_BloqueC<Viaje,String> viajes = new estructura_BloqueC();
-    public static Viaje viajeUsuario=new Viaje();
+    public static estructura_BloqueC<Viaje, String> viajes = new estructura_BloqueC();
+
     public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);
@@ -58,6 +59,7 @@ public class Carga {
                     clientes.add(nuevoCliente, nuevoCliente.getDPI());
                     clientesAUX = clientes.restablecer_tamanio();
                     if (!clientesAUX.isEmpty()) {
+                        estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(clientes.getCapacidad() + 37, 75.0);
                         for (int i = 0; i < clientesAUX.size(); i++) {
                             clientesAlternative.add(clientesAUX.get(i), clientesAUX.get(i).getDPI());
                         }
@@ -355,6 +357,149 @@ public class Carga {
         BW.close();
         //RETORNAMOS LA RUTA PARA CREAR EL GRÁFICO
         return rutaAbsoluta;
+    }
+
+    public static Path block_chain_GRAPHVIZ() throws IOException, Exception {
+        nodo_bloque aux, aux2;
+        //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
+        String ARCHIVO = "Viajes.dot";
+        Path rutaRelativa = Paths.get(ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        //IMPRIMIR LA RUTA PARA REVISAR
+        System.out.println(rutaAbsoluta);
+        //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
+        File archivo = new File(rutaAbsoluta.toString());
+        BufferedWriter BW;
+        //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
+        if (archivo.exists()) {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph BlockChain {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            aux = viajes.retornarBloque(0);
+            miViaje = (Viaje) aux.getTransaccion();
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                viaje2 = new Viaje();
+                aux2 = viajes.retornarBloque(i);
+                viaje2 = (Viaje) aux2.getTransaccion();
+                BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                        + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "[label=\"" + viaje2.getViaje().get(j)
+                            + "\n" + viaje2.getPesoCamino().get(j) + "\"];" + "\n");
+                }
+                for (int j = 0; j < viaje2.getViaje().getSize() - 1; j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "->" + "\"" + i + viaje2.getViaje().get(j + 1) + "\"" + "\n");
+                }
+                BW.write("{ rank = same;\"" + aux2.getLlave() + "\";");
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + ";");
+                }
+                BW.write("}\n");
+                BW.write("\"" + aux2.getLlave() + "\"->" + "\"" + i + viaje2.getViaje().get(0) + "\"" + "\n");
+
+            }
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                aux = viajes.retornarBloque(i);
+                BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
+            }
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
+        else {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph BlockChain {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            aux = viajes.retornarBloque(0);
+            miViaje = (Viaje) aux.getTransaccion();
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                viaje2 = new Viaje();
+                aux2 = viajes.retornarBloque(i);
+                viaje2 = (Viaje) aux2.getTransaccion();
+                BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                        + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "[label=\"" + viaje2.getViaje().get(j)
+                            + "\n" + viaje2.getPesoCamino().get(j) + "\"];" + "\n");
+                }
+                for (int j = 0; j < viaje2.getViaje().getSize() - 1; j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "->" + "\"" + i + viaje2.getViaje().get(j + 1) + "\"" + "\n");
+                }
+                BW.write("{ rank = same;\"" + aux2.getLlave() + "\";");
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + ";");
+                }
+                BW.write("}\n");
+                BW.write("\"" + aux2.getLlave() + "\"->" + "\"" + i + viaje2.getViaje().get(0) + "\"" + "\n");
+
+            }
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                aux = viajes.retornarBloque(i);
+                BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
+            }
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        }
+
+        BW.close();
+        //RETORNAMOS LA RUTA PARA CREAR EL GRÁFICO
+        return rutaAbsoluta;
+
     }
 
     public static void dibujarGRAPHVIZ(Path dot, String png) {

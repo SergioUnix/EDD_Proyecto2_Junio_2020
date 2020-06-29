@@ -9,12 +9,29 @@ import clases.Carga;
 import clases.Cliente;
 import clases.Conductor;
 import clases.Vehiculo;
+import clases.Viaje;
+import estructuras.estructura_BloqueC.Encriptar;
+import estructuras.lista_enlazada_doble_circular;
+import estructuras.lista_enlazada_doble_circular.nodo_doble;
 import estructuras.lista_simple;
+import java.awt.Component;
+import java.awt.Desktop;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -29,8 +46,8 @@ public class menu_Viajes extends javax.swing.JFrame {
     private DefaultComboBoxModel vehiculoBox = new DefaultComboBoxModel();
     private DefaultComboBoxModel origenBox = new DefaultComboBoxModel();
     private DefaultComboBoxModel destinoBox = new DefaultComboBoxModel();
-
     private lista_simple<Cliente> clientesTabla;
+    private Viaje viajeUsuario;
 
     /**
      * Creates new form menu_Viajes
@@ -60,6 +77,8 @@ public class menu_Viajes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ClienteArea = new javax.swing.JTextArea();
         Titulo = new javax.swing.JLabel();
+        ImagenBoton = new javax.swing.JButton();
+        grafico = new javax.swing.JButton();
         CrearViajeBoton = new javax.swing.JButton();
         DestinoLabel = new javax.swing.JLabel();
         DestinoBox = new javax.swing.JComboBox<>();
@@ -95,10 +114,10 @@ public class menu_Viajes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Salir);
-        Salir.setBounds(880, 10, 72, 72);
+        Salir.setBounds(20, 500, 72, 72);
 
         MostradorPanel.setBackground(new java.awt.Color(0, 0, 0));
-        MostradorPanel.setLayout(null);
+        MostradorPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ViajeArea.setEditable(false);
         ViajeArea.setBackground(new java.awt.Color(255, 102, 0));
@@ -109,8 +128,7 @@ public class menu_Viajes extends javax.swing.JFrame {
         ViajeArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane4.setViewportView(ViajeArea);
 
-        MostradorPanel.add(jScrollPane4);
-        jScrollPane4.setBounds(300, 210, 260, 180);
+        MostradorPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 260, 180));
 
         VehiculoArea.setEditable(false);
         VehiculoArea.setBackground(new java.awt.Color(255, 102, 0));
@@ -121,8 +139,7 @@ public class menu_Viajes extends javax.swing.JFrame {
         VehiculoArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane3.setViewportView(VehiculoArea);
 
-        MostradorPanel.add(jScrollPane3);
-        jScrollPane3.setBounds(20, 210, 260, 180);
+        MostradorPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 260, 180));
 
         ConductorArea.setEditable(false);
         ConductorArea.setBackground(new java.awt.Color(255, 102, 0));
@@ -133,8 +150,7 @@ public class menu_Viajes extends javax.swing.JFrame {
         ConductorArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane2.setViewportView(ConductorArea);
 
-        MostradorPanel.add(jScrollPane2);
-        jScrollPane2.setBounds(300, 20, 260, 180);
+        MostradorPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 260, 180));
 
         ClienteArea.setEditable(false);
         ClienteArea.setBackground(new java.awt.Color(255, 102, 0));
@@ -145,17 +161,38 @@ public class menu_Viajes extends javax.swing.JFrame {
         ClienteArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jScrollPane1.setViewportView(ClienteArea);
 
-        MostradorPanel.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 20, 260, 180);
+        MostradorPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, 180));
 
         jPanel1.add(MostradorPanel);
-        MostradorPanel.setBounds(380, 90, 570, 410);
+        MostradorPanel.setBounds(380, 70, 570, 410);
 
         Titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Titulo.setForeground(new java.awt.Color(255, 255, 255));
         Titulo.setText("GESTION DE VIAJES");
         jPanel1.add(Titulo);
-        Titulo.setBounds(540, 60, 240, 30);
+        Titulo.setBounds(540, 20, 240, 30);
+
+        ImagenBoton.setBackground(new java.awt.Color(255, 255, 255));
+        ImagenBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/imagen.png"))); // NOI18N
+        ImagenBoton.setText("IMAGEN");
+        ImagenBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImagenBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ImagenBoton);
+        ImagenBoton.setBounds(350, 490, 142, 80);
+
+        grafico.setBackground(new java.awt.Color(255, 255, 255));
+        grafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
+        grafico.setText("GRAPHVIZ");
+        grafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(grafico);
+        grafico.setBounds(180, 490, 156, 80);
 
         CrearViajeBoton.setBackground(new java.awt.Color(255, 255, 255));
         CrearViajeBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/iviajes.png"))); // NOI18N
@@ -172,27 +209,27 @@ public class menu_Viajes extends javax.swing.JFrame {
         DestinoLabel.setForeground(new java.awt.Color(255, 255, 255));
         DestinoLabel.setText("DESTINO:");
         jPanel1.add(DestinoLabel);
-        DestinoLabel.setBounds(20, 440, 180, 30);
+        DestinoLabel.setBounds(20, 380, 180, 30);
 
         DestinoBox.setBackground(new java.awt.Color(0, 0, 0));
         DestinoBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         DestinoBox.setForeground(new java.awt.Color(255, 255, 255));
         DestinoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(DestinoBox);
-        DestinoBox.setBounds(20, 470, 290, 30);
+        DestinoBox.setBounds(20, 410, 290, 30);
 
         OrigenLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         OrigenLabel.setForeground(new java.awt.Color(255, 255, 255));
         OrigenLabel.setText("ORIGEN:");
         jPanel1.add(OrigenLabel);
-        OrigenLabel.setBounds(20, 360, 180, 30);
+        OrigenLabel.setBounds(20, 300, 180, 30);
 
         OrigenBox.setBackground(new java.awt.Color(0, 0, 0));
         OrigenBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         OrigenBox.setForeground(new java.awt.Color(255, 255, 255));
         OrigenBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(OrigenBox);
-        OrigenBox.setBounds(20, 400, 290, 30);
+        OrigenBox.setBounds(20, 340, 290, 30);
 
         Vehiculoslabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Vehiculoslabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -333,8 +370,8 @@ public class menu_Viajes extends javax.swing.JFrame {
         return result;
     }
     private void CrearViajeBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearViajeBotonActionPerformed
+
         if (CrearViajeBoton.getText().equals("Crear Viaje")) {
-            Cliente eC = null;
 
             if (!ClientesBox.getSelectedItem().equals("Seleccione Un Cliente")
                     && !ConductoresBox.getSelectedItem().equals("Seleccione Un Conductor")
@@ -342,8 +379,9 @@ public class menu_Viajes extends javax.swing.JFrame {
                     && !OrigenBox.getSelectedItem().equals("Seleccione su punto de Origen")
                     && !DestinoBox.getSelectedItem().equals("Seleccione su punto de Destino")
                     && !OrigenBox.getSelectedItem().equals(DestinoBox.getSelectedItem())) {
+                viajeUsuario = new Viaje();
                 long dpi = Long.parseLong(String.valueOf(ClientesBox.getSelectedItem()));
-
+                Cliente eC = null;
                 clientesTabla = Carga.clientes.devolver_nodo(dpi);
                 for (int i = 0; i < clientesTabla.size(); i++) {
                     try {
@@ -367,7 +405,7 @@ public class menu_Viajes extends javax.swing.JFrame {
                 long dpiC = Long.parseLong(String.valueOf(ConductoresBox.getSelectedItem()));
                 Conductor eC2;
                 eC2 = Carga.conductores.retornarDato(dpiC);
-
+                
                 ConductorArea.setText("CONDUCTOR QUE REALIZARA EL VIAJE:" + "\n" + "\n"
                         + "DPI: " + String.valueOf(eC2.getDPI()) + "\n"
                         + "NOMBRES: " + eC2.getNombres() + "\n"
@@ -376,12 +414,12 @@ public class menu_Viajes extends javax.swing.JFrame {
                         + "TIPO DE LICENCIA: " + String.valueOf(eC2.getLicencia()) + "\n"
                         + "GENERO: " + eC2.getGenero() + "\n"
                         + "FECHA DE NACIMIENTO: " + eC2.getFecha_nac());
-
+                long placaNo = valorAssci(String.valueOf(VehiculosBox.getSelectedItem()));
+                Vehiculo eC3 = null;
                 try {
-                    long placaNo = valorAssci(String.valueOf(VehiculosBox.getSelectedItem()));
-                    Vehiculo eC3;
-                    eC3 = Carga.vehiculos.obtenerVehiculo(placaNo);
 
+                    eC3 = Carga.vehiculos.obtenerVehiculo(placaNo);
+                    
                     VehiculoArea.setText("VEHICULO ESCOGIDO PARA EL VIAJE" + "\n" + "\n"
                             + "PLACA: " + eC3.getPlaca() + "\n"
                             + "MARCA: " + eC3.getMarca() + "\n"
@@ -397,11 +435,69 @@ public class menu_Viajes extends javax.swing.JFrame {
                 ViajeArea.setText("VIAJE A REALIZAR:" + "\n" + "\n"
                         + "LUGAR ORIGEN: " + OrigenBox.getSelectedItem().toString() + "\n"
                         + "LUGAR DESTINO: " + DestinoBox.getSelectedItem().toString());
-            }
-        } else {
+                try {
+                    viajeUsuario = Carga.grafo.metCorto(OrigenBox.getSelectedItem().toString(), DestinoBox.getSelectedItem().toString());
+                } catch (Exception ex) {
+                    Logger.getLogger(menu_Viajes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                viajeUsuario.getCliente().agregarNodo(eC, eC.getDPI());
+                viajeUsuario.getConductor().agregarNodo(eC2, eC2.getDPI());
+                viajeUsuario.getVehiculo().agregarNodo(eC3, eC3.getPlaca());
+                CrearViajeBoton.setText("Confirmar Viaje");
+                viajeUsuario.setClave(eC3.getPlaca());
+                System.out.println(viajeUsuario.getClave());
+                viajeUsuario.setFecha();
+                System.out.println(viajeUsuario.getFecha());
 
+            }
+
+        } else if (CrearViajeBoton.getText().equals("Confirmar Viaje")) {
+            try {
+                Carga.viajes.nuevoBloque(viajeUsuario, Encriptar.MD5Code(viajeUsuario.getClave()), viajeUsuario.getFecha());
+                System.out.println(Encriptar.MD5Code(viajeUsuario.getClave()));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(menu_Viajes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            viajeUsuario.getViaje().imprimir();
+            ClienteArea.setText("");
+            ConductorArea.setText("");
+            VehiculoArea.setText("");
+            ViajeArea.setText("");
+
+            for (Component component : jPanel1.getComponents()) {
+                if (component instanceof JComboBox) {
+                    ((JComboBox) component).setSelectedIndex(0);
+                }
+            }
+            CrearViajeBoton.setText("Crear Viaje");
         }
     }//GEN-LAST:event_CrearViajeBotonActionPerformed
+
+    private void graficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficoActionPerformed
+        //MÉTODO PARA CREAR EL ARCHIVO.DOT Y LA IMAGEN.PNG
+        try {
+            Path CMD = Carga.block_chain_GRAPHVIZ();
+            Carga.dibujarGRAPHVIZ(CMD, "Viajes.png");
+        } catch (IOException ex) {
+            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_graficoActionPerformed
+
+    private void ImagenBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImagenBotonActionPerformed
+        File miGraphviz = new File("Viajes.png");
+        try {
+            Desktop.getDesktop().open(miGraphviz);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
+        }
+        mostrador_imagen imagen = new mostrador_imagen();
+        ImageIcon foto = new ImageIcon("./Viajes.png");
+        Icon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.GraphvizLabel.getWidth(), imagen.GraphvizLabel.getHeight(), Image.SCALE_DEFAULT));
+        imagen.GraphvizLabel.setIcon(icono);
+        imagen.setVisible(true);
+    }//GEN-LAST:event_ImagenBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,6 +545,7 @@ public class menu_Viajes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> DestinoBox;
     private javax.swing.JLabel DestinoLabel;
     private javax.swing.JLabel Fondo;
+    private javax.swing.JButton ImagenBoton;
     private javax.swing.JPanel MostradorPanel;
     private javax.swing.JComboBox<String> OrigenBox;
     private javax.swing.JLabel OrigenLabel;
@@ -458,6 +555,7 @@ public class menu_Viajes extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> VehiculosBox;
     private javax.swing.JLabel Vehiculoslabel;
     private javax.swing.JTextArea ViajeArea;
+    private javax.swing.JButton grafico;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
