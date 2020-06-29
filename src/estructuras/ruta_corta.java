@@ -1,127 +1,138 @@
-package estructuras;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
-
 /**
  *
  * @author ADMIN
  */
-public class ruta_corta {
+package estructuras;
+import clases.Viaje;
+import java.util.PriorityQueue;
+
+public class ruta_corta {    
     
+    private final int limitedeVertices = 9999;  
+    private final int valorGrande = 1<<30;  
     
-    //similar a los defines de C++
-    private final int MAX = 10005;  //maximo numero de vértices
-    private final int INF = 1<<30;  //definimos un valor grande que represente la distancia infinita inicial, basta conque sea superior al maximo valor del peso en alguna de las aristas
+    private lista_simple< lista_simple< NodoDjistra > > mi_listaAdyacencia = new lista_simple< lista_simple< NodoDjistra > >(); 
+    private int distancia[ ] = new int[ limitedeVertices ];       
+    private boolean vertices_yaVisitados[ ] = new boolean[ limitedeVertices ];  
+    private PriorityQueue< NodoDjistra > colaDePrioridad = new PriorityQueue<NodoDjistra>();
+    private int totalVeticesGrafo;                                    
+    private int guardaLosCaminos[] = new int[ limitedeVertices ];         
+    private boolean corriendoDjistra;
     
-    private List< List< Node > > ady = new ArrayList< List< Node > >(); //lista de adyacencia
-    private int distancia[ ] = new int[ MAX ];          //distancia[ u ] distancia de vértice inicial a vértice con ID = u
-    private boolean visitado[ ] = new boolean[ MAX ];   //para vértices visitados
-    private PriorityQueue< Node > Q = new PriorityQueue<Node>(); //priority queue propia de Java, usamos el comparador definido para que el de menor valor este en el tope
-    private int V;                                      //numero de vertices
-    private int previo[] = new int[ MAX ];              //para la impresion de caminos
-    private boolean dijkstraEjecutado;
-    
-   ruta_corta (int V){
-        this.V = V;
-        for( int i = 0 ; i <= V ; ++i ) 
-            ady.add(new ArrayList<Node>()) ; //inicializamos lista de adyacencia
-        dijkstraEjecutado = false;
+   ruta_corta (int totalVeticesGrafo){
+     int index=0;
+        this.totalVeticesGrafo = totalVeticesGrafo;
+
+        while(index <= totalVeticesGrafo){
+            mi_listaAdyacencia.add(new lista_simple<NodoDjistra>()) ;
+
+          index++;
+        }      
+        corriendoDjistra = false;
     }
     
-    //En el caso de java usamos una clase que representara el pair de C++
-    class Node implements Comparable<Node>{
-        int first, second;
-        Node( int d , int p ){                          //constructor
-            this.first = d;
-            this.second = p;
+
+    class NodoDjistra implements Comparable<NodoDjistra>{
+        int primero, segundo;
+        NodoDjistra( int d , int p ){                     
+            this.primero = d;
+            this.segundo = p;
         }
-        public int compareTo( Node other){              //es necesario definir un comparador para el correcto funcionamiento del PriorityQueue
-            if( second > other.second ) return 1;
-            if( second == other.second ) return 0;
+        public int compareTo( NodoDjistra nodoAux){            
+            if( segundo > nodoAux.segundo ) return 1;
+            if( segundo == nodoAux.segundo ) return 0;
             return -1;
         }
     };
-    
-    //función de inicialización
-    private void init(){
-        for( int i = 0 ; i <= V ; ++i ){
-            distancia[ i ] = INF;  //inicializamos todas las distancias con valor infinito
-            visitado[ i ] = false; //inicializamos todos los vértices como no visitados
-            previo[ i ] = -1;      //inicializamos el previo del vertice i con -1
+
+    private void constructorArreglos(){
+        int indexar=0;
+        while(indexar <= totalVeticesGrafo){
+            distancia[ indexar ] = valorGrande;  
+            vertices_yaVisitados[ indexar ] = false; 
+            guardaLosCaminos[ indexar ] = -1;     
+            indexar=indexar+1;
+        }    
+       
+
+        
+    }
+
+ 
+    private void Actualizar( int vPresente , int vVecino , int peso ){
+        if( distancia[ vPresente ] + peso < distancia[ vVecino ] ){
+            distancia[ vVecino ] = distancia[ vPresente ] + peso;  
+            guardaLosCaminos[ vVecino ] = vPresente;                        
+            colaDePrioridad.add( new NodoDjistra( vVecino , distancia[ vVecino ] ) );
         }
     }
 
-    //Paso de relajacion
-    private void relajacion( int actual , int adyacente , int peso ){
-        //Si la distancia del origen al vertice actual + peso de su arista es menor a la distancia del origen al vertice adyacente
-        if( distancia[ actual ] + peso < distancia[ adyacente ] ){
-            distancia[ adyacente ] = distancia[ actual ] + peso;  //relajamos el vertice actualizando la distancia
-            previo[ adyacente ] = actual;                         //a su vez actualizamos el vertice previo
-            Q.add( new Node( adyacente , distancia[ adyacente ] ) ); //agregamos adyacente a la cola de prioridad
-        }
-    }
+    Viaje algoritmoDjistra( int inicial,Viaje viaje,int destinoIngresado ) throws Exception{
+        constructorArreglos(); 
+        colaDePrioridad.add( new NodoDjistra( inicial , 0 ) );
+        distancia[ inicial ] = 0;     
+        int verticePresente , verticeVecino , peso;
+        while( !colaDePrioridad.isEmpty() ){                   
+            verticePresente = colaDePrioridad.element().primero;          
+            colaDePrioridad.remove();                          
+            if( vertices_yaVisitados[ verticePresente ] ) continue; 
+            vertices_yaVisitados[ verticePresente ] = true;         
 
-    void dijkstra( int inicial ){
-        init(); //inicializamos nuestros arreglos
-        Q.add( new Node( inicial , 0 ) ); //Insertamos el vértice inicial en la Cola de Prioridad
-        distancia[ inicial ] = 0;      //Este paso es importante, inicializamos la distancia del inicial como 0
-        int actual , adyacente , peso;
-        while( !Q.isEmpty() ){                   //Mientras cola no este vacia
-            actual = Q.element().first;            //Obtengo de la cola el nodo con menor peso, en un comienzo será el inicial
-            Q.remove();                           //Sacamos el elemento de la cola
-            if( visitado[ actual ] ) continue; //Si el vértice actual ya fue visitado entonces sigo sacando elementos de la cola
-            visitado[ actual ] = true;         //Marco como visitado el vértice actual
-
-            for( int i = 0 ; i < ady.get( actual ).size() ; ++i ){ //reviso sus adyacentes del vertice actual
-                adyacente = ady.get( actual ).get( i ).first;   //id del vertice adyacente
-                peso = ady.get( actual ).get( i ).second;        //peso de la arista que une actual con adyacente ( actual , adyacente )
-                if( !visitado[ adyacente ] ){        //si el vertice adyacente no fue visitado
-                    relajacion( actual , adyacente , peso ); //realizamos el paso de relajacion
+            for( int i = 0 ; i < mi_listaAdyacencia.get( verticePresente ).size() ; ++i ){ 
+                verticeVecino = mi_listaAdyacencia.get( verticePresente ).get( i ).primero;   
+                peso = mi_listaAdyacencia.get( verticePresente ).get( i ).segundo;      
+                if( !vertices_yaVisitados[ verticeVecino ] ){     
+                    Actualizar( verticePresente , verticeVecino , peso ); 
                 }
             }
         }
+        System.out.println("Todas las Distancias Cortas desde nuestro vertice Inicial: "+inicial);
+        
+        for( int i = 1 ; i <= totalVeticesGrafo ; ++i ){
+        System.out.println("Hacia el vertice destino: "+i+"  distancia mas corta al vertice : "+distancia[i]);
+            if(destinoIngresado==i){viaje.setTiempoTotal(distancia[i]);} ////aca seteo el tiempo total del origen al destino
+        }
+        corriendoDjistra = true;
+        return viaje;
+    }
+    
+    void agregar_Arista( int origenObtenido , int destinoObtenido , int peso , boolean EsDirigido ) throws Exception{
+        mi_listaAdyacencia.get( origenObtenido ).add( new NodoDjistra( destinoObtenido , peso ) );    //grafo diridigo
+        if( !EsDirigido )
+            mi_listaAdyacencia.get( destinoObtenido ).add( new NodoDjistra( origenObtenido , peso ) ); //no EsDirigido
+    }
+    
+    lista_simple<Integer> pasoCaminos=new lista_simple<>();
+    
+    lista_simple<Integer> mostrarCaminoMasCorto(int destinoIngresado){
+        if( !corriendoDjistra ){
+            System.out.println("A ley ejecutar el Algoritma Djistra primero  ");
+            return null;
+        }
 
-        System.out.printf( "Distancias mas cortas iniciando en vertice %d\n" , inicial );
-        for( int i = 1 ; i <= V ; ++i ){
-            System.out.printf("Vertice %d , distancia mas corta = %d\n" , i , distancia[ i ] );
-        }
-        dijkstraEjecutado = true;
-    }
-    
-    void addEdge( int origen , int destino , int peso , boolean dirigido ){
-        ady.get( origen ).add( new Node( destino , peso ) );    //grafo diridigo
-        if( !dirigido )
-            ady.get( destino ).add( new Node( origen , peso ) ); //no dirigido
-    }
-    
-    void printShortestPath(int destinoIngresado){
-        if( !dijkstraEjecutado ){
-            System.out.println("Es necesario ejecutar el algorithmo de Dijkstra antes de poder imprimir el camino mas corto");
-            return;
-        }
-        Scanner sc = new Scanner( System.in );      //para lectura de datos
         System.out.println("\n**************Impresion de camino mas corto**************");
-        System.out.printf("Ingrese vertice destino: ");
-        int destino=destinoIngresado ;
-        print( destino );
-        System.out.printf("\n");
+        System.out.printf("Ingrese vertice destino: ");     
+        mostrarCamino( destinoIngresado);
+        System.out.printf("\n"); 
+        pasoCaminos.add(destinoIngresado);
+        return this.pasoCaminos;
     }
     
-    //Impresion del camino mas corto desde el vertice inicial y final ingresados
-    void print( int destino ){
-        if( previo[ destino ] != -1 )    //si aun poseo un vertice previo
-            print( previo[ destino ] );  //recursivamente sigo explorando
-        System.out.printf("%d " , destino );        //terminada la recursion imprimo los vertices recorridos
+    void mostrarCamino( int destino ){
+        if( guardaLosCaminos[ destino ] != -1 ){  
+            mostrarCamino( guardaLosCaminos[ destino ] );
+            if(this.pasoCaminos.buscar(guardaLosCaminos[ destino ])==false){
+            this.pasoCaminos.add( guardaLosCaminos[ destino ]);  }
+        }
+   
+        System.out.printf("%d " , destino );       
     }
 
-    public int getNumberOfVertices() {
-        return V;
+    public int GetTotalVetices() {
+        return totalVeticesGrafo;
     }
 
-    public void setNumberOfVertices(int numeroDeVertices) {
-        V = numeroDeVertices;
+    public void SetVertices(int numeroDeVertices) {
+        totalVeticesGrafo = numeroDeVertices;
     }
 }

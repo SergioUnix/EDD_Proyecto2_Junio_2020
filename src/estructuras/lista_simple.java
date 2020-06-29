@@ -188,7 +188,7 @@ public class lista_simple<T> {
             Nodo<T> aux = inicio;
             int i = 0;
             while (aux != null) {
-                System.out.print(i + " -- " + aux.getValor() + " -- ");
+                System.out.print(i + "--- " +aux.getValor() + "\n ");
                 aux = aux.getSiguiente();
                 i++;
             }

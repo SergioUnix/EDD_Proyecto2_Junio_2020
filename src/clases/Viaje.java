@@ -12,6 +12,8 @@ public class Viaje {
 
     private String lugarOrigen;
     private String lugarDestino;
+    private int tiempoTotal;       //// suma de todo el recorrido  
+    public lista_simple<Integer> pesoCamino;  /// 0, 250, 150, .....
 
     private int anio;
     private int mes;
@@ -27,6 +29,7 @@ public class Viaje {
     private String clave; //PLACAFECHAHORAMINUTO
 
     public Viaje() {
+
         Calendar fecha = new GregorianCalendar();
         this.lugarOrigen = null;
         this.lugarDestino = null;
@@ -41,6 +44,7 @@ public class Viaje {
         this.conductor = null;
         this.viaje = null;
         this.clave = null;
+        this.pesoCamino=null;
     }
 
     public Viaje(String lugarOrigen, String lugarDestino, Cliente cliente, Vehiculo vehiculo, Conductor conductor, lista_simple<String> viaje, String clave) {
@@ -53,6 +57,22 @@ public class Viaje {
         this.clave = clave;
     }
 
+    
+    public lista_simple<Integer> getPesoCamino() {
+        return pesoCamino;
+    }
+
+    public void setPesoCamino(lista_simple<Integer> pesoCamino) {
+        this.pesoCamino = pesoCamino;
+    }
+    public int getTiempoTotal() {
+        return tiempoTotal;
+    }
+
+    public void setTiempoTotal(int tiempoTotal) {
+        this.tiempoTotal = tiempoTotal;
+    }   
+    
     public String getLugarOrigen() {
         return lugarOrigen;
     }

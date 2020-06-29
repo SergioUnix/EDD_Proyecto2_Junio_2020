@@ -35,7 +35,7 @@ public class Carga {
     public static lista_simple<Cliente> clientesAUX;
     public static estructura_grafo grafo = new estructura_grafo();
     public static estructura_BloqueC<Viaje,String> viajes = new estructura_BloqueC();
-
+    public static Viaje viajeUsuario=new Viaje();
     public static void cargaCliente(String ruta) throws FileNotFoundException, Exception {
         File archivoLeer = new File(ruta);
         FileReader FR = new FileReader(archivoLeer);

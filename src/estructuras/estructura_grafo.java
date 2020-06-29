@@ -3,6 +3,8 @@
  * @author Sergio Ariel Ramirez Castro
  */
 package estructuras;
+import clases.Carga;
+import clases.Viaje;
 import clases.transicion;
 
 public class estructura_grafo {
@@ -219,7 +221,7 @@ public class estructura_grafo {
         }
         
         
-        public void  llenoMatriz() throws Exception{
+     public void  llenoMatriz() throws Exception{
         //inicializo la matriz
         this.inicializandoMatriz(tamanio);
         int i,j;
@@ -307,34 +309,73 @@ public class estructura_grafo {
         
   ////////////////////////////////////////////Se calcula el camino mas corto de un nodo origen hacia un nodo destino      
   public void metCorto(String origenIngresado,String destinoIngresado) throws Exception {
-        int E , origen, destino , peso , inicial, V;
+        int totalVertices , localinicial,localdestino, Aristasgrafo;
        //numero total de Vertices
-        V = this.tamanio;
+        totalVertices = this.tamanio;
        //total de aristas
-        E = this.totalAristas_++;
-        ruta_corta dijkstraAlgorithm = new ruta_corta(V);
-        
-        
-                
-
+        Aristasgrafo = this.totalAristas_;
+        ruta_corta DJ = new ruta_corta(totalVertices);
+        //obtengo los valores en int del destino y origen
+         localinicial =nameRutas.getPosicion(origenIngresado)+1;
+         localdestino =nameRutas.getPosicion(destinoIngresado)+1;
+          
+         
+         
+            //////Aca lleno mis aristas
             estructura_grafo aux=this.next1;
             for(int i=0;i<transiciones.size();i++){
-                dijkstraAlgorithm.addEdge(nameRutas.getPosicion(this.origen)+1,    nameRutas.getPosicion(transiciones.get(i).getNombre())+1, Integer.parseInt(transiciones.get(i).getDireccion())   , true);
+                DJ.agregar_Arista(nameRutas.getPosicion(this.origen)+1,    nameRutas.getPosicion(transiciones.get(i).getNombre())+1, Integer.parseInt(transiciones.get(i).getDireccion())   , true);
             }
             while(aux!=null){
             for(int i=0;i<aux.transiciones.size();i++){
-           dijkstraAlgorithm.addEdge(nameRutas.getPosicion(aux.origen)+1,    nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1, Integer.parseInt(aux.transiciones.get(i).getDireccion())   , true);  
+           DJ.agregar_Arista(nameRutas.getPosicion(aux.origen)+1,    nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1, Integer.parseInt(aux.transiciones.get(i).getDireccion())   , true);  
             }           
             aux=aux.getNext1(); 
             }
-
- 
+       
+        //creo el objeto
+        Viaje resuelto=new Viaje();
+        resuelto.setLugarOrigen(origenIngresado);
+        resuelto.setLugarDestino(destinoIngresado);
         
-        System.out.print("Ingrese el vertice inicial: ");
-        inicial =nameRutas.getPosicion(origenIngresado)+1;
-        dijkstraAlgorithm.dijkstra(inicial);
-        destino =nameRutas.getPosicion(destinoIngresado)+1;
-        dijkstraAlgorithm.printShortestPath(destino);
+        //setear 
+        resuelto=DJ.algoritmoDjistra(localinicial,resuelto,nameRutas.getPosicion(destinoIngresado));
+        
+        lista_simple<Integer> valorCaminos=new lista_simple<Integer>();
+        valorCaminos=DJ.mostrarCaminoMasCorto(localdestino);
+        
+        valorCaminos.imprimir();
+        
+       lista_simple<String> CString=new lista_simple<>(); 
+     for(int g=0;g<valorCaminos.getSize();g++){
+     System.out.println(" valor de caminos  "+valorCaminos.getSize()+" los qu R "+valorCaminos.get(g)+ " obtenido "+nameRutas.get(valorCaminos.get(g)-1));
+     CString.add(nameRutas.get(valorCaminos.get(g)-1));
+     }
+     resuelto.setViaje(CString);
+     
+     
+       
+     
+//      reciba (1,2) retorne el valor de la arista
+        lista_simple<Integer> pes=new lista_simple();
+        pes.add(0);
+        for(int t=0;t<CString.size-1;t++){
+        pes.add(obtenerPeso(CString.get(t),CString.get(t+1)));      
+        }       
+        
+        
+        for(int w=1;w<pes.size;w++){
+        pes.set(w, pes.get(w-1)+pes.get(w));
+        }               
+        resuelto.setPesoCamino(pes);        
+        resuelto.getPesoCamino().imprimir();
+        
+        
+               
+//                   
+        Carga.viajeUsuario=resuelto;
+    
+        
     }       
  
  
