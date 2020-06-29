@@ -152,23 +152,23 @@ public class estructura_grafo {
             }
          }
          public String cadenaGrafico() throws Exception{
-            String res="graph grafoRutas { \n" +"layout=\"circo\";\n" +"size = \"30\"\n" +"node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];\n";
+            String res="graph grafoRutas { \n" +"layout=\"circo\";\n" +"size = \"30\"\nbgcolor=\"oldlace\"; \n" +"node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];\n";
             String direccion="";
          
             estructura_grafo aux=this.next1;
             System.out.println("-----------"+origen);
             for(int i=0;i<transiciones.size();i++){
-            direccion=direccion+"\""+(nameRutas.getPosicion(origen)+1)+"."+origen+"\"-- \""+(nameRutas.getPosicion(transiciones.get(i).getNombre())+1)+"."+transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
+            direccion=direccion+"\""+(nameRutas.getPosicion(origen)+1)+"."+origen+"\"-- \""+(nameRutas.getPosicion(transiciones.get(i).getNombre())+1)+"."+transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+transiciones.get(i).getDireccion()+"\", fontcolor=limegreen]; \n";   
             }
       
             while(aux!=null){
             for(int i=0;i<aux.transiciones.size();i++){
-            direccion=direccion+"\""+(nameRutas.getPosicion(aux.getOrigen())+1)+"."+aux.getOrigen()+"\"-- \""+(nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1)+"."+aux.transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+aux.transiciones.get(i).getDireccion()+"\", fontcolor=darkolivegreen4]; \n";   
+            direccion=direccion+"\""+(nameRutas.getPosicion(aux.getOrigen())+1)+"."+aux.getOrigen()+"\"-- \""+(nameRutas.getPosicion(aux.transiciones.get(i).getNombre())+1)+"."+aux.transiciones.get(i).getNombre()+"\"[dir=\"forward\", color=crimson,label = \""+aux.transiciones.get(i).getDireccion()+"\", fontcolor=limegreen]; \n";   
             }           
             aux=aux.getNext1(); 
             }
            res=res+direccion;
-            return res+"label=\"{Rutas de Llega Rapidito}\";\n }";
+            return res+"label=\"Rutas de LlegaRapidito\"fontsize=30 fontcolor=red;\n }";
          }
          
         public String getRuta(int index){
