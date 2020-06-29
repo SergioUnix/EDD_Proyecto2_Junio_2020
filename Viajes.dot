@@ -1,0 +1,20 @@
+digraph BlockChain {
+node[shape=component style="solid" color="blue" fontcolor = "black" penwidth=3];
+edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
+rankdir=LR;
+subgraph cluster_0{
+style=filled;
+color=white;
+"a91e6c47ee1c3207655dc90d30b1d366"[label="a91e6c47ee1c3207655dc90d30b1d366
+ FECHA: 29/5/2020 16:23
+CLIENTE: 7176750467119
+CONDUCTOR: 1856619165091
+VEHICULO: C282LUO"];
+"0Jaen"[label="Jaen
+0"];
+"0Granada"[label="Granada
+99"];
+"0Jaen"->"0Granada"
+{ rank = same;"a91e6c47ee1c3207655dc90d30b1d366";"0Jaen";"0Granada";}
+"a91e6c47ee1c3207655dc90d30b1d366"->"0Jaen"}
+}

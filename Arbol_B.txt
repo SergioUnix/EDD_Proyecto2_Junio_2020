@@ -23,5 +23,5 @@ node[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style 
 80485653668672->80555053678185[dir="forward", color=mediumorchid4];
 80485653668672->80565456836583[dir="forward", color=mediumorchid4];
 67565357819078->80485653668672[dir="forward", color=mediumorchid4];
-label="{Arbol B | placas}";
+label="Arbol B -- Placas LlegaRapidito"fontsize=30 fontcolor=red;
 }
