@@ -458,7 +458,7 @@ cadena +=""+hijo+"[ label =\""+aux+"\"]  \n";
 
 cadena+=this.cadena_nodos;
 cadena+=this.cadena_direccion;
-cadena+="label=\"{Arbol B | placas}\";\n";       
+cadena+="label=\"Arbol B -- Placas LlegaRapidito\"fontsize=30 fontcolor=red;\n";       
         return cadena+"}";
     }    
 
@@ -495,7 +495,7 @@ cadena+="label=\"{Arbol B | placas}\";\n";
         if (nodo.nodo[iterBusca] != null) { 
         if(auxRepo.length()>0)auxRepo = auxRepo.substring(0, auxRepo.length() - 1);
         this.NodosRepo +=""+hijo+"[ label =\""+auxRepo+"\"]  \n";
-        this.cadDire += ""+father+"->"+""+hijo+"\n";
+        this.cadDire += ""+father+"->"+""+hijo+"[dir=\"forward\", color=mediumorchid4];\n";
         auxRepo="";
         cadena_dot_ghrapviz += " ]";
         } 
@@ -533,7 +533,7 @@ CadenaRepo +=""+hijo+"[ label =\""+auxR1+"\"]  \n";
 
 CadenaRepo+=this.NodosRepo;
 CadenaRepo+=this.cadDire;
-CadenaRepo+="label=\"{Arbol B | placas}\";\n";       
+CadenaRepo+="label=\"Arbol B\"fontsize=20 fontcolor=red;\n";       
         return CadenaRepo+"}";
     }    
     
