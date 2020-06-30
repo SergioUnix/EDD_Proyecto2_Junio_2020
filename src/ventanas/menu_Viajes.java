@@ -483,6 +483,15 @@ public class menu_Viajes extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            Path CMD = Carga.mainGRAPHVIZ();
+            Carga.dibujarGRAPHVIZ(CMD, "SUPERGRAFO.png");
+        } catch (IOException ex) {
+            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_graficoActionPerformed
 
     private void ImagenBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImagenBotonActionPerformed

@@ -502,6 +502,284 @@ public class Carga {
 
     }
 
+    public static Path mainGRAPHVIZ() throws IOException, Exception {
+
+        Cliente clienteG;
+        Cliente clienteG2;
+        //VARIABLES PARA OBTENER LOS DATOS DE LOS CONDUTORES EN LA LISTA
+        Conductor conductor;
+        Conductor inicial;
+        Conductor ultimo;
+
+        //NODOS PARA OBTENER LA INFORMACIÓN DEL PRIMER Y ÚLTIMO NODO
+        inicial = conductores.retornarNodobyIndex(0);
+        ultimo = conductores.retornarNodobyIndex(conductores.tamanioLista());
+        nodo_bloque aux, aux2;
+        //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
+        String ARCHIVO = "SUPERGRAFO.dot";
+        Path rutaRelativa = Paths.get(ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        //IMPRIMIR LA RUTA PARA REVISAR
+        System.out.println(rutaAbsoluta);
+        //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
+        File archivo = new File(rutaAbsoluta.toString());
+        BufferedWriter BW;
+        //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
+        if (archivo.exists()) {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph BlockChain {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_1{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            aux = viajes.retornarBloque(0);
+            miViaje = (Viaje) aux.getTransaccion();
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                viaje2 = new Viaje();
+                aux2 = viajes.retornarBloque(i);
+                viaje2 = (Viaje) aux2.getTransaccion();
+                BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                        + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "[label=\"" + viaje2.getViaje().get(j)
+                            + "\n" + viaje2.getPesoCamino().get(j) + "\"];" + "\n");
+                }
+                for (int j = 0; j < viaje2.getViaje().getSize() - 1; j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "->" + "\"" + i + viaje2.getViaje().get(j + 1) + "\"" + "\n");
+                }
+                BW.write("{ rank = same;\"" + aux2.getLlave() + "\";");
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + ";");
+                }
+                BW.write("}\n");
+                BW.write("\"" + aux2.getLlave() + "\"->" + "\"" + i + viaje2.getViaje().get(0) + "\"" + "\n");
+
+            }
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                aux = viajes.retornarBloque(i);
+                BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
+            }
+            BW.write("}" + "\n");
+            
+            
+            
+            
+            
+            
+            BW.write("subgraph cluster_2{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;");
+            BW.write("node[shape=record];\n");
+            BW.write("rankdir=TB;\n");
+            for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
+                conductor = conductores.retornarNodobyIndex(i);
+                BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");
+            }
+            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\" color=\"red\"];\n");
+            BW.write("{node[shape=point height=0] p0 p4}" + "\n");
+            BW.write("p0:n -> \"" + String.valueOf(inicial.getDPI()) + "\"[arrowtail=none];\n");
+            BW.write("p0:s -> p4:s[arrowtail=none];\n");
+
+            for (int i = 1; i < conductores.tamanioLista(); i++) {
+                String prev;
+                conductor = conductores.retornarNodobyIndex(i);
+                prev = String.valueOf(conductor.getDPI());
+                BW.write(String.valueOf(conductor.getDPI()) + ":next:c ->");
+                conductor = conductores.retornarNodobyIndex(i + 1);
+                BW.write(String.valueOf(conductor.getDPI()) + ":before;\n");
+                BW.write(String.valueOf(conductor.getDPI()) + ":before:c ->" + prev + ":next;\n");
+            }
+            //BW.write(String.valueOf(inicial.getDPI())+":before:c ->"+String.valueOf(ultimo.getDPI())+":next;\n");
+            //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
+            BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
+            BW.write("}" + "\n");
+            
+            
+            
+            
+            
+            
+            
+            BW.write("subgraph cluster_3{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            for (int i = 0; i < clientes.getTabla_H().length; i++) {
+                if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
+                    lista_simple<Cliente> vector = clientes.getTabla_H()[i];
+                    BW.write("\"" + i + "\";\n");
+
+                    for (int j = 0; j < vector.size(); j++) {
+                        clienteG = vector.get(j);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getDPI() + "\n" + clienteG.getNombres() + "\"];\n");
+                    }
+                    for (int j = 0; j < vector.size() - 1; j++) {
+                        clienteG = vector.get(j);
+                        clienteG2 = vector.get(j + 1);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "->\"" + String.valueOf(clienteG2.getDPI()) + "\";\n");
+
+                    }
+                    clienteG = vector.get(0);
+                    BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }
+            }
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
+        else {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph BlockChain {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_1{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            aux = viajes.retornarBloque(0);
+            miViaje = (Viaje) aux.getTransaccion();
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                viaje2 = new Viaje();
+                aux2 = viajes.retornarBloque(i);
+                viaje2 = (Viaje) aux2.getTransaccion();
+                BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                        + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "[label=\"" + viaje2.getViaje().get(j)
+                            + "\n" + viaje2.getPesoCamino().get(j) + "\"];" + "\n");
+                }
+                for (int j = 0; j < viaje2.getViaje().getSize() - 1; j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + "->" + "\"" + i + viaje2.getViaje().get(j + 1) + "\"" + "\n");
+                }
+                BW.write("{ rank = same;\"" + aux2.getLlave() + "\";");
+                for (int j = 0; j < viaje2.getViaje().getSize(); j++) {
+                    BW.write("\"" + i + viaje2.getViaje().get(j) + "\"" + ";");
+                }
+                BW.write("}\n");
+                BW.write("\"" + aux2.getLlave() + "\"->" + "\"" + i + viaje2.getViaje().get(0) + "\"" + "\n");
+
+            }
+            for (int i = 1; i < viajes.tamanioCadena(); i++) {
+                aux = viajes.retornarBloque(i);
+                BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
+            }
+            BW.write("}" + "\n");
+            
+            
+            
+            
+            
+            
+            BW.write("subgraph cluster_2{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;");
+            BW.write("node[shape=record];\n");
+            BW.write("rankdir=TB;\n");
+            for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
+                conductor = conductores.retornarNodobyIndex(i);
+                BW.write(String.valueOf(conductor.getDPI()) + "[label=\"{<before>|<ID>" + String.valueOf(conductor.getDPI()) + "|<data>" + conductor.getNombres().replace(" ", "") + "|<next>}\" style=\"filled\" fillcolor=\"indigo\" color=\"lightseagreen\" fontcolor=\"whitesmoke\" penwidth=3];\n");
+            }
+            BW.write("edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor=\"red\" color=\"red\"];\n");
+            BW.write("{node[shape=point height=0] p0 p4}" + "\n");
+            BW.write("p0:n -> \"" + String.valueOf(inicial.getDPI()) + "\"[arrowtail=none];\n");
+            BW.write("p0:s -> p4:s[arrowtail=none];\n");
+
+            for (int i = 1; i < conductores.tamanioLista(); i++) {
+                String prev;
+                conductor = conductores.retornarNodobyIndex(i);
+                prev = String.valueOf(conductor.getDPI());
+                BW.write(String.valueOf(conductor.getDPI()) + ":next:c ->");
+                conductor = conductores.retornarNodobyIndex(i + 1);
+                BW.write(String.valueOf(conductor.getDPI()) + ":before;\n");
+                BW.write(String.valueOf(conductor.getDPI()) + ":before:c ->" + prev + ":next;\n");
+            }
+            //BW.write(String.valueOf(inicial.getDPI())+":before:c ->"+String.valueOf(ultimo.getDPI())+":next;\n");
+            //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
+            BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
+            BW.write("}" + "\n");
+            
+            
+            
+            
+            BW.write("subgraph cluster_3{\n");
+            BW.write("style=filled;\n");
+            BW.write("color=white;\n");
+
+            for (int i = 0; i < clientes.getTabla_H().length; i++) {
+                if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
+                    lista_simple<Cliente> vector = clientes.getTabla_H()[i];
+                    BW.write("\"" + i + "\";\n");
+
+                    for (int j = 0; j < vector.size(); j++) {
+                        clienteG = vector.get(j);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "[label =" + "\"" + clienteG.getDPI() + "\n" + clienteG.getNombres() + "\"];\n");
+                    }
+                    for (int j = 0; j < vector.size() - 1; j++) {
+                        clienteG = vector.get(j);
+                        clienteG2 = vector.get(j + 1);
+                        BW.write("\"" + String.valueOf(clienteG.getDPI()) + "\"" + "->\"" + String.valueOf(clienteG2.getDPI()) + "\";\n");
+
+                    }
+                    clienteG = vector.get(0);
+                    BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }
+            }
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        }
+
+        BW.close();
+        //RETORNAMOS LA RUTA PARA CREAR EL GRÁFICO
+        return rutaAbsoluta;
+    }
+
     public static void dibujarGRAPHVIZ(Path dot, String png) {
         try {
             //CREAMOS UN PROCESO PARA LLAMAR LA FUNCIÓN DOT
