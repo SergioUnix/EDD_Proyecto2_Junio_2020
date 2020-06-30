@@ -45,6 +45,7 @@ public class arbol_por_paginas {
     public static boolean verifico_pag_primero;
     public static int altura_N = 1;
     lista_simple<Vehiculo> v=new lista_simple<>();
+    lista_simple<Long> soloNodosReporte=new lista_simple<>();
     public static int imprimir = 1;
     public static String cadena_dot_ghrapviz = ""; 
     public cabeceras cabeza_nodo;
@@ -52,7 +53,8 @@ public class arbol_por_paginas {
     public arbolPagina arbolPagina = new arbolPagina();
     
     public arbol_por_paginas(int pag_primera_particion)
-    {   this.pag_primera_particion = pag_primera_particion; 
+    {   
+this.pag_primera_particion = pag_primera_particion; 
         cabeza_nodo = new cabeceras ();
         arbolPagina llevarIngresos = new arbolPagina();
         verifico_pag_primero = true;
@@ -465,9 +467,6 @@ cadena+="label=\"Arbol B -- Placas LlegaRapidito\"fontsize=30 fontcolor=red;\n";
     
 
 
-
-
-  
    String auxRepo=""; 
     public String reporteGrafo(cabeceras nodo) throws Exception {
         cadena_dot_ghrapviz += "\n";
@@ -537,6 +536,58 @@ CadenaRepo+="label=\"Arbol B\"fontsize=20 fontcolor=red;\n";
         return CadenaRepo+"}";
     }    
     
+
+
+
+public lista_simple<Long> NodosReporte() throws Exception{
+soloNodosReporte=new lista_simple<>();
+long hijo=0;  int father=0;
+
+for(int i = 0; i < cabeza_nodo.valores.length && cabeza_nodo.valores[i] != 0; i++){
+    hijo =cabeza_nodo.valores[0];
+    }
+
+ this.soloNodosReporte.addOrdenado(hijo);
+this.llenonodosReporte(cabeza_nodo);  
+    
+return soloNodosReporte;
+}
+
+
+
+ public void llenonodosReporte(cabeceras nodo) throws Exception {
+        int iterBusca=0;
+        while(iterBusca<2*pag_primera_particion+1){   
+
+        if (nodo.nodo[iterBusca] != null) {
+            if (iterBusca != 0) { imprimir ++;
+        } else {     altura_N++;  imprimir = 1;}
+        llenonodosReporte(nodo.nodo[iterBusca]);    }     
+        if (nodo.nodo[iterBusca] != null) { cadena_dot_ghrapviz += "[ "; }
+        long hijo=0;  long father=0;
+        int j=0;
+        while(nodo.nodo[iterBusca]!=null && j<nodo.nodo[iterBusca].valores.length){
+            if (nodo.nodo[iterBusca].valores[j] != 0) {
+            father=nodo.nodo[iterBusca].father.valores[0];
+            hijo= nodo.nodo[iterBusca].valores[0];                      
+                                    
+            }
+        j=j+1;
+        }
+        if (nodo.nodo[iterBusca] != null) { 
+        this.soloNodosReporte.addOrdenado(hijo);
+       
+        } 
+        iterBusca=iterBusca+1;
+        }
+        if (cadena_dot_ghrapviz.length() > (2*pag_primera_particion+3)*4) {}
+        
+    }
+
+
+
+
+
 }
 
 

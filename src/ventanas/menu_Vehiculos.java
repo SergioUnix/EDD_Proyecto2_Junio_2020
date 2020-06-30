@@ -159,6 +159,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         precio = new javax.swing.JTextField();
         combo = new javax.swing.JComboBox<>();
         combo2 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         imagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -373,6 +374,14 @@ public class menu_Vehiculos extends javax.swing.JFrame {
 
         combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, -1));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
 
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vehiculos.jpg"))); // NOI18N
         jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));
@@ -747,6 +756,17 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         imagen.setVisible(true);
     }//GEN-LAST:event_ImagenBotonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            lista_simple<Long> nuevo=Carga.vehiculos.NodosReporte();
+            
+            nuevo.imprimir();
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Vehiculos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -809,6 +829,7 @@ public class menu_Vehiculos extends javax.swing.JFrame {
     private javax.swing.JLabel generoLabel;
     private javax.swing.JButton grafico;
     private javax.swing.JLabel imagen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

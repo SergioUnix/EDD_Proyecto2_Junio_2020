@@ -126,7 +126,7 @@ public class lista_simple<T> {
         return encontrado; //Retorna si esta el dato buscado ..
     }
 
-    public T get(int posicion) throws Exception {
+    public T get(int posicion){
         if (posicion >= 0 && posicion < size) {  //Si esta en el rago entra..
             if (posicion == 0) {
                 return this.inicio.getValor();
@@ -138,9 +138,9 @@ public class lista_simple<T> {
                 return aux.getValor();
             }
         } else {///si no existe esto retorna una excepcion.. por si falla jaja
-            throw new Exception("si no esta el dato muestro este mensaje..");
+        //    throw new Exception("si no esta el dato muestro este mensaje..");
         }
-        // return null;
+         return null;
     }
 
     public void set(int posicion, T valor) {
@@ -195,7 +195,7 @@ public class lista_simple<T> {
         }
     }
     //acepta string y devuelve su posicion en forma de indice... 
-    public int getPosicion(String referencia) throws Exception{       
+    public int getPosicion(String referencia){       
         if (buscar(referencia)) {
             Nodo aux = inicio;
             int cont = 0;
@@ -206,9 +206,43 @@ public class lista_simple<T> {
             }
             return cont;
         } else {
-            throw new Exception("Valor inexistente en la lista.");
+        //    throw new Exception("Valor inexistente en la lista.");
         }
-      // return 
+       return -1;
     }
 
+    
+       public void addOrdenado(T valor) {
+        Nodo<T> nuevo = new Nodo<>();
+        nuevo.setValor(valor);
+        boolean bandera=false;
+        int comodin=0;
+        
+        if (estaVacia()) {
+            this.inicio = nuevo;  this.size++;
+        } else {          
+            
+            Nodo<T> aux = inicio;
+            while (aux.getSiguiente() != null) {
+            if((Integer)aux.getValor()>(Integer)valor){    
+                break;
+            }
+            aux = aux.getSiguiente(); comodin++;
+            }
+            
+            if(comodin==0){this.addFirst(valor);
+            }else if(aux.getSiguiente()==null){aux.setSiguiente(nuevo);this.size++;
+            }else{this.set(comodin, valor);
+            
+            }
+            //aux.setSiguiente(nuevo);
+        }
+        
+    }
+
+
+    
+    
+    
+    
 }
