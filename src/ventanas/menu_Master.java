@@ -19,6 +19,7 @@ public class menu_Master extends javax.swing.JFrame {
     private menu_Conductor con = new menu_Conductor();
     private carga_Masiva car = new carga_Masiva();
     private menu_Viajes via = new menu_Viajes();
+    private menu_Reportes repo = new menu_Reportes();
     private int x;
     private int y;
 
@@ -91,6 +92,11 @@ public class menu_Master extends javax.swing.JFrame {
         ReporteBoton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ReporteBoton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
         ReporteBoton1.setText("MENU REPORTE");
+        ReporteBoton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReporteBoton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(ReporteBoton1);
         ReporteBoton1.setBounds(820, 410, 240, 100);
 
@@ -243,6 +249,10 @@ public class menu_Master extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ReporteBotonActionPerformed
+
+    private void ReporteBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteBoton1ActionPerformed
+        repo.setVisible(true);
+    }//GEN-LAST:event_ReporteBoton1ActionPerformed
 
     /**
      * @param args the command line arguments

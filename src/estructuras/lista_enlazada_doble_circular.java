@@ -244,8 +244,7 @@ public class lista_enlazada_doble_circular<T, V> {
                 inicio = inicio.getSiguiente();
                 aux = null;
                 aux = inicio.getAnterior();
-            }
-            else if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0) {
+            } else if (aux.getEtiqueta().toString().compareTo(index.toString()) == 0) {
                 aux.getAnterior().setSiguiente(aux.getSiguiente());
                 aux.getSiguiente().setAnterior(aux.getAnterior());
                 aux = null;
@@ -254,5 +253,50 @@ public class lista_enlazada_doble_circular<T, V> {
             aux = aux.getSiguiente();
         } while (aux != inicio);
         tamanio--;
+    }
+
+    public void insertarOrdenadoSinRepetido(T dato, V index) {
+        nodo_doble<T, V> nuevoNodo = new nodo_doble();
+        nuevoNodo.setDato(dato);
+        nuevoNodo.setEtiqueta(index);
+
+        if (estaVacia()) {
+            inicio = nuevoNodo;
+            inicio.setAnterior(inicio);
+            inicio.setSiguiente(inicio);
+        } else {
+            aux = inicio;
+            do {
+                if (aux.getDato().equals(nuevoNodo.getDato())) {
+                    System.out.println("NO SE ACEPTAN REPETIDOS");
+                    tamanio--;
+                    aux = inicio.getAnterior();
+                } else if (aux.getEtiqueta().toString().compareTo(index.toString()) < 0 && aux == inicio) {
+                    nuevoNodo.setSiguiente(aux);
+                    nuevoNodo.setAnterior(aux.getAnterior());
+                    aux.getAnterior().setSiguiente(nuevoNodo);
+                    aux.setAnterior(nuevoNodo);
+                    inicio = nuevoNodo;
+                    aux = inicio.getAnterior();
+
+                } else if (aux.getEtiqueta().toString().compareTo(index.toString()) < 0) {
+                    nuevoNodo.setSiguiente(aux);
+                    nuevoNodo.setAnterior(aux.getAnterior());
+                    aux.getAnterior().setSiguiente(nuevoNodo);
+                    aux.setAnterior(nuevoNodo);
+                    aux = inicio.getAnterior();
+
+                } else if (aux.getSiguiente() == inicio) {
+                    inicio.getAnterior().setSiguiente(nuevoNodo);
+                    nuevoNodo.setAnterior(inicio.getAnterior());
+                    nuevoNodo.setSiguiente(inicio);
+                    inicio.setAnterior(nuevoNodo);
+                    aux = inicio.getAnterior();
+                }
+                aux = aux.getSiguiente();
+            } while (aux != inicio);
+
+        }
+        tamanio++;
     }
 }

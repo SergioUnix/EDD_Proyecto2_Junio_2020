@@ -203,8 +203,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=black;\n");
+            BW.write("bgcolor=\"black\""+"\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -224,6 +223,9 @@ public class Carga {
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
                 }
+                else{
+                    BW.write("\"" + i + "\";\n");
+                }
             }
             BW.write("}" + "\n");
             BW.write("}" + "\n");
@@ -236,8 +238,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=black;\n");
+            BW.write("bgcolor=\"black\""+"\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -256,6 +257,8 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }else{
+                    BW.write("\"" + i + "\";\n");
                 }
             }
             BW.write("}" + "\n");
@@ -293,8 +296,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=black;");
+            BW.write("bgcolor=\"black\""+"\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -325,8 +327,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=black;");
+            BW.write("bgcolor=\"black\""+"\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -379,8 +380,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"green\""+"\n");
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -407,7 +407,7 @@ public class Carga {
                 aux2 = viajes.retornarBloque(i);
                 viaje2 = (Viaje) aux2.getTransaccion();
                 BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
-                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
                         + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
                         + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
 
@@ -441,8 +441,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"green\""+"\n");
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -469,7 +468,7 @@ public class Carga {
                 aux2 = viajes.retornarBloque(i);
                 viaje2 = (Viaje) aux2.getTransaccion();
                 BW.write("\"" + aux2.getLlave() + "\"[label=\"" + aux2.getLlaveAnterior() + "\n" + " FECHA: " + aux2.getSelloTiempo() + "\n"
-                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(1).getDPI()) + "\n"
+                        + "CLIENTE: " + String.valueOf(viaje2.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
                         + "CONDUCTOR: " + String.valueOf(viaje2.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
                         + "VEHICULO: " + String.valueOf(viaje2.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
 
@@ -526,16 +525,19 @@ public class Carga {
         BufferedWriter BW;
         //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
         if (archivo.exists()) {
+
             Viaje miViaje, viaje2;
             BW = new BufferedWriter(new FileWriter(archivo));
-            BW.write("digraph BlockChain {\n");
+
+            BW.write("digraph MAIN {\n");
             BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
-            BW.write("rankdir=LR;\n");
+            BW.write("rankdir=TB;\n");
+            BW.write(Carga.vehiculos.getCadenaSubgrafo());
             BW.write("subgraph cluster_1{\n");
             BW.write("style=filled;\n");
             BW.write("color=white;\n");
-
+            
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
             BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
@@ -585,12 +587,7 @@ public class Carga {
                 BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
             }
             BW.write("}" + "\n");
-            
-            
-            
-            
-            
-            
+
             BW.write("subgraph cluster_2{\n");
             BW.write("style=filled;\n");
             BW.write("color=white;");
@@ -618,13 +615,7 @@ public class Carga {
             //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
             BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
             BW.write("}" + "\n");
-            
-            
-            
-            
-            
-            
-            
+
             BW.write("subgraph cluster_3{\n");
             BW.write("style=filled;\n");
             BW.write("color=white;\n");
@@ -646,6 +637,8 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }else{
+                    BW.write("\"" + i + "\";\n");
                 }
             }
             BW.write("}" + "\n");
@@ -711,12 +704,7 @@ public class Carga {
                 BW.write("\"" + aux.getLlaveAnterior() + "\"->\"" + aux.getLlave() + "\"" + "\n");
             }
             BW.write("}" + "\n");
-            
-            
-            
-            
-            
-            
+
             BW.write("subgraph cluster_2{\n");
             BW.write("style=filled;\n");
             BW.write("color=white;");
@@ -744,10 +732,7 @@ public class Carga {
             //BW.write(String.valueOf(ultimo.getDPI())+":next:c ->"+ String.valueOf(inicial.getDPI())+":before;\n");
             BW.write(String.valueOf(ultimo.getDPI()) + ":next:c -> p4:n[arrowhead=none]\n");
             BW.write("}" + "\n");
-            
-            
-            
-            
+
             BW.write("subgraph cluster_3{\n");
             BW.write("style=filled;\n");
             BW.write("color=white;\n");
@@ -769,6 +754,8 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
+                }else{
+                    BW.write("\"" + i + "\";\n");
                 }
             }
             BW.write("}" + "\n");

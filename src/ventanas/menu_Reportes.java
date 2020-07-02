@@ -5,8 +5,25 @@
  */
 package ventanas;
 
+import clases.Cliente;
+import clases.Conductor;
+import static clases.Reportes.TopClientes;
+import static clases.Reportes.TopConductores;
+import static clases.Reportes.TopVehiculos;
+import static clases.Reportes.TopViajes;
+import clases.Vehiculo;
+import clases.Viaje;
+import estructuras.lista_enlazada_doble_circular;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +52,16 @@ public class menu_Reportes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Salir2 = new javax.swing.JLabel();
+        ClientesTopBoton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ReporteArea = new javax.swing.JTextArea();
+        RutaViajeBoton = new javax.swing.JButton();
+        ViajesTopBoton = new javax.swing.JButton();
+        EstructuraBoton = new javax.swing.JButton();
+        VehiculosTopBoton = new javax.swing.JButton();
+        ConductoresTopBoton = new javax.swing.JButton();
+        ClientesTopBoton = new javax.swing.JButton();
+        Titulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,6 +87,78 @@ public class menu_Reportes extends javax.swing.JFrame {
         });
         jPanel1.add(Salir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 10, -1, -1));
 
+        ClientesTopBoton1.setBackground(new java.awt.Color(255, 255, 255));
+        ClientesTopBoton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/estudiar.png"))); // NOI18N
+        ClientesTopBoton1.setText("Codificar");
+        ClientesTopBoton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClientesTopBoton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ClientesTopBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
+
+        ReporteArea.setEditable(false);
+        ReporteArea.setColumns(20);
+        ReporteArea.setRows(5);
+        jScrollPane1.setViewportView(ReporteArea);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 740, 380));
+
+        RutaViajeBoton.setBackground(new java.awt.Color(255, 255, 255));
+        RutaViajeBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/irutas.png"))); // NOI18N
+        RutaViajeBoton.setText("Ruta por Viaje");
+        jPanel1.add(RutaViajeBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
+
+        ViajesTopBoton.setBackground(new java.awt.Color(255, 255, 255));
+        ViajesTopBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/iviajes.png"))); // NOI18N
+        ViajesTopBoton.setText("TOP Viajes");
+        ViajesTopBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViajesTopBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ViajesTopBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+
+        EstructuraBoton.setBackground(new java.awt.Color(255, 255, 255));
+        EstructuraBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
+        EstructuraBoton.setText("Estructura Completa");
+        jPanel1.add(EstructuraBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
+
+        VehiculosTopBoton.setBackground(new java.awt.Color(255, 255, 255));
+        VehiculosTopBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/ivehiculos.png"))); // NOI18N
+        VehiculosTopBoton.setText("TOP Vehiculos");
+        VehiculosTopBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VehiculosTopBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(VehiculosTopBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        ConductoresTopBoton.setBackground(new java.awt.Color(255, 255, 255));
+        ConductoresTopBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/iconductores.png"))); // NOI18N
+        ConductoresTopBoton.setText("TOP Conductores");
+        ConductoresTopBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConductoresTopBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ConductoresTopBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+
+        ClientesTopBoton.setBackground(new java.awt.Color(255, 255, 255));
+        ClientesTopBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/iusuarios.png"))); // NOI18N
+        ClientesTopBoton.setText("TOP Clientes");
+        ClientesTopBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClientesTopBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ClientesTopBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        Titulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(0, 0, 0));
+        Titulo.setText("GESTION DE REPORTES");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reportes.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 580));
 
@@ -75,6 +174,7 @@ public class menu_Reportes extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -90,6 +190,124 @@ public class menu_Reportes extends javax.swing.JFrame {
     private void Salir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Salir2MouseClicked
         this.dispose();
     }//GEN-LAST:event_Salir2MouseClicked
+
+    private void ClientesTopBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesTopBotonActionPerformed
+        ReporteArea.setText("REPORTE DE TOP CLIENTES: \n");
+        Cliente top;
+        lista_enlazada_doble_circular<Cliente, Integer> topClientes = TopClientes();
+        if (topClientes.tamanioLista() > 10) {
+            for (int i = 1; i < 11; i++) {
+                top = topClientes.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "CLIENTE: " + top.getDPI() + "; NUMERO DE VIAJES: " + topClientes.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        } else {
+            for (int i = 1; i < topClientes.tamanioLista() + 1; i++) {
+                top = topClientes.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "CLIENTE: " + top.getDPI() + "; NUMERO DE VIAJES: " + topClientes.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        }
+
+    }//GEN-LAST:event_ClientesTopBotonActionPerformed
+
+    private void ConductoresTopBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConductoresTopBotonActionPerformed
+        ReporteArea.setText("REPORTE DE TOP CONDUCTORES: \n");
+        Conductor top;
+        lista_enlazada_doble_circular<Conductor, Integer> topConductores = TopConductores();
+        if (topConductores.tamanioLista() > 10) {
+            for (int i = 1; i < 11; i++) {
+                top = topConductores.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "CONDUCTOR: " + top.getDPI() + "; NUMERO DE VIAJES: " + topConductores.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        } else {
+            for (int i = 1; i < topConductores.tamanioLista() + 1; i++) {
+                top = topConductores.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "CONDUCTOR: " + top.getDPI() + "; NUMERO DE VIAJES: " + topConductores.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        }
+    }//GEN-LAST:event_ConductoresTopBotonActionPerformed
+
+    private void VehiculosTopBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VehiculosTopBotonActionPerformed
+        ReporteArea.setText("REPORTE DE TOP VEHICULOS: \n");
+        Vehiculo top;
+        lista_enlazada_doble_circular<Vehiculo, Integer> topVehiculos = TopVehiculos();
+        if (topVehiculos.tamanioLista() > 10) {
+            for (int i = 1; i < 11; i++) {
+                top = topVehiculos.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "VEHICULO: " + top.getPlaca() + "; NUMERO DE VIAJES: " + topVehiculos.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        } else {
+            for (int i = 1; i < topVehiculos.tamanioLista() + 1; i++) {
+                top = topVehiculos.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "VEHICULO: " + top.getPlaca() + "; NUMERO DE VIAJES: " + topVehiculos.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        }
+    }//GEN-LAST:event_VehiculosTopBotonActionPerformed
+
+    private void ViajesTopBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViajesTopBotonActionPerformed
+        ReporteArea.setText("REPORTE DE TOP VIAJES: \n");
+        Viaje top;
+        lista_enlazada_doble_circular<Viaje, Integer> topViajes = TopViajes();
+        if (topViajes.tamanioLista() > 10) {
+            for (int i = 1; i < 11; i++) {
+                top = topViajes.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "VIAJE: " + top.getClave() + "; NUMERO DE LUGARES: " + topViajes.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        } else {
+            for (int i = 1; i < topViajes.tamanioLista() + 1; i++) {
+                top = topViajes.retornarNodobyIndex(i);
+
+                ReporteArea.setText(ReporteArea.getText() + "VIAJE: " + top.getClave() + "; NUMERO DE LUGARES: " + topViajes.retornarNodo(top).getEtiqueta() + "\n");
+            }
+        }
+    }//GEN-LAST:event_ViajesTopBotonActionPerformed
+
+    private void ClientesTopBoton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientesTopBoton1ActionPerformed
+        //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
+        String ARCHIVO = "ARCHIVO.edd";
+        Path rutaRelativa = Paths.get(ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        //IMPRIMIR LA RUTA PARA REVISAR
+        System.out.println(rutaAbsoluta);
+        //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
+        File archivo = new File(rutaAbsoluta.toString());
+        BufferedWriter BW = null;
+
+        if (archivo.exists()) {
+            try {
+                BW = new BufferedWriter(new FileWriter(archivo));
+            } catch (IOException ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                BW.write(ReporteArea.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                BW = new BufferedWriter(new FileWriter(archivo));
+            } catch (IOException ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                BW.write(ReporteArea.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            BW.close();
+        } catch (IOException ex) {
+            Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ClientesTopBoton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,10 +345,18 @@ public class menu_Reportes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Salir;
-    private javax.swing.JLabel Salir1;
+    private javax.swing.JButton ClientesTopBoton;
+    private javax.swing.JButton ClientesTopBoton1;
+    private javax.swing.JButton ConductoresTopBoton;
+    private javax.swing.JButton EstructuraBoton;
+    private javax.swing.JTextArea ReporteArea;
+    private javax.swing.JButton RutaViajeBoton;
     private javax.swing.JLabel Salir2;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JButton VehiculosTopBoton;
+    private javax.swing.JButton ViajesTopBoton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
