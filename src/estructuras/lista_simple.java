@@ -213,36 +213,37 @@ public class lista_simple<T> {
 
     
        public void addOrdenado(T valor) {
-        Nodo<T> nuevo = new Nodo<>();
+      Nodo<T> nuevo = new Nodo ();
+      String x;
         nuevo.setValor(valor);
-        boolean bandera=false;
-        int comodin=0;
-        
-        if (estaVacia()) {
-            this.inicio = nuevo;  this.size++;
-        } else {          
-            
-            Nodo<T> aux = inicio;
-            while (aux.getSiguiente() != null) {
-            if((Integer)aux.getValor()>(Integer)valor){    
-                break;
+        if (inicio==null) {
+            inicio=nuevo;
+        } else {
+            //if (valor.compareTo(inicio.valor)<0) {
+            if ((Long)valor<(Long)inicio.getValor()) {
+                nuevo.setSiguiente(inicio);
+                inicio=nuevo;
+            } else {
+                Nodo recorre=inicio;
+                Nodo atras=inicio;
+                //while ((x.compareTo(recorre.info)>=0) && recorre.sig!=null) {
+                while (((Long)valor >=(Long)recorre.getValor()) && recorre.getSiguiente() !=null) {
+                    atras=recorre;
+                    recorre=recorre.getSiguiente();
+                }
+                //if (valor.compareTo(recorre.info)>0) {
+                if ((Long)valor>(Long)recorre.getValor()) {
+                    recorre.setSiguiente(nuevo);
+                } else {
+                    nuevo.setSiguiente(recorre);
+                    atras.setSiguiente(nuevo);
+                }
             }
-            aux = aux.getSiguiente(); comodin++;
-            }
-            
-            if(comodin==0){this.addFirst(valor);
-            }else if(aux.getSiguiente()==null){aux.setSiguiente(nuevo);this.size++;
-            }else{this.set(comodin, valor);
-            
-            }
-            //aux.setSiguiente(nuevo);
-        }
-        
-    }
+           
+           
+        }    
+       }
 
 
-    
-    
-    
-    
+
 }

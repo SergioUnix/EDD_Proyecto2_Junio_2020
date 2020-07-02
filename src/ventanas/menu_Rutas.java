@@ -305,7 +305,7 @@ public class menu_Rutas extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 240, 30));
 
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rutas.jpg"))); // NOI18N
         jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 480));
@@ -529,7 +529,7 @@ public class menu_Rutas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Carga.grafo.llenoMatriz();
+            Carga.grafo.metCorto("Gerona", "Cadiz");
         } catch (Exception ex) {
             Logger.getLogger(menu_Rutas.class.getName()).log(Level.SEVERE, null, ex);
         }

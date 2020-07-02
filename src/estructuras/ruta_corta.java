@@ -4,7 +4,6 @@
  */
 package estructuras;
 import clases.Viaje;
-import java.util.PriorityQueue;
 
 public class ruta_corta {    
     
@@ -14,7 +13,7 @@ public class ruta_corta {
     private lista_simple< lista_simple< NodoDjistra > > mi_listaAdyacencia = new lista_simple< lista_simple< NodoDjistra > >(); 
     private int distancia[ ] = new int[ limitedeVertices ];       
     private boolean vertices_yaVisitados[ ] = new boolean[ limitedeVertices ];  
-    private PriorityQueue< NodoDjistra > colaDePrioridad = new PriorityQueue<NodoDjistra>();
+    private cola_prioridad< NodoDjistra,NodoDjistra> colaDePrioridad = new cola_prioridad<NodoDjistra, NodoDjistra>();
     private int totalVeticesGrafo;                                    
     private int guardaLosCaminos[] = new int[ limitedeVertices ];         
     private boolean corriendoDjistra;
@@ -63,18 +62,18 @@ public class ruta_corta {
         if( distancia[ vPresente ] + peso < distancia[ vVecino ] ){
             distancia[ vVecino ] = distancia[ vPresente ] + peso;  
             guardaLosCaminos[ vVecino ] = vPresente;                        
-            colaDePrioridad.add( new NodoDjistra( vVecino , distancia[ vVecino ] ) );
+            colaDePrioridad.encolar( new NodoDjistra( vVecino , distancia[ vVecino ] ),new NodoDjistra( vVecino , distancia[ vVecino ] ) );
         }
     }
 
     Viaje algoritmoDjistra( int inicial,Viaje viaje,int destinoIngresado ) throws Exception{
         constructorArreglos(); 
-        colaDePrioridad.add( new NodoDjistra( inicial , 0 ) );
+        colaDePrioridad.encolar( new NodoDjistra( inicial , 0 ),new NodoDjistra( inicial , 0 ) );
         distancia[ inicial ] = 0;     
         int verticePresente , verticeVecino , peso;
-        while( !colaDePrioridad.isEmpty() ){                   
-            verticePresente = colaDePrioridad.element().primero;          
-            colaDePrioridad.remove();                          
+        while( !colaDePrioridad.estaVacia() ){                   
+            verticePresente = colaDePrioridad.cabeza.getDato().primero;          
+            colaDePrioridad.descolar();                          
             if( vertices_yaVisitados[ verticePresente ] ) continue; 
             vertices_yaVisitados[ verticePresente ] = true;         
 
@@ -110,7 +109,7 @@ public class ruta_corta {
             return null;
         }
 
-        System.out.println("\n**************Impresion de camino mas corto**************");
+        System.out.println("\nCamino corto");
         System.out.printf("Ingrese vertice destino: ");     
         mostrarCamino( destinoIngresado);
         System.out.printf("\n"); 

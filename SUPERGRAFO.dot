@@ -5,69 +5,21 @@ rankdir=LR;
 subgraph cluster_1{
 style=filled;
 color=white;
-"d4e64a4a0699c3d549e29657252e7e3d"[label="d4e64a4a0699c3d549e29657252e7e3d
- FECHA: 29/5/2020 9:5
-CLIENTE: 4255040741108
-CONDUCTOR: 1511042948678
-VEHICULO: P688XIZ"];
-"0Cadiz"[label="Cadiz
-0"];
-"0Sevilla"[label="Sevilla
-125"];
-"0Jaen"[label="Jaen
-367"];
-"0Madrid"[label="Madrid
-702"];
-"0Bilbao"[label="Bilbao
-1097"];
-"0Cadiz"->"0Sevilla"
-"0Sevilla"->"0Jaen"
-"0Jaen"->"0Madrid"
-"0Madrid"->"0Bilbao"
-{ rank = same;"d4e64a4a0699c3d549e29657252e7e3d";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Bilbao";}
-"d4e64a4a0699c3d549e29657252e7e3d"->"0Cadiz""5bf02b2b5a27591fb1bf1e35545854fc"[label="d4e64a4a0699c3d549e29657252e7e3d
- FECHA: 29/5/2020 9:6
+"6a610f345df5214ba2231230648246d3"[label="6a610f345df5214ba2231230648246d3
+ FECHA: 2/6/2020 0:15
 CLIENTE: 8881189800232
 CONDUCTOR: 1511042948678
-VEHICULO: C859QZN"];
-"1Cadiz"[label="Cadiz
+VEHICULO: P688XIZ"];
+"0Granada"[label="Granada
 0"];
-"1Sevilla"[label="Sevilla
-125"];
-"1Cadiz"->"1Sevilla"
-{ rank = same;"5bf02b2b5a27591fb1bf1e35545854fc";"1Cadiz";"1Sevilla";}
-"5bf02b2b5a27591fb1bf1e35545854fc"->"1Cadiz"
-"b0f4f2bd05c57b197c5f0aca177a75a1"[label="5bf02b2b5a27591fb1bf1e35545854fc
- FECHA: 29/5/2020 9:6
-CLIENTE: 7176750467119
-CONDUCTOR: 1668014356232
-VEHICULO: C207OOW"];
-"2Madrid"[label="Madrid
-0"];
-"2Zaragoza"[label="Zaragoza
-325"];
-"2Madrid"->"2Zaragoza"
-{ rank = same;"b0f4f2bd05c57b197c5f0aca177a75a1";"2Madrid";"2Zaragoza";}
-"b0f4f2bd05c57b197c5f0aca177a75a1"->"2Madrid"
-"bf0bfc1c51742d32fcb54ba4a97b3a43"[label="b0f4f2bd05c57b197c5f0aca177a75a1
- FECHA: 29/5/2020 9:6
-CLIENTE: 8023423332982
-CONDUCTOR: 7754177557392
-VEHICULO: P860RMD"];
-"3Sevilla"[label="Sevilla
-0"];
-"3Jaen"[label="Jaen
-242"];
-"3Madrid"[label="Madrid
-577"];
-"3Sevilla"->"3Jaen"
-"3Jaen"->"3Madrid"
-{ rank = same;"bf0bfc1c51742d32fcb54ba4a97b3a43";"3Sevilla";"3Jaen";"3Madrid";}
-"bf0bfc1c51742d32fcb54ba4a97b3a43"->"3Sevilla"
-"d4e64a4a0699c3d549e29657252e7e3d"->"5bf02b2b5a27591fb1bf1e35545854fc"
-"5bf02b2b5a27591fb1bf1e35545854fc"->"b0f4f2bd05c57b197c5f0aca177a75a1"
-"b0f4f2bd05c57b197c5f0aca177a75a1"->"bf0bfc1c51742d32fcb54ba4a97b3a43"
-}
+"0Sevilla"[label="Sevilla
+256"];
+"0Jaen"[label="Jaen
+498"];
+"0Granada"->"0Sevilla"
+"0Sevilla"->"0Jaen"
+{ rank = same;"6a610f345df5214ba2231230648246d3";"0Granada";"0Sevilla";"0Jaen";}
+"6a610f345df5214ba2231230648246d3"->"0Granada"}
 subgraph cluster_2{
 style=filled;
 color=white;node[shape=record];

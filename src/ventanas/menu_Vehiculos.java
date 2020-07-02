@@ -375,13 +375,13 @@ public class menu_Vehiculos extends javax.swing.JFrame {
         combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 130, -1));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Prueba de Ordenamiendo en nodos long");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 40, 290, 20));
 
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vehiculos.jpg"))); // NOI18N
         jPanel1.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 720));

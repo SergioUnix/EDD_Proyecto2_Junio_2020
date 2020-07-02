@@ -5,16 +5,19 @@ rankdir=LR;
 subgraph cluster_0{
 style=filled;
 color=white;
-"a91e6c47ee1c3207655dc90d30b1d366"[label="a91e6c47ee1c3207655dc90d30b1d366
- FECHA: 29/5/2020 16:23
-CLIENTE: 7176750467119
-CONDUCTOR: 1856619165091
-VEHICULO: C282LUO"];
-"0Jaen"[label="Jaen
-0"];
+"6a610f345df5214ba2231230648246d3"[label="6a610f345df5214ba2231230648246d3
+ FECHA: 2/6/2020 0:15
+CLIENTE: 8881189800232
+CONDUCTOR: 1511042948678
+VEHICULO: P688XIZ"];
 "0Granada"[label="Granada
-99"];
-"0Jaen"->"0Granada"
-{ rank = same;"a91e6c47ee1c3207655dc90d30b1d366";"0Jaen";"0Granada";}
-"a91e6c47ee1c3207655dc90d30b1d366"->"0Jaen"}
+0"];
+"0Sevilla"[label="Sevilla
+256"];
+"0Jaen"[label="Jaen
+498"];
+"0Granada"->"0Sevilla"
+"0Sevilla"->"0Jaen"
+{ rank = same;"6a610f345df5214ba2231230648246d3";"0Granada";"0Sevilla";"0Jaen";}
+"6a610f345df5214ba2231230648246d3"->"0Granada"}
 }
