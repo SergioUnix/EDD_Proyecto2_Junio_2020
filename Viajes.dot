@@ -3,21 +3,14 @@ node[shape=component style="solid" color="blue" fontcolor = "black" penwidth=3];
 edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
 rankdir=LR;
 subgraph cluster_0{
-style=filled;
-color=white;
-"6a610f345df5214ba2231230648246d3"[label="6a610f345df5214ba2231230648246d3
- FECHA: 2/6/2020 0:15
-CLIENTE: 8881189800232
+bgcolor="green"
+"f0cced0c4d92c02e8d042e3f91477acb"[label="f0cced0c4d92c02e8d042e3f91477acb
+ FECHA: 2/6/2020 21:55
+CLIENTE: 4255040741108
 CONDUCTOR: 1511042948678
-VEHICULO: P688XIZ"];
-"0Granada"[label="Granada
+VEHICULO: C859QZN"];
+"0Coruna"[label="Coruna
 0"];
-"0Sevilla"[label="Sevilla
-256"];
-"0Jaen"[label="Jaen
-498"];
-"0Granada"->"0Sevilla"
-"0Sevilla"->"0Jaen"
-{ rank = same;"6a610f345df5214ba2231230648246d3";"0Granada";"0Sevilla";"0Jaen";}
-"6a610f345df5214ba2231230648246d3"->"0Granada"}
+{ rank = same;"f0cced0c4d92c02e8d042e3f91477acb";"0Coruna";}
+"f0cced0c4d92c02e8d042e3f91477acb"->"0Coruna"}
 }

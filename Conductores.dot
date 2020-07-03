@@ -1,7 +1,7 @@
 digraph DoublyCList {
 subgraph cluster_0{
-style=filled;
-color=black;node[shape=record];
+bgcolor="black"
+node[shape=record];
 rankdir=TB;
 1007723679377[label="{<before>|<ID>1007723679377|<data>Paul|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
 1511042948678[label="{<before>|<ID>1511042948678|<data>Quin|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];

@@ -280,56 +280,6 @@ public class estructura_grafo {
         
         
         
-  public void calc(int n,int s)
- {
-  int flag[] = new int[n+1];
-  int i,minpos=1,k,c,minimum;
-  
-  for(i=1;i<=n;i++)
-  {  
-      flag[i]=0; 
-      this.distance[i]=this.matriz_rutas[s][i]; 
-  }
-  c=2;
-  while(c<=n)
-  {
-   minimum=99;
-   for(k=1;k<=n;k++)
-   { 
-          if(this.distance[k]<minimum && flag[k]!=1)
-       {
-        minimum=this.distance[i];
-        minpos=k;
-       }
-      } 
-            flag[minpos]=1;
-      c++;
-      for(k=1;k<=n;k++){
-       if(this.distance[minpos]+this.matriz_rutas[minpos][k] <  this.distance[k] && flag[k]!=1 )
-       this.distance[k]=this.distance[minpos]+this.matriz_rutas[minpos][k];
-   }   
-  } 
-  
- }       
-     
-   
- public void caminoMasCorto(String Destino) throws Exception{
-     int valordeOrigen=nameRutas.getPosicion(Destino)+1;
-     int i,j;  
-     
-     for(int t=0;t<nameRutas.size();t++){
-      System.out.println("Valor de los vertices "+ nameRutas.get(t)+"  posicion arreglo "+(t)+" valor de Origen obtenido  " +valordeOrigen+"\n");
-     }
-     
- this.calc(tamanio,valordeOrigen);
-  System.out.println("The Shortest Path from Source \t"+valordeOrigen+"\t to all other vertices are : \n");
-        for(i=1;i<=tamanio;i++)
-          if(i!=valordeOrigen)
-  System.out.println("source :"+valordeOrigen+"\t destination :"+i+"\t MinCost is :"+this.distance[i]+"\t");
-        
- }       
-        
-        
   ////////////////////////////////////////////Se calcula el camino mas corto de un nodo origen hacia un nodo destino      
   public Viaje metCorto(String origenIngresado,String destinoIngresado) throws Exception {
         int totalVertices , localinicial,localdestino, Aristasgrafo;
