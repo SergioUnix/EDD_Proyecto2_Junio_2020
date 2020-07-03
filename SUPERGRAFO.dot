@@ -29,20 +29,34 @@ node[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style 
 67565357819078->80485653668672[dir="forward", color=mediumorchid4];
 label="Arbol B"fontsize=20 fontcolor=red;
 }subgraph cluster_1{
-style=filled;
-color=white;
-"f0cced0c4d92c02e8d042e3f91477acb"[label="f0cced0c4d92c02e8d042e3f91477acb
- FECHA: 2/6/2020 21:55
+bgcolor="oldlace";
+"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"[label="21f3ac77d9ccc03ec46d6cfe4bbf3fc5
+ FECHA: 2/6/2020 23:34
 CLIENTE: 4255040741108
-CONDUCTOR: 1511042948678
-VEHICULO: C859QZN"];
-"0Coruna"[label="Coruna
+CONDUCTOR: 1007723679377
+VEHICULO: P688XIZ"];
+"0Cadiz"[label="Cadiz
 0"];
-{ rank = same;"f0cced0c4d92c02e8d042e3f91477acb";"0Coruna";}
-"f0cced0c4d92c02e8d042e3f91477acb"->"0Coruna"}
+"0Sevilla"[label="Sevilla
+125"];
+"0Jaen"[label="Jaen
+367"];
+"0Madrid"[label="Madrid
+702"];
+"0Valladolid"[label="Valladolid
+895"];
+"0Coruna"[label="Coruna
+1350"];
+"0Cadiz"->"0Sevilla"
+"0Sevilla"->"0Jaen"
+"0Jaen"->"0Madrid"
+"0Madrid"->"0Valladolid"
+"0Valladolid"->"0Coruna"
+{ rank = same;"21f3ac77d9ccc03ec46d6cfe4bbf3fc5";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Valladolid";"0Coruna";}
+"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->"0Cadiz"}
 subgraph cluster_2{
-style=filled;
-color=white;node[shape=record];
+bgcolor="oldlace";
+node[shape=record];
 rankdir=TB;
 1007723679377[label="{<before>|<ID>1007723679377|<data>Paul|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
 1511042948678[label="{<before>|<ID>1511042948678|<data>Quin|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
@@ -136,8 +150,7 @@ p0:s -> p4:s[arrowtail=none];
 9898749357775:next:c -> p4:n[arrowhead=none]
 }
 subgraph cluster_3{
-style=filled;
-color=white;
+bgcolor="oldlace";
 "0";
 "1";
 "4255040741108"[label ="4255040741108
@@ -263,4 +276,58 @@ Belle"];
 35->"1357137121751";
 "36";
 }
+subgraph cluster_4 { 
+
+size = "30"
+bgcolor="oldlace"; 
+node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fontsize = 15 width = 0.5 style = filled, fillcolor = black];
+"1.Cadiz"-> "2.Sevilla"[dir="forward", color=crimson,label = "125", fontcolor=limegreen]; 
+"2.Sevilla"-> "1.Cadiz"[dir="forward", color=crimson,label = "125", fontcolor=limegreen]; 
+"2.Sevilla"-> "3.Granada"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
+"2.Sevilla"-> "4.Jaen"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
+"3.Granada"-> "2.Sevilla"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
+"3.Granada"-> "5.Murcia"[dir="forward", color=crimson,label = "278", fontcolor=limegreen]; 
+"4.Jaen"-> "2.Sevilla"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
+"4.Jaen"-> "3.Granada"[dir="forward", color=crimson,label = "99", fontcolor=limegreen]; 
+"4.Jaen"-> "6.Madrid"[dir="forward", color=crimson,label = "335", fontcolor=limegreen]; 
+"5.Murcia"-> "3.Granada"[dir="forward", color=crimson,label = "278", fontcolor=limegreen]; 
+"5.Murcia"-> "7.Valencia"[dir="forward", color=crimson,label = "241", fontcolor=limegreen]; 
+"5.Murcia"-> "8.Albacete"[dir="forward", color=crimson,label = "150", fontcolor=limegreen]; 
+"6.Madrid"-> "4.Jaen"[dir="forward", color=crimson,label = "335", fontcolor=limegreen]; 
+"6.Madrid"-> "8.Albacete"[dir="forward", color=crimson,label = "251", fontcolor=limegreen]; 
+"6.Madrid"-> "11.Zaragoza"[dir="forward", color=crimson,label = "325", fontcolor=limegreen]; 
+"6.Madrid"-> "12.Badajoz"[dir="forward", color=crimson,label = "403", fontcolor=limegreen]; 
+"6.Madrid"-> "13.Valladolid"[dir="forward", color=crimson,label = "193", fontcolor=limegreen]; 
+"6.Madrid"-> "16.Bilbao"[dir="forward", color=crimson,label = "395", fontcolor=limegreen]; 
+"7.Valencia"-> "5.Murcia"[dir="forward", color=crimson,label = "241", fontcolor=limegreen]; 
+"7.Valencia"-> "8.Albacete"[dir="forward", color=crimson,label = "191", fontcolor=limegreen]; 
+"7.Valencia"-> "9.Barcelona"[dir="forward", color=crimson,label = "349", fontcolor=limegreen]; 
+"8.Albacete"-> "5.Murcia"[dir="forward", color=crimson,label = "150", fontcolor=limegreen]; 
+"8.Albacete"-> "7.Valencia"[dir="forward", color=crimson,label = "191", fontcolor=limegreen]; 
+"8.Albacete"-> "6.Madrid"[dir="forward", color=crimson,label = "251", fontcolor=limegreen]; 
+"9.Barcelona"-> "7.Valencia"[dir="forward", color=crimson,label = "349", fontcolor=limegreen]; 
+"9.Barcelona"-> "10.Gerona"[dir="forward", color=crimson,label = "100", fontcolor=limegreen]; 
+"9.Barcelona"-> "11.Zaragoza"[dir="forward", color=crimson,label = "296", fontcolor=limegreen]; 
+"10.Gerona"-> "9.Barcelona"[dir="forward", color=crimson,label = "100", fontcolor=limegreen]; 
+"11.Zaragoza"-> "9.Barcelona"[dir="forward", color=crimson,label = "296", fontcolor=limegreen]; 
+"11.Zaragoza"-> "6.Madrid"[dir="forward", color=crimson,label = "325", fontcolor=limegreen]; 
+"11.Zaragoza"-> "16.Bilbao"[dir="forward", color=crimson,label = "324", fontcolor=limegreen]; 
+"12.Badajoz"-> "6.Madrid"[dir="forward", color=crimson,label = "403", fontcolor=limegreen]; 
+"13.Valladolid"-> "6.Madrid"[dir="forward", color=crimson,label = "193", fontcolor=limegreen]; 
+"13.Valladolid"-> "14.Vigo"[dir="forward", color=crimson,label = "356", fontcolor=limegreen]; 
+"13.Valladolid"-> "15.Coruna"[dir="forward", color=crimson,label = "455", fontcolor=limegreen]; 
+"13.Valladolid"-> "16.Bilbao"[dir="forward", color=crimson,label = "280", fontcolor=limegreen]; 
+"14.Vigo"-> "13.Valladolid"[dir="forward", color=crimson,label = "356", fontcolor=limegreen]; 
+"14.Vigo"-> "15.Coruna"[dir="forward", color=crimson,label = "171", fontcolor=limegreen]; 
+"15.Coruna"-> "13.Valladolid"[dir="forward", color=crimson,label = "455", fontcolor=limegreen]; 
+"15.Coruna"-> "14.Vigo"[dir="forward", color=crimson,label = "171", fontcolor=limegreen]; 
+"16.Bilbao"-> "13.Valladolid"[dir="forward", color=crimson,label = "280", fontcolor=limegreen]; 
+"16.Bilbao"-> "6.Madrid"[dir="forward", color=crimson,label = "395", fontcolor=limegreen]; 
+"16.Bilbao"-> "11.Zaragoza"[dir="forward", color=crimson,label = "324", fontcolor=limegreen]; 
+"16.Bilbao"-> "17.Oviedo"[dir="forward", color=crimson,label = "304", fontcolor=limegreen]; 
+"17.Oviedo"-> "16.Bilbao"[dir="forward", color=crimson,label = "304", fontcolor=limegreen]; 
+label="Rutas de LlegaRapidito"fontsize=30 fontcolor=red;
+ }
+"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->4255040741108;
+"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->1007723679377;
 }

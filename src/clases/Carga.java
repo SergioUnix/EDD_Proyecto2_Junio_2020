@@ -620,7 +620,6 @@ public class Carga {
             BW.write(Carga.vehiculos.getCadenaSubgrafo());
             BW.write("subgraph cluster_1{\n");
             BW.write("bgcolor=\"oldlace\";\n");
-            
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -725,6 +724,24 @@ public class Carga {
             }
             BW.write("}" + "\n");
             BW.write(grafo.cadenaGraficoSubGrafo());
+            BW.write("\n");
+            lista_simple<Long> AS = vehiculos.NodosReporte();
+            AS.imprimir();
+            for (int i = 0; i < viajes.tamanioCadena(); i++) {
+                BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + viajes.retornarBloque(i).getTransaccion().getCliente().retornarNodobyIndex(0).getDPI() + ";\n");
+                BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + viajes.retornarBloque(i).getTransaccion().getConductor().retornarNodobyIndex(0).getDPI() + ";\n");
+                long toCompare = valorAssci(viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca());
+                for (int j = 0; j < AS.getSize(); j++) {
+                    if (toCompare < AS.get(i)) {
+                        BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + AS.get(i - 1).toString() + ":" + viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca() + ";\n");
+                        break;
+
+                    } else if (toCompare == AS.get(i)) {
+                        BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + AS.get(i).toString() + ":" + viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca() + ";\n");
+                        break;
+                    }
+                }
+            }
             BW.write("}" + "\n");
         } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
         else {
@@ -841,6 +858,23 @@ public class Carga {
             }
             BW.write("}" + "\n");
             BW.write(grafo.cadenaGraficoSubGrafo());
+            BW.write("\n");
+            lista_simple<Long> AS = vehiculos.NodosReporte();
+            for (int i = 0; i < viajes.tamanioCadena(); i++) {
+                BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + viajes.retornarBloque(i).getTransaccion().getCliente().retornarNodobyIndex(0).getDPI() + ";\n");
+                BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + viajes.retornarBloque(i).getTransaccion().getConductor().retornarNodobyIndex(0).getDPI() + ";\n");
+                Long toCompare = valorAssci(viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca());
+                for (int j = 0; j < AS.getSize(); j++) {
+                    if (toCompare < AS.get(i)) {
+                        BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + AS.get(i - 1) + ":" + viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca() + ";\n");
+                        break;
+
+                    } else if (toCompare == AS.get(i)) {
+                        BW.write("\"" + viajes.retornarBloque(i).getLlave() + "\"->" + AS.get(i) + ":" + viajes.retornarBloque(i).getTransaccion().getVehiculo().retornarNodobyIndex(0).getPlaca() + ";\n");
+                        break;
+                    }
+                }
+            }
             BW.write("}" + "\n");
         }
 
@@ -862,7 +896,8 @@ public class Carga {
         } catch (IOException e) {
         }
     }
-        public static void AdibujarGRAPHVIZ(Path dot, String png) {
+
+    public static void AdibujarGRAPHVIZ(Path dot, String png) {
         try {
             //CREAMOS UN PROCESO PARA LLAMAR LA FUNCIÓN DOT
             ProcessBuilder graficarDot;
@@ -874,5 +909,17 @@ public class Carga {
             graficarDot.start();
         } catch (IOException e) {
         }
+    }
+
+    public static long valorAssci(String subCadena) {
+        long result = 0;
+        String str = null;
+        str = subCadena;
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+            sb.append((int) c);
+        }
+        result = Long.parseLong(sb.toString());
+        return result;
     }
 }

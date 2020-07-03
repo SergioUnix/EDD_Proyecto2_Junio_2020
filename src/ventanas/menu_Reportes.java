@@ -369,6 +369,17 @@ public class menu_Reportes extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        File miGraphviz = new File("SUPERGRAFO.png");
+        try {
+            Desktop.getDesktop().open(miGraphviz);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
+        }
+        mostrador_imagen imagen = new mostrador_imagen();
+        ImageIcon foto = new ImageIcon("./SUPERGRAFO.png");
+        Icon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.GraphvizLabel.getWidth(), imagen.GraphvizLabel.getHeight(), Image.SCALE_DEFAULT));
+        imagen.GraphvizLabel.setIcon(icono);
+        imagen.setVisible(true);
     }//GEN-LAST:event_EstructuraBotonActionPerformed
 
     /**
