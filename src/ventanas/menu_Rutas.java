@@ -529,7 +529,7 @@ public class menu_Rutas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Carga.grafo.metCorto("Gerona", "Cadiz");
+            Carga.grafo.metCorto("Cadiz", "Coruna");
         } catch (Exception ex) {
             Logger.getLogger(menu_Rutas.class.getName()).log(Level.SEVERE, null, ex);
         }
