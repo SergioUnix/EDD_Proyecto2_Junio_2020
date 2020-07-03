@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import clases.Carga;
 import clases.Cliente;
 import clases.Conductor;
 import static clases.Reportes.TopClientes;
@@ -13,7 +14,10 @@ import static clases.Reportes.TopVehiculos;
 import static clases.Reportes.TopViajes;
 import clases.Vehiculo;
 import clases.Viaje;
+import estructuras.estructura_BloqueC;
 import estructuras.lista_enlazada_doble_circular;
+import java.awt.Desktop;
+import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.io.BufferedWriter;
@@ -22,8 +26,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +61,7 @@ public class menu_Reportes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Salir2 = new javax.swing.JLabel();
         ClientesTopBoton1 = new javax.swing.JButton();
+        RutaViaje = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReporteArea = new javax.swing.JTextArea();
         RutaViajeBoton = new javax.swing.JButton();
@@ -96,17 +105,23 @@ public class menu_Reportes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(ClientesTopBoton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
+        jPanel1.add(RutaViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 190, -1));
 
         ReporteArea.setEditable(false);
         ReporteArea.setColumns(20);
         ReporteArea.setRows(5);
         jScrollPane1.setViewportView(ReporteArea);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 740, 380));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 490, 380));
 
         RutaViajeBoton.setBackground(new java.awt.Color(255, 255, 255));
         RutaViajeBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/irutas.png"))); // NOI18N
         RutaViajeBoton.setText("Ruta por Viaje");
+        RutaViajeBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RutaViajeBotonActionPerformed(evt);
+            }
+        });
         jPanel1.add(RutaViajeBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
         ViajesTopBoton.setBackground(new java.awt.Color(255, 255, 255));
@@ -122,6 +137,11 @@ public class menu_Reportes extends javax.swing.JFrame {
         EstructuraBoton.setBackground(new java.awt.Color(255, 255, 255));
         EstructuraBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/graphviz.png"))); // NOI18N
         EstructuraBoton.setText("Estructura Completa");
+        EstructuraBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstructuraBotonActionPerformed(evt);
+            }
+        });
         jPanel1.add(EstructuraBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
         VehiculosTopBoton.setBackground(new java.awt.Color(255, 255, 255));
@@ -309,6 +329,48 @@ public class menu_Reportes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ClientesTopBoton1ActionPerformed
 
+    private void RutaViajeBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaViajeBotonActionPerformed
+        if (!RutaViaje.getText().equals("")) {
+            Viaje mostrar = null;
+            try {
+                System.out.println(estructura_BloqueC.Encriptar.MD5Code(RutaViaje.getText()));
+                mostrar = Carga.viajes.buscarTransaccion(estructura_BloqueC.Encriptar.MD5Code(RutaViaje.getText()));
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(menu_Viajes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                Path CMD = Carga.block_I_GRAPHVIZ(estructura_BloqueC.Encriptar.MD5Code(RutaViaje.getText()));
+                Carga.dibujarGRAPHVIZ(CMD, "ViajeINDI.png");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(menu_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            File miGraphviz = new File("ViajeINDI.png");
+            try {
+                Desktop.getDesktop().open(miGraphviz);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "IMAGEN CARGANDO");
+            }
+            mostrador_imagen imagen = new mostrador_imagen();
+            ImageIcon foto = new ImageIcon("./ViajeINDI.png");
+            Icon icono = new ImageIcon(foto.getImage().getScaledInstance(imagen.GraphvizLabel.getWidth(), imagen.GraphvizLabel.getHeight(), Image.SCALE_DEFAULT));
+            imagen.GraphvizLabel.setIcon(icono);
+            imagen.setVisible(true);
+        }
+    }//GEN-LAST:event_RutaViajeBotonActionPerformed
+
+    private void EstructuraBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstructuraBotonActionPerformed
+        try {
+            Path CMD = Carga.mainGRAPHVIZ();
+            Carga.AdibujarGRAPHVIZ(CMD, "SUPERGRAFO.png");
+        } catch (IOException ex) {
+            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_EstructuraBotonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,6 +412,7 @@ public class menu_Reportes extends javax.swing.JFrame {
     private javax.swing.JButton ConductoresTopBoton;
     private javax.swing.JButton EstructuraBoton;
     private javax.swing.JTextArea ReporteArea;
+    private javax.swing.JTextField RutaViaje;
     private javax.swing.JButton RutaViajeBoton;
     private javax.swing.JLabel Salir2;
     private javax.swing.JLabel Titulo;

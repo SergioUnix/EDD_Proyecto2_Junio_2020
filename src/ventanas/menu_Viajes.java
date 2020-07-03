@@ -480,6 +480,17 @@ public class menu_Viajes extends javax.swing.JFrame {
                 }
             }
             CrearViajeBoton.setText("Crear Viaje");
+        } else if (CrearViajeBoton.getText().equals("Limpiar")) {
+            for (Component component : jPanel1.getComponents()) {
+                if (component instanceof JComboBox) {
+                    ((JComboBox) component).setSelectedIndex(0);
+                }
+                ClienteArea.setText("");
+                ConductorArea.setText("");
+                VehiculoArea.setText("");
+                ViajeArea.setText("");
+                CrearViajeBoton.setText("Crear Viaje");
+            }
         }
     }//GEN-LAST:event_CrearViajeBotonActionPerformed
 
@@ -488,14 +499,6 @@ public class menu_Viajes extends javax.swing.JFrame {
         try {
             Path CMD = Carga.block_chain_GRAPHVIZ();
             Carga.dibujarGRAPHVIZ(CMD, "Viajes.png");
-        } catch (IOException ex) {
-            Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(menu_Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            Path CMD = Carga.mainGRAPHVIZ();
-            Carga.dibujarGRAPHVIZ(CMD, "SUPERGRAFO.png");
         } catch (IOException ex) {
             Logger.getLogger(carga_Masiva.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -521,10 +524,17 @@ public class menu_Viajes extends javax.swing.JFrame {
     private void MostrarFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MostrarFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (!MostrarField.getText().equals("")) {
-                Viaje mostrar = Carga.viajes.buscarBloque(MostrarField.getText()).getTransaccion();
+                Viaje mostrar = null;
+                try {
+                    System.out.println(Encriptar.MD5Code(MostrarField.getText()));
+                    mostrar = Carga.viajes.buscarTransaccion(Encriptar.MD5Code(MostrarField.getText()));
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(menu_Viajes.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 Cliente eC = mostrar.getCliente().retornarNodobyIndex(0);
                 Conductor eC2 = mostrar.getConductor().retornarNodobyIndex(0);
                 Vehiculo eC3 = mostrar.getVehiculo().retornarNodobyIndex(0);
+                lista_simple<String> viajeXD = mostrar.getViaje();
                 ClienteArea.setText("CLIENTE QUE SOLICITA EL VIAJE:" + "\n" + "\n"
                         + "DPI: " + String.valueOf(eC.getDPI()) + "\n"
                         + "NOMBRES: " + eC.getNombres() + "\n"
@@ -550,6 +560,11 @@ public class menu_Viajes extends javax.swing.JFrame {
                         + "MODELO: " + eC3.getModelo() + "\n"
                         + "COLOR: " + eC3.getColor() + "\n"
                         + "TRANSMISION: " + eC3.getTransmision() + "\n");
+                ViajeArea.setText("VIAJE REALIZADO" + "\n");
+                for (int i = 0; i < viajeXD.getSize(); i++) {
+                    ViajeArea.setText(ViajeArea.getText() + viajeXD.get(i) + "\n");
+                }
+                CrearViajeBoton.setText("Limpiar");
             }
         }
     }//GEN-LAST:event_MostrarFieldKeyPressed

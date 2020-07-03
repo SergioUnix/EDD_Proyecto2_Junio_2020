@@ -174,7 +174,7 @@ public class estructura_BloqueC<T, V> {
         } else {
             alter = inicio;
             for (int i = 0; i < numeroBloques; i++) {
-                if (alter.getLlave() == llave) {
+                if (alter.getLlave().equals(llave)) {
                     return alter;
                 }
                 alter = alter.getSiguiente();
@@ -189,7 +189,7 @@ public class estructura_BloqueC<T, V> {
         } else {
             alter = inicio;
             for (int i = 0; i < numeroBloques; i++) {
-                if (alter.getLlave() == llave) {
+                if (alter.getLlave().equals(llave)) {
                     return alter.getTransaccion();
                 }
                 alter = alter.getSiguiente();

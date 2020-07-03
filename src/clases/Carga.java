@@ -203,7 +203,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"black\""+"\n");
+            BW.write("bgcolor=\"black\"" + "\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -222,8 +222,7 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
-                }
-                else{
+                } else {
                     BW.write("\"" + i + "\";\n");
                 }
             }
@@ -238,7 +237,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"black\""+"\n");
+            BW.write("bgcolor=\"black\"" + "\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -257,7 +256,7 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
-                }else{
+                } else {
                     BW.write("\"" + i + "\";\n");
                 }
             }
@@ -296,7 +295,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"black\""+"\n");
+            BW.write("bgcolor=\"black\"" + "\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -327,7 +326,7 @@ public class Carga {
             BW = new BufferedWriter(new FileWriter(archivo));
             BW.write("digraph DoublyCList {\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"black\""+"\n");
+            BW.write("bgcolor=\"black\"" + "\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -380,7 +379,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"green\""+"\n");
+            BW.write("bgcolor=\"green\"" + "\n");
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -441,7 +440,7 @@ public class Carga {
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
             BW.write("rankdir=LR;\n");
             BW.write("subgraph cluster_0{\n");
-            BW.write("bgcolor=\"green\""+"\n");
+            BW.write("bgcolor=\"green\"" + "\n");
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -501,6 +500,91 @@ public class Carga {
 
     }
 
+    public static Path block_I_GRAPHVIZ(String llave) throws IOException, Exception {
+        nodo_bloque aux, aux2;
+        //VARIALBES PARA CREAR NUESTRO ARCHIVO .DOT CON SU RUTA
+        String ARCHIVO = "Viajes.dot";
+        Path rutaRelativa = Paths.get(ARCHIVO);
+        Path rutaAbsoluta = rutaRelativa.toAbsolutePath();
+        //IMPRIMIR LA RUTA PARA REVISAR
+        System.out.println(rutaAbsoluta);
+        //CREAMOS EL ARCHIVO EN LA RUTA ABSOLUTA DE NUESTRO PROYECTO
+        File archivo = new File(rutaAbsoluta.toString());
+        BufferedWriter BW;
+        //SI EXISTE NUESTRO ARCHIVO SOLO LO EDITAMOS
+        if (archivo.exists()) {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph ViajeIndividual {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("bgcolor=\"green\"" + "\n");
+
+            aux = viajes.buscarBloque(llave);
+            miViaje = viajes.buscarTransaccion(llave);
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
+        else {
+            Viaje miViaje, viaje2;
+            BW = new BufferedWriter(new FileWriter(archivo));
+            BW.write("digraph ViajeIndividual {\n");
+            BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
+            BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
+            BW.write("rankdir=LR;\n");
+            BW.write("subgraph cluster_0{\n");
+            BW.write("bgcolor=\"green\"" + "\n");
+
+            aux = viajes.buscarBloque(llave);
+            miViaje = viajes.buscarTransaccion(llave);
+            BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
+                    + "CLIENTE: " + String.valueOf(miViaje.getCliente().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "CONDUCTOR: " + String.valueOf(miViaje.getConductor().retornarNodobyIndex(0).getDPI()) + "\n"
+                    + "VEHICULO: " + String.valueOf(miViaje.getVehiculo().retornarNodobyIndex(0).getPlaca()) + "\"];" + "\n");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "[label=\"" + miViaje.getViaje().get(j)
+                        + "\n" + miViaje.getPesoCamino().get(j) + "\"];" + "\n");
+            }
+            for (int j = 0; j < miViaje.getViaje().getSize() - 1; j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + "->" + "\"0" + miViaje.getViaje().get(j + 1) + "\"" + "\n");
+            }
+            BW.write("{ rank = same;\"" + aux.getLlave() + "\";");
+            for (int j = 0; j < miViaje.getViaje().getSize(); j++) {
+                BW.write("\"0" + miViaje.getViaje().get(j) + "\"" + ";");
+            }
+            BW.write("}\n");
+            BW.write("\"" + aux.getLlave() + "\"->" + "\"0" + miViaje.getViaje().get(0) + "\"");
+
+            BW.write("}" + "\n");
+            BW.write("}" + "\n");
+        }
+
+        BW.close();
+        //RETORNAMOS LA RUTA PARA CREAR EL GRÁFICO
+        return rutaAbsoluta;
+
+    }
+
     public static Path mainGRAPHVIZ() throws IOException, Exception {
 
         Cliente clienteG;
@@ -535,9 +619,9 @@ public class Carga {
             BW.write("rankdir=TB;\n");
             BW.write(Carga.vehiculos.getCadenaSubgrafo());
             BW.write("subgraph cluster_1{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"oldlace\";\n");
             
+
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
             BW.write("\"" + aux.getLlave() + "\"[label=\"" + aux.getLlave() + "\n" + " FECHA: " + aux.getSelloTiempo() + "\n"
@@ -589,8 +673,7 @@ public class Carga {
             BW.write("}" + "\n");
 
             BW.write("subgraph cluster_2{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;");
+            BW.write("bgcolor=\"oldlace\";\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -617,8 +700,7 @@ public class Carga {
             BW.write("}" + "\n");
 
             BW.write("subgraph cluster_3{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"oldlace\";\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -637,23 +719,24 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
-                }else{
+                } else {
                     BW.write("\"" + i + "\";\n");
                 }
             }
             BW.write("}" + "\n");
+            BW.write(grafo.cadenaGraficoSubGrafo());
             BW.write("}" + "\n");
         } //SI NO EXISTE CREAMOS UNO NUEVO Y LLENAMOS DE INFORMACIÓN
         else {
             Viaje miViaje, viaje2;
             BW = new BufferedWriter(new FileWriter(archivo));
-            BW.write("digraph BlockChain {\n");
+            BW.write("digraph MAIN {\n");
             BW.write("node[shape=component style=\"solid\" color=\"blue\" fontcolor = \"black\" penwidth=3];\n");
             BW.write("edge[style=filled fillcolor=\"darkgreen\" color=\"darkgoldenrod3\"];\n");
-            BW.write("rankdir=LR;\n");
+            BW.write("rankdir=TB;\n");
+            BW.write(Carga.vehiculos.getCadenaSubgrafo());
             BW.write("subgraph cluster_1{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"oldlace\";\n");
 
             aux = viajes.retornarBloque(0);
             miViaje = (Viaje) aux.getTransaccion();
@@ -706,8 +789,7 @@ public class Carga {
             BW.write("}" + "\n");
 
             BW.write("subgraph cluster_2{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;");
+            BW.write("bgcolor=\"oldlace\";\n");
             BW.write("node[shape=record];\n");
             BW.write("rankdir=TB;\n");
             for (int i = 1; i < conductores.tamanioLista() + 1; i++) {
@@ -734,8 +816,7 @@ public class Carga {
             BW.write("}" + "\n");
 
             BW.write("subgraph cluster_3{\n");
-            BW.write("style=filled;\n");
-            BW.write("color=white;\n");
+            BW.write("bgcolor=\"oldlace\";\n");
 
             for (int i = 0; i < clientes.getTabla_H().length; i++) {
                 if (clientes.getTabla_H()[i] != null && !clientes.getTabla_H()[i].isEmpty()) {
@@ -754,11 +835,12 @@ public class Carga {
                     }
                     clienteG = vector.get(0);
                     BW.write(i + "->" + "\"" + String.valueOf(clienteG.getDPI()) + "\";\n");
-                }else{
+                } else {
                     BW.write("\"" + i + "\";\n");
                 }
             }
             BW.write("}" + "\n");
+            BW.write(grafo.cadenaGraficoSubGrafo());
             BW.write("}" + "\n");
         }
 
@@ -773,6 +855,19 @@ public class Carga {
             ProcessBuilder graficarDot;
             //CREAMOS EL CONSTRUCTOR CON LOS PARAMETROS DE LA FUNCIÓN
             graficarDot = new ProcessBuilder("dot", "-Tpng", "-Gdpi=300", "-o", png, dot.toString());
+            //VERIFICA O REDIRIGE SI HAY UN ERROR
+            graficarDot.redirectErrorStream(true);
+            //EJECUTA LA FUCNIÓN
+            graficarDot.start();
+        } catch (IOException e) {
+        }
+    }
+        public static void AdibujarGRAPHVIZ(Path dot, String png) {
+        try {
+            //CREAMOS UN PROCESO PARA LLAMAR LA FUNCIÓN DOT
+            ProcessBuilder graficarDot;
+            //CREAMOS EL CONSTRUCTOR CON LOS PARAMETROS DE LA FUNCIÓN
+            graficarDot = new ProcessBuilder("dot", "-Tpng", "-o", png, dot.toString());
             //VERIFICA O REDIRIGE SI HAY UN ERROR
             graficarDot.redirectErrorStream(true);
             //EJECUTA LA FUCNIÓN
