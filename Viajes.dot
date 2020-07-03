@@ -4,13 +4,28 @@ edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
 rankdir=LR;
 subgraph cluster_0{
 bgcolor="green"
-"f0cced0c4d92c02e8d042e3f91477acb"[label="f0cced0c4d92c02e8d042e3f91477acb
- FECHA: 2/6/2020 21:55
-CLIENTE: 4255040741108
-CONDUCTOR: 1511042948678
-VEHICULO: C859QZN"];
-"0Coruna"[label="Coruna
+"446507da88c7f85857c5dae987dec430"[label="446507da88c7f85857c5dae987dec430
+ FECHA: 2/6/2020 22:20
+CLIENTE: 8881189800232
+CONDUCTOR: 1668014356232
+VEHICULO: C196JDD"];
+"0Cadiz"[label="Cadiz
 0"];
-{ rank = same;"f0cced0c4d92c02e8d042e3f91477acb";"0Coruna";}
-"f0cced0c4d92c02e8d042e3f91477acb"->"0Coruna"}
+"0Sevilla"[label="Sevilla
+125"];
+"0Jaen"[label="Jaen
+367"];
+"0Madrid"[label="Madrid
+702"];
+"0Valladolid"[label="Valladolid
+895"];
+"0Coruna"[label="Coruna
+1350"];
+"0Cadiz"->"0Sevilla"
+"0Sevilla"->"0Jaen"
+"0Jaen"->"0Madrid"
+"0Madrid"->"0Valladolid"
+"0Valladolid"->"0Coruna"
+{ rank = same;"446507da88c7f85857c5dae987dec430";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Valladolid";"0Coruna";}
+"446507da88c7f85857c5dae987dec430"->"0Cadiz"}
 }
