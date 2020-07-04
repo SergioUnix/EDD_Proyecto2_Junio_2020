@@ -4,28 +4,161 @@ edge[style=filled fillcolor="darkgreen" color="darkgoldenrod3"];
 rankdir=LR;
 subgraph cluster_0{
 bgcolor="green"
-"446507da88c7f85857c5dae987dec430"[label="446507da88c7f85857c5dae987dec430
- FECHA: 2/6/2020 22:20
-CLIENTE: 8881189800232
-CONDUCTOR: 1668014356232
-VEHICULO: C196JDD"];
-"0Cadiz"[label="Cadiz
+"99899d79d7302afca20221ca79141752"[label="99899d79d7302afca20221ca79141752
+ FECHA: 4/6/2020 12:48
+CLIENTE: 3000853708101
+CONDUCTOR: 1000853700103
+VEHICULO: p0lAf0"];
+"0Gerona"[label="Gerona
 0"];
-"0Sevilla"[label="Sevilla
-125"];
-"0Jaen"[label="Jaen
-367"];
+"0Barcelona"[label="Barcelona
+100"];
+"0Zaragoza"[label="Zaragoza
+396"];
 "0Madrid"[label="Madrid
+721"];
+"0Gerona"->"0Barcelona"
+"0Barcelona"->"0Zaragoza"
+"0Zaragoza"->"0Madrid"
+{ rank = same;"99899d79d7302afca20221ca79141752";"0Gerona";"0Barcelona";"0Zaragoza";"0Madrid";}
+"99899d79d7302afca20221ca79141752"->"0Gerona""29733c31eaaf9dbf2759a54c0709f1a7"[label="99899d79d7302afca20221ca79141752
+ FECHA: 4/6/2020 12:49
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700102
+VEHICULO: p1lAf1"];
+"1Cadiz"[label="Cadiz
+0"];
+"1Sevilla"[label="Sevilla
+125"];
+"1Jaen"[label="Jaen
+367"];
+"1Madrid"[label="Madrid
 702"];
-"0Valladolid"[label="Valladolid
+"1Valladolid"[label="Valladolid
 895"];
-"0Coruna"[label="Coruna
+"1Coruna"[label="Coruna
 1350"];
-"0Cadiz"->"0Sevilla"
-"0Sevilla"->"0Jaen"
-"0Jaen"->"0Madrid"
-"0Madrid"->"0Valladolid"
-"0Valladolid"->"0Coruna"
-{ rank = same;"446507da88c7f85857c5dae987dec430";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Valladolid";"0Coruna";}
-"446507da88c7f85857c5dae987dec430"->"0Cadiz"}
+"1Cadiz"->"1Sevilla"
+"1Sevilla"->"1Jaen"
+"1Jaen"->"1Madrid"
+"1Madrid"->"1Valladolid"
+"1Valladolid"->"1Coruna"
+{ rank = same;"29733c31eaaf9dbf2759a54c0709f1a7";"1Cadiz";"1Sevilla";"1Jaen";"1Madrid";"1Valladolid";"1Coruna";}
+"29733c31eaaf9dbf2759a54c0709f1a7"->"1Cadiz"
+"c739529455273f3b721cfaf1a601f5d7"[label="29733c31eaaf9dbf2759a54c0709f1a7
+ FECHA: 4/6/2020 12:49
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700102
+VEHICULO: p3lAf3"];
+"2Vigo"[label="Vigo
+0"];
+"2Valladolid"[label="Valladolid
+356"];
+"2Madrid"[label="Madrid
+549"];
+"2Zaragoza"[label="Zaragoza
+874"];
+"2Vigo"->"2Valladolid"
+"2Valladolid"->"2Madrid"
+"2Madrid"->"2Zaragoza"
+{ rank = same;"c739529455273f3b721cfaf1a601f5d7";"2Vigo";"2Valladolid";"2Madrid";"2Zaragoza";}
+"c739529455273f3b721cfaf1a601f5d7"->"2Vigo"
+"d251ea023f8ce0cd32aa2e13127907d4"[label="c739529455273f3b721cfaf1a601f5d7
+ FECHA: 4/6/2020 12:51
+CLIENTE: 3000853700110
+CONDUCTOR: 1000853700101
+VEHICULO: p4lAf4"];
+"3Jaen"[label="Jaen
+0"];
+"3Madrid"[label="Madrid
+335"];
+"3Valladolid"[label="Valladolid
+528"];
+"3Vigo"[label="Vigo
+884"];
+"3Jaen"->"3Madrid"
+"3Madrid"->"3Valladolid"
+"3Valladolid"->"3Vigo"
+{ rank = same;"d251ea023f8ce0cd32aa2e13127907d4";"3Jaen";"3Madrid";"3Valladolid";"3Vigo";}
+"d251ea023f8ce0cd32aa2e13127907d4"->"3Jaen"
+"cce02c09dff2e83ddab46831268e82c6"[label="d251ea023f8ce0cd32aa2e13127907d4
+ FECHA: 4/6/2020 12:51
+CLIENTE: 3000853700191
+CONDUCTOR: 1000853700107
+VEHICULO: p11lAf11"];
+"4Cadiz"[label="Cadiz
+0"];
+"4Sevilla"[label="Sevilla
+125"];
+"4Jaen"[label="Jaen
+367"];
+"4Madrid"[label="Madrid
+702"];
+"4Zaragoza"[label="Zaragoza
+1027"];
+"4Cadiz"->"4Sevilla"
+"4Sevilla"->"4Jaen"
+"4Jaen"->"4Madrid"
+"4Madrid"->"4Zaragoza"
+{ rank = same;"cce02c09dff2e83ddab46831268e82c6";"4Cadiz";"4Sevilla";"4Jaen";"4Madrid";"4Zaragoza";}
+"cce02c09dff2e83ddab46831268e82c6"->"4Cadiz"
+"b1121e6d5ff3855c8c2ce2776eab029d"[label="cce02c09dff2e83ddab46831268e82c6
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853750101
+CONDUCTOR: 1000853700105
+VEHICULO: p7lAf7"];
+"5Sevilla"[label="Sevilla
+0"];
+"5Jaen"[label="Jaen
+242"];
+"5Madrid"[label="Madrid
+577"];
+"5Zaragoza"[label="Zaragoza
+902"];
+"5Sevilla"->"5Jaen"
+"5Jaen"->"5Madrid"
+"5Madrid"->"5Zaragoza"
+{ rank = same;"b1121e6d5ff3855c8c2ce2776eab029d";"5Sevilla";"5Jaen";"5Madrid";"5Zaragoza";}
+"b1121e6d5ff3855c8c2ce2776eab029d"->"5Sevilla"
+"56d991744a0741253efd08d3b79b630d"[label="b1121e6d5ff3855c8c2ce2776eab029d
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853700191
+CONDUCTOR: 1000853700110
+VEHICULO: p3lAf3"];
+"6Granada"[label="Granada
+0"];
+"6Jaen"[label="Jaen
+99"];
+"6Madrid"[label="Madrid
+434"];
+"6Valladolid"[label="Valladolid
+627"];
+"6Granada"->"6Jaen"
+"6Jaen"->"6Madrid"
+"6Madrid"->"6Valladolid"
+{ rank = same;"56d991744a0741253efd08d3b79b630d";"6Granada";"6Jaen";"6Madrid";"6Valladolid";}
+"56d991744a0741253efd08d3b79b630d"->"6Granada"
+"9cc7d9be2aa628cdc1a809d046f105ec"[label="56d991744a0741253efd08d3b79b630d
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700101
+VEHICULO: p0lAf0"];
+"7Sevilla"[label="Sevilla
+0"];
+"7Jaen"[label="Jaen
+242"];
+"7Madrid"[label="Madrid
+577"];
+"7Sevilla"->"7Jaen"
+"7Jaen"->"7Madrid"
+{ rank = same;"9cc7d9be2aa628cdc1a809d046f105ec";"7Sevilla";"7Jaen";"7Madrid";}
+"9cc7d9be2aa628cdc1a809d046f105ec"->"7Sevilla"
+"99899d79d7302afca20221ca79141752"->"29733c31eaaf9dbf2759a54c0709f1a7"
+"29733c31eaaf9dbf2759a54c0709f1a7"->"c739529455273f3b721cfaf1a601f5d7"
+"c739529455273f3b721cfaf1a601f5d7"->"d251ea023f8ce0cd32aa2e13127907d4"
+"d251ea023f8ce0cd32aa2e13127907d4"->"cce02c09dff2e83ddab46831268e82c6"
+"cce02c09dff2e83ddab46831268e82c6"->"b1121e6d5ff3855c8c2ce2776eab029d"
+"b1121e6d5ff3855c8c2ce2776eab029d"->"56d991744a0741253efd08d3b79b630d"
+"56d991744a0741253efd08d3b79b630d"->"9cc7d9be2aa628cdc1a809d046f105ec"
+}
 }

@@ -2,26 +2,48 @@ digraph arbol_por_paginas{
 rankdir=TB;
 bgcolor="oldlace"; 
 node[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style = filled, shape = record, width = 1 height = 1];
-  67565357819078[ label ="{<C859QZN>C859QZN|Infiniti|Pick Up}"]  
-67485048886771[ label ="{<C020XCG>C020XCG|Mercedes-Benz|Deportivo}|{<C196JDD>C196JDD|Vauxhall|Racing}|{<C207OOW>C207OOW|Renault|Standard}"]  
-67504956878470[ label ="{<C218WTF>C218WTF|Prueba|pick up P}|{<C249TVZ>C249TVZ|Hyundai Motors|Standard}|{<C282LUO>C282LUO|Buick|Racing}|{<C344SEQ>C344SEQ|Honda|Coupe}"]  
-67525652748479[ label ="{<C484JTO>C484JTO|Buick|Standard}|{<C571ZHR>C571ZHR|Ford|Deportivo}|{<C647MGJ>C647MGJ|Audi|Pick Up}|{<C824HFI>C824HFI|Suzuki|Racing}"]  
-67504948718069[ label ="{<C210GPE>C210GPE|Suzuki|Racing}|{<C477TTC>C477TTC|Chrysler|Camioneta}"]  
-67574951707972[ label ="{<C913FOH>C913FOH|Citroën|Coupe}|{<P058WOF>P058WOF|RAM Trucks|Standard}|{<P060HKC>P060HKC|MINI|Camioneta}"]  
-80504956777983[ label ="{<P218MOS>P218MOS|Mazda|Standard}|{<P290BID>P290BID|Tata Motors|Standard}"]  
-80535153668566[ label ="{<P535BUB>P535BUB|Kia Motors|Camioneta}|{<P546SKJ>P546SKJ|Mitsubishi Motors|Deportivo}|{<P590PXZ>P590PXZ|Suzuki|Deportivo}"]  
-80555053678185[ label ="{<P725CQU>P725CQU|MINI|Pick Up}|{<P836WTS>P836WTS|Dacia|Pick Up}"]  
-80565456836583[ label ="{<P868SAS>P868SAS|Audi|Standard}|{<P970AZE>P970AZE|Lexus|Deportivo}"]  
-80485653668672[ label ="{<P085BVH>P085BVH|Buick|Coupe}|{<P515LQN>P515LQN|Skoda|Camioneta}|{<P688XIZ>P688XIZ|Mazda|Coupe}|{<P860RMD>P860RMD|Buick|Pick Up}"]  
-67504948718069->67485048886771[dir="forward", color=mediumorchid4];
-67504948718069->67504956878470[dir="forward", color=mediumorchid4];
-67504948718069->67525652748479[dir="forward", color=mediumorchid4];
-67565357819078->67504948718069[dir="forward", color=mediumorchid4];
-80485653668672->67574951707972[dir="forward", color=mediumorchid4];
-80485653668672->80504956777983[dir="forward", color=mediumorchid4];
-80485653668672->80535153668566[dir="forward", color=mediumorchid4];
-80485653668672->80555053678185[dir="forward", color=mediumorchid4];
-80485653668672->80565456836583[dir="forward", color=mediumorchid4];
-67565357819078->80485653668672[dir="forward", color=mediumorchid4];
+  112571086510257[ label ="{<p9lAf9>p9lAf9|toyota|MM10}|{<p18lAf18>p18lAf18|hyundai|MM19}|{<p27lAf27>p27lAf27|hyundai|MM28}|{<p36lAf36>p36lAf36|volvo|MM37}"]  
+81495051818181[ label ="{<Q123QQQ>Q123QQQ|Marca Nueva|Nuevo}|{<p0lAf0>p0lAf0|toyota|MM1}|{<p1lAf1>p1lAf1|toyota|MM2}"]  
+112521086510252[ label ="{<p4lAf4>p4lAf4|toyota|MM5}|{<p5lAf5>p5lAf5|toyota Modificado|MM6}"]  
+112551086510255[ label ="{<p7lAf7>p7lAf7|toyota|MM8}|{<p8lAf8>p8lAf8|toyota|MM9}"]  
+112511086510251[ label ="{<p3lAf3>p3lAf3|toyota|MM4}|{<p6lAf6>p6lAf6|toyota|MM7}"]  
+1124948108651024948[ label ="{<p10lAf10>p10lAf10|toyota|MM11}|{<p11lAf11>p11lAf11|toyota|MM12}"]  
+1124951108651024951[ label ="{<p13lAf13>p13lAf13|toyota|MM14}|{<p14lAf14>p14lAf14|toyota|MM15}"]  
+1124954108651024954[ label ="{<p16lAf16>p16lAf16|toyota|MM17}|{<p17lAf17>p17lAf17|toyota|MM18}"]  
+1124950108651024950[ label ="{<p12lAf12>p12lAf12|toyota|MM13}|{<p15lAf15>p15lAf15|toyota|MM16}"]  
+1124957108651024957[ label ="{<p19lAf19>p19lAf19|hyundai|MM20}|{<p20lAf20>p20lAf20|hyundai|MM21}"]  
+1125050108651025050[ label ="{<p22lAf22>p22lAf22|hyundai|MM23}|{<p23lAf23>p23lAf23|hyundai|MM24}"]  
+1125053108651025053[ label ="{<p25lAf25>p25lAf25|hyundai|MM26}|{<p26lAf26>p26lAf26|hyundai|MM27}"]  
+1125049108651025049[ label ="{<p21lAf21>p21lAf21|hyundai|MM22}|{<p24lAf24>p24lAf24|hyundai|MM25}"]  
+1125056108651025056[ label ="{<p28lAf28>p28lAf28|hyundai|MM29}|{<p29lAf29>p29lAf29|hyundai|MM30}"]  
+1125149108651025149[ label ="{<p31lAf31>p31lAf31|hyundai|MM32}|{<p32lAf32>p32lAf32|hyundai|MM33}"]  
+1125152108651025152[ label ="{<p34lAf34>p34lAf34|volvo|MM35}|{<p35lAf35>p35lAf35|volvo|MM36}"]  
+1125148108651025148[ label ="{<p30lAf30>p30lAf30|hyundai|MM31}|{<p33lAf33>p33lAf33|hyundai|MM34}"]  
+1125155108651025155[ label ="{<p37lAf37>p37lAf37|volvo|MM38}|{<p38lAf38>p38lAf38|volvo|MM39}"]  
+1125248108651025248[ label ="{<p40lAf40>p40lAf40|volvo|MM41}|{<p41lAf41>p41lAf41|volvo|MM42}"]  
+1125251108651025251[ label ="{<p43lAf43>p43lAf43|volvo|MM44}|{<p44lAf44>p44lAf44|volvo|MM45}"]  
+1125254108651025254[ label ="{<p46lAf46>p46lAf46|volvo|MM47}|{<p47lAf47>p47lAf47|volvo|MM48}|{<p48lAf48>p48lAf48|volvo|MM49}|{<p49lAf49>p49lAf49|volvo|MM50}"]  
+1125157108651025157[ label ="{<p39lAf39>p39lAf39|volvo|MM40}|{<p42lAf42>p42lAf42|volvo|MM43}|{<p45lAf45>p45lAf45|volvo|MM46}"]  
+112511086510251->81495051818181[dir="forward", color=mediumorchid4];
+112511086510251->112521086510252[dir="forward", color=mediumorchid4];
+112511086510251->112551086510255[dir="forward", color=mediumorchid4];
+112571086510257->112511086510251[dir="forward", color=mediumorchid4];
+1124950108651024950->1124948108651024948[dir="forward", color=mediumorchid4];
+1124950108651024950->1124951108651024951[dir="forward", color=mediumorchid4];
+1124950108651024950->1124954108651024954[dir="forward", color=mediumorchid4];
+112571086510257->1124950108651024950[dir="forward", color=mediumorchid4];
+1125049108651025049->1124957108651024957[dir="forward", color=mediumorchid4];
+1125049108651025049->1125050108651025050[dir="forward", color=mediumorchid4];
+1125049108651025049->1125053108651025053[dir="forward", color=mediumorchid4];
+112571086510257->1125049108651025049[dir="forward", color=mediumorchid4];
+1125148108651025148->1125056108651025056[dir="forward", color=mediumorchid4];
+1125148108651025148->1125149108651025149[dir="forward", color=mediumorchid4];
+1125148108651025148->1125152108651025152[dir="forward", color=mediumorchid4];
+112571086510257->1125148108651025148[dir="forward", color=mediumorchid4];
+1125157108651025157->1125155108651025155[dir="forward", color=mediumorchid4];
+1125157108651025157->1125248108651025248[dir="forward", color=mediumorchid4];
+1125157108651025157->1125251108651025251[dir="forward", color=mediumorchid4];
+1125157108651025157->1125254108651025254[dir="forward", color=mediumorchid4];
+112571086510257->1125157108651025157[dir="forward", color=mediumorchid4];
 label="Arbol B -- Placas LlegaRapidito"fontsize=30 fontcolor=red;
 }

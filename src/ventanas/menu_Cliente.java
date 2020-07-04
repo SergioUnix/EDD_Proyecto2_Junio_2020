@@ -44,6 +44,7 @@ public class menu_Cliente extends javax.swing.JFrame {
     private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
     private lista_simple<Cliente> clientesTabla;
     public static estructura_Hash<Cliente> clientesAlternative = new estructura_Hash(Carga.clientes.getCapacidad() + 37, 75.0);
+    private long edit=0;
 
     /**
      * Creates new form menu_Conductor
@@ -499,6 +500,7 @@ public class menu_Cliente extends javax.swing.JFrame {
                 } else {
                     System.out.println("CAMPOS LLENADOS CORRECTAMENTE");
                     Cliente nuevoCliente = new Cliente();
+                    
                     nuevoCliente.setDPI(Long.parseLong(DPI.getText().trim()));
                     nuevoCliente.setNombres(nombre.getText().trim());
                     nuevoCliente.setApellidos(apellido.getText().trim());
@@ -509,10 +511,10 @@ public class menu_Cliente extends javax.swing.JFrame {
                     nuevoCliente.setDireccion(direccion.getText().trim());
 
                     System.out.println(nuevoCliente.toString());
-                    clientesTabla = Carga.clientes.devolver_nodo(nuevoCliente.getDPI());
+                    clientesTabla = Carga.clientes.devolver_nodo(this.edit);
                     for (int i = 0; i < clientesTabla.size(); i++) {
                         try {
-                            if (clientesTabla.get(i).getDPI() == nuevoCliente.getDPI()) {
+                            if (clientesTabla.get(i).getDPI() == this.edit) {
                                 clientesTabla.remove(i);
                                 Carga.clientes.add(nuevoCliente, nuevoCliente.getDPI());
                                 break;
@@ -589,6 +591,7 @@ public class menu_Cliente extends javax.swing.JFrame {
             CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
             CrearBoton.repaint();
             EliminarBoton.setEnabled(true);
+            this.edit = eC.getDPI();
         } else {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }

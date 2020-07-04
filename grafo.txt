@@ -8,6 +8,7 @@ node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fonts
 "2.Sevilla"-- "3.Granada"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
 "2.Sevilla"-- "4.Jaen"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
 "3.Granada"-- "2.Sevilla"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
+"3.Granada"-- "4.Jaen"[dir="forward", color=crimson,label = "99", fontcolor=limegreen]; 
 "3.Granada"-- "5.Murcia"[dir="forward", color=crimson,label = "278", fontcolor=limegreen]; 
 "4.Jaen"-- "2.Sevilla"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
 "4.Jaen"-- "3.Granada"[dir="forward", color=crimson,label = "99", fontcolor=limegreen]; 

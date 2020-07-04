@@ -6,275 +6,490 @@ subgraph cluster_0{
 rankdir=TB;
 bgcolor="oldlace"; 
 node[fillcolor =deepskyblue , fontcolor = navy , color =    violetred3   ,style = filled, shape = record, width = 1 height = 1];
-  67565357819078[ label ="{<C859QZN>C859QZN|Infiniti|Pick Up}"]  
-67485048886771[ label ="{<C020XCG>C020XCG|Mercedes-Benz|Deportivo}|{<C196JDD>C196JDD|Vauxhall|Racing}|{<C207OOW>C207OOW|Renault|Standard}"]  
-67504956878470[ label ="{<C218WTF>C218WTF|Prueba|pick up P}|{<C249TVZ>C249TVZ|Hyundai Motors|Standard}|{<C282LUO>C282LUO|Buick|Racing}|{<C344SEQ>C344SEQ|Honda|Coupe}"]  
-67525652748479[ label ="{<C484JTO>C484JTO|Buick|Standard}|{<C571ZHR>C571ZHR|Ford|Deportivo}|{<C647MGJ>C647MGJ|Audi|Pick Up}|{<C824HFI>C824HFI|Suzuki|Racing}"]  
-67504948718069[ label ="{<C210GPE>C210GPE|Suzuki|Racing}|{<C477TTC>C477TTC|Chrysler|Camioneta}"]  
-67574951707972[ label ="{<C913FOH>C913FOH|Citroën|Coupe}|{<P058WOF>P058WOF|RAM Trucks|Standard}|{<P060HKC>P060HKC|MINI|Camioneta}"]  
-80504956777983[ label ="{<P218MOS>P218MOS|Mazda|Standard}|{<P290BID>P290BID|Tata Motors|Standard}"]  
-80535153668566[ label ="{<P535BUB>P535BUB|Kia Motors|Camioneta}|{<P546SKJ>P546SKJ|Mitsubishi Motors|Deportivo}|{<P590PXZ>P590PXZ|Suzuki|Deportivo}"]  
-80555053678185[ label ="{<P725CQU>P725CQU|MINI|Pick Up}|{<P836WTS>P836WTS|Dacia|Pick Up}"]  
-80565456836583[ label ="{<P868SAS>P868SAS|Audi|Standard}|{<P970AZE>P970AZE|Lexus|Deportivo}"]  
-80485653668672[ label ="{<P085BVH>P085BVH|Buick|Coupe}|{<P515LQN>P515LQN|Skoda|Camioneta}|{<P688XIZ>P688XIZ|Mazda|Coupe}|{<P860RMD>P860RMD|Buick|Pick Up}"]  
-67504948718069->67485048886771[dir="forward", color=mediumorchid4];
-67504948718069->67504956878470[dir="forward", color=mediumorchid4];
-67504948718069->67525652748479[dir="forward", color=mediumorchid4];
-67565357819078->67504948718069[dir="forward", color=mediumorchid4];
-80485653668672->67574951707972[dir="forward", color=mediumorchid4];
-80485653668672->80504956777983[dir="forward", color=mediumorchid4];
-80485653668672->80535153668566[dir="forward", color=mediumorchid4];
-80485653668672->80555053678185[dir="forward", color=mediumorchid4];
-80485653668672->80565456836583[dir="forward", color=mediumorchid4];
-67565357819078->80485653668672[dir="forward", color=mediumorchid4];
+  112571086510257[ label ="{<p9lAf9>p9lAf9|toyota|MM10}|{<p18lAf18>p18lAf18|hyundai|MM19}|{<p27lAf27>p27lAf27|hyundai|MM28}|{<p36lAf36>p36lAf36|volvo|MM37}"]  
+81495051818181[ label ="{<Q123QQQ>Q123QQQ|Marca Nueva|Nuevo}|{<p0lAf0>p0lAf0|toyota|MM1}|{<p1lAf1>p1lAf1|toyota|MM2}"]  
+112521086510252[ label ="{<p4lAf4>p4lAf4|toyota|MM5}|{<p5lAf5>p5lAf5|toyota Modificado|MM6}"]  
+112551086510255[ label ="{<p7lAf7>p7lAf7|toyota|MM8}|{<p8lAf8>p8lAf8|toyota|MM9}"]  
+112511086510251[ label ="{<p3lAf3>p3lAf3|toyota|MM4}|{<p6lAf6>p6lAf6|toyota|MM7}"]  
+1124948108651024948[ label ="{<p10lAf10>p10lAf10|toyota|MM11}|{<p11lAf11>p11lAf11|toyota|MM12}"]  
+1124951108651024951[ label ="{<p13lAf13>p13lAf13|toyota|MM14}|{<p14lAf14>p14lAf14|toyota|MM15}"]  
+1124954108651024954[ label ="{<p16lAf16>p16lAf16|toyota|MM17}|{<p17lAf17>p17lAf17|toyota|MM18}"]  
+1124950108651024950[ label ="{<p12lAf12>p12lAf12|toyota|MM13}|{<p15lAf15>p15lAf15|toyota|MM16}"]  
+1124957108651024957[ label ="{<p19lAf19>p19lAf19|hyundai|MM20}|{<p20lAf20>p20lAf20|hyundai|MM21}"]  
+1125050108651025050[ label ="{<p22lAf22>p22lAf22|hyundai|MM23}|{<p23lAf23>p23lAf23|hyundai|MM24}"]  
+1125053108651025053[ label ="{<p25lAf25>p25lAf25|hyundai|MM26}|{<p26lAf26>p26lAf26|hyundai|MM27}"]  
+1125049108651025049[ label ="{<p21lAf21>p21lAf21|hyundai|MM22}|{<p24lAf24>p24lAf24|hyundai|MM25}"]  
+1125056108651025056[ label ="{<p28lAf28>p28lAf28|hyundai|MM29}|{<p29lAf29>p29lAf29|hyundai|MM30}"]  
+1125149108651025149[ label ="{<p31lAf31>p31lAf31|hyundai|MM32}|{<p32lAf32>p32lAf32|hyundai|MM33}"]  
+1125152108651025152[ label ="{<p34lAf34>p34lAf34|volvo|MM35}|{<p35lAf35>p35lAf35|volvo|MM36}"]  
+1125148108651025148[ label ="{<p30lAf30>p30lAf30|hyundai|MM31}|{<p33lAf33>p33lAf33|hyundai|MM34}"]  
+1125155108651025155[ label ="{<p37lAf37>p37lAf37|volvo|MM38}|{<p38lAf38>p38lAf38|volvo|MM39}"]  
+1125248108651025248[ label ="{<p40lAf40>p40lAf40|volvo|MM41}|{<p41lAf41>p41lAf41|volvo|MM42}"]  
+1125251108651025251[ label ="{<p43lAf43>p43lAf43|volvo|MM44}|{<p44lAf44>p44lAf44|volvo|MM45}"]  
+1125254108651025254[ label ="{<p46lAf46>p46lAf46|volvo|MM47}|{<p47lAf47>p47lAf47|volvo|MM48}|{<p48lAf48>p48lAf48|volvo|MM49}|{<p49lAf49>p49lAf49|volvo|MM50}"]  
+1125157108651025157[ label ="{<p39lAf39>p39lAf39|volvo|MM40}|{<p42lAf42>p42lAf42|volvo|MM43}|{<p45lAf45>p45lAf45|volvo|MM46}"]  
+112511086510251->81495051818181[dir="forward", color=mediumorchid4];
+112511086510251->112521086510252[dir="forward", color=mediumorchid4];
+112511086510251->112551086510255[dir="forward", color=mediumorchid4];
+112571086510257->112511086510251[dir="forward", color=mediumorchid4];
+1124950108651024950->1124948108651024948[dir="forward", color=mediumorchid4];
+1124950108651024950->1124951108651024951[dir="forward", color=mediumorchid4];
+1124950108651024950->1124954108651024954[dir="forward", color=mediumorchid4];
+112571086510257->1124950108651024950[dir="forward", color=mediumorchid4];
+1125049108651025049->1124957108651024957[dir="forward", color=mediumorchid4];
+1125049108651025049->1125050108651025050[dir="forward", color=mediumorchid4];
+1125049108651025049->1125053108651025053[dir="forward", color=mediumorchid4];
+112571086510257->1125049108651025049[dir="forward", color=mediumorchid4];
+1125148108651025148->1125056108651025056[dir="forward", color=mediumorchid4];
+1125148108651025148->1125149108651025149[dir="forward", color=mediumorchid4];
+1125148108651025148->1125152108651025152[dir="forward", color=mediumorchid4];
+112571086510257->1125148108651025148[dir="forward", color=mediumorchid4];
+1125157108651025157->1125155108651025155[dir="forward", color=mediumorchid4];
+1125157108651025157->1125248108651025248[dir="forward", color=mediumorchid4];
+1125157108651025157->1125251108651025251[dir="forward", color=mediumorchid4];
+1125157108651025157->1125254108651025254[dir="forward", color=mediumorchid4];
+112571086510257->1125157108651025157[dir="forward", color=mediumorchid4];
 label="Arbol B"fontsize=20 fontcolor=red;
 }subgraph cluster_1{
 bgcolor="oldlace";
-"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"[label="21f3ac77d9ccc03ec46d6cfe4bbf3fc5
- FECHA: 2/6/2020 23:34
-CLIENTE: 4255040741108
-CONDUCTOR: 1007723679377
-VEHICULO: P688XIZ"];
-"0Cadiz"[label="Cadiz
+"99899d79d7302afca20221ca79141752"[label="99899d79d7302afca20221ca79141752
+ FECHA: 4/6/2020 12:48
+CLIENTE: 3000853708101
+CONDUCTOR: 1000853700103
+VEHICULO: p0lAf0"];
+"0Gerona"[label="Gerona
 0"];
-"0Sevilla"[label="Sevilla
-125"];
-"0Jaen"[label="Jaen
-367"];
+"0Barcelona"[label="Barcelona
+100"];
+"0Zaragoza"[label="Zaragoza
+396"];
 "0Madrid"[label="Madrid
+721"];
+"0Gerona"->"0Barcelona"
+"0Barcelona"->"0Zaragoza"
+"0Zaragoza"->"0Madrid"
+{ rank = same;"99899d79d7302afca20221ca79141752";"0Gerona";"0Barcelona";"0Zaragoza";"0Madrid";}
+"99899d79d7302afca20221ca79141752"->"0Gerona""29733c31eaaf9dbf2759a54c0709f1a7"[label="99899d79d7302afca20221ca79141752
+ FECHA: 4/6/2020 12:49
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700102
+VEHICULO: p1lAf1"];
+"1Cadiz"[label="Cadiz
+0"];
+"1Sevilla"[label="Sevilla
+125"];
+"1Jaen"[label="Jaen
+367"];
+"1Madrid"[label="Madrid
 702"];
-"0Valladolid"[label="Valladolid
+"1Valladolid"[label="Valladolid
 895"];
-"0Coruna"[label="Coruna
+"1Coruna"[label="Coruna
 1350"];
-"0Cadiz"->"0Sevilla"
-"0Sevilla"->"0Jaen"
-"0Jaen"->"0Madrid"
-"0Madrid"->"0Valladolid"
-"0Valladolid"->"0Coruna"
-{ rank = same;"21f3ac77d9ccc03ec46d6cfe4bbf3fc5";"0Cadiz";"0Sevilla";"0Jaen";"0Madrid";"0Valladolid";"0Coruna";}
-"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->"0Cadiz"}
+"1Cadiz"->"1Sevilla"
+"1Sevilla"->"1Jaen"
+"1Jaen"->"1Madrid"
+"1Madrid"->"1Valladolid"
+"1Valladolid"->"1Coruna"
+{ rank = same;"29733c31eaaf9dbf2759a54c0709f1a7";"1Cadiz";"1Sevilla";"1Jaen";"1Madrid";"1Valladolid";"1Coruna";}
+"29733c31eaaf9dbf2759a54c0709f1a7"->"1Cadiz"
+"c739529455273f3b721cfaf1a601f5d7"[label="29733c31eaaf9dbf2759a54c0709f1a7
+ FECHA: 4/6/2020 12:49
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700102
+VEHICULO: p3lAf3"];
+"2Vigo"[label="Vigo
+0"];
+"2Valladolid"[label="Valladolid
+356"];
+"2Madrid"[label="Madrid
+549"];
+"2Zaragoza"[label="Zaragoza
+874"];
+"2Vigo"->"2Valladolid"
+"2Valladolid"->"2Madrid"
+"2Madrid"->"2Zaragoza"
+{ rank = same;"c739529455273f3b721cfaf1a601f5d7";"2Vigo";"2Valladolid";"2Madrid";"2Zaragoza";}
+"c739529455273f3b721cfaf1a601f5d7"->"2Vigo"
+"d251ea023f8ce0cd32aa2e13127907d4"[label="c739529455273f3b721cfaf1a601f5d7
+ FECHA: 4/6/2020 12:51
+CLIENTE: 3000853700110
+CONDUCTOR: 1000853700101
+VEHICULO: p4lAf4"];
+"3Jaen"[label="Jaen
+0"];
+"3Madrid"[label="Madrid
+335"];
+"3Valladolid"[label="Valladolid
+528"];
+"3Vigo"[label="Vigo
+884"];
+"3Jaen"->"3Madrid"
+"3Madrid"->"3Valladolid"
+"3Valladolid"->"3Vigo"
+{ rank = same;"d251ea023f8ce0cd32aa2e13127907d4";"3Jaen";"3Madrid";"3Valladolid";"3Vigo";}
+"d251ea023f8ce0cd32aa2e13127907d4"->"3Jaen"
+"cce02c09dff2e83ddab46831268e82c6"[label="d251ea023f8ce0cd32aa2e13127907d4
+ FECHA: 4/6/2020 12:51
+CLIENTE: 3000853700191
+CONDUCTOR: 1000853700107
+VEHICULO: p11lAf11"];
+"4Cadiz"[label="Cadiz
+0"];
+"4Sevilla"[label="Sevilla
+125"];
+"4Jaen"[label="Jaen
+367"];
+"4Madrid"[label="Madrid
+702"];
+"4Zaragoza"[label="Zaragoza
+1027"];
+"4Cadiz"->"4Sevilla"
+"4Sevilla"->"4Jaen"
+"4Jaen"->"4Madrid"
+"4Madrid"->"4Zaragoza"
+{ rank = same;"cce02c09dff2e83ddab46831268e82c6";"4Cadiz";"4Sevilla";"4Jaen";"4Madrid";"4Zaragoza";}
+"cce02c09dff2e83ddab46831268e82c6"->"4Cadiz"
+"b1121e6d5ff3855c8c2ce2776eab029d"[label="cce02c09dff2e83ddab46831268e82c6
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853750101
+CONDUCTOR: 1000853700105
+VEHICULO: p7lAf7"];
+"5Sevilla"[label="Sevilla
+0"];
+"5Jaen"[label="Jaen
+242"];
+"5Madrid"[label="Madrid
+577"];
+"5Zaragoza"[label="Zaragoza
+902"];
+"5Sevilla"->"5Jaen"
+"5Jaen"->"5Madrid"
+"5Madrid"->"5Zaragoza"
+{ rank = same;"b1121e6d5ff3855c8c2ce2776eab029d";"5Sevilla";"5Jaen";"5Madrid";"5Zaragoza";}
+"b1121e6d5ff3855c8c2ce2776eab029d"->"5Sevilla"
+"56d991744a0741253efd08d3b79b630d"[label="b1121e6d5ff3855c8c2ce2776eab029d
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853700191
+CONDUCTOR: 1000853700110
+VEHICULO: p3lAf3"];
+"6Granada"[label="Granada
+0"];
+"6Jaen"[label="Jaen
+99"];
+"6Madrid"[label="Madrid
+434"];
+"6Valladolid"[label="Valladolid
+627"];
+"6Granada"->"6Jaen"
+"6Jaen"->"6Madrid"
+"6Madrid"->"6Valladolid"
+{ rank = same;"56d991744a0741253efd08d3b79b630d";"6Granada";"6Jaen";"6Madrid";"6Valladolid";}
+"56d991744a0741253efd08d3b79b630d"->"6Granada"
+"9cc7d9be2aa628cdc1a809d046f105ec"[label="56d991744a0741253efd08d3b79b630d
+ FECHA: 4/6/2020 12:52
+CLIENTE: 3000853700701
+CONDUCTOR: 1000853700101
+VEHICULO: p0lAf0"];
+"7Sevilla"[label="Sevilla
+0"];
+"7Jaen"[label="Jaen
+242"];
+"7Madrid"[label="Madrid
+577"];
+"7Sevilla"->"7Jaen"
+"7Jaen"->"7Madrid"
+{ rank = same;"9cc7d9be2aa628cdc1a809d046f105ec";"7Sevilla";"7Jaen";"7Madrid";}
+"9cc7d9be2aa628cdc1a809d046f105ec"->"7Sevilla"
+"99899d79d7302afca20221ca79141752"->"29733c31eaaf9dbf2759a54c0709f1a7"
+"29733c31eaaf9dbf2759a54c0709f1a7"->"c739529455273f3b721cfaf1a601f5d7"
+"c739529455273f3b721cfaf1a601f5d7"->"d251ea023f8ce0cd32aa2e13127907d4"
+"d251ea023f8ce0cd32aa2e13127907d4"->"cce02c09dff2e83ddab46831268e82c6"
+"cce02c09dff2e83ddab46831268e82c6"->"b1121e6d5ff3855c8c2ce2776eab029d"
+"b1121e6d5ff3855c8c2ce2776eab029d"->"56d991744a0741253efd08d3b79b630d"
+"56d991744a0741253efd08d3b79b630d"->"9cc7d9be2aa628cdc1a809d046f105ec"
+}
 subgraph cluster_2{
 bgcolor="oldlace";
 node[shape=record];
 rankdir=TB;
-1007723679377[label="{<before>|<ID>1007723679377|<data>Paul|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-1511042948678[label="{<before>|<ID>1511042948678|<data>Quin|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-1668014356232[label="{<before>|<ID>1668014356232|<data>Melanie|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-1856619165091[label="{<before>|<ID>1856619165091|<data>Vaughan|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-2137343565537[label="{<before>|<ID>2137343565537|<data>Deborah|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-3371537204646[label="{<before>|<ID>3371537204646|<data>Karina|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-3500641864904[label="{<before>|<ID>3500641864904|<data>Fulton|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-3874160522121[label="{<before>|<ID>3874160522121|<data>Teegan|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-4116118507559[label="{<before>|<ID>4116118507559|<data>Jonas|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-4578774996784[label="{<before>|<ID>4578774996784|<data>Jonah|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-4670437990604[label="{<before>|<ID>4670437990604|<data>Armando|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-4745647284409[label="{<before>|<ID>4745647284409|<data>Linda|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-4950354478649[label="{<before>|<ID>4950354478649|<data>Stephen|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-5307606770223[label="{<before>|<ID>5307606770223|<data>Steven|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-5375090919096[label="{<before>|<ID>5375090919096|<data>Ciara|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-5576294952607[label="{<before>|<ID>5576294952607|<data>Germaine|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-5713106892976[label="{<before>|<ID>5713106892976|<data>Rebekah|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-5836638072959[label="{<before>|<ID>5836638072959|<data>TaShya|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-6196972477497[label="{<before>|<ID>6196972477497|<data>Jael|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-6772178054660[label="{<before>|<ID>6772178054660|<data>Kiona|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-7136228953475[label="{<before>|<ID>7136228953475|<data>Bernard|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-7357294321109[label="{<before>|<ID>7357294321109|<data>Noelle|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-7476715136472[label="{<before>|<ID>7476715136472|<data>Nolan|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-7634985503447[label="{<before>|<ID>7634985503447|<data>Victoria|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-7754177557392[label="{<before>|<ID>7754177557392|<data>Hadley|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-8187495187888[label="{<before>|<ID>8187495187888|<data>Ivor|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-8247579567079[label="{<before>|<ID>8247579567079|<data>Patricia|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-8404110728286[label="{<before>|<ID>8404110728286|<data>Roth|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
-9898749357775[label="{<before>|<ID>9898749357775|<data>Bianca|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700101[label="{<before>|<ID>1000853700101|<data>Sonia|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700102[label="{<before>|<ID>1000853700102|<data>Rebeca|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700103[label="{<before>|<ID>1000853700103|<data>Melissa|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700104[label="{<before>|<ID>1000853700104|<data>Lourdes|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700105[label="{<before>|<ID>1000853700105|<data>Gabriela|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700106[label="{<before>|<ID>1000853700106|<data>Jessica|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700107[label="{<before>|<ID>1000853700107|<data>Rosa|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700108[label="{<before>|<ID>1000853700108|<data>Isabel|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700109[label="{<before>|<ID>1000853700109|<data>Evelyn|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700110[label="{<before>|<ID>1000853700110|<data>Sindy|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700111[label="{<before>|<ID>1000853700111|<data>Marcela|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700112[label="{<before>|<ID>1000853700112|<data>Heidy|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700113[label="{<before>|<ID>1000853700113|<data>Alexandra|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700114[label="{<before>|<ID>1000853700114|<data>Leonor|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+1000853700115[label="{<before>|<ID>1000853700115|<data>Fabiola|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+3010870910101[label="{<before>|<ID>3010870910101|<data>JoseAlejandro|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+4000853700100[label="{<before>|<ID>4000853700100|<data>Modificado|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360001[label="{<before>|<ID>7805544360001|<data>Alexander|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360002[label="{<before>|<ID>7805544360002|<data>Henry|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360003[label="{<before>|<ID>7805544360003|<data>Alan|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360004[label="{<before>|<ID>7805544360004|<data>Esteban|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360005[label="{<before>|<ID>7805544360005|<data>Josue|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360006[label="{<before>|<ID>7805544360006|<data>Eduardo|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360007[label="{<before>|<ID>7805544360007|<data>Melvin|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360008[label="{<before>|<ID>7805544360008|<data>Guillermo|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360009[label="{<before>|<ID>7805544360009|<data>Byron|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360010[label="{<before>|<ID>7805544360010|<data>Mainor|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360011[label="{<before>|<ID>7805544360011|<data>Edgar|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360012[label="{<before>|<ID>7805544360012|<data>Yerit|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360013[label="{<before>|<ID>7805544360013|<data>Ignacio|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360014[label="{<before>|<ID>7805544360014|<data>Diego|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
+7805544360015[label="{<before>|<ID>7805544360015|<data>Leonardo|<next>}" style="filled" fillcolor="indigo" color="lightseagreen" fontcolor="whitesmoke" penwidth=3];
 edge[tailclip=false,arrowtail=dot,dir=both style=filled fillcolor="red" color="red"];
 {node[shape=point height=0] p0 p4}
-p0:n -> "1007723679377"[arrowtail=none];
+p0:n -> "1000853700101"[arrowtail=none];
 p0:s -> p4:s[arrowtail=none];
-1007723679377:next:c ->1511042948678:before;
-1511042948678:before:c ->1007723679377:next;
-1511042948678:next:c ->1668014356232:before;
-1668014356232:before:c ->1511042948678:next;
-1668014356232:next:c ->1856619165091:before;
-1856619165091:before:c ->1668014356232:next;
-1856619165091:next:c ->2137343565537:before;
-2137343565537:before:c ->1856619165091:next;
-2137343565537:next:c ->3371537204646:before;
-3371537204646:before:c ->2137343565537:next;
-3371537204646:next:c ->3500641864904:before;
-3500641864904:before:c ->3371537204646:next;
-3500641864904:next:c ->3874160522121:before;
-3874160522121:before:c ->3500641864904:next;
-3874160522121:next:c ->4116118507559:before;
-4116118507559:before:c ->3874160522121:next;
-4116118507559:next:c ->4578774996784:before;
-4578774996784:before:c ->4116118507559:next;
-4578774996784:next:c ->4670437990604:before;
-4670437990604:before:c ->4578774996784:next;
-4670437990604:next:c ->4745647284409:before;
-4745647284409:before:c ->4670437990604:next;
-4745647284409:next:c ->4950354478649:before;
-4950354478649:before:c ->4745647284409:next;
-4950354478649:next:c ->5307606770223:before;
-5307606770223:before:c ->4950354478649:next;
-5307606770223:next:c ->5375090919096:before;
-5375090919096:before:c ->5307606770223:next;
-5375090919096:next:c ->5576294952607:before;
-5576294952607:before:c ->5375090919096:next;
-5576294952607:next:c ->5713106892976:before;
-5713106892976:before:c ->5576294952607:next;
-5713106892976:next:c ->5836638072959:before;
-5836638072959:before:c ->5713106892976:next;
-5836638072959:next:c ->6196972477497:before;
-6196972477497:before:c ->5836638072959:next;
-6196972477497:next:c ->6772178054660:before;
-6772178054660:before:c ->6196972477497:next;
-6772178054660:next:c ->7136228953475:before;
-7136228953475:before:c ->6772178054660:next;
-7136228953475:next:c ->7357294321109:before;
-7357294321109:before:c ->7136228953475:next;
-7357294321109:next:c ->7476715136472:before;
-7476715136472:before:c ->7357294321109:next;
-7476715136472:next:c ->7634985503447:before;
-7634985503447:before:c ->7476715136472:next;
-7634985503447:next:c ->7754177557392:before;
-7754177557392:before:c ->7634985503447:next;
-7754177557392:next:c ->8187495187888:before;
-8187495187888:before:c ->7754177557392:next;
-8187495187888:next:c ->8247579567079:before;
-8247579567079:before:c ->8187495187888:next;
-8247579567079:next:c ->8404110728286:before;
-8404110728286:before:c ->8247579567079:next;
-8404110728286:next:c ->9898749357775:before;
-9898749357775:before:c ->8404110728286:next;
-9898749357775:next:c -> p4:n[arrowhead=none]
+1000853700101:next:c ->1000853700102:before;
+1000853700102:before:c ->1000853700101:next;
+1000853700102:next:c ->1000853700103:before;
+1000853700103:before:c ->1000853700102:next;
+1000853700103:next:c ->1000853700104:before;
+1000853700104:before:c ->1000853700103:next;
+1000853700104:next:c ->1000853700105:before;
+1000853700105:before:c ->1000853700104:next;
+1000853700105:next:c ->1000853700106:before;
+1000853700106:before:c ->1000853700105:next;
+1000853700106:next:c ->1000853700107:before;
+1000853700107:before:c ->1000853700106:next;
+1000853700107:next:c ->1000853700108:before;
+1000853700108:before:c ->1000853700107:next;
+1000853700108:next:c ->1000853700109:before;
+1000853700109:before:c ->1000853700108:next;
+1000853700109:next:c ->1000853700110:before;
+1000853700110:before:c ->1000853700109:next;
+1000853700110:next:c ->1000853700111:before;
+1000853700111:before:c ->1000853700110:next;
+1000853700111:next:c ->1000853700112:before;
+1000853700112:before:c ->1000853700111:next;
+1000853700112:next:c ->1000853700113:before;
+1000853700113:before:c ->1000853700112:next;
+1000853700113:next:c ->1000853700114:before;
+1000853700114:before:c ->1000853700113:next;
+1000853700114:next:c ->1000853700115:before;
+1000853700115:before:c ->1000853700114:next;
+1000853700115:next:c ->3010870910101:before;
+3010870910101:before:c ->1000853700115:next;
+3010870910101:next:c ->4000853700100:before;
+4000853700100:before:c ->3010870910101:next;
+4000853700100:next:c ->7805544360001:before;
+7805544360001:before:c ->4000853700100:next;
+7805544360001:next:c ->7805544360002:before;
+7805544360002:before:c ->7805544360001:next;
+7805544360002:next:c ->7805544360003:before;
+7805544360003:before:c ->7805544360002:next;
+7805544360003:next:c ->7805544360004:before;
+7805544360004:before:c ->7805544360003:next;
+7805544360004:next:c ->7805544360005:before;
+7805544360005:before:c ->7805544360004:next;
+7805544360005:next:c ->7805544360006:before;
+7805544360006:before:c ->7805544360005:next;
+7805544360006:next:c ->7805544360007:before;
+7805544360007:before:c ->7805544360006:next;
+7805544360007:next:c ->7805544360008:before;
+7805544360008:before:c ->7805544360007:next;
+7805544360008:next:c ->7805544360009:before;
+7805544360009:before:c ->7805544360008:next;
+7805544360009:next:c ->7805544360010:before;
+7805544360010:before:c ->7805544360009:next;
+7805544360010:next:c ->7805544360011:before;
+7805544360011:before:c ->7805544360010:next;
+7805544360011:next:c ->7805544360012:before;
+7805544360012:before:c ->7805544360011:next;
+7805544360012:next:c ->7805544360013:before;
+7805544360013:before:c ->7805544360012:next;
+7805544360013:next:c ->7805544360014:before;
+7805544360014:before:c ->7805544360013:next;
+7805544360014:next:c ->7805544360015:before;
+7805544360015:before:c ->7805544360014:next;
+7805544360015:next:c -> p4:n[arrowhead=none]
 }
 subgraph cluster_3{
 bgcolor="oldlace";
 "0";
+"3000853700701"[label ="3000853700701
+Oscar"];
+"3000853708101"[label ="3000853708101
+Surely"];
+"3000853700701"->"3000853708101";
+0->"3000853700701";
 "1";
-"4255040741108"[label ="4255040741108
-Aimee"];
-"8881189800232"[label ="8881189800232
-Nadine"];
-"4255040741108"->"8881189800232";
-1->"4255040741108";
+"3000853700110"[label ="3000853700110
+Paola"];
+"3000853709101"[label ="3000853709101
+Ashley"];
+"3000853700110"->"3000853709101";
+1->"3000853700110";
 "2";
-"7176750467119"[label ="7176750467119
-Cleo"];
-"8197907665334"[label ="8197907665334
-Ross"];
-"7176750467119"->"8197907665334";
-2->"7176750467119";
+"3000853710101"[label ="3000853710101
+Shirley"];
+2->"3000853710101";
 "3";
 "4";
-"6169192041447"[label ="6169192041447
-Melissa"];
-4->"6169192041447";
 "5";
+"3000853700151"[label ="3000853700151
+Alejandro"];
+"3000853750101"[label ="3000853750101
+Ludwig"];
+"3000853700151"->"3000853750101";
+5->"3000853700151";
 "6";
-"345056202069"[label ="345056202069
-Geoffrey"];
-"2707968240198"[label ="2707968240198
-Wyatt"];
-"345056202069"->"2707968240198";
-6->"345056202069";
 "7";
-"976166618282"[label ="976166618282
-Dorothy"];
-7->"976166618282";
+"3000853700301"[label ="3000853700301
+Maximiliano"];
+7->"3000853700301";
 "8";
-"9283511284586"[label ="9283511284586
-Rooney"];
-8->"9283511284586";
+"3000853700191"[label ="3000853700191
+Ulysses"];
+"3000853790101"[label ="3000853790101
+Carlo"];
+"3000853700191"->"3000853790101";
+8->"3000853700191";
 "9";
 "10";
 "11";
-"5930296786658"[label ="5930296786658
-Magee"];
-"2219856202804"[label ="2219856202804
-Arsenio"];
-"5930296786658"->"2219856202804";
-11->"5930296786658";
+"3000853700601"[label ="3000853700601
+Raul"];
+"2416000111222"[label ="2416000111222
+Sergio Ariel"];
+"3000853700601"->"2416000111222";
+11->"3000853700601";
 "12";
-"4507584236457"[label ="4507584236457
-Hadley"];
-12->"4507584236457";
+"3000853700121"[label ="3000853700121
+Dominga"];
+"3000853720101"[label ="3000853720101
+Mynor"];
+"3000853700121"->"3000853720101";
+12->"3000853700121";
 "13";
-"6877404823974"[label ="6877404823974
-Dexter"];
-13->"6877404823974";
 "14";
 "15";
-"676393056444"[label ="676393056444
-John"];
-15->"676393056444";
+"3000853700161"[label ="3000853700161
+Samuel"];
+"3000853700901"[label ="3000853700901
+Flor"];
+"3000853760101"[label ="3000853760101
+Rafael"];
+"3000853700161"->"3000853700901";
+"3000853700901"->"3000853760101";
+15->"3000853700161";
 "16";
-"1010122545337"[label ="1010122545337
-Talon"];
-16->"1010122545337";
 "17";
-"372451820261"[label ="372451820261
-Iris"];
-17->"372451820261";
 "18";
+"3000853700201"[label ="3000853700201
+Pancho"];
+18->"3000853700201";
 "19";
 "20";
 "21";
-"8552640378145"[label ="8552640378145
-Cassidy"];
-"5094625203685"[label ="5094625203685
-Travis"];
-"8552640378145"->"5094625203685";
-21->"8552640378145";
 "22";
-"2806407299839"[label ="2806407299839
-Rowan"];
-"8165085954882"[label ="8165085954882
-Kelly"];
-"2987027347435"[label ="2987027347435
-Kylan"];
-"8242750632869"[label ="8242750632869
-Phoebe"];
-"2806407299839"->"8165085954882";
-"8165085954882"->"2987027347435";
-"2987027347435"->"8242750632869";
-22->"2806407299839";
+"3000853700131"[label ="3000853700131
+Luli"];
+"3000853700501"[label ="3000853700501
+Daniel"];
+"3000853730101"[label ="3000853730101
+Geovanni"];
+"3000853700131"->"3000853700501";
+"3000853700501"->"3000853730101";
+22->"3000853700131";
 "23";
-"1580564721155"[label ="1580564721155
-Reagan"];
-23->"1580564721155";
 "24";
 "25";
-"2509410769259"[label ="2509410769259
-Aristotle"];
-25->"2509410769259";
+"3000853700171"[label ="3000853700171
+Miguel"];
+"3000853770101"[label ="3000853770101
+Christian"];
+"3000853700171"->"3000853770101";
+25->"3000853700171";
 "26";
-"9393081738396"[label ="9393081738396
-Charlotte"];
-26->"9393081738396";
+"3000853700801"[label ="3000853700801
+Linda"];
+26->"3000853700801";
 "27";
 "28";
 "29";
-"8023423332982"[label ="8023423332982
-Colleen"];
-29->"8023423332982";
 "30";
+"3000853700102"[label ="3000853700102
+Leila"];
+"3000853701101"[label ="3000853701101
+Estephanie"];
+"3001853700101"[label ="3001853700101
+Hernaldo"];
+"3000853700102"->"3000853701101";
+"3000853701101"->"3001853700101";
+30->"3000853700102";
 "31";
+"3000853700103"[label ="3000853700103
+Emy"];
+"3000853702101"[label ="3000853702101
+Alany"];
+"3002853700101"[label ="3002853700101
+Luis"];
+"3000853700103"->"3000853702101";
+"3000853702101"->"3002853700101";
+31->"3000853700103";
 "32";
+"3000853700104"[label ="3000853700104
+Roxana"];
+"3000853700141"[label ="3000853700141
+Sebastian"];
+"3000853703101"[label ="3000853703101
+Roxana"];
+"3000853740101"[label ="3000853740101
+Alex"];
+"3000853700104"->"3000853700141";
+"3000853700141"->"3000853703101";
+"3000853703101"->"3000853740101";
+32->"3000853700104";
 "33";
-"4620999737485"[label ="4620999737485
-Brynn"];
-"9674433555064"[label ="9674433555064
-Nigel"];
-"4620999737485"->"9674433555064";
-33->"4620999737485";
+"3000853700105"[label ="3000853700105
+Angela"];
+"3000853700401"[label ="3000853700401
+Sergio"];
+"3000853704101"[label ="3000853704101
+Amanda"];
+"3000853700105"->"3000853700401";
+"3000853700401"->"3000853704101";
+33->"3000853700105";
 "34";
+"3000853700106"[label ="3000853700106
+Isabel"];
+"3000853705101"[label ="3000853705101
+Sandra"];
+"3000853700106"->"3000853705101";
+34->"3000853700106";
 "35";
-"1357137121751"[label ="1357137121751
-Belle"];
-35->"1357137121751";
+"3000853700107"[label ="3000853700107
+Andrea"];
+"3000853700181"[label ="3000853700181
+Javier"];
+"3000853706101"[label ="3000853706101
+Angel"];
+"3000853780101"[label ="3000853780101
+Jian"];
+"9000853700101"[label ="9000853700101
+Modificado"];
+"3000853700107"->"3000853700181";
+"3000853700181"->"3000853706101";
+"3000853706101"->"3000853780101";
+"3000853780101"->"9000853700101";
+35->"3000853700107";
 "36";
+"3000853700108"[label ="3000853700108
+Abigail"];
+"3000853707101"[label ="3000853707101
+Susely"];
+"3000853700108"->"3000853707101";
+36->"3000853700108";
 }
 subgraph cluster_4 { 
 
@@ -286,6 +501,7 @@ node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fonts
 "2.Sevilla"-> "3.Granada"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
 "2.Sevilla"-> "4.Jaen"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
 "3.Granada"-> "2.Sevilla"[dir="forward", color=crimson,label = "256", fontcolor=limegreen]; 
+"3.Granada"-> "4.Jaen"[dir="forward", color=crimson,label = "99", fontcolor=limegreen]; 
 "3.Granada"-> "5.Murcia"[dir="forward", color=crimson,label = "278", fontcolor=limegreen]; 
 "4.Jaen"-> "2.Sevilla"[dir="forward", color=crimson,label = "242", fontcolor=limegreen]; 
 "4.Jaen"-> "3.Granada"[dir="forward", color=crimson,label = "99", fontcolor=limegreen]; 
@@ -328,6 +544,20 @@ node[shape = doublecircle margin = 0 , color=mistyrose2, fontcolor = white fonts
 "17.Oviedo"-> "16.Bilbao"[dir="forward", color=crimson,label = "304", fontcolor=limegreen]; 
 label="Rutas de LlegaRapidito"fontsize=30 fontcolor=red;
  }
-"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->4255040741108;
-"21f3ac77d9ccc03ec46d6cfe4bbf3fc5"->1007723679377;
+"99899d79d7302afca20221ca79141752"->3000853708101;
+"99899d79d7302afca20221ca79141752"->1000853700103;
+"29733c31eaaf9dbf2759a54c0709f1a7"->3000853700701;
+"29733c31eaaf9dbf2759a54c0709f1a7"->1000853700102;
+"c739529455273f3b721cfaf1a601f5d7"->3000853700701;
+"c739529455273f3b721cfaf1a601f5d7"->1000853700102;
+"d251ea023f8ce0cd32aa2e13127907d4"->3000853700110;
+"d251ea023f8ce0cd32aa2e13127907d4"->1000853700101;
+"cce02c09dff2e83ddab46831268e82c6"->3000853700191;
+"cce02c09dff2e83ddab46831268e82c6"->1000853700107;
+"b1121e6d5ff3855c8c2ce2776eab029d"->3000853750101;
+"b1121e6d5ff3855c8c2ce2776eab029d"->1000853700105;
+"56d991744a0741253efd08d3b79b630d"->3000853700191;
+"56d991744a0741253efd08d3b79b630d"->1000853700110;
+"9cc7d9be2aa628cdc1a809d046f105ec"->3000853700701;
+"9cc7d9be2aa628cdc1a809d046f105ec"->1000853700101;
 }

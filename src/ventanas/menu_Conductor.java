@@ -38,6 +38,7 @@ public class menu_Conductor extends javax.swing.JFrame {
     private int y;
     private DefaultTableModel modeloConductores;
     private ImageIcon fondo = new ImageIcon("src/imagenes/conductor.png");
+    private long edit;
 
     /**
      * Creates new form menu_Conductor
@@ -490,7 +491,8 @@ public class menu_Conductor extends javax.swing.JFrame {
                     nuevoConductor.setDireccion(direccion.getText().trim());
 
                     System.out.println(nuevoConductor.toString());
-                    Carga.conductores.editarDato(nuevoConductor, nuevoConductor.getDPI());
+                    Carga.conductores.eliminarNodo(this.edit);
+                    Carga.conductores.insertarOrdenado(nuevoConductor, nuevoConductor.getDPI());
 
                     for (Component component : jPanel1.getComponents()) {
                         if (component instanceof JTextField) {
@@ -546,6 +548,7 @@ public class menu_Conductor extends javax.swing.JFrame {
             CrearBoton.setIcon(new ImageIcon("src/imagenes/iconos/editar.png"));
             CrearBoton.repaint();
             EliminarBoton.setEnabled(true);
+            this.edit = eC.getDPI();
         } else {
             errorLabel.setText("SELECCIONE UN CONDUCTOR ANTES");
         }

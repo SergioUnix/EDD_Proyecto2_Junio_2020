@@ -1,5 +1,0 @@
-P688XIZ:Mazda:Coupe:1995:índigo:878:Mecanica;
-C859QZN:Infiniti:Pick Up:1980:verde:80641:Mecanica;
-P515LQN:Skoda:Camioneta:1970:azul:67441:Automatica;
-C196JDD:Vauxhall:Racing:1985:azul:21653:Automatica;
-P535BUB:Kia Motors:Camioneta:1912:violeta:54274:Automatica;
